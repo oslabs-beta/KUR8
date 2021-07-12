@@ -1,2 +1,2 @@
 # FTRI2-Crows-Nest
-An overview of Kubernetes architecture and metrics
+A visual overview of Kubernetes architecture and metrics
