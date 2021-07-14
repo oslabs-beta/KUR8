@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viewer-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: viewer
+  template:
+    metadata:
+      labels:
+        app: viewer
+    spec:
+      containers:
+        - name: viewer
+          image: jimmycngo/viewer:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: viewer-srv
+spec:
+  selector:
+    app: viewer
+  type: ClusterIP
+  ports:
+    - name: viewer
+      protocol: TCP
+      port: 5000
+      targetPort: 5000

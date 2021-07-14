@@ -22,6 +22,7 @@ app.get('/podList', (req, res) => {
     });
 });
 
+
 app.get('/serviceList', (req, res) => {
   k8sApi
     .listNamespacedService('default')
@@ -30,6 +31,7 @@ app.get('/serviceList', (req, res) => {
       res.send('error found in get request to /serviceList', err);
     });
 });
+
 
 app.get('/ingressList', (req, res) => {
   k8sApi
@@ -40,6 +42,7 @@ app.get('/ingressList', (req, res) => {
     });
 });
 
+
 app.get('/deploymentList', (req, res) => {
   k8sApi
     .listNamespacedDeployment('default')
@@ -48,6 +51,7 @@ app.get('/deploymentList', (req, res) => {
       res.send('error found in get request to /deploymentList', err);
     });
 });
+
 
 app.listen(5000, () => {
   console.log('Listening on 5000');
