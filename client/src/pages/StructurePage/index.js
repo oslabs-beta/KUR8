@@ -8,12 +8,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Home() {
+export default function StructurePage() {
   const classes = useStyles();
 
   return (
     <Typography variant="h3" className={classes.sampleStyle}>
-      Home Page index.js
+      structure page
     </Typography>
   );
 }
