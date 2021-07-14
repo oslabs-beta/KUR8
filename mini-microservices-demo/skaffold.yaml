@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta18
 kind: Config
 deploy:
   kubectl:
@@ -58,6 +58,14 @@ build:
             dest: .
     - image: jimmycngo/viewer
       context: viewer
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: jimmycngo/prom
+      context: prom
       docker:
         dockerfile: Dockerfile
       sync:
