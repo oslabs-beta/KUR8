@@ -1,9 +1,8 @@
 {
-  "name": "server",
-  "version": "0.0.0",
+  "name": "prom",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon index.js"
   },
@@ -11,10 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.6.9",
-    "mongoose": "^5.12.13",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "prom-client": "^13.1.0",
+    "response-time": "^2.3.2"
   }
 }
