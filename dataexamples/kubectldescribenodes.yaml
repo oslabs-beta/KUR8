@@ -1,0 +1,136 @@
+Name:               docker-desktop
+Roles:              control-plane,master
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=docker-desktop
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node-role.kubernetes.io/master=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 07 Jul 2021 14:56:31 -0700
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  docker-desktop
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 14 Jul 2021 21:16:24 -0700
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 14 Jul 2021 21:16:19 -0700   Wed, 07 Jul 2021 14:56:30 -0700   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 14 Jul 2021 21:16:19 -0700   Wed, 07 Jul 2021 14:56:30 -0700   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 14 Jul 2021 21:16:19 -0700   Wed, 07 Jul 2021 14:56:30 -0700   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Wed, 14 Jul 2021 21:16:19 -0700   Wed, 07 Jul 2021 14:57:01 -0700   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  192.168.65.4
+  Hostname:    docker-desktop
+Capacity:
+  cpu:                12
+  ephemeral-storage:  263174212Ki
+  hugepages-2Mi:      0
+  memory:             13029544Ki
+  pods:               110
+Allocatable:
+  cpu:                12
+  ephemeral-storage:  242541353378
+  hugepages-2Mi:      0
+  memory:             12927144Ki
+  pods:               110
+System Info:
+  Machine ID:                 721ff660-727f-4b0c-9745-8f7c614777ff
+  System UUID:                721ff660-727f-4b0c-9745-8f7c614777ff
+  Boot ID:                    6068b9d3-7c14-4cc8-abd6-0b4f5e283aba
+  Kernel Version:             5.4.72-microsoft-standard-WSL2
+  OS Image:                   Docker Desktop
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://20.10.7
+  Kubelet Version:            v1.21.2
+  Kube-Proxy Version:         v1.21.2
+Non-terminated Pods:          (29 in total)
+  Namespace                   Name                                         CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                         ------------  ----------  ---------------  -------------  ---
+  default                     client-depl-569cc6789b-4tzqg                 0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     comments-depl-6c86578cfb-444v9               0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     event-bus-depl-566b5f4764-s54cp              0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     moderation-depl-76d56544f5-mbvzw             0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     posts-depl-55bf486598-r6xzs                  0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     prom-depl-9c9c59bcd-2z2k7                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     query-depl-6f9944bd6b-ng299                  0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  default                     viewer-depl-66cd9c54bd-czl8h                 0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h47m
+  ingress-nginx               ingress-nginx-controller-5b74bc9868-t7sjs    100m (0%)     0 (0%)      90Mi (0%)        0 (0%)         5d1h
+  kube-system                 coredns-558bd4d5db-dbqxw                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (1%)     7d6h
+  kube-system                 coredns-558bd4d5db-nzskj                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (1%)     7d6h
+  kube-system                 etcd-docker-desktop                          100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         7d6h
+  kube-system                 kube-apiserver-docker-desktop                250m (2%)     0 (0%)      0 (0%)           0 (0%)         7d6h
+  kube-system                 kube-controller-manager-docker-desktop       200m (1%)     0 (0%)      0 (0%)           0 (0%)         7d6h
+  kube-system                 kube-proxy-zlgw4                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         7d6h
+  kube-system                 kube-scheduler-docker-desktop                100m (0%)     0 (0%)      0 (0%)           0 (0%)         7d6h
+  kube-system                 storage-provisioner                          0 (0%)        0 (0%)      0 (0%)           0 (0%)         7d6h
+  kube-system                 vpnkit-controller                            0 (0%)        0 (0%)      0 (0%)           0 (0%)         7d6h
+  monitoring                  alertmanager-main-0                          104m (0%)     200m (1%)   150Mi (1%)       150Mi (1%)     6h46m
+  monitoring                  alertmanager-main-1                          104m (0%)     200m (1%)   150Mi (1%)       150Mi (1%)     6h46m
+  monitoring                  alertmanager-main-2                          104m (0%)     200m (1%)   150Mi (1%)       150Mi (1%)     6h46m
+  monitoring                  blackbox-exporter-6c95587d7-6v2t8            30m (0%)      60m (0%)    60Mi (0%)        120Mi (0%)     6h46m
+  monitoring                  kube-state-metrics-b545789dd-z9xjz           40m (0%)      160m (1%)   230Mi (1%)       330Mi (2%)     6h46m
+  monitoring                  node-exporter-h774t                          112m (0%)     270m (2%)   200Mi (1%)       220Mi (1%)     6h46m
+  monitoring                  prometheus-adapter-5c977869c-5v4lp           0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h46m
+  monitoring                  prometheus-adapter-5c977869c-zf2z9           0 (0%)        0 (0%)      0 (0%)           0 (0%)         6h46m
+  monitoring                  prometheus-k8s-0                             100m (0%)     100m (0%)   450Mi (3%)       50Mi (0%)      6h46m
+  monitoring                  prometheus-k8s-1                             100m (0%)     100m (0%)   450Mi (3%)       50Mi (0%)      6h46m
+  monitoring                  prometheus-operator-84dc795dc8-skc9b         110m (0%)     220m (1%)   120Mi (0%)       240Mi (1%)     6h46m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests      Limits
+  --------           --------      ------
+  cpu                1754m (14%)   1510m (12%)
+  memory             2290Mi (18%)  1800Mi (14%)
+  ephemeral-storage  0 (0%)        0 (0%)
+  hugepages-2Mi      0 (0%)        0 (0%)
+Events:              <none>
+
+
+Name:               random-node
+Roles:              <none>
+Labels:             app.kubernetes.io/managed-by=skaffold
+                    skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+CreationTimestamp:  Wed, 14 Jul 2021 14:29:22 -0700
+Taints:             node.kubernetes.io/unreachable:NoExecute
+                    node.kubernetes.io/unreachable:NoSchedule
+Unschedulable:      false
+Lease:              Failed to get lease: leases.coordination.k8s.io "random-node" not found
+Conditions:
+  Type             Status    LastHeartbeatTime                 LastTransitionTime                Reason                   Message
+  ----             ------    -----------------                 ------------------                ------                   -------
+  Ready            Unknown   Wed, 14 Jul 2021 14:29:22 -0700   Wed, 14 Jul 2021 14:29:44 -0700   NodeStatusNeverUpdated   Kubelet never posted node status.
+  MemoryPressure   Unknown   Wed, 14 Jul 2021 14:29:22 -0700   Wed, 14 Jul 2021 14:29:44 -0700   NodeStatusNeverUpdated   Kubelet never posted node status.
+  DiskPressure     Unknown   Wed, 14 Jul 2021 14:29:22 -0700   Wed, 14 Jul 2021 14:29:44 -0700   NodeStatusNeverUpdated   Kubelet never posted node status.
+  PIDPressure      Unknown   Wed, 14 Jul 2021 14:29:22 -0700   Wed, 14 Jul 2021 14:29:44 -0700   NodeStatusNeverUpdated   Kubelet never posted node status.
+Addresses:
+System Info:
+  Machine ID:                 
+  System UUID:                
+  Boot ID:                    
+  Kernel Version:             
+  OS Image:                   
+  Operating System:           
+  Architecture:               
+  Container Runtime Version:  
+  Kubelet Version:            
+  Kube-Proxy Version:         
+Non-terminated Pods:          (0 in total)
+  Namespace                   Name    CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----    ------------  ----------  ---------------  -------------  ---
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+Events:              <none>

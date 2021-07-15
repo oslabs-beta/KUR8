@@ -1,0 +1,390 @@
+Name:         client-depl-569cc6789b-4tzqg
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=client
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=569cc6789b
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.56
+IPs:
+  IP:           10.1.2.56
+Controlled By:  ReplicaSet/client-depl-569cc6789b
+Containers:
+  client:
+    Container ID:   docker://357aad0af6dff2d31fcc2fe467552be4e873f258956d9fd455f742cd60f21501
+    Image:          jimmycngo/client:2e8ef34c5a6d0969bada64dde7b75f40192f66d0b4d8662555ea5d8418a7d375
+    Image ID:       docker://sha256:2e8ef34c5a6d0969bada64dde7b75f40192f66d0b4d8662555ea5d8418a7d375
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:23 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-kjs7x (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-kjs7x:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         comments-depl-6c86578cfb-444v9
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=comments
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=6c86578cfb
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.58
+IPs:
+  IP:           10.1.2.58
+Controlled By:  ReplicaSet/comments-depl-6c86578cfb
+Containers:
+  comments:
+    Container ID:   docker://af615f0a6a62ead5598291883a0af57a4572cb677ec8033b104c6b370046662e
+    Image:          jimmycngo/comments:abcf49aa8d354b8f6a9fab3bf58f79ac50c5a54c801f42e7b62e3bd2d1c97efe
+    Image ID:       docker://sha256:abcf49aa8d354b8f6a9fab3bf58f79ac50c5a54c801f42e7b62e3bd2d1c97efe
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:23 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8hc2t (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-8hc2t:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         event-bus-depl-566b5f4764-s54cp
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=event-bus
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=566b5f4764
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.57
+IPs:
+  IP:           10.1.2.57
+Controlled By:  ReplicaSet/event-bus-depl-566b5f4764
+Containers:
+  event-bus:
+    Container ID:   docker://91fe611017cc022cbda744a76b16d70325eaffdc2fd1bd963178a4d7f019cdb3
+    Image:          jimmycngo/event-bus:261da80f3e18aa36ca141d6a5f96032305bc7264a1f282005255c92c2f053eef
+    Image ID:       docker://sha256:261da80f3e18aa36ca141d6a5f96032305bc7264a1f282005255c92c2f053eef
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:23 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6kf2x (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-6kf2x:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         moderation-depl-76d56544f5-mbvzw
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=moderation
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=76d56544f5
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.61
+IPs:
+  IP:           10.1.2.61
+Controlled By:  ReplicaSet/moderation-depl-76d56544f5
+Containers:
+  moderation:
+    Container ID:   docker://fb715acbc474f85588b5553271b717ff46fda18a3950542b90d0a6539f8b56ee
+    Image:          jimmycngo/moderation:d0df1cccfea71105d87f5e665962c2794ee919368d8c18bb5de3a381794fc21d
+    Image ID:       docker://sha256:d0df1cccfea71105d87f5e665962c2794ee919368d8c18bb5de3a381794fc21d
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:24 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8h86z (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-8h86z:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         posts-depl-55bf486598-r6xzs
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=posts
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=55bf486598
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.59
+IPs:
+  IP:           10.1.2.59
+Controlled By:  ReplicaSet/posts-depl-55bf486598
+Containers:
+  posts:
+    Container ID:   docker://da80e58d797deacef6ae9560559148972225b886666a3045e2ea8d866a7053b5
+    Image:          jimmycngo/posts:2db64bd94aa3532e3d40b17e0504cc33140f54163737c80cd0f6383d458a5697
+    Image ID:       docker://sha256:2db64bd94aa3532e3d40b17e0504cc33140f54163737c80cd0f6383d458a5697
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:23 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-h778z (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-h778z:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         prom-depl-9c9c59bcd-2z2k7
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=prom
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=9c9c59bcd
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.60
+IPs:
+  IP:           10.1.2.60
+Controlled By:  ReplicaSet/prom-depl-9c9c59bcd
+Containers:
+  prom:
+    Container ID:   docker://018df81210bacc9276cf7c43f97fac77d91ae65489f5e6699d7add83ba930e35
+    Image:          jimmycngo/prom:98d8dff5ceb5e4f69ccf00e3991d545f292fdb9dc93b226493dc1590e017c763
+    Image ID:       docker://sha256:98d8dff5ceb5e4f69ccf00e3991d545f292fdb9dc93b226493dc1590e017c763
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:24 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-4f5f7 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-4f5f7:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         query-depl-6f9944bd6b-ng299
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=query
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=6f9944bd6b
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.62
+IPs:
+  IP:           10.1.2.62
+Controlled By:  ReplicaSet/query-depl-6f9944bd6b
+Containers:
+  query:
+    Container ID:   docker://f501c8ba76cc08f785526f322f2faa5f2f7988f59a4a54f7c1011be6261a3584
+    Image:          jimmycngo/query:c091d5224e19d0dd3f0664190c6af7bc3b22812c6ec87f88c6fd8c2b93edcf50
+    Image ID:       docker://sha256:c091d5224e19d0dd3f0664190c6af7bc3b22812c6ec87f88c6fd8c2b93edcf50
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:24 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xkgvs (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-xkgvs:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+
+
+Name:         viewer-depl-66cd9c54bd-czl8h
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Wed, 14 Jul 2021 14:29:22 -0700
+Labels:       app=viewer
+              app.kubernetes.io/managed-by=skaffold
+              pod-template-hash=66cd9c54bd
+              skaffold.dev/run-id=81ca5a4c-89ef-41d4-ad1a-b9f0538b4347
+Annotations:  <none>
+Status:       Running
+IP:           10.1.2.63
+IPs:
+  IP:           10.1.2.63
+Controlled By:  ReplicaSet/viewer-depl-66cd9c54bd
+Containers:
+  viewer:
+    Container ID:   docker://ce09542e585758e60d363987a94ffc8b0b3d96a57ea57cd530f1f7f3fc741795
+    Image:          jimmycngo/viewer:7a1de6b41d9e02f3ea3a91c6e58799f984f7f7b63e4fe329f1720a70d98c6fe4
+    Image ID:       docker://sha256:7a1de6b41d9e02f3ea3a91c6e58799f984f7f7b63e4fe329f1720a70d98c6fe4
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 14 Jul 2021 14:29:24 -0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-4tklh (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-4tklh:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
