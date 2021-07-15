@@ -1,0 +1,1020 @@
+"k:{\"name\":\"posts\"}": {
+                         ".": {},
+                         "f:image": {},
+                         "f:imagePullPolicy": {},
+                         "f:name": {},
+                         "f:resources": {},
+                         "f:terminationMessagePath": {},
+                         "f:terminationMessagePolicy": {}
+                       }
+                     },
+                     "f:dnsPolicy": {},
+                     "f:enableServiceLinks": {},
+                     "f:restartPolicy": {},
+                     "f:schedulerName": {},
+                     "f:securityContext": {},
+                     "f:terminationGracePeriodSeconds": {}
+                   }
+                 },
+                 "manager": "kube-controller-manager",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:22.000Z"
+               },
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:status": {
+                     "f:conditions": {
+                       "k:{\"type\":\"ContainersReady\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Initialized\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Ready\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       }
+                     },
+                     "f:containerStatuses": {},
+                     "f:hostIP": {},
+                     "f:phase": {},
+                     "f:podIP": {},
+                     "f:podIPs": {
+                       ".": {},
+                       "k:{\"ip\":\"10.1.2.79\"}": {
+                         ".": {},
+                         "f:ip": {}
+                       }
+                     },
+                     "f:startTime": {}
+                   }
+                 },
+                 "manager": "kubelet",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:31.000Z"
+               }
+             ],
+             "name": "posts-depl-584b44f4cd-p6blt",
+             "namespace": "default",
+             "ownerReferences": [
+               {
+                 "apiVersion": "apps/v1",
+                 "blockOwnerDeletion": true,
+                 "controller": true,
+                 "kind": "ReplicaSet",
+                 "name": "posts-depl-584b44f4cd",
+                 "uid": "9288f64c-e211-4027-9df2-8967483e432a"
+               }
+             ],
+             "resourceVersion": "368168",
+             "uid": "edcd0abe-2051-4dbd-bd4d-96cdb8a20bc3"
+           },
+           "spec": {
+             "containers": [
+               {
+                 "image": "jimmycngo/posts:2db64bd94aa3532e3d40b17e0504cc33140f54163737c80cd0f6383d458a5697",
+                 "imagePullPolicy": "IfNotPresent",
+                 "name": "posts",
+                 "resources": {},
+                 "terminationMessagePath": "/dev/termination-log",
+                 "terminationMessagePolicy": "File",
+                 "volumeMounts": [
+                   {
+                     "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                     "name": "kube-api-access-kr9pr",
+                     "readOnly": true
+                   }
+                 ]
+               }
+             ],
+             "dnsPolicy": "ClusterFirst",
+             "enableServiceLinks": true,
+             "nodeName": "docker-desktop",
+             "preemptionPolicy": "PreemptLowerPriority",
+             "priority": 0,
+             "restartPolicy": "Always",
+             "schedulerName": "default-scheduler",
+             "securityContext": {},
+             "serviceAccount": "default",
+             "serviceAccountName": "default",
+             "terminationGracePeriodSeconds": 30,
+             "tolerations": [
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/not-ready",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               },
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/unreachable",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               }
+             ],
+             "volumes": [
+               {
+                 "name": "kube-api-access-kr9pr",
+                 "projected": {
+                   "defaultMode": 420,
+                   "sources": [
+                     {
+                       "serviceAccountToken": {
+                         "expirationSeconds": 3607,
+                         "path": "token"
+                       }
+                     },
+                     {
+                       "configMap": {
+                         "items": [
+                           {
+                             "key": "ca.crt",
+                             "path": "ca.crt"
+                           }
+                         ],
+                         "name": "kube-root-ca.crt"
+                       }
+                     },
+                     {
+                       "downwardAPI": {
+                         "items": [
+                           {
+                             "fieldRef": {
+                               "apiVersion": "v1",
+                               "fieldPath": "metadata.namespace"
+                             },
+                             "path": "namespace"
+                           }
+                         ]
+                       }
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           "status": {
+             "conditions": [
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "Initialized"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:27.000Z",
+                 "status": "True",
+                 "type": "Ready"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:27.000Z",
+                 "status": "True",
+                 "type": "ContainersReady"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "PodScheduled"
+               }
+             ],
+             "containerStatuses": [
+               {
+                 "containerID": "docker://e918b422d51709ca7a7ecafb177605edafdc26cdd924d1dca17119423069db3d",
+                 "image": "jimmycngo/posts:2db64bd94aa3532e3d40b17e0504cc33140f54163737c80cd0f6383d458a5697",
+                 "imageID": "docker://sha256:2db64bd94aa3532e3d40b17e0504cc33140f54163737c80cd0f6383d458a5697",
+                 "lastState": {},
+                 "name": "posts",
+                 "ready": true,
+                 "restartCount": 0,
+                 "started": true,
+                 "state": {
+                   "running": {
+                     "startedAt": "2021-07-15T04:38:26.000Z"
+                   }
+                 }
+               }
+             ],
+             "hostIP": "192.168.65.4",
+             "phase": "Running",
+             "podIP": "10.1.2.79",
+             "podIPs": [
+               {
+                 "ip": "10.1.2.79"
+               }
+             ],
+             "qosClass": "BestEffort",
+             "startTime": "2021-07-15T04:38:22.000Z"
+           }
+         },
+         {
+           "metadata": {
+             "creationTimestamp": "2021-07-15T04:38:22.000Z",
+             "generateName": "prom-depl-6964c6d6c8-",
+             "labels": {
+               "app": "prom",
+               "app.kubernetes.io/managed-by": "skaffold",
+               "pod-template-hash": "6964c6d6c8",
+               "skaffold.dev/run-id": "d12b83e7-fdc7-4819-a348-26f92fa20735"
+             },
+             "managedFields": [
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:metadata": {
+                     "f:generateName": {},
+                     "f:labels": {
+                       ".": {},
+                       "f:app": {},
+                       "f:app.kubernetes.io/managed-by": {},
+                       "f:pod-template-hash": {},
+                       "f:skaffold.dev/run-id": {}
+                     },
+                     "f:ownerReferences": {
+                       ".": {},
+                       "k:{\"uid\":\"c8e7d8ae-5afb-483c-960a-44feb7c07322\"}": {
+                         ".": {},
+                         "f:apiVersion": {},
+                         "f:blockOwnerDeletion": {},
+                         "f:controller": {},
+                         "f:kind": {},
+                         "f:name": {},
+                         "f:uid": {}
+                       }
+                     }
+                   },
+                   "f:spec": {
+                     "f:containers": {
+                       "k:{\"name\":\"prom\"}": {
+                         ".": {},
+                         "f:image": {},
+                         "f:imagePullPolicy": {},
+                         "f:name": {},
+                         "f:resources": {},
+                         "f:terminationMessagePath": {},
+                         "f:terminationMessagePolicy": {}
+                       }
+                     },
+                     "f:dnsPolicy": {},
+                     "f:enableServiceLinks": {},
+                     "f:restartPolicy": {},
+                     "f:schedulerName": {},
+                     "f:securityContext": {},
+                     "f:terminationGracePeriodSeconds": {}
+                   }
+                 },
+                 "manager": "kube-controller-manager",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:22.000Z"
+               },
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:status": {
+                     "f:conditions": {
+                       "k:{\"type\":\"ContainersReady\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Initialized\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Ready\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       }
+                     },
+                     "f:containerStatuses": {},
+                     "f:hostIP": {},
+                     "f:phase": {},
+                     "f:podIP": {},
+                     "f:podIPs": {
+                       ".": {},
+                       "k:{\"ip\":\"10.1.2.80\"}": {
+                         ".": {},
+                         "f:ip": {}
+                       }
+                     },
+                     "f:startTime": {}
+                   }
+                 },
+                 "manager": "kubelet",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:29.000Z"
+               }
+             ],
+             "name": "prom-depl-6964c6d6c8-4rxtv",
+             "namespace": "default",
+             "ownerReferences": [
+               {
+                 "apiVersion": "apps/v1",
+                 "blockOwnerDeletion": true,
+                 "controller": true,
+                 "kind": "ReplicaSet",
+                 "name": "prom-depl-6964c6d6c8",
+                 "uid": "c8e7d8ae-5afb-483c-960a-44feb7c07322"
+               }
+             ],
+             "resourceVersion": "368151",
+             "uid": "915a709a-324c-4b9d-8a26-19b23f0400a3"
+           },
+           "spec": {
+             "containers": [
+               {
+                 "image": "jimmycngo/prom:98d8dff5ceb5e4f69ccf00e3991d545f292fdb9dc93b226493dc1590e017c763",
+                 "imagePullPolicy": "IfNotPresent",
+                 "name": "prom",
+                 "resources": {},
+                 "terminationMessagePath": "/dev/termination-log",
+                 "terminationMessagePolicy": "File",
+                 "volumeMounts": [
+                   {
+                     "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                     "name": "kube-api-access-jlxb2",
+                     "readOnly": true
+                   }
+                 ]
+               }
+             ],
+             "dnsPolicy": "ClusterFirst",
+             "enableServiceLinks": true,
+             "nodeName": "docker-desktop",
+             "preemptionPolicy": "PreemptLowerPriority",
+             "priority": 0,
+             "restartPolicy": "Always",
+             "schedulerName": "default-scheduler",
+             "securityContext": {},
+             "serviceAccount": "default",
+             "serviceAccountName": "default",
+             "terminationGracePeriodSeconds": 30,
+             "tolerations": [
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/not-ready",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               },
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/unreachable",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               }
+             ],
+             "volumes": [
+               {
+                 "name": "kube-api-access-jlxb2",
+                 "projected": {
+                   "defaultMode": 420,
+                   "sources": [
+                     {
+                       "serviceAccountToken": {
+                         "expirationSeconds": 3607,
+                         "path": "token"
+                       }
+                     },
+                     {
+                       "configMap": {
+                         "items": [
+                           {
+                             "key": "ca.crt",
+                             "path": "ca.crt"
+                           }
+                         ],
+                         "name": "kube-root-ca.crt"
+                       }
+                     },
+                     {
+                       "downwardAPI": {
+                         "items": [
+                           {
+                             "fieldRef": {
+                               "apiVersion": "v1",
+                               "fieldPath": "metadata.namespace"
+                             },
+                             "path": "namespace"
+                           }
+                         ]
+                       }
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           "status": {
+             "conditions": [
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "Initialized"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:26.000Z",
+                 "status": "True",
+                 "type": "Ready"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:26.000Z",
+                 "status": "True",
+                 "type": "ContainersReady"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "PodScheduled"
+               }
+             ],
+             "containerStatuses": [
+               {
+                 "containerID": "docker://ccc8321df430188d1f91ad79283c6ed09a2fa0ab35878e136956df066ceaedcd",
+                 "image": "jimmycngo/prom:5b621ef",
+                 "imageID": "docker://sha256:98d8dff5ceb5e4f69ccf00e3991d545f292fdb9dc93b226493dc1590e017c763",
+                 "lastState": {},
+                 "name": "prom",
+                 "ready": true,
+                 "restartCount": 0,
+                 "started": true,
+                 "state": {
+                   "running": {
+                     "startedAt": "2021-07-15T04:38:26.000Z"
+                   }
+                 }
+               }
+             ],
+             "hostIP": "192.168.65.4",
+             "phase": "Running",
+             "podIP": "10.1.2.80",
+             "podIPs": [
+               {
+                 "ip": "10.1.2.80"
+               }
+             ],
+             "qosClass": "BestEffort",
+             "startTime": "2021-07-15T04:38:22.000Z"
+           }
+         },
+         {
+           "metadata": {
+             "creationTimestamp": "2021-07-15T04:38:22.000Z",
+             "generateName": "query-depl-d875dfd46-",
+             "labels": {
+               "app": "query",
+               "app.kubernetes.io/managed-by": "skaffold",
+               "pod-template-hash": "d875dfd46",
+               "skaffold.dev/run-id": "d12b83e7-fdc7-4819-a348-26f92fa20735"
+             },
+             "managedFields": [
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:metadata": {
+                     "f:generateName": {},
+                     "f:labels": {
+                       ".": {},
+                       "f:app": {},
+                       "f:app.kubernetes.io/managed-by": {},
+                       "f:pod-template-hash": {},
+                       "f:skaffold.dev/run-id": {}
+                     },
+                     "f:ownerReferences": {
+                       ".": {},
+                       "k:{\"uid\":\"4b4ab892-d6b7-4cab-ba50-e2e2317c7678\"}": {
+                         ".": {},
+                         "f:apiVersion": {},
+                         "f:blockOwnerDeletion": {},
+                         "f:controller": {},
+                         "f:kind": {},
+                         "f:name": {},
+                         "f:uid": {}
+                       }
+                     }
+                   },
+                   "f:spec": {
+                     "f:containers": {
+                       "k:{\"name\":\"query\"}": {
+                         ".": {},
+                         "f:image": {},
+                         "f:imagePullPolicy": {},
+                         "f:name": {},
+                         "f:resources": {},
+                         "f:terminationMessagePath": {},
+                         "f:terminationMessagePolicy": {}
+                       }
+                     },
+                     "f:dnsPolicy": {},
+                     "f:enableServiceLinks": {},
+                     "f:restartPolicy": {},
+                     "f:schedulerName": {},
+                     "f:securityContext": {},
+                     "f:terminationGracePeriodSeconds": {}
+                   }
+                 },
+                 "manager": "kube-controller-manager",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:22.000Z"
+               },
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:status": {
+                     "f:conditions": {
+                       "k:{\"type\":\"ContainersReady\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Initialized\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Ready\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       }
+                     },
+                     "f:containerStatuses": {},
+                     "f:hostIP": {},
+                     "f:phase": {},
+                     "f:podIP": {},
+                     "f:podIPs": {
+                       ".": {},
+                       "k:{\"ip\":\"10.1.2.77\"}": {
+                         ".": {},
+                         "f:ip": {}
+                       }
+                     },
+                     "f:startTime": {}
+                   }
+                 },
+                 "manager": "kubelet",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:28.000Z"
+               }
+             ],
+             "name": "query-depl-d875dfd46-dlmxp",
+             "namespace": "default",
+             "ownerReferences": [
+               {
+                 "apiVersion": "apps/v1",
+                 "blockOwnerDeletion": true,
+                 "controller": true,
+                 "kind": "ReplicaSet",
+                 "name": "query-depl-d875dfd46",
+                 "uid": "4b4ab892-d6b7-4cab-ba50-e2e2317c7678"
+               }
+             ],
+             "resourceVersion": "368139",
+             "uid": "0577a6df-3466-4edb-ae17-01cde0ca8f05"
+           },
+           "spec": {
+             "containers": [
+               {
+                 "image": "jimmycngo/query:c091d5224e19d0dd3f0664190c6af7bc3b22812c6ec87f88c6fd8c2b93edcf50",
+                 "imagePullPolicy": "IfNotPresent",
+                 "name": "query",
+                 "resources": {},
+                 "terminationMessagePath": "/dev/termination-log",
+                 "terminationMessagePolicy": "File",
+                 "volumeMounts": [
+                   {
+                     "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                     "name": "kube-api-access-ftmjn",
+                     "readOnly": true
+                   }
+                 ]
+               }
+             ],
+             "dnsPolicy": "ClusterFirst",
+             "enableServiceLinks": true,
+             "nodeName": "docker-desktop",
+             "preemptionPolicy": "PreemptLowerPriority",
+             "priority": 0,
+             "restartPolicy": "Always",
+             "schedulerName": "default-scheduler",
+             "securityContext": {},
+             "serviceAccount": "default",
+             "serviceAccountName": "default",
+             "terminationGracePeriodSeconds": 30,
+             "tolerations": [
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/not-ready",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               },
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/unreachable",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               }
+             ],
+             "volumes": [
+               {
+                 "name": "kube-api-access-ftmjn",
+                 "projected": {
+                   "defaultMode": 420,
+                   "sources": [
+                     {
+                       "serviceAccountToken": {
+                         "expirationSeconds": 3607,
+                         "path": "token"
+                       }
+                     },
+                     {
+                       "configMap": {
+                         "items": [
+                           {
+                             "key": "ca.crt",
+                             "path": "ca.crt"
+                           }
+                         ],
+                         "name": "kube-root-ca.crt"
+                       }
+                     },
+                     {
+                       "downwardAPI": {
+                         "items": [
+                           {
+                             "fieldRef": {
+                               "apiVersion": "v1",
+                               "fieldPath": "metadata.namespace"
+                             },
+                             "path": "namespace"
+                           }
+                         ]
+                       }
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           "status": {
+             "conditions": [
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "Initialized"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:25.000Z",
+                 "status": "True",
+                 "type": "Ready"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:25.000Z",
+                 "status": "True",
+                 "type": "ContainersReady"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "PodScheduled"
+               }
+             ],
+             "containerStatuses": [
+               {
+                 "containerID": "docker://8a67ed8502a294123f154eedc2e53412802c86fefdbabd3690f10b171c11c6db",
+                 "image": "jimmycngo/query:3a8c9d9-dirty",
+                 "imageID": "docker://sha256:c091d5224e19d0dd3f0664190c6af7bc3b22812c6ec87f88c6fd8c2b93edcf50",
+                 "lastState": {},
+                 "name": "query",
+                 "ready": true,
+                 "restartCount": 0,
+                 "started": true,
+                 "state": {
+                   "running": {
+                     "startedAt": "2021-07-15T04:38:25.000Z"
+                   }
+                 }
+               }
+             ],
+             "hostIP": "192.168.65.4",
+             "phase": "Running",
+             "podIP": "10.1.2.77",
+             "podIPs": [
+               {
+                 "ip": "10.1.2.77"
+               }
+             ],
+             "qosClass": "BestEffort",
+             "startTime": "2021-07-15T04:38:22.000Z"
+           }
+         },
+         {
+           "metadata": {
+             "creationTimestamp": "2021-07-15T04:38:22.000Z",
+             "generateName": "viewer-depl-6db66dbb4c-",
+             "labels": {
+               "app": "viewer",
+               "app.kubernetes.io/managed-by": "skaffold",
+               "pod-template-hash": "6db66dbb4c",
+               "skaffold.dev/run-id": "d12b83e7-fdc7-4819-a348-26f92fa20735"
+             },
+             "managedFields": [
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:metadata": {
+                     "f:generateName": {},
+                     "f:labels": {
+                       ".": {},
+                       "f:app": {},
+                       "f:app.kubernetes.io/managed-by": {},
+                       "f:pod-template-hash": {},
+                       "f:skaffold.dev/run-id": {}
+                     },
+                     "f:ownerReferences": {
+                       ".": {},
+                       "k:{\"uid\":\"37e48435-19a9-4f8f-b937-95c7d66b0e74\"}": {
+                         ".": {},
+                         "f:apiVersion": {},
+                         "f:blockOwnerDeletion": {},
+                         "f:controller": {},
+                         "f:kind": {},
+                         "f:name": {},
+                         "f:uid": {}
+                       }
+                     }
+                   },
+                   "f:spec": {
+                     "f:containers": {
+                       "k:{\"name\":\"viewer\"}": {
+                         ".": {},
+                         "f:image": {},
+                         "f:imagePullPolicy": {},
+                         "f:name": {},
+                         "f:resources": {},
+                         "f:terminationMessagePath": {},
+                         "f:terminationMessagePolicy": {}
+                       }
+                     },
+                     "f:dnsPolicy": {},
+                     "f:enableServiceLinks": {},
+                     "f:restartPolicy": {},
+                     "f:schedulerName": {},
+                     "f:securityContext": {},
+                     "f:terminationGracePeriodSeconds": {}
+                   }
+                 },
+                 "manager": "kube-controller-manager",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:22.000Z"
+               },
+               {
+                 "apiVersion": "v1",
+                 "fieldsType": "FieldsV1",
+                 "fieldsV1": {
+                   "f:status": {
+                     "f:conditions": {
+                       "k:{\"type\":\"ContainersReady\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Initialized\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       },
+                       "k:{\"type\":\"Ready\"}": {
+                         ".": {},
+                         "f:lastProbeTime": {},
+                         "f:lastTransitionTime": {},
+                         "f:status": {},
+                         "f:type": {}
+                       }
+                     },
+                     "f:containerStatuses": {},
+                     "f:hostIP": {},
+                     "f:phase": {},
+                     "f:podIP": {},
+                     "f:podIPs": {
+                       ".": {},
+                       "k:{\"ip\":\"10.1.2.81\"}": {
+                         ".": {},
+                         "f:ip": {}
+                       }
+                     },
+                     "f:startTime": {}
+                   }
+                 },
+                 "manager": "kubelet",
+                 "operation": "Update",
+                 "time": "2021-07-15T04:38:30.000Z"
+               }
+             ],
+             "name": "viewer-depl-6db66dbb4c-hzqph",
+             "namespace": "default",
+             "ownerReferences": [
+               {
+                 "apiVersion": "apps/v1",
+                 "blockOwnerDeletion": true,
+                 "controller": true,
+                 "kind": "ReplicaSet",
+                 "name": "viewer-depl-6db66dbb4c",
+                 "uid": "37e48435-19a9-4f8f-b937-95c7d66b0e74"
+               }
+             ],
+             "resourceVersion": "368163",
+             "uid": "ea57f0d6-a4f5-4ee8-b307-67240e5c8d01"
+           },
+           "spec": {
+             "containers": [
+               {
+                 "image": "jimmycngo/viewer:cf91a7a12896edb0a50163258e5088c98b45425212fe82013cd66cc5f0bfe28a",
+                 "imagePullPolicy": "IfNotPresent",
+                 "name": "viewer",
+                 "resources": {},
+                 "terminationMessagePath": "/dev/termination-log",
+                 "terminationMessagePolicy": "File",
+                 "volumeMounts": [
+                   {
+                     "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                     "name": "kube-api-access-wtqxf",
+                     "readOnly": true
+                   }
+                 ]
+               }
+             ],
+             "dnsPolicy": "ClusterFirst",
+             "enableServiceLinks": true,
+             "nodeName": "docker-desktop",
+             "preemptionPolicy": "PreemptLowerPriority",
+             "priority": 0,
+             "restartPolicy": "Always",
+             "schedulerName": "default-scheduler",
+             "securityContext": {},
+             "serviceAccount": "default",
+             "serviceAccountName": "default",
+             "terminationGracePeriodSeconds": 30,
+             "tolerations": [
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/not-ready",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               },
+               {
+                 "effect": "NoExecute",
+                 "key": "node.kubernetes.io/unreachable",
+                 "operator": "Exists",
+                 "tolerationSeconds": 300
+               }
+             ],
+             "volumes": [
+               {
+                 "name": "kube-api-access-wtqxf",
+                 "projected": {
+                   "defaultMode": 420,
+                   "sources": [
+                     {
+                       "serviceAccountToken": {
+                         "expirationSeconds": 3607,
+                         "path": "token"
+                       }
+                     },
+                     {
+                       "configMap": {
+                         "items": [
+                           {
+                             "key": "ca.crt",
+                             "path": "ca.crt"
+                           }
+                         ],
+                         "name": "kube-root-ca.crt"
+                       }
+                     },
+                     {
+                       "downwardAPI": {
+                         "items": [
+                           {
+                             "fieldRef": {
+                               "apiVersion": "v1",
+                               "fieldPath": "metadata.namespace"
+                             },
+                             "path": "namespace"
+                           }
+                         ]
+                       }
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           "status": {
+             "conditions": [
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "Initialized"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:27.000Z",
+                 "status": "True",
+                 "type": "Ready"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:27.000Z",
+                 "status": "True",
+                 "type": "ContainersReady"
+               },
+               {
+                 "lastProbeTime": null,
+                 "lastTransitionTime": "2021-07-15T04:38:22.000Z",
+                 "status": "True",
+                 "type": "PodScheduled"
+               }
+             ],
+             "containerStatuses": [
+               {
+                 "containerID": "docker://36fb7df4b65cbe1269e01a519f8270d41f76af720909556c5b44e67f402ee074",
+                 "image": "jimmycngo/viewer:8790c37-dirty",
+                 "imageID": "docker://sha256:cf91a7a12896edb0a50163258e5088c98b45425212fe82013cd66cc5f0bfe28a",
+                 "lastState": {},
+                 "name": "viewer",
+                 "ready": true,
+                 "restartCount": 0,
+                 "started": true,
+                 "state": {
+                   "running": {
+                     "startedAt": "2021-07-15T04:38:26.000Z"
+                   }
+                 }
+               }
+             ],
+             "hostIP": "192.168.65.4",
+             "phase": "Running",
+             "podIP": "10.1.2.81",
+             "podIPs": [
+               {
+                 "ip": "10.1.2.81"
+               }
+             ],
+             "qosClass": "BestEffort",
+             "startTime": "2021-07-15T04:38:22.000Z"
+           }
+         }
+       ],
+       "kind": "PodList",
+       "metadata": {
+         "resourceVersion": "368490"
+       }
+     }
+   }
