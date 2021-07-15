@@ -34,7 +34,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Layout = ({ children }) => {
+interface AppProps {
+  children: React.ReactNode
+}
+
+const Layout: React.FC<AppProps> = ({ children }) => {
   const classes = useStyles();
 
   return (
