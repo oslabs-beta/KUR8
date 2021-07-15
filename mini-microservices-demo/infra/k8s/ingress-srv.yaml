@@ -38,6 +38,13 @@ spec:
                 name: prometheus-main
                 port:
                   number: 9090
+          - path: /podList
+            pathType: Prefix
+            backend:
+              service:
+                name: viewer-srv
+                port:
+                  number: 5000
           - path: /?(.*)
             pathType: Prefix
             backend:
