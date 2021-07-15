@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-srv
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: ingress-nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
     ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/16 # change this range to admin IPs
     nginx.ingress.kubernetes.io/rewrite-target: /$2
