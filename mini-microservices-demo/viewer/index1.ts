@@ -1,5 +1,5 @@
-const express = require('express');
-const app = express();
+import express, {Application, Request, Response, NextFunction} from 'express';
+const app: express.Application = express();
 app.use(express.json());
 
 const k8s = require('@kubernetes/client-node');
@@ -8,7 +8,7 @@ kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
 
-const getPodList = (req, res, next) => {
+const getPodList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
     .listNamespacedPod('default')
     .then(data => {
@@ -16,17 +16,17 @@ const getPodList = (req, res, next) => {
       return next()
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /podList', err);
+      res.status(500).send(`error found in get request to /podList, ${err}`);
     });
 };
 
-app.get('/podList', getPodList, (req, res) => {
+app.get('/podList', getPodList, (req: Request, res: Response): void => {
   res.status(201).send(res.locals.podList)
 });
 
 console.log('jj'); 
 
-const getServiceList = (req, res, next) => {
+const getServiceList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
     .listNamespacedService('default')
     .then(data => {
@@ -34,19 +34,19 @@ const getServiceList = (req, res, next) => {
       return next()
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /serviceList', err);
+      res.status(500).send(`error found in get request to /serviceList, ${err}`);
     });
 };
 
 
 
-app.get('/serviceList', getServiceList, (req, res) => {
+app.get('/serviceList', getServiceList, (req: Request, res: Response): void => {
   res.status(201).send(res.locals.serviceList)
 });
 
 
 
-const getIngressList = (req, res, next) => {
+const getIngressList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
     .listNamespacedIngress('default')
     .then(data => {
@@ -54,17 +54,17 @@ const getIngressList = (req, res, next) => {
       return next()
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /ingressList', err);
+      res.status(500).send(`error found in get request to /ingressList, ${err}`);
     });
 };
 
 
-app.get('/ingressList', getIngressList, (req, res) => {
+app.get('/ingressList', getIngressList, (req: Request, res: Response): void => {
   res.status(201).send(res.locals.ingressList)
 });
 
 
-const getDeploymentList = (req, res, next) => {
+const getDeploymentList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
     .listNamespacedDeployment('default')
     .then(data => {
@@ -72,17 +72,17 @@ const getDeploymentList = (req, res, next) => {
       return next()
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /deploymentList', err);
+      res.status(500).send(`error found in get request to /deploymentList, ${err}`);
     });
 };
 
 
-app.get('/deploymentList', getDeploymentList, (req, res) => {
+app.get('/deploymentList', getDeploymentList, (req: Request, res: Response): void=> {
   res.status(201).send(res.locals.deploymentList)
 });
 
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('hello world');
 });
 
