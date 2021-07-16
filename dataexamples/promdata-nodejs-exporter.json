@@ -1,0 +1,287 @@
+[
+  {
+    "help": "Total user CPU time spent in seconds.",
+    "name": "process_cpu_user_seconds_total",
+    "type": "counter",
+    "values": [{ "value": 0.018314, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Total system CPU time spent in seconds.",
+    "name": "process_cpu_system_seconds_total",
+    "type": "counter",
+    "values": [{ "value": 0, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Total user and system CPU time spent in seconds.",
+    "name": "process_cpu_seconds_total",
+    "type": "counter",
+    "values": [{ "value": 0.018314, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Start time of the process since unix epoch in seconds.",
+    "name": "process_start_time_seconds",
+    "type": "gauge",
+    "values": [{ "value": 1626400945, "labels": {} }],
+    "aggregator": "omit"
+  },
+  {
+    "help": "Resident memory size in bytes.",
+    "name": "process_resident_memory_bytes",
+    "type": "gauge",
+    "values": [{ "value": 47427584, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Virtual memory size in bytes.",
+    "name": "process_virtual_memory_bytes",
+    "type": "gauge",
+    "values": [{ "value": 264556544, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap size in bytes.",
+    "name": "process_heap_bytes",
+    "type": "gauge",
+    "values": [{ "value": 56913920, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Number of open file descriptors.",
+    "name": "process_open_fds",
+    "type": "gauge",
+    "values": [{ "value": 21, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Maximum number of open file descriptors.",
+    "name": "process_max_fds",
+    "type": "gauge",
+    "values": [{ "value": 1048576, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Lag of event loop in seconds.",
+    "name": "nodejs_eventloop_lag_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0, "labels": {} }],
+    "aggregator": "average"
+  },
+  {
+    "help": "The minimum recorded event loop delay.",
+    "name": "nodejs_eventloop_lag_min_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.009076736, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The maximum recorded event loop delay.",
+    "name": "nodejs_eventloop_lag_max_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.010289151, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The mean of the recorded event loop delays.",
+    "name": "nodejs_eventloop_lag_mean_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.010067719757575758, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The standard deviation of the recorded event loop delays.",
+    "name": "nodejs_eventloop_lag_stddev_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.00015215443225303775, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The 50th percentile of the recorded event loop delays.",
+    "name": "nodejs_eventloop_lag_p50_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.010092543, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The 90th percentile of the recorded event loop delays.",
+    "name": "nodejs_eventloop_lag_p90_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.010108927, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "The 99th percentile of the recorded event loop delays.",
+    "name": "nodejs_eventloop_lag_p99_seconds",
+    "type": "gauge",
+    "values": [{ "value": 0.010231807, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Number of active libuv handles grouped by handle type. Every handle type is C++ class name.",
+    "name": "nodejs_active_handles",
+    "type": "gauge",
+    "values": [
+      { "value": 1, "labels": { "type": "Pipe" } },
+      { "value": 4, "labels": { "type": "Socket" } },
+      { "value": 1, "labels": { "type": "Server" } }
+    ],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Total number of active handles.",
+    "name": "nodejs_active_handles_total",
+    "type": "gauge",
+    "values": [{ "value": 6, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Number of active libuv requests grouped by request type. Every request type is C++ class name.",
+    "name": "nodejs_active_requests",
+    "type": "gauge",
+    "values": [],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Total number of active requests.",
+    "name": "nodejs_active_requests_total",
+    "type": "gauge",
+    "values": [{ "value": 0, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap size from Node.js in bytes.",
+    "name": "nodejs_heap_size_total_bytes",
+    "type": "gauge",
+    "values": [{ "value": 12058624, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap size used from Node.js in bytes.",
+    "name": "nodejs_heap_size_used_bytes",
+    "type": "gauge",
+    "values": [{ "value": 7815464, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Node.js external memory size in bytes.",
+    "name": "nodejs_external_memory_bytes",
+    "type": "gauge",
+    "values": [{ "value": 884244, "labels": {} }],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap space size total from Node.js in bytes.",
+    "name": "nodejs_heap_space_size_total_bytes",
+    "type": "gauge",
+    "values": [
+      { "value": 176128, "labels": { "space": "read_only" } },
+      { "value": 6516736, "labels": { "space": "old" } },
+      { "value": 368640, "labels": { "space": "code" } },
+      { "value": 532480, "labels": { "space": "map" } },
+      { "value": 270336, "labels": { "space": "large_object" } },
+      { "value": 0, "labels": { "space": "code_large_object" } },
+      { "value": 0, "labels": { "space": "new_large_object" } },
+      { "value": 4194304, "labels": { "space": "new" } }
+    ],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap space size used from Node.js in bytes.",
+    "name": "nodejs_heap_space_size_used_bytes",
+    "type": "gauge",
+    "values": [
+      { "value": 168544, "labels": { "space": "read_only" } },
+      { "value": 5887296, "labels": { "space": "old" } },
+      { "value": 332096, "labels": { "space": "code" } },
+      { "value": 515672, "labels": { "space": "map" } },
+      { "value": 262160, "labels": { "space": "large_object" } },
+      { "value": 0, "labels": { "space": "code_large_object" } },
+      { "value": 0, "labels": { "space": "new_large_object" } },
+      { "value": 653600, "labels": { "space": "new" } }
+    ],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Process heap space size available from Node.js in bytes.",
+    "name": "nodejs_heap_space_size_available_bytes",
+    "type": "gauge",
+    "values": [
+      { "value": 0, "labels": { "space": "read_only" } },
+      { "value": 516544, "labels": { "space": "old" } },
+      { "value": 0, "labels": { "space": "code" } },
+      { "value": 0, "labels": { "space": "map" } },
+      { "value": 0, "labels": { "space": "large_object" } },
+      { "value": 0, "labels": { "space": "code_large_object" } },
+      { "value": 2062144, "labels": { "space": "new_large_object" } },
+      { "value": 1408544, "labels": { "space": "new" } }
+    ],
+    "aggregator": "sum"
+  },
+  {
+    "help": "Node.js version info.",
+    "name": "nodejs_version_info",
+    "type": "gauge",
+    "values": [
+      {
+        "value": 1,
+        "labels": { "version": "v16.4.2", "major": 16, "minor": 4, "patch": 2 }
+      }
+    ],
+    "aggregator": "first"
+  },
+  {
+    "name": "nodejs_gc_duration_seconds",
+    "help": "Garbage collection duration by kind, one of major, minor, incremental or weakcb.",
+    "type": "histogram",
+    "values": [
+      {
+        "labels": { "le": 0.001, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": 0.01, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": 0.1, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": 1, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": 2, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": 5, "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "le": "+Inf", "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_bucket"
+      },
+      {
+        "labels": { "kind": "minor" },
+        "value": 0.0008294999971985817,
+        "metricName": "nodejs_gc_duration_seconds_sum"
+      },
+      {
+        "labels": { "kind": "minor" },
+        "value": 1,
+        "metricName": "nodejs_gc_duration_seconds_count"
+      }
+    ],
+    "aggregator": "sum"
+  }
+]

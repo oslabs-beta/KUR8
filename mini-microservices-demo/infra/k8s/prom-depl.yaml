@@ -30,5 +30,5 @@ spec:
   ports:
     - name: prom
       protocol: TCP
-      port: 4006
-      targetPort: 4006
+      port: 9991
+      targetPort: 9991
