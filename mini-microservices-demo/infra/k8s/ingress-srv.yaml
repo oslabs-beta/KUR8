@@ -38,6 +38,13 @@ spec:
                 name: prometheus-main
                 port:
                   number: 9090
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: prom-srv
+                port:
+                  number: 9991
           - path: /podList
             pathType: Prefix
             backend:
