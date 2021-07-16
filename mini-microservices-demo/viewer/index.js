@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+
 const k8s = require('@kubernetes/client-node');
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
 
 const getPodList = (req, res, next) => {
   k8sApi
@@ -19,40 +21,71 @@ const getPodList = (req, res, next) => {
 };
 
 app.get('/podList', getPodList, (req, res) => {
-  res.send(res.locals.podList)
+  res.status(201).send(res.locals.podList)
 });
 
+console.log('jj'); 
 
-app.get('/serviceList', (req, res) => {
+const getServiceList = (req, res, next) => {
   k8sApi
     .listNamespacedService('default')
-    .then(data => res.send(data.body))
+    .then(data => {
+      res.locals.serviceList = data.body
+      return next()
+    })
     .catch(err => {
-      res.send('error found in get request to /serviceList', err);
+      res.status(500).send('error found in get request to /serviceList', err);
     });
+};
+
+
+
+app.get('/serviceList', getServiceList, (req, res) => {
+  res.status(201).send(res.locals.serviceList)
 });
 
-app.get('/ingressList', (req, res) => {
+
+
+const getIngressList = (req, res, next) => {
   k8sApi
     .listNamespacedIngress('default')
-    .then(data => res.send(data.body))
+    .then(data => {
+      res.locals.ingressList = data.body
+      return next()
+    })
     .catch(err => {
-      res.send('error found in get request to /ingressList', err);
+      res.status(500).send('error found in get request to /ingressList', err);
     });
+};
+
+
+app.get('/ingressList', getIngressList, (req, res) => {
+  res.status(201).send(res.locals.ingressList)
 });
 
-app.get('/deploymentList', (req, res) => {
+
+const getDeploymentList = (req, res, next) => {
   k8sApi
     .listNamespacedDeployment('default')
-    .then(data => res.send(data.body))
+    .then(data => {
+      res.locals.deploymentList = data.body
+      return next()
+    })
     .catch(err => {
-      res.send('error found in get request to /deploymentList', err);
+      res.status(500).send('error found in get request to /deploymentList', err);
     });
+};
+
+
+app.get('/deploymentList', getDeploymentList, (req, res) => {
+  res.status(201).send(res.locals.deploymentList)
 });
+
 
 app.get('/', (req, res) => {
   res.send('hello world');
 });
+
 
 app.listen(5000, () => {
   console.log('Listening on 5000');

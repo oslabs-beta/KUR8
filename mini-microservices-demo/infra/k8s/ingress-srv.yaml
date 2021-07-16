@@ -45,6 +45,34 @@ spec:
                 name: prom-srv
                 port:
                   number: 9991
+          - path: /podList
+            pathType: Prefix
+            backend:
+              service:
+                name: viewer-srv
+                port:
+                  number: 5000
+          - path: /ingressList
+            pathType: Prefix
+            backend:
+              service:
+                name: viewer-srv
+                port:
+                  number: 5000
+          - path: /deploymentList
+            pathType: Prefix
+            backend:
+              service:
+                name: viewer-srv
+                port:
+                  number: 5000
+          - path: /serviceList
+            pathType: Prefix
+            backend:
+              service:
+                name: viewer-srv
+                port:
+                  number: 5000
           - path: /?(.*)
             pathType: Prefix
             backend:
