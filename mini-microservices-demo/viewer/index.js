@@ -24,6 +24,7 @@ app.get('/podList', getPodList, (req, res) => {
   res.status(201).send(res.locals.podList)
 });
 
+console.log('jj'); 
 
 const getServiceList = (req, res, next) => {
   k8sApi
@@ -42,6 +43,7 @@ const getServiceList = (req, res, next) => {
 app.get('/serviceList', getServiceList, (req, res) => {
   res.status(201).send(res.locals.serviceList)
 });
+
 
 
 const getIngressList = (req, res, next) => {
