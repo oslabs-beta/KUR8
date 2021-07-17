@@ -1,5 +1,5 @@
-const express = require('express');
-const app = express();
+import express, {Application, Request, Response, NextFunction} from 'express';
+const app: express.Application = express();
 app.use(express.json());
 
 const k8s = require('@kubernetes/client-node');
@@ -32,7 +32,7 @@ app.get('/podList', getPodList, (req, res) => {
 
 console.log('jj');
 
-const getServiceList = (req, res, next) => {
+const getServiceList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
     .listNamespacedService('default')
     .then(data => {
@@ -40,7 +40,7 @@ const getServiceList = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /serviceList', err);
+      res.status(500).send(`error found in get request to /serviceList, ${err}`);
     });
 };
 
@@ -56,7 +56,7 @@ const getIngressList = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      res.status(500).send('error found in get request to /ingressList', err);
+      res.status(500).send(`error found in get request to /ingressList, ${err}`);
     });
 };
 
