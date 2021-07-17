@@ -92,7 +92,7 @@ const getNodeList = (req, res, next) => {
     .catch((err) => {
       res
         .status(500)
-        .send(`error found in get request to /serviceList, ${err}`);
+        .send(`error found in get request to /nodeList, ${err}`);
     });
 };
 
