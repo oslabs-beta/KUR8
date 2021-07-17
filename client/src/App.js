@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { fetchData } from './actions/actionCreators';
 import GetStartedPage from './pages/GetStartedPage';
 import Layout from './components/Layout';
 import MetricsPage from './pages/MetricsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import StructurePage from './pages/StructurePage';
 
-export default function App() {
+function App({ fetchData }) {
+  useEffect(() => fetchData('posts.com') , []);
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <Switch>
           <Route exact path="/" component={GetStartedPage} />
           <Route path="/structure" component={StructurePage} />
           <Route path="/metrics" component={MetricsPage} />
           <Route component={NotFoundPage} />
         </Switch>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchData }, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);
