@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -34,11 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface AppProps {
-  children: React.ReactNode
-}
-
-const Layout: React.FC<AppProps> = ({ children }) => {
+const Layout = ({ children }) => {
   const classes = useStyles();
 
   return (
