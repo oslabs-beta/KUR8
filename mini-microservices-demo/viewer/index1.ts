@@ -6,7 +6,7 @@ const k8s = require('@kubernetes/client-node');
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-
+const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
 
 const getPodList = (req: Request, res: Response, next: NextFunction) => {
   k8sApi
@@ -47,7 +47,7 @@ app.get('/serviceList', getServiceList, (req: Request, res: Response): void => {
 
 
 const getIngressList = (req: Request, res: Response, next: NextFunction) => {
-  k8sApi
+  k8sApi2
     .listNamespacedIngress('default')
     .then(data => {
       res.locals.ingressList = data.body
