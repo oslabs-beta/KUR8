@@ -9,25 +9,20 @@ const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
 const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
 
-const getPodList = async (req, res, next) => {
-  const data = await k8s.topNodes(k8sApi);
-  // console.log(JSON.stringify(data));
-  res.locals.podList = data[0];
-  return next();
-
-  // k8sApi
-  //   .listNamespacedPod('default')
-  //   .then(data => {
-  //     res.locals.podList = data.body
-  //     return next()
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send('error found in get request to /podList', err);
-  //   });
+const getPodList = (req, res, next) => {
+  k8sApi
+    .listNamespacedPod('default')
+    .then(data => {
+      res.locals.podList = data.body
+      return next()
+    })
+    .catch(err => {
+      res.status(500).send('error found in get request to /podList', err);
+    });
 };
 
 app.get('/podList', getPodList, (req, res) => {
-  res.status(201).send(JSON.parse(res.locals.podList));
+  res.status(201).send(res.locals.podList);
 });
 
 console.log('jj');
@@ -84,6 +79,24 @@ const getDeploymentList = (req, res, next) => {
 
 app.get('/deploymentList', getDeploymentList, (req, res) => {
   res.status(201).send(res.locals.deploymentList);
+});
+
+const getNodeList = (req, res, next) => {
+  k8sApi
+    .listNode('default')
+    .then((data) => {
+      res.locals.nodeList = data;
+      return next();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send(`error found in get request to /serviceList, ${err}`);
+    });
+};
+
+app.get('/nodeList', getNodeList, (req, res) => {
+  res.status(201).send(res.locals.nodeList);
 });
 
 app.get('/', (req, res) => {
