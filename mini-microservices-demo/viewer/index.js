@@ -6,6 +6,7 @@ const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
+<<<<<<< HEAD
 const getPodList = async (req, res, next) => {
   const data = await k8s.topNodes(k8sApi);
   // console.log(JSON.stringify(data));
@@ -20,9 +21,22 @@ const getPodList = async (req, res, next) => {
   //   .catch(err => {
   //     res.status(500).send('error found in get request to /podList', err);
   //   });
+=======
+
+const getPodList = (req, res, next) => {
+  k8sApi
+    .listNamespacedPod('default')
+    .then(data => {
+      res.locals.podList = data.body
+      return next()
+    })
+    .catch(err => {
+      res.status(500).send('error found in get request to /podList', err);
+    });
+>>>>>>> 8cd2f731cf5a5e30c1390668de6495d68bf1b610
 };
 app.get('/podList', getPodList, (req, res) => {
-  res.status(201).send(JSON.parse(res.locals.podList));
+  res.status(201).send(res.locals.podList);
 });
 
 
@@ -88,6 +102,26 @@ app.get('/deploymentList', getDeploymentList, (req, res) => {
   res.status(201).send(res.locals.deploymentList);
 });
 
+<<<<<<< HEAD
+=======
+const getNodeList = (req, res, next) => {
+  k8sApi
+    .listNode('default')
+    .then((data) => {
+      res.locals.nodeList = data;
+      return next();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send(`error found in get request to /serviceList, ${err}`);
+    });
+};
+
+app.get('/nodeList', getNodeList, (req, res) => {
+  res.status(201).send(res.locals.nodeList);
+});
+>>>>>>> 8cd2f731cf5a5e30c1390668de6495d68bf1b610
 
 app.get('/', (req, res) => {
   res.send('hello world');
