@@ -7,6 +7,8 @@ const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
+const k8sApi3 = kc.makeApiClient(k8s.AppsV1Api);
+
 const getPodList = (req, res, next) => {
   k8sApi
     .listNamespacedPod('default')
@@ -61,7 +63,7 @@ app.get('/ingressList', getIngressList, (req, res) => {
 });
 
 const getDeploymentList = (req, res, next) => {
-  k8sApi
+  k8sApi3
     .listNamespacedDeployment('default')
     .then((data) => {
       res.locals.deploymentList = data.body;
