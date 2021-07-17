@@ -1,5 +1,5 @@
-import express, {Application, Request, Response, NextFunction} from 'express';
-const app: express.Application = express();
+const express = require('express');
+const app = express();
 app.use(express.json());
 
 const k8s = require('@kubernetes/client-node');
@@ -32,15 +32,17 @@ app.get('/podList', getPodList, (req, res) => {
 
 console.log('jj');
 
-const getServiceList = (req: Request, res: Response, next: NextFunction) => {
+const getServiceList = (req, res, next) => {
   k8sApi
     .listNamespacedService('default')
-    .then(data => {
+    .then((data) => {
       res.locals.serviceList = data.body;
       return next();
     })
-    .catch(err => {
-      res.status(500).send(`error found in get request to /serviceList, ${err}`);
+    .catch((err) => {
+      res
+        .status(500)
+        .send(`error found in get request to /serviceList, ${err}`);
     });
 };
 
@@ -51,12 +53,14 @@ app.get('/serviceList', getServiceList, (req, res) => {
 const getIngressList = (req, res, next) => {
   k8sApi2
     .listNamespacedIngress('default')
-    .then(data => {
+    .then((data) => {
       res.locals.ingressList = data.body;
       return next();
     })
-    .catch(err => {
-      res.status(500).send(`error found in get request to /ingressList, ${err}`);
+    .catch((err) => {
+      res
+        .status(500)
+        .send(`error found in get request to /ingressList, ${err}`);
     });
 };
 
@@ -67,11 +71,11 @@ app.get('/ingressList', getIngressList, (req, res) => {
 const getDeploymentList = (req, res, next) => {
   k8sApi
     .listNamespacedDeployment('default')
-    .then(data => {
+    .then((data) => {
       res.locals.deploymentList = data.body;
       return next();
     })
-    .catch(err => {
+    .catch((err) => {
       res
         .status(500)
         .send('error found in get request to /deploymentList', err);
