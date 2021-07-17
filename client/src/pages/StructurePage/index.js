@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import PodList from '../../components/PodList'
 
 const useStyles = makeStyles(theme => ({
   sampleStyle: {
@@ -13,7 +14,7 @@ export default function StructurePage() {
 
   return (
     <Typography variant="h3" className={classes.sampleStyle}>
-      structure page
+      {PodList}
     </Typography>
   );
 }
