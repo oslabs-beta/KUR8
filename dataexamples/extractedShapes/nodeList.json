@@ -1,0 +1,603 @@
+{
+  "response": {
+    "statusCode": 200,
+    "body": {
+      "kind": "NodeList",
+      "apiVersion": "v1",
+      "metadata": { "resourceVersion": "27707" },
+      "items": [
+        {
+          "metadata": {
+            "name": "docker-desktop",
+            "uid": "ce4d9433-e5bd-4390-b9b6-8879d9d56999",
+            "resourceVersion": "27699",
+            "creationTimestamp": "2021-07-16T16:01:48Z",
+            "managedFields": [
+              {
+                "manager": "kubeadm",
+                "operation": "Update",
+                "apiVersion": "v1",
+                "time": "2021-07-16T16:01:51Z",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                  "f:metadata": {
+                    "f:annotations": {
+                      "f:kubeadm.alpha.kubernetes.io/cri-socket": {}
+                    },
+                    "f:labels": {
+                      "f:node-role.kubernetes.io/control-plane": {},
+                      "f:node-role.kubernetes.io/master": {},
+                      "f:node.kubernetes.io/exclude-from-external-load-balancers": {}
+                    }
+                  }
+                }
+              },
+              {
+                "manager": "kube-controller-manager",
+                "operation": "Update",
+                "apiVersion": "v1",
+                "time": "2021-07-16T16:01:55Z",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                  "f:metadata": {
+                    "f:annotations": { "f:node.alpha.kubernetes.io/ttl": {} }
+                  }
+                }
+              },
+              {
+                "manager": "kubelet",
+                "operation": "Update",
+                "apiVersion": "v1",
+                "time": "2021-07-17T00:25:19Z",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                  "f:metadata": {
+                    "f:annotations": {
+                      ".": {},
+                      "f:volumes.kubernetes.io/controller-managed-attach-detach": {}
+                    },
+                    "f:labels": {
+                      ".": {},
+                      "f:beta.kubernetes.io/arch": {},
+                      "f:beta.kubernetes.io/os": {},
+                      "f:kubernetes.io/arch": {},
+                      "f:kubernetes.io/hostname": {},
+                      "f:kubernetes.io/os": {}
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "spec": {},
+          "status": {
+            "daemonEndpoints": { "kubeletEndpoint": { "Port": 10250 } },
+            "nodeInfo": {
+              "machineID": "721ff660-727f-4b0c-9745-8f7c614777ff",
+              "systemUUID": "721ff660-727f-4b0c-9745-8f7c614777ff",
+              "bootID": "f0ea8507-744e-442f-9082-5b4a17c4f6da",
+              "kernelVersion": "5.4.72-microsoft-standard-WSL2",
+              "osImage": "Docker Desktop",
+              "containerRuntimeVersion": "docker://20.10.7",
+              "kubeletVersion": "v1.21.2",
+              "kubeProxyVersion": "v1.21.2",
+              "operatingSystem": "linux",
+              "architecture": "amd64"
+            },
+            "images": [
+              {
+                "names": [
+                  "jimmycngo/client:0526bea3197c2aca6b8a73a81b8b9da94d353d58589ebe25115764f2b83e0c3e",
+                  "jimmycngo/client:1b3c2b5",
+                  "jimmycngo/client:7589ffb",
+                  "jimmycngo/client:84b4b1a",
+                  "jimmycngo/client:9c3589a"
+                ],
+                "sizeBytes": 435030454
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/etcd@sha256:4ad90a11b55313b182afc186b9876c8e891531b8db4c9bf1541953021618d0e2",
+                  "k8s.gcr.io/etcd:3.4.13-0"
+                ],
+                "sizeBytes": 253392289
+              },
+              {
+                "names": [
+                  "jimmycngo/viewer:3d2c936992c839adff538d6ce8d4454ae1349d03802153b0f67313ef4a581d3c",
+                  "jimmycngo/viewer:c85fbd3-dirty"
+                ],
+                "sizeBytes": 147944936
+              },
+              {
+                "names": [
+                  "jimmycngo/viewer:221c2c36b6f96419da0f5fbeae57dc5ec21e79e7fc3bfcaeae2866ec34a7e427",
+                  "jimmycngo/viewer:84b4b1a",
+                  "jimmycngo/viewer:c85fbd3"
+                ],
+                "sizeBytes": 147643744
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/kube-proxy@sha256:3ee783402715225d6bc483b3a2f8ea11adcb997d00fb5ca2f74734023ade0561",
+                  "k8s.gcr.io/kube-proxy:v1.21.2"
+                ],
+                "sizeBytes": 130869239
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/kube-apiserver@sha256:c86c3855e360b1483008c30c8deaed2b1a92f63eaacec819a90a0ffe04df152b",
+                  "k8s.gcr.io/kube-apiserver:v1.21.2"
+                ],
+                "sizeBytes": 125624711
+              },
+              {
+                "names": [
+                  "jimmycngo/prom:1b3c2b5",
+                  "jimmycngo/prom:7589ffb",
+                  "jimmycngo/prom:84b4b1a",
+                  "jimmycngo/prom:9c3589a",
+                  "jimmycngo/prom:c030bba8d69f9cea35e6b3a1a1d4f69cb4c083e488186db1fbb99bf0d51b8ede"
+                ],
+                "sizeBytes": 125120101
+              },
+              {
+                "names": [
+                  "jimmycngo/comments:1b3c2b5",
+                  "jimmycngo/comments:4177211f709c097116aaecdc277148d7ebd30940972a8a79049d8d847e198158",
+                  "jimmycngo/comments:7589ffb",
+                  "jimmycngo/comments:84b4b1a",
+                  "jimmycngo/comments:9c3589a"
+                ],
+                "sizeBytes": 122003954
+              },
+              {
+                "names": [
+                  "jimmycngo/query:1b3c2b5",
+                  "jimmycngo/query:5e8aeae11812c3d2161da92c3452f2df42e85a80224094c1da715dd6099fd020",
+                  "jimmycngo/query:7589ffb",
+                  "jimmycngo/query:84b4b1a",
+                  "jimmycngo/query:9c3589a"
+                ],
+                "sizeBytes": 122003737
+              },
+              {
+                "names": [
+                  "jimmycngo/posts:1b3c2b5",
+                  "jimmycngo/posts:640825e16fc47e56bae877f4e0e4312e418a18d249e5f060d66b0322d54c9438",
+                  "jimmycngo/posts:7589ffb",
+                  "jimmycngo/posts:84b4b1a",
+                  "jimmycngo/posts:9c3589a"
+                ],
+                "sizeBytes": 122003251
+              },
+              {
+                "names": [
+                  "jimmycngo/event-bus:197fe08b45025d9b4ff806254eb0d03306eaa597cb9b6899e3ef8a8e8f7c83e5",
+                  "jimmycngo/event-bus:1b3c2b5",
+                  "jimmycngo/event-bus:7589ffb",
+                  "jimmycngo/event-bus:84b4b1a",
+                  "jimmycngo/event-bus:9c3589a"
+                ],
+                "sizeBytes": 121946193
+              },
+              {
+                "names": [
+                  "jimmycngo/moderation:1b3c2b5",
+                  "jimmycngo/moderation:7589ffb",
+                  "jimmycngo/moderation:84b4b1a",
+                  "jimmycngo/moderation:8a9877e929344e7dc2e2057b6fa4c9d6450c4f49d90333ecab7858da75818691",
+                  "jimmycngo/moderation:9c3589a"
+                ],
+                "sizeBytes": 121945995
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/kube-controller-manager@sha256:2ea5e2885485fc20aaa15a0033d50e47ce7c559bf292741c16604984088bd700",
+                  "k8s.gcr.io/kube-controller-manager:v1.21.2"
+                ],
+                "sizeBytes": 119829772
+              },
+              {
+                "names": [
+                  "node@sha256:50b33102c307e04f73817dad87cdae145b14782875495ddd950b5a48e4937c70",
+                  "node:alpine"
+                ],
+                "sizeBytes": 112144921
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/kube-scheduler@sha256:d372f36741c015e30d36aef958a021de4af7218c467edac91796fb03aab478b4",
+                  "k8s.gcr.io/kube-scheduler:v1.21.2"
+                ],
+                "sizeBytes": 50640140
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/coredns/coredns@sha256:cc8fb77bc2a0541949d1d9320a641b82fd392b0d3d8145469ca4709ae769980e",
+                  "k8s.gcr.io/coredns/coredns:v1.8.0"
+                ],
+                "sizeBytes": 42454755
+              },
+              {
+                "names": [
+                  "docker/desktop-storage-provisioner@sha256:115d77efe6e256cefbcdf1d3292bede9339ef3952a2a83393cea217a3ffdef36",
+                  "docker/desktop-storage-provisioner:v2.0"
+                ],
+                "sizeBytes": 41850220
+              },
+              {
+                "names": [
+                  "docker/desktop-vpnkit-controller@sha256:b5bcb3a7172ae44d3a1df2e74a1b4d4e10d5562efe1d3c9197b23b383de70a86",
+                  "docker/desktop-vpnkit-controller:v2.0"
+                ],
+                "sizeBytes": 21034536
+              },
+              {
+                "names": [
+                  "k8s.gcr.io/pause@sha256:6c3835cab3980f11b83277305d0d736051c32b17606f5ec59f1dda67c9ba3810",
+                  "k8s.gcr.io/pause:3.4.1"
+                ],
+                "sizeBytes": 682696
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "10.96.0.1:443",
+        "port": "443",
+        "hostname": "10.96.0.1",
+        "hash": null,
+        "search": "?pretty=default",
+        "query": "pretty=default",
+        "pathname": "/api/v1/nodes",
+        "path": "/api/v1/nodes?pretty=default",
+        "href": "https://10.96.0.1:443/api/v1/nodes?pretty=default"
+      },
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IklCaVBkR0IxU19DWVdvN190QmVSeWhYN0M4d08wR25OVU5XYVFwQ29HVGsifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjU4MDMyMDY2LCJpYXQiOjE2MjY0OTYwNjYsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJ2aWV3ZXItZGVwbC01OGZjZjY0OWZmLTg3bW0yIiwidWlkIjoiZWFjMjJkMjQtZGE0ZS00OTE1LTk1Y2QtZjI0N2ZiNjJjODAzIn0sInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJkZWZhdWx0IiwidWlkIjoiYjI4ZjMwNGItYTNmMi00OGJhLWI3NzMtNjJhN2M1OGJlYmZkIn0sIndhcm5hZnRlciI6MTYyNjQ5OTY3M30sIm5iZiI6MTYyNjQ5NjA2Niwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6ZGVmYXVsdCJ9.Ya2VauR132slM421R1_gBG8CqclVyB0wKXSBNJ2qk6Bmzs_lH7RTo2J0InR53a0ZUfy1bIzzBaDNeDagtXB4nTQhoEei8xUQbUCHWgbmw83x_tVyKg3hq5FaeJzng7Aa3M6OB-p1rJHp3tJZqeXMr8KYUpAmLdm1nsyPWdefMa8sm-XgmyiUlW0xxr7DXUhKE8O0IkvxtHNUSAWodhesIK9QENuSWhjljoB1aT4XFZ9HX9imhmhAyLC0a6HI5pXLOpbZk1x-VveZPg-NzwCURGb2d2yKjOgGvW2WxPnWFug_7xmQXEcDs-z9A6Eq7t9J9lV0UH6kXuTUvt_KeSPwaA"
+      }
+    }
+  },
+  "body": {
+    "apiVersion": "v1",
+    "items": [
+      {
+        "metadata": {
+          "annotations": {
+            "kubeadm.alpha.kubernetes.io/cri-socket": "/var/run/dockershim.sock",
+            "node.alpha.kubernetes.io/ttl": "0",
+            "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+          },
+          "creationTimestamp": "2021-07-16T16:01:48.000Z",
+          "labels": {
+            "beta.kubernetes.io/arch": "amd64",
+            "beta.kubernetes.io/os": "linux",
+            "kubernetes.io/arch": "amd64",
+            "kubernetes.io/hostname": "docker-desktop",
+            "kubernetes.io/os": "linux",
+            "node-role.kubernetes.io/control-plane": "",
+            "node-role.kubernetes.io/master": "",
+            "node.kubernetes.io/exclude-from-external-load-balancers": ""
+          },
+          "managedFields": [
+            {
+              "apiVersion": "v1",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    "f:kubeadm.alpha.kubernetes.io/cri-socket": {}
+                  },
+                  "f:labels": {
+                    "f:node-role.kubernetes.io/control-plane": {},
+                    "f:node-role.kubernetes.io/master": {},
+                    "f:node.kubernetes.io/exclude-from-external-load-balancers": {}
+                  }
+                }
+              },
+              "manager": "kubeadm",
+              "operation": "Update",
+              "time": "2021-07-16T16:01:51.000Z"
+            },
+            {
+              "apiVersion": "v1",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": { "f:node.alpha.kubernetes.io/ttl": {} }
+                }
+              },
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "time": "2021-07-16T16:01:55.000Z"
+            },
+            {
+              "apiVersion": "v1",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:volumes.kubernetes.io/controller-managed-attach-detach": {}
+                  },
+                  "f:labels": {
+                    ".": {},
+                    "f:beta.kubernetes.io/arch": {},
+                    "f:beta.kubernetes.io/os": {},
+                    "f:kubernetes.io/arch": {},
+                    "f:kubernetes.io/hostname": {},
+                    "f:kubernetes.io/os": {}
+                  }
+                },
+                "f:status": {
+                  "f:conditions": {
+                    "k:{\"type\":\"DiskPressure\"}": {
+                      "f:lastHeartbeatTime": {}
+                    },
+                    "k:{\"type\":\"MemoryPressure\"}": {
+                      "f:lastHeartbeatTime": {}
+                    },
+                    "k:{\"type\":\"PIDPressure\"}": {
+                      "f:lastHeartbeatTime": {}
+                    },
+                    "k:{\"type\":\"Ready\"}": {
+                      "f:lastHeartbeatTime": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {}
+                    }
+                  },
+                  "f:images": {},
+                  "f:nodeInfo": { "f:bootID": {} }
+                }
+              },
+              "manager": "kubelet",
+              "operation": "Update",
+              "time": "2021-07-17T00:25:19.000Z"
+            }
+          ],
+          "name": "docker-desktop",
+          "resourceVersion": "27699",
+          "uid": "ce4d9433-e5bd-4390-b9b6-8879d9d56999"
+        },
+        "spec": {},
+        "status": {
+          "addresses": [
+            { "address": "192.168.65.4", "type": "InternalIP" },
+            { "address": "docker-desktop", "type": "Hostname" }
+          ],
+          "allocatable": {
+            "cpu": "12",
+            "ephemeral-storage": "242541353378",
+            "hugepages-2Mi": "0",
+            "memory": "12927144Ki",
+            "pods": "110"
+          },
+          "capacity": {
+            "cpu": "12",
+            "ephemeral-storage": "263174212Ki",
+            "hugepages-2Mi": "0",
+            "memory": "13029544Ki",
+            "pods": "110"
+          },
+          "conditions": [
+            {
+              "lastHeartbeatTime": "2021-07-17T04:29:00.000Z",
+              "lastTransitionTime": "2021-07-16T16:01:46.000Z",
+              "message": "kubelet has sufficient memory available",
+              "reason": "KubeletHasSufficientMemory",
+              "status": "False",
+              "type": "MemoryPressure"
+            },
+            {
+              "lastHeartbeatTime": "2021-07-17T04:29:00.000Z",
+              "lastTransitionTime": "2021-07-16T16:01:46.000Z",
+              "message": "kubelet has no disk pressure",
+              "reason": "KubeletHasNoDiskPressure",
+              "status": "False",
+              "type": "DiskPressure"
+            },
+            {
+              "lastHeartbeatTime": "2021-07-17T04:29:00.000Z",
+              "lastTransitionTime": "2021-07-16T16:01:46.000Z",
+              "message": "kubelet has sufficient PID available",
+              "reason": "KubeletHasSufficientPID",
+              "status": "False",
+              "type": "PIDPressure"
+            },
+            {
+              "lastHeartbeatTime": "2021-07-17T04:29:00.000Z",
+              "lastTransitionTime": "2021-07-16T16:02:18.000Z",
+              "message": "kubelet is posting ready status",
+              "reason": "KubeletReady",
+              "status": "True",
+              "type": "Ready"
+            }
+          ],
+          "daemonEndpoints": { "kubeletEndpoint": { "Port": 10250 } },
+          "images": [
+            {
+              "names": [
+                "jimmycngo/client:0526bea3197c2aca6b8a73a81b8b9da94d353d58589ebe25115764f2b83e0c3e",
+                "jimmycngo/client:1b3c2b5",
+                "jimmycngo/client:7589ffb",
+                "jimmycngo/client:84b4b1a",
+                "jimmycngo/client:9c3589a"
+              ],
+              "sizeBytes": 435030454
+            },
+            {
+              "names": [
+                "k8s.gcr.io/etcd@sha256:4ad90a11b55313b182afc186b9876c8e891531b8db4c9bf1541953021618d0e2",
+                "k8s.gcr.io/etcd:3.4.13-0"
+              ],
+              "sizeBytes": 253392289
+            },
+            {
+              "names": [
+                "jimmycngo/viewer:3d2c936992c839adff538d6ce8d4454ae1349d03802153b0f67313ef4a581d3c",
+                "jimmycngo/viewer:c85fbd3-dirty"
+              ],
+              "sizeBytes": 147944936
+            },
+            {
+              "names": [
+                "jimmycngo/viewer:221c2c36b6f96419da0f5fbeae57dc5ec21e79e7fc3bfcaeae2866ec34a7e427",
+                "jimmycngo/viewer:84b4b1a",
+                "jimmycngo/viewer:c85fbd3"
+              ],
+              "sizeBytes": 147643744
+            },
+            {
+              "names": [
+                "k8s.gcr.io/kube-proxy@sha256:3ee783402715225d6bc483b3a2f8ea11adcb997d00fb5ca2f74734023ade0561",
+                "k8s.gcr.io/kube-proxy:v1.21.2"
+              ],
+              "sizeBytes": 130869239
+            },
+            {
+              "names": [
+                "k8s.gcr.io/kube-apiserver@sha256:c86c3855e360b1483008c30c8deaed2b1a92f63eaacec819a90a0ffe04df152b",
+                "k8s.gcr.io/kube-apiserver:v1.21.2"
+              ],
+              "sizeBytes": 125624711
+            },
+            {
+              "names": [
+                "jimmycngo/prom:1b3c2b5",
+                "jimmycngo/prom:7589ffb",
+                "jimmycngo/prom:84b4b1a",
+                "jimmycngo/prom:9c3589a",
+                "jimmycngo/prom:c030bba8d69f9cea35e6b3a1a1d4f69cb4c083e488186db1fbb99bf0d51b8ede"
+              ],
+              "sizeBytes": 125120101
+            },
+            {
+              "names": [
+                "jimmycngo/comments:1b3c2b5",
+                "jimmycngo/comments:4177211f709c097116aaecdc277148d7ebd30940972a8a79049d8d847e198158",
+                "jimmycngo/comments:7589ffb",
+                "jimmycngo/comments:84b4b1a",
+                "jimmycngo/comments:9c3589a"
+              ],
+              "sizeBytes": 122003954
+            },
+            {
+              "names": [
+                "jimmycngo/query:1b3c2b5",
+                "jimmycngo/query:5e8aeae11812c3d2161da92c3452f2df42e85a80224094c1da715dd6099fd020",
+                "jimmycngo/query:7589ffb",
+                "jimmycngo/query:84b4b1a",
+                "jimmycngo/query:9c3589a"
+              ],
+              "sizeBytes": 122003737
+            },
+            {
+              "names": [
+                "jimmycngo/posts:1b3c2b5",
+                "jimmycngo/posts:640825e16fc47e56bae877f4e0e4312e418a18d249e5f060d66b0322d54c9438",
+                "jimmycngo/posts:7589ffb",
+                "jimmycngo/posts:84b4b1a",
+                "jimmycngo/posts:9c3589a"
+              ],
+              "sizeBytes": 122003251
+            },
+            {
+              "names": [
+                "jimmycngo/event-bus:197fe08b45025d9b4ff806254eb0d03306eaa597cb9b6899e3ef8a8e8f7c83e5",
+                "jimmycngo/event-bus:1b3c2b5",
+                "jimmycngo/event-bus:7589ffb",
+                "jimmycngo/event-bus:84b4b1a",
+                "jimmycngo/event-bus:9c3589a"
+              ],
+              "sizeBytes": 121946193
+            },
+            {
+              "names": [
+                "jimmycngo/moderation:1b3c2b5",
+                "jimmycngo/moderation:7589ffb",
+                "jimmycngo/moderation:84b4b1a",
+                "jimmycngo/moderation:8a9877e929344e7dc2e2057b6fa4c9d6450c4f49d90333ecab7858da75818691",
+                "jimmycngo/moderation:9c3589a"
+              ],
+              "sizeBytes": 121945995
+            },
+            {
+              "names": [
+                "k8s.gcr.io/kube-controller-manager@sha256:2ea5e2885485fc20aaa15a0033d50e47ce7c559bf292741c16604984088bd700",
+                "k8s.gcr.io/kube-controller-manager:v1.21.2"
+              ],
+              "sizeBytes": 119829772
+            },
+            {
+              "names": [
+                "node@sha256:50b33102c307e04f73817dad87cdae145b14782875495ddd950b5a48e4937c70",
+                "node:alpine"
+              ],
+              "sizeBytes": 112144921
+            },
+            {
+              "names": [
+                "k8s.gcr.io/kube-scheduler@sha256:d372f36741c015e30d36aef958a021de4af7218c467edac91796fb03aab478b4",
+                "k8s.gcr.io/kube-scheduler:v1.21.2"
+              ],
+              "sizeBytes": 50640140
+            },
+            {
+              "names": [
+                "k8s.gcr.io/coredns/coredns@sha256:cc8fb77bc2a0541949d1d9320a641b82fd392b0d3d8145469ca4709ae769980e",
+                "k8s.gcr.io/coredns/coredns:v1.8.0"
+              ],
+              "sizeBytes": 42454755
+            },
+            {
+              "names": [
+                "docker/desktop-storage-provisioner@sha256:115d77efe6e256cefbcdf1d3292bede9339ef3952a2a83393cea217a3ffdef36",
+                "docker/desktop-storage-provisioner:v2.0"
+              ],
+              "sizeBytes": 41850220
+            },
+            {
+              "names": [
+                "docker/desktop-vpnkit-controller@sha256:b5bcb3a7172ae44d3a1df2e74a1b4d4e10d5562efe1d3c9197b23b383de70a86",
+                "docker/desktop-vpnkit-controller:v2.0"
+              ],
+              "sizeBytes": 21034536
+            },
+            {
+              "names": [
+                "k8s.gcr.io/pause@sha256:6c3835cab3980f11b83277305d0d736051c32b17606f5ec59f1dda67c9ba3810",
+                "k8s.gcr.io/pause:3.4.1"
+              ],
+              "sizeBytes": 682696
+            }
+          ],
+          "nodeInfo": {
+            "architecture": "amd64",
+            "bootID": "f0ea8507-744e-442f-9082-5b4a17c4f6da",
+            "containerRuntimeVersion": "docker://20.10.7",
+            "kernelVersion": "5.4.72-microsoft-standard-WSL2",
+            "kubeProxyVersion": "v1.21.2",
+            "kubeletVersion": "v1.21.2",
+            "machineID": "721ff660-727f-4b0c-9745-8f7c614777ff",
+            "operatingSystem": "linux",
+            "osImage": "Docker Desktop",
+            "systemUUID": "721ff660-727f-4b0c-9745-8f7c614777ff"
+          }
+        }
+      }
+    ],
+    "kind": "NodeList",
+    "metadata": { "resourceVersion": "27707" }
+  }
+}
