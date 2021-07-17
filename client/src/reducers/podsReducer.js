@@ -13,18 +13,18 @@ function podsReducer(state = initialState, action) {
       let pods = [];
       items.forEach(pod => {
         pods.push({
-          name: pod.status.containerStatuses.name,
+          name: pod.status.containerStatuses[0].name,
           nodeName: pod.spec.nodeName,
-          image: pod.status.containerStatuses.image,
-          state: pod.status.containerStatuses.state,
-          started: pod.status.containerStatuses.started,
-          imageId: pod.status.containerStatuses.imageID,
-          containerId: pod.status.containerStatuses.containerID,
+          image: pod.status.containerStatuses[0].image,
+          state: pod.status.containerStatuses[0].state,
+          started: pod.status.containerStatuses[0].started,
+          imageId: pod.status.containerStatuses[0].imageID,
+          containerId: pod.status.containerStatuses[0].containerID,
           startTime: pod.status.startTime,
           hostIp: pod.status.hostIP,
           phase: pod.status.phase,
           podIp: pod.status.podIp,
-          statusConditions: pod.status.conditions,
+          statusConditions: pod.status.conditions[0],
         });
       });
       return { ...state, pods };
