@@ -9,15 +9,15 @@ import StructurePage from './pages/StructurePage';
 
 export default function App() {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <Switch>
           <Route exact path="/" component={GetStartedPage} />
           <Route path="/structure" component={StructurePage} />
           <Route path="/metrics" component={MetricsPage} />
           <Route component={NotFoundPage} />
         </Switch>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
