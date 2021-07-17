@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children, history }) => {
   const classes = useStyles();
 
   return (
@@ -51,7 +52,10 @@ const Layout = ({ children }) => {
         <div className={classes.drawerContainer}>
           <List>
             {['Structure', 'Metrics'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem
+                button
+                key={text}
+                onClick={() => history.push(`/${text.toLowerCase()}`)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <LocationCityIcon /> : <AvTimerIcon />}
                 </ListItemIcon>
@@ -69,4 +73,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default withRouter(Layout);
