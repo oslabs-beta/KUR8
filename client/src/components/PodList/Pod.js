@@ -5,30 +5,19 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    height: theme.spacing(5),
-    width: theme.spacing(5),
+    height: theme.spacing(30),
+    width: theme.spacing(30),
   },
 }));
 
-function Pod({
-  name,
-  nodeName,
-  image,
-  state,
-  started,
-  imageId,
-  containerId,
-  startTime,
-  hostIp,
-  phase,
-  podIp,
-  statusConditions,
-}) {
+function Pod({ containers, metadata, spec, status, podIndex }) {
   const classes = useStyles();
+  console.log(`status`, status);
   return (
     <Paper className={classes.paper} elevation={3}>
-      <Typography as="body1">Name: {name}</Typography>
-      <Typography as="body1">IP: {podIp}</Typography>
+      <Typography as="body1">Name: {containers.list[0].name}</Typography>
+      <Typography as="body1">podIP: {status.podIP}</Typography>
+      <Typography as="body1">hostIP: {status.hostIP}</Typography>
     </Paper>
   );
 }

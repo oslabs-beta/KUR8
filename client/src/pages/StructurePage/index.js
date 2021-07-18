@@ -13,8 +13,9 @@ export default function StructurePage() {
   const classes = useStyles();
 
   return (
-    <Typography variant="h3" className={classes.sampleStyle}>
-      {PodList}
-    </Typography>
+    <div>
+      <h1>podlist - structure page</h1>
+      <PodList />
+    </div>
   );
 }
