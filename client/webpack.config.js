@@ -14,9 +14,6 @@ module.exports = {
     hot: true,
     publicPath: '/build/',
     contentBase: path.join(__dirname, 'public'),
-    proxy: {
-      '/user': 'http://localhost:3000',
-    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

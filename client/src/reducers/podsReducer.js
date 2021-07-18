@@ -10,24 +10,33 @@ function podsReducer(state = initialState, action) {
   switch (type) {
     case actionsTypes.RECEIVE_PODS:
       const { items } = payload.data;
-      let pods = [];
+      let podArray = [];
       items.forEach(pod => {
-        pods.push({
-          name: pod.status.containerStatuses.name,
-          nodeName: pod.spec.nodeName,
-          image: pod.status.containerStatuses.image,
-          state: pod.status.containerStatuses.state,
-          started: pod.status.containerStatuses.started,
-          imageId: pod.status.containerStatuses.imageID,
-          containerId: pod.status.containerStatuses.containerID,
-          startTime: pod.status.startTime,
-          hostIp: pod.status.hostIP,
-          phase: pod.status.phase,
-          podIp: pod.status.podIp,
-          statusConditions: pod.status.conditions,
+        const { metadata, spec, status } = pod;
+        podArray.push({
+          containers: {
+            list: [...spec.containers],
+            conditions: [...status.containerStatuses],
+            podIPs: [...status.podIPs],
+          },
+          metadata: {
+            creationTimestamp: metadata.creationTimestamp,
+            namespace: metadata.namespace,
+            uid: metadata.uid,
+          },
+          spec: {
+            nodeName: spec.nodeName,
+            schedulerName: spec.schedulerName,
+          },
+          status: {
+            startTime: status.startTime,
+            hostIP: status.hostIP,
+            phase: status.phase,
+            podIP: status.podIP,
+          },
         });
       });
-      return { ...state, pods };
+      return { ...state, pods: podArray };
     default:
       return state;
   }
