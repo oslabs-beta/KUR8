@@ -1,16 +1,16 @@
 import { combineReducers, applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk'
-import podsReducer from './reducers/podsReducer'
-import servicesReducer from './reducers/servicesReducer'
-import deploymentsReducer from './reducers/deploymentsReducer'
-import ingressesReducer from './reducers/ingressesReducer'
+import thunk from 'redux-thunk';
+import podsReducer from './reducers/podsReducer';
+import servicesReducer from './reducers/servicesReducer';
+import deploymentsReducer from './reducers/deploymentsReducer';
+import ingressesReducer from './reducers/ingressesReducer';
 
 //ADD REDUCERS HERE
 const rootReducer = combineReducers({
-  pods: podsReducer,
-  services: servicesReducer,
-  deployments: deploymentsReducer,
-  ingresses: ingressesReducer,
+  podsReducer,
+  servicesReducer,
+  deploymentsReducer,
+  ingressesReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
