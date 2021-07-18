@@ -12,13 +12,25 @@ function ingressesReducer(state = initialState, action) {
       const { items } = payload.data;
       let ingresses = [];
       items.forEach(ingress => {
+        const { metadata, spec, status } = ingress;
         ingresses.push({
-          creationTime: ingress.metadata.creationTimestamp,
-          name: ingress.metadata.name,
-          namespace: ingress.metadata.namespace,
-          host: ingress.spec.rules[0].host,
-          rules: ingress.spec.rules[0].http.path[0],
-          status: ingress.status,
+          metadata: {
+            class: metadata.annotations['kubernetes.io/ingress.class'],
+            creationTime: metadata.creationTimestamp,
+            name: metadata.name,
+            namespace: metadata.namespace,
+            managedBy: metadata.labels['app.kubernetes.io/managed-by'],
+            uid: metadata.uid,
+          },
+          host: spec.rules[0].host,
+          paths: [
+            ...spec.rules[0].http.paths.map(path => ({
+              path: path.path,
+              serviceName: path.backend.serviceName,
+              servicePort: path.backend.servicePort,
+            })),
+          ],
+          ingressIPs: [...status.loadBalancer.ingress],
         });
       });
       return { ...state, ingresses };
