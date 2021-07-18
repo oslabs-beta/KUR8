@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kur8-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kur8
+  template:
+    metadata:
+      labels:
+        app: kur8
+    spec:
+      containers:
+        - name: kur8
+          image: kur8/dashboard:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kur8-srv
+  labels:
+    prometheus: cluster-monitoring
+    k8s-app: kube-state-metrics
+spec:
+  selector:
+    app: kur8
+  type: ClusterIP
+  ports:
+    - name: kur8
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

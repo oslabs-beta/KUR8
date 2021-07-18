@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - './infra/k8s/*'
+build:
+  local:
+    push: false
+  artifacts:
+    - image: kur8/dashboard
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'client/src/**/*.js'
+            dest: .
