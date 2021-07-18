@@ -8,6 +8,20 @@ export const receivePods = data => {
   };
 };
 
+export const receiveWorkerNodes = data => {
+  return {
+    type: actionTypes.RECEIVE_WORKER_NODES,
+    payload: data,
+  };
+};
+
+export const receiveMasterNodes = data => {
+  return {
+    type: actionTypes.RECEIVE_MASTER_NODES,
+    payload: data,
+  };
+};
+
 export const receiveServices = data => {
   return {
     type: actionTypes.RECEIVE_SERVICES,
@@ -34,6 +48,8 @@ const actionCreators = [
   receiveServices,
   receiveIngresses,
   receiveDeployments,
+  receiveWorkerNodes,
+  receiveMasterNodes
 ];
 
 export const endpointArray = (url = 'posts.com') => [
@@ -41,6 +57,8 @@ export const endpointArray = (url = 'posts.com') => [
   `http://${url}/serviceList`,
   `http://${url}/ingressList`,
   `http://${url}/deploymentList`,
+  `http://${url}/nodeList`,
+  `http://${url}/nodeList`,
 ];
 
 export const fetchData = () => dispatch => {
