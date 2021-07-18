@@ -12,13 +12,16 @@ function deploymentsReducer(state = initialState, action) {
       const { items } = payload.data;
       let deployments = [];
       items.forEach(deployment => {
+        const { metadata, status } = deployment;
         deployments.push({
-            creationTime: deployment.metadata.creationTimestamp,
-            deploymentName: deployment.metadata.name,
-            deploymentNamespace: deployment.metadata.namespace,
-            replicas: deployment.spec.replicas,
-            availableReplicas: deployment.status.availableReplicas,
-            conditions: deployment.status.conditions[0]
+          metadata: {
+            creationTime: metadata.creationTimestamp,
+            name: metadata.name,
+            namespace: metadata.namespace,
+            managedBy: metadata.labels['app.kubernetes.io/managed-by'],
+            uid: metadata.uid,
+          },
+          status: { ...status },
         });
       });
       return { ...state, deployments };

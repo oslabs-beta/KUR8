@@ -32,8 +32,8 @@ export const receiveIngresses = data => {
 const actionCreators = [
   receivePods,
   receiveServices,
-  receiveDeployments,
   receiveIngresses,
+  receiveDeployments,
 ];
 
 export const endpointArray = (url = 'posts.com') => [
