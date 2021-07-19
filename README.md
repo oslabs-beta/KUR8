@@ -3,11 +3,18 @@ A visual overview of Kubernetes architecture and Prometheus metrics
 
 ---
 
-## Getting started
+# Getting started
 
 <br/>
 
-### Deploying KUR8
+## Deploying KUR8
+
+<br/>
+
+Assuming you already have a Kubernetes cluster running, you can get started by:
+
+<br/>
+
 In KUR8 directory run:  `skaffold dev`
 
 Once deployed open up port to KUR8 app: `kubectl port-forward deployment/kur8-depl 8080:8080`
@@ -18,7 +25,9 @@ The structures tab on the left will query your Kubernetes API to view the cluste
 
 ---
 
-### Deploying Prometheus
+## Deploying Prometheus
+
+<br/>
 
 If you don't have your instance of Prometheus installed begin by:
 
