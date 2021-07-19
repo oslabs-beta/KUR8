@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import client from 'prom-client';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -13,12 +14,22 @@ const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
 const k8sApi3 = kc.makeApiClient(k8s.AppsV1Api);
 
+//Prom API
+client.collectDefaultMetrics()
+
 app.use(cors());
 app.use(express.json());
 const moduleURL = new URL(import.meta.url);
 const __dirname = path.dirname(moduleURL.pathname);
 // WEBPACK
 // app.use('/build', express.static(path.resolve(__dirname, '../client/build')));
+
+//Prom API data default endpoint
+app.get('/getMetrics', async (req, res) => {
+  console.log('Scraped')
+  console.log(await client.register.getMetricsAsJSON())
+  res.send(await client.register.getMetricsAsJSON())
+})
 
 // Kubernetes API data endpoint and middleware
 const getPodList = (req, res, next) => {
