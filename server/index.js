@@ -25,8 +25,8 @@ const getPodList = (req, res, next) => {
   k8sApi
     .listNamespacedPod('default')
     .then(data => {
-      res.locals.podList = data.body
-      return next()
+      res.locals.podList = data.body;
+      return next();
     })
     .catch(err => {
       res.status(500).send('error found in get request to /podList', err);
@@ -41,11 +41,11 @@ console.log('jj');
 const getServiceList = (req, res, next) => {
   k8sApi
     .listNamespacedService('default')
-    .then((data) => {
+    .then(data => {
       res.locals.serviceList = data.body;
       return next();
     })
-    .catch((err) => {
+    .catch(err => {
       res
         .status(500)
         .send(`error found in get request to /serviceList, ${err}`);
@@ -59,11 +59,11 @@ app.get('/serviceList', getServiceList, (req, res) => {
 const getIngressList = (req, res, next) => {
   k8sApi2
     .listNamespacedIngress('default')
-    .then((data) => {
+    .then(data => {
       res.locals.ingressList = data.body;
       return next();
     })
-    .catch((err) => {
+    .catch(err => {
       res
         .status(500)
         .send(`error found in get request to /ingressList, ${err}`);
@@ -77,11 +77,11 @@ app.get('/ingressList', getIngressList, (req, res) => {
 const getDeploymentList = (req, res, next) => {
   k8sApi3
     .listNamespacedDeployment('default')
-    .then((data) => {
+    .then(data => {
       res.locals.deploymentList = data.body;
       return next();
     })
-    .catch((err) => {
+    .catch(err => {
       res
         .status(500)
         .send('error found in get request to /deploymentList', err);
@@ -95,19 +95,29 @@ app.get('/deploymentList', getDeploymentList, (req, res) => {
 const getNodeList = (req, res, next) => {
   k8sApi
     .listNode('default')
-    .then((data) => {
+    .then(data => {
       res.locals.nodeList = data;
       return next();
     })
-    .catch((err) => {
-      res
-        .status(500)
-        .send(`error found in get request to /nodeList, ${err}`);
+    .catch(err => {
+      res.status(500).send(`error found in get request to /nodeList, ${err}`);
     });
 };
 
 app.get('/nodeList', getNodeList, (req, res) => {
   res.status(201).send(res.locals.nodeList);
+});
+
+app.get('/structure', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.join(__dirname, '../client/public/index.html'));
+});
+
+app.get('/metrics', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 app.get('/', (req, res) => {
