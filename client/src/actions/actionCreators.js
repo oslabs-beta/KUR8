@@ -49,7 +49,7 @@ const actionCreators = [
   receiveIngresses,
   receiveDeployments,
   receiveWorkerNodes,
-  receiveMasterNodes
+  receiveMasterNodes,
 ];
 
 export const endpointArray = (url = 'localhost:8080') => [
