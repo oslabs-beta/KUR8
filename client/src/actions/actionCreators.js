@@ -49,10 +49,10 @@ const actionCreators = [
   receiveIngresses,
   receiveDeployments,
   receiveWorkerNodes,
-  receiveMasterNodes
+  receiveMasterNodes,
 ];
 
-export const endpointArray = (url = 'posts.com') => [
+export const endpointArray = (url = 'localhost:8080') => [
   `http://${url}/podList`,
   `http://${url}/serviceList`,
   `http://${url}/ingressList`,
