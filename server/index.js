@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import client from 'prom-client';
+import client, { Histogram } from 'prom-client';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -24,10 +24,13 @@ const __dirname = path.dirname(moduleURL.pathname);
 // WEBPACK
 // app.use('/build', express.static(path.resolve(__dirname, '../client/build')));
 
+// client.register.metrics().then(data => console.log(data))
+// console.log(client.register.metrics());
+
 //Prom API data default endpoint
 app.get('/getMetrics', async (req, res) => {
   console.log('Scraped')
-  console.log(await client.register.getMetricsAsJSON())
+  // console.log(await client.register.getMetricsAsJSON())
   res.send(await client.register.getMetricsAsJSON())
 })
 
