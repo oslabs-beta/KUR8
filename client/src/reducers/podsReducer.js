@@ -1,5 +1,5 @@
 import * as actionsTypes from '../actions/actionsTypes';
-
+import moment from 'moment';
 const initialState = {
   pods: [],
 };
@@ -20,8 +20,10 @@ function podsReducer(state = initialState, action) {
             podIPs: [...status.podIPs],
           },
           metadata: {
-            creationTimestamp: metadata.creationTimestamp,
             namespace: metadata.namespace,
+            creationTimestamp: moment(metadata.creationTimestamp).format(
+              'MMMM Do YYYY - h:mm:ss a'
+            ),
             uid: metadata.uid,
           },
           spec: {
@@ -29,9 +31,11 @@ function podsReducer(state = initialState, action) {
             schedulerName: spec.schedulerName,
           },
           status: {
-            startTime: status.startTime,
-            hostIP: status.hostIP,
             phase: status.phase,
+            startTime: moment(status.startTime).format(
+              'MMMM Do YYYY - h:mm:ss a'
+            ),
+            hostIP: status.hostIP,
             podIP: status.podIP,
           },
         });
