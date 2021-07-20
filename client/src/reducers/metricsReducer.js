@@ -14,15 +14,18 @@ function metricsReducer(state = initialState, action) {
       const { data } = payload;
       let chartArray = [];
       data.forEach((el) => {
-        chartArray.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${el.values[0].value}, aggregator: ${el.aggregator} `)
+        if(el.name.includes('cpu')){
+          chartArray.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${el.values[0]}, aggregator: ${el.aggregator} `)
+        }
       })
       return {...state, defaultcharts: chartArray};
 
     case actionsTypes.RECEIVE_QUERY:
       let querychartsArray = [];
-      console.log(payload,'payload')
-      payload.forEach((el) => {
-        chartArray.push(el)
+      console.log(payload.data.data.result,'payload')
+      payload.data.data.result.forEach((el) => {
+        console.log('in for each')
+        querychartsArray.push(el.value)
       })
       return {...state, querycharts: querychartsArray};
 

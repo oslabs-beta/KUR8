@@ -7,6 +7,7 @@ const GaugeChart = ({ defaultcharts, querycharts }) => {
     <div>
       im a gauge chart
       {defaultcharts}
+      {querycharts}
     </div>
   );
 };

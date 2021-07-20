@@ -30,7 +30,7 @@ const metricsActionCreators = [
 
 export const metricsEndpointArray = (query, start, end) => [
   `http://localhost:8080/getMetrics`,
-  `http://localhost:9090/api/v1/query=rate(container_cpu_usage_seconds_total{image!=""}[5m])`
+  `http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{image!=""}[5m])`
   // `http://localhost:9090/api/v1/query_range=${query}&start=${start}&end=${end}`,
 ];
 
