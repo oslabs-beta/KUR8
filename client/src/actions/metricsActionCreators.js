@@ -24,14 +24,14 @@ export const receiveQueryRange = data => {
 
 const metricsActionCreators = [
   receiveDefaultMetrics,
-  receiveQuery,
-  // receiveQueryRange,
+  // receiveQuery,
+  receiveQueryRange,
 ];
 
 export const metricsEndpointArray = (query, start, end) => [
   `http://localhost:8080/getMetrics`,
-  `http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{image!=""}[5m])`
-  // `http://localhost:9090/api/v1/query_range=${query}&start=${start}&end=${end}`,
+  // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
+  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=2021-07-20T09:10:30.781Z&end=2021-07-21T15:30:00.781Z&step=15s`,
 ];
 
 export const metricsFetchData = () => dispatch => {
