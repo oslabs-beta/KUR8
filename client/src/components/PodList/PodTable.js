@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,15 +15,13 @@ const useStyles = makeStyles(theme => ({
   tableHead: {
     width: '100%',
   },
-  tableCell: {
+  tableCellCatagory: {
     backgroundColor: theme.palette.grey[300],
+  },
+  tableCellItem: {
     borderBottom: 'none',
   },
 }));
-
-const MyTableCell = withStyles({
-  borderBottom: 'none',
-})(TableCell);
 
 export default function PodTable({ metadata, spec, status }) {
   const classes = useStyles();
@@ -41,7 +38,7 @@ export default function PodTable({ metadata, spec, status }) {
       rowHeads.push(
         <TableHead className={classes.tableHead}>
           <TableRow>
-            <TableCell className={classes.tableCell}>
+            <TableCell className={classes.tableCellCatagory}>
               {rowName.toUpperCase()}
             </TableCell>
           </TableRow>
@@ -54,10 +51,15 @@ export default function PodTable({ metadata, spec, status }) {
     for (const [key, value] of Object.entries(dataObj)) {
       rowArray.push(
         <TableRow key={`table-row-${key}`}>
-          <MyTableCell component="th" scope="row">
+          <TableCell
+            component="th"
+            scope="row"
+            className={classes.tableCellItem}>
             {key}
-          </MyTableCell>
-          <TableCell align="left">{value}</TableCell>
+          </TableCell>
+          <TableCell align="left" className={classes.tableCellItem}>
+            {value}
+          </TableCell>
         </TableRow>
       );
     }
@@ -69,9 +71,8 @@ export default function PodTable({ metadata, spec, status }) {
   makeRows(spec, specRows);
   makeRows(status, statusRows);
 
-  console.log('spec', specRows);
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table className={classes.table} size="small" aria-label="a dense table">
         {rowsArray.map((rows, index) => {
           return (
