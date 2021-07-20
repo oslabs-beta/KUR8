@@ -2,7 +2,8 @@ import * as actionsTypes from '../actions/actionsTypes';
 
 const initialState = {
   defaultcharts: [],
-  // querycharts: [],
+  querycharts: [],
+  queryrangecharts: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -22,12 +23,22 @@ function metricsReducer(state = initialState, action) {
 
     case actionsTypes.RECEIVE_QUERY:
       let querychartsArray = [];
-      console.log(payload.data.data.result,'payload')
-      payload.data.data.result.forEach((el) => {
-        console.log('in for each')
+      console.log(payload.data.data,'payload')
+      payload.data.data.forEach((el) => {
         querychartsArray.push(el.value)
       })
       return {...state, querycharts: querychartsArray};
+
+    case actionsTypes.RECEIVE_QUERY_RANGE:
+      let queryrangechartsArray = [];
+
+      payload.data.data.result.forEach((el) => {
+
+        console.log(el)
+        //el.metrics has the title of each line
+        queryrangechartsArray.push(el.values)
+      })
+      return {...state, queryrangecharts: queryrangechartsArray};
 
     default:
       return state;
