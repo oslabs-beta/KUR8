@@ -15,6 +15,7 @@ const k8sApi2 = kc.makeApiClient(k8s.ExtensionsV1beta1Api);
 const k8sApi3 = kc.makeApiClient(k8s.AppsV1Api);
 
 //Prom API
+// Getting teh default value;
 client.collectDefaultMetrics()
 
 app.use(cors());
@@ -30,6 +31,7 @@ app.get('/getMetrics', async (req, res) => {
   console.log(await client.register.getMetricsAsJSON())
   res.send(await client.register.getMetricsAsJSON())
 })
+
 
 // Kubernetes API data endpoint and middleware
 const getPodList = (req, res, next) => {

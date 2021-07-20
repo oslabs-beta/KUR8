@@ -1,4 +1,4 @@
-"metadata": {
+{"metadata": {
     "name": "kind-worker",
     "uid": "1fae4280-726c-4f16-b636-7421950c354e",
     "resourceVersion": "12243",
@@ -256,5 +256,4 @@
       { "names": ["k8s.gcr.io/pause:3.5"], "sizeBytes": 301416 }
     ]
   }
-},
-{
+}
