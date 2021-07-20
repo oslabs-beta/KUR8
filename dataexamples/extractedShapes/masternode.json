@@ -1,4 +1,4 @@
-    "metadata": {
+    {"metadata": {
       "name": "kind-control-plane",
       "uid": "5997f849-08a4-4ccb-bae7-b4a021f7fff3",
       "resourceVersion": "12022",
@@ -262,7 +262,4 @@
           "sizeBytes": 12945155
         },
         { "names": ["k8s.gcr.io/pause:3.5"], "sizeBytes": 301416 }
-      ]
-    }
-  },
-  {
+      ]}}
