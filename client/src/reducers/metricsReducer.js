@@ -1,11 +1,34 @@
-import * as actions from '../actions/actions';
+import * as actionsTypes from '../actions/actionsTypes';
 
-const initialState = {};
+const initialState = {
+  defaultcharts: [],
+  // querycharts: [],
+};
 
-function metricsReducer(state = initialState, { type, payload }) {
+function metricsReducer(state = initialState, action) {
+  const { type, payload } = action;
+
   switch (type) {
-    case actions.ACTION_HERE:
-      return state;
+
+    case actionsTypes.RECEIVE_DEFAULT_METRICS:
+      const { data } = payload;
+      let chartArray = [];
+      data.forEach((el) => {
+        if(el.name.includes('cpu')){
+          chartArray.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${el.values[0]}, aggregator: ${el.aggregator} `)
+        }
+      })
+      return {...state, defaultcharts: chartArray};
+
+    case actionsTypes.RECEIVE_QUERY:
+      let querychartsArray = [];
+      console.log(payload.data.data.result,'payload')
+      payload.data.data.result.forEach((el) => {
+        console.log('in for each')
+        querychartsArray.push(el.value)
+      })
+      return {...state, querycharts: querychartsArray};
+
     default:
       return state;
   }
