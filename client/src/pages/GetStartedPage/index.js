@@ -33,8 +33,8 @@ const useStyles = makeStyles(theme => ({
     color: 'black',
     backgroundColor: 'white',
     textAlign: 'center',
-    width: '60px',
-    height: '35px',
+    width: '50px',
+    height: '25px',
   },
 
   codeBlock: {
