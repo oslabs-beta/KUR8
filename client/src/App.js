@@ -10,8 +10,11 @@ import MetricsPage from './pages/MetricsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import StructurePage from './pages/StructurePage';
 
-function App({ fetchData }) {
+import { metricsFetchData } from './actions/metricsActionCreators';
+
+function App({ fetchData, metricsFetchData }) {
   useEffect(() => fetchData('posts.com') , []);
+  useEffect(() => metricsFetchData() , []);
   return (
     <Router>
       <Layout>
@@ -27,6 +30,6 @@ function App({ fetchData }) {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchData }, dispatch);
+  bindActionCreators({ fetchData, metricsFetchData }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);
