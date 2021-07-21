@@ -10,7 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import { useParams, useHistory } from 'react-router-dom';
 import MyAppBar from './MyAppBar';
 
 const drawerWidth = 240;
@@ -35,13 +35,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Layout = ({ children, history }) => {
+const Layout = ({ children, history}) => {
   const classes = useStyles();
+
+  // if (location.pathname === '/')
+
+//   <Drawer
+//   className={classes.drawer}
+//   variant="permanent"
+//   classes={{
+//     paper: classes.drawerPaper,
+//   }}>
+//   <Toolbar />
+//   <div className={classes.drawerContainer}>
+//     <List>
+//       {['Structure', 'Metrics'].map((text, index) => (
+//         <ListItem
+//           button
+//           key={text}
+//           onClick={() => history.push(`/${text.toLowerCase()}`)}>
+//           <ListItemIcon>
+//             {index % 2 === 0 ? <LocationCityIcon /> : <AvTimerIcon />}
+//           </ListItemIcon>
+//           <ListItemText primary={text} />
+//         </ListItem>
+//       ))}
+//     </List>
+//   </div>
+// </Drawer>
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <MyAppBar />
+      {/* {Display} */}
       <Drawer
         className={classes.drawer}
         variant="permanent"
