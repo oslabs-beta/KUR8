@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=PRODUCTION nodemon ./server/index.js",
     "build": "cross-env NODE_ENV=PRODUCTION webpack",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\""
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
+    "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\""
   },
   "keywords": [],
   "author": "",

@@ -14,9 +14,19 @@ function metricsReducer(state = initialState, action) {
     case actionsTypes.RECEIVE_DEFAULT_METRICS:
       const { data } = payload;
       let chartArray = [];
+      console.log('default data', data)
       data.forEach((el) => {
-        if(el.name.includes('cpu')){
-          chartArray.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${el.values[0]}, aggregator: ${el.aggregator} `)
+        if(el.type = 'histogram'){
+          const valueArray = [];
+          const labelsArray = [];
+          el.values.forEach((element) => {
+            valueArray.push(element.value);
+            labelsArray.push(element.labels.space);
+            // innerChart.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${element.value}, aggregator: ${el.aggregator}`)
+          })
+          el.valueArray = valueArray;
+          el.labelsArray = labelsArray;
+          chartArray.push(el)
         }
       })
       return {...state, defaultcharts: chartArray};
