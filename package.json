@@ -36,7 +36,6 @@
     "uuid": "^8.3.2",
     "webpack": "^5.40.0",
     "webpack-dev-server": "^3.11.2",
-    "zingchart": "^2.9.6",
     "zingchart-react": "^3.1.0"
   },
   "devDependencies": {
