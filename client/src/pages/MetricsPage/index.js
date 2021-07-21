@@ -10,7 +10,7 @@ function MetricsPage() {
       <CounterChart />
       <GaugeChart />
       <HistogramChart />
-      {/* <QueryRangeChart /> */}
+      <QueryRangeChart />
     </div>
   )
 }
