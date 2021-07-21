@@ -13,11 +13,12 @@ import StructurePage from './pages/StructurePage';
 import { metricsFetchData } from './actions/metricsActionCreators';
 
 function App({ fetchData, metricsFetchData }) {
+  // On intial load, perform all fetch requests to populate our app with data
   useEffect(() => fetchData('posts.com') , []);
   useEffect(() => metricsFetchData() , []);
   return (
     <Router>
-      <Layout>
+      <Layout> {/* Layout produces our AppBar and Drawer */}
         <Switch>
           <Route exact path="/" component={GetStartedPage} />
           <Route path="/structure" component={StructurePage} />
