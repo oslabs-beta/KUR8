@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk)) // Apply redux-thunk middleware. This gives passes the `dispatch` function as an argument to returned functions.
 );
 
 export default store;
