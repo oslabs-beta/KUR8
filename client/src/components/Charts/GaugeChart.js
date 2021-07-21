@@ -6,7 +6,6 @@ const GaugeChart = ({ defaultcharts, querycharts, queryrangecharts }) => {
   return (
     <div>
       im a gauge chart
-      {defaultcharts}
       {querycharts}
       {queryrangecharts}
     </div>
