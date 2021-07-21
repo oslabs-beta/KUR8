@@ -20,6 +20,8 @@
     "clsx": "^1.1.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "highcharts": "^9.1.2",
+    "highcharts-react-official": "^3.0.0",
     "moment": "^2.29.1",
     "mongodb": "^4.0.0",
     "mongoose": "^5.13.3",
@@ -33,7 +35,9 @@
     "redux-thunk": "^2.3.0",
     "uuid": "^8.3.2",
     "webpack": "^5.40.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "zingchart": "^2.9.6",
+    "zingchart-react": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
