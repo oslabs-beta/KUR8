@@ -13,19 +13,21 @@ function servicesReducer(state = initialState, action) {
       let services = [];
       items.forEach(service => {
         const { metadata, spec, status } = service;
-        services.push({
-          metadata: {
-            creationTime: metadata.creationTimestamp,
-            name: metadata.name,
-            namespace: metadata.namespace,
-            managedBy: metadata.labels['app.kubernetes.io/managed-by'],
-            app: metadata.labels['k8s-app'],
-            prometheus: metadata.labels.prometheus,
-            uid: metadata.uid,
-          },
-          spec: { ...spec },
-          status: { ...status },
-        });
+        if (metadata.name !== 'kubernetes') {
+          services.push({
+            metadata: {
+              creationTime: metadata.creationTimestamp,
+              name: metadata.name,
+              namespace: metadata.namespace,
+              managedBy: metadata.labels['app.kubernetes.io/managed-by'],
+              app: metadata.labels['k8s-app'],
+              prometheus: metadata.labels.prometheus,
+              uid: metadata.uid,
+            },
+            spec: { ...spec },
+            status: { ...status },
+          });
+        }
       });
       return { ...state, services };
     default:

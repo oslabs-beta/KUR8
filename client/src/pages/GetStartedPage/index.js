@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { useParams, useHistory } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '20px',
     padding: '30px',
   },
-
+  title: {
+    textAlign: 'center',
+    fontWeight: '500',
+  },
   button: {
     color: 'black',
     backgroundColor: 'white',
@@ -35,9 +39,8 @@ const useStyles = makeStyles((theme) => ({
 
   codeBlock: {
     backgroundColor: 'black',
-    color: 'white'
-  }
-
+    color: 'white',
+  },
 }));
 
 export default function GetStartedPage() {
@@ -48,45 +51,83 @@ export default function GetStartedPage() {
 
   const switchPage = () => {
     history.push('/structure');
-  }
+  };
 
   return (
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
-
-      <p><center><strong>Getting Started</strong></center></p>
-        <p><center><strong>Deploying Prometheus</strong></center></p>
+        <Typography variant="h6" component="h1">
+          <center>
+            <strong>Getting Started</strong>
+          </center>
+        </Typography>
+        <Typography variant="body1">Deploying Prometheus</Typography>
         <ol>
           <li>
-          If you don't have your instance of Prometheus installed begin by:
-          <br></br>
-          In KUR8 directory run: <code className={classes.codeBlock}>kubectl create -f infra/manifests/setup</code><nbsp></nbsp>
-          <button className={classes.button} onClick={() =>  navigator.clipboard.writeText('kubectl create -f infra/manifests/setup')}><i class="far fa-copy"></i></button>
+            If you don't have your instance of Prometheus installed begin by:
+            <br></br>
+            In KUR8 directory run:{' '}
+            <code className={classes.codeBlock}>
+              kubectl create -f infra/manifests/setup
+            </code>
+            <button
+              className={classes.button}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  'kubectl create -f infra/manifests/setup'
+                )
+              }>
+              <i className="far fa-copy"></i>
+            </button>
           </li>
 
           <br></br>
           <li>
-          Once setup is complete run: <code className={classes.codeBlock}>kubectl create -f infra/manifests/</code><nbsp></nbsp>
-          <button className={classes.button} onClick={() =>  navigator.clipboard.writeText('kubectl create -f infra/manifests/')}><i class="far fa-copy"></i></button>
+            Once setup is complete run:{' '}
+            <code className={classes.codeBlock}>
+              kubectl create -f infra/manifests/
+            </code>
+            <button
+              className={classes.button}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  'kubectl create -f infra/manifests/'
+                )
+              }>
+              <i className="far fa-copy"></i>
+            </button>
           </li>
 
           <br></br>
           <li>
-          If you want to open up Prometheus UI run: <code className={classes.codeBlock}>kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090</code><nbsp></nbsp>
-          <button className={classes.button} onClick={() =>  navigator.clipboard.writeText('kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090')}><i class="far fa-copy"></i></button>
+            If you want to open up Prometheus UI run:{' '}
+            <code className={classes.codeBlock}>
+              kubectl --namespace monitoring port-forward svc/prometheus-k8s
+              9090
+            </code>
+            <button
+              className={classes.button}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  'kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090'
+                )
+              }>
+              <i className="far fa-copy"></i>
+            </button>
           </li>
 
           <br></br>
           <li>
-          Now open up localhost:9090 in your browser
-          <br></br>
-          You may also view the Prometheus tab in KUR8 localhost:8080 to view and create your custom dashboard.
+            Now open up localhost:9090 in your browser
+            <br></br>
+            You may also view the Prometheus tab in KUR8 localhost:8080 to view
+            and create your custom dashboard.
           </li>
-          </ol>
-          <button className={classes.button} onClick={switchPage}>Done
-          </button>
-    
+        </ol>
+        <button className={classes.button} onClick={switchPage}>
+          Done
+        </button>
       </Paper>
     </div>
   );
-};
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import PodTable from './PodTable';
@@ -31,8 +33,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: theme.spacing(20),
-    width: theme.spacing(20),
+    height: theme.spacing(25),
+    width: theme.spacing(25),
     margin: theme.spacing(1),
     background: 'rgb(26, 115, 232)',
     boxShadow: theme.shadows[10],
@@ -51,6 +53,15 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '50%',
     color: 'white',
     fontSize: '2rem',
+  },
+  chipClusterIp: {
+    color: '#fff',
+    borderColor: '#fff',
+    marginBottom: '15px',
+  },
+  podText: {
+    color: '#fff',
+    marginTop: '25px',
   },
 }));
 
@@ -84,7 +95,7 @@ const DialogTitle = withStyles(DialogTitleStyles)(props => {
   );
 });
 
-function Pod({ containers, metadata, spec, status }) {
+function Pod({ containers, metadata, spec, status, clusterIP }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -94,13 +105,24 @@ function Pod({ containers, metadata, spec, status }) {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Grid item>
       <div className={classes.kubernetesShapeWrap}>
         <div className={classes.kubernetesShape} elevation={3}>
-          <div className={classes.containersShape} onClick={handleClickOpen}>
-            {containers.list.length}
-          </div>
+          <Tooltip disableFocusListener placement="left" title="ClusterIP">
+            <Chip
+              className={classes.chipClusterIp}
+              variant="outlined"
+              size="small"
+              label={clusterIP}
+            />
+          </Tooltip>
+          <Tooltip disableFocusListener placement="left" title="More Info">
+            <div className={classes.containersShape} onClick={handleClickOpen}>
+              {containers.list.length}
+            </div>
+          </Tooltip>
           <Dialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
@@ -122,6 +144,7 @@ function Pod({ containers, metadata, spec, status }) {
               </Button>
             </MuiDialogActions>
           </Dialog>
+          <Typography className={classes.podText}>Pod</Typography>
         </div>
       </div>
       <Typography className={classes.podName} as="body1">

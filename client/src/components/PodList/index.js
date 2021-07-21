@@ -13,19 +13,27 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PodList = ({ pods }) => {
+const PodList = ({ pods, services }) => {
   const classes = useStyles();
   return (
     <Paper className={classes.paper} elevation={1}>
       <Typography>Node</Typography>
+
       <Grid
         container
         direction="row"
         justifyContent="center"
         alignItems="center">
-        {pods.map((pod, index) => (
-          <Pod key={`pod-${index}`} {...pod} podIndex={index} />
-        ))}
+        {pods.map((pod, index) => {
+          console.log(services[index]);
+          return (
+            <Pod
+              key={`pod-${index}`}
+              clusterIP={services[index].spec.clusterIP}
+              {...pod}
+            />
+          );
+        })}
       </Grid>
     </Paper>
   );
@@ -34,6 +42,7 @@ const PodList = ({ pods }) => {
 export default connect(
   state => ({
     pods: state.podsReducer.pods,
+    services: state.servicesReducer.services,
   }),
   null
 )(PodList);
