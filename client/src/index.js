@@ -8,7 +8,7 @@ import App from './App';
 import theme from './theme';
 import store from './store';
 
-// ThemeProvider supplies our app with MUI's theme within the makeStyles hook.
+// ThemeProvider supplies our app with MUI's theme within the makeStyles hook. Modifications to the default theme are found in ./theme.js
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
