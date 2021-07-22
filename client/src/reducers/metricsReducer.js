@@ -5,6 +5,7 @@ const initialState = {
   querycharts: [],
   queryrangecharts: [],
   cpuGauge: [],
+  cpuRangeChart: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -42,12 +43,13 @@ function metricsReducer(state = initialState, action) {
       return { ...state, querycharts: querychartsArray };
 
     case actionsTypes.RECEIVE_QUERY_RANGE:
+      console.log('this is in RECEIVE_QUERY_RANGE', payload.data)
       let queryrangechartsArray = [];
-
-      payload.data.data.result.forEach(el => {
+      payload.data.data.result.forEach((el) => {
         const xqueryrange = [];
         const yqueryrange = [];
-        el.values.forEach(element => {
+        // console.log('RECEIVE_QUERY_RANGE',el)
+        el.values.forEach((element) => {
           xqueryrange.push(Math.floor(element[0]));
           yqueryrange.push(Math.floor(element[1]));
         });
@@ -57,20 +59,40 @@ function metricsReducer(state = initialState, action) {
         queryrangechartsArray.push(el);
       });
       return { ...state, queryrangecharts: queryrangechartsArray };
-    case actionsTypes.FETCH_CPU_DATA:
-      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-      let { result } = payload.data.data;
+    
+      case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
+        console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data)
+        let cpuRangeChart = [];
+        payload.data.data.result.forEach((el) => {
+          const xcpurange = [];
+          const ycpurange = [];
+          el.values.forEach((element) => {
+            xcpurange.push(element[0]);
+            ycpurange.push(element[1]);
+          })
+          el.xcpurange = xcpurange;
+          el.ycpurange = ycpurange;
+          //el.metrics has the title of each line
 
-      let CPUdata = [];
-      result.forEach((node, index) => {
-        //[[kind-control-plane, Node 1, 87], ]
-        CPUdata.push([
-          node.metric.instance,
-          `Node ${index + 1}`,
-          node.value[1],
-        ]);
-      });
-      return { ...state, cpuGauge: CPUdata };
+          cpuRangeChart.push(el)
+        })
+        return { ...state, cpuRangeChart: cpuRangeChart };
+
+      case actionsTypes.FETCH_CPU_DATA:
+        //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+        let { result } = payload.data.data;
+    
+        let CPUdata = [];
+        result.forEach((node, index) => {
+          //[[kind-control-plane, Node 1, 87], ]
+          CPUdata.push([
+            node.metric.instance,
+            `Node ${index + 1}`,
+            node.value[1],
+          ]);
+        });
+        return { ...state, cpuGauge: CPUdata };
+    
     default:
       return state;
   }

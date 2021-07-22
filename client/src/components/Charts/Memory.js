@@ -9,6 +9,12 @@ export default class MemoryGauge extends Component {
       this.state = {
         config: {
           type: 'gauge',
+          title: {
+            text: 'Memory usage in %'
+          },
+          "scale": {
+            "size-factor": 0.9
+          },
           series: [{
             values: [87]
           }]
@@ -19,7 +25,6 @@ export default class MemoryGauge extends Component {
     render() {
       return (
         <div>
-        <h1>yooooooo</h1>
           <ZingChart data={this.state.config} complete={this.chartDone}/>
         </div>
       );

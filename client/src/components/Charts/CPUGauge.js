@@ -13,6 +13,12 @@ class CPUGauge extends Component {
     this.state = {
       config: {
         type: 'gauge',
+        title: {
+          text: 'CPU usage in %'
+        },
+        "scale": {
+          "size-factor": 0.9
+        },
         series: [
           {
             // values: [this.props.cpuGauge[1][2]]
@@ -47,7 +53,7 @@ class CPUGauge extends Component {
 
     return (
       <div>
-        <ZingChart data={this.state.config} complete={this.chartDone} />
+        <ZingChart data={this.state.config} complete={this.chartDone}/>
       </div>
     );
   }
