@@ -1,6 +1,5 @@
 FROM node:latest
 
-#because of issue in crate-react-app
 ENV CI=true
 
 WORKDIR /app

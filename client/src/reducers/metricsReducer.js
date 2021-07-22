@@ -13,9 +13,9 @@ function metricsReducer(state = initialState, action) {
   switch (type) {
 
     case actionsTypes.RECEIVE_DEFAULT_METRICS:
-      const { data } = payload;
+      let { data } = payload;
       let chartArray = [];
-      console.log('default node exporter data', data)
+      // console.log('default node exporter data', data)
 
       data.forEach((el) => {
 
@@ -25,7 +25,6 @@ function metricsReducer(state = initialState, action) {
           
           el.values.forEach((element) => {
             if(element.metricName === 'nodejs_gc_duration_seconds_sum') {
-              console.log('got eem')
               valueArray.push(element.value * 1000);
               labelsArray.push(element.labels.kind);
               // innerChart.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${element.value}, aggregator: ${el.aggregator}`)
@@ -60,8 +59,8 @@ function metricsReducer(state = initialState, action) {
       return {...state, queryrangecharts: queryrangechartsArray};
 
     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-    case actionTypes.FETCH_CPU_DATA: 
-    const { data } = payload;
+    case actionsTypes.FETCH_CPU_DATA: 
+    data = payload.data;
     let CPUdata = [];
     let nodeCounter = 1;
     let targetData = data.data.result;
