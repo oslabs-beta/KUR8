@@ -76,22 +76,23 @@ function metricsReducer(state = initialState, action) {
 
           cpuRangeChart.push(el)
         })
+        return { ...state, cpuRangeChart: cpuRangeChart };
 
-        case actionsTypes.FETCH_CPU_DATA:
-          //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-          let { result } = payload.data.data;
+      case actionsTypes.FETCH_CPU_DATA:
+        //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+        let { result } = payload.data.data;
     
-    //{"status":"success","data":{"resultType":"vector","result":[{"metric":{"instance":"kind-control-plane"},"value":[1626837285.504,"87.5030092592592"]},{"metric":{"instance":"kind-worker"},"value":[1626837285.504,"87.49791666666671"]},{"metric":{"instance":"kind-worker2"},"value":[1626837285.504,"87.49791666666671"]}]}}
-      let CPUdata = [];
-      result.forEach((node, index) => {
-        //[[kind-control-plane, Node 1, 87], ]
-        CPUdata.push([
-          node.metric.instance,
-          `Node ${index + 1}`,
-          node.value[1],
-        ]);
-      });
-      return { ...state, cpuGauge: CPUdata };
+        let CPUdata = [];
+        result.forEach((node, index) => {
+          //[[kind-control-plane, Node 1, 87], ]
+          CPUdata.push([
+            node.metric.instance,
+            `Node ${index + 1}`,
+            node.value[1],
+          ]);
+        });
+        return { ...state, cpuGauge: CPUdata };
+    
     default:
       return state;
   }

@@ -42,7 +42,7 @@ function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <Grid item>
           <Paper className={classes.halfedTop}>
             <CounterChart />
@@ -53,29 +53,31 @@ function MetricsPage({ cpuGauge }) {
             <GaugeChart />
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      <Grid item xs={12} md={8}>
-        <Paper className={classes.paper}>{/* <QueryRangeChart /> */}</Paper>
-      </Grid>
-
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryCpuRangeChart />
+          <QueryRangeChart />
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          <QueryCpuRangeChart />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={4}>
+        <Paper className={classes.paper}>
           <HistogramChart />
         </Paper>
       </Grid>
 
-      {/* <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <CPUSelector cpuGauge={cpuGauge} />
         </Paper>
-      </Grid> */}
+      </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
