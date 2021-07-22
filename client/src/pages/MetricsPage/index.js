@@ -1,20 +1,14 @@
 import React from 'react';
-import {CPUGauge} from './Components/CPUGauge';
-import {MemoryGauge} from './Components/Memory'
-import CounterChart from '../../components/Charts/CounterChart'
-import {GaugeChart} from '../../components/Charts/GaugeChart'
-import {HistogramChart} from '../../components/Charts/HistogramChart'
-import {QueryRangeChart} from '../../components/Charts/QueryRangeChart'
-import {CPUSelector} from './Components/CPUSelector';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import { CPUGauge } from './Components/cpu.jsx';
-import { MemoryGauge } from './Components/memory.jsx';
 import CounterChart from '../../components/Charts/CounterChart';
+import CPUSelector from '../../components/Charts/CPUSelector';
 import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
+import Memory from '../../components/Charts/Memory';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MetricsPage() {
+function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
@@ -61,9 +55,7 @@ function MetricsPage() {
       </Grid>
 
       <Grid item xs={12} md={8}>
-        <Paper className={classes.paper}>
-          <QueryRangeChart />
-        </Paper>
+        <Paper className={classes.paper}>{/* <QueryRangeChart /> */}</Paper>
       </Grid>
 
       <Grid item xs={12}>
@@ -74,21 +66,24 @@ function MetricsPage() {
 
       <Grid item xs={12} md={8}>
         <Paper className={classes.paper}>
-          <CPUGauge />
+          <CPUSelector cpuGauge={cpuGauge} />
         </Paper>
       </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <MemoryGauge />
+          <Memory />
         </Paper>
       </Grid>
     </Grid>
   );
 }
 
-export default MetricsPage;
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators({ metricsFetchData }, dispatch);
+const mapStateToProps = state => {
+  console.log(`state`, state);
+  return {
+    cpuGauge: state.metricsReducer.cpuGauge,
+  };
+};
 
-// export default connect(null, mapDispatchToProps)(MetricsPage);
+export default connect(mapStateToProps, null)(MetricsPage);
