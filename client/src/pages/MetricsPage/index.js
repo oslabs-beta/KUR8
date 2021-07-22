@@ -1,6 +1,9 @@
+import React, { useEffect} from 'react';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { metricsFetchData } from '../../actions/metricsActionCreators';
 
-import React from 'react';
-import {CPUGauge} from './Components/CPU.jsx';
+import {CPUGauge} from './Components/CPUGauge.jsx';
 import {MemoryGauge} from './Components/Memory.jsx'
 import CounterChart from '../../components/Charts/CounterChart'
 import GaugeChart from '../../components/Charts/GaugeChart'
@@ -8,7 +11,9 @@ import HistogramChart from '../../components/Charts/HistogramChart'
 import QueryRangeChart from '../../components/Charts/QueryRangeChart'
 import CPUSelector from './Components/CPUSelector.jsx';
 
+
 function MetricsPage() {
+  // useEffect(() => metricsFetchData() , []);
   return (
     <div>
       metrics page
@@ -16,12 +21,16 @@ function MetricsPage() {
       <MemoryGauge />
       <CounterChart />
       <GaugeChart /> */}
-      <CPUSelector />
+      {/* <CPUSelector /> */}
 
-      {/* <HistogramChart /> */}
-      {/* <QueryRangeChart /> */}
+      <HistogramChart />
+      <QueryRangeChart />
     </div>
   )
 }
 
 export default MetricsPage;
+// const mapDispatchToProps = dispatch =>
+//   bindActionCreators({ metricsFetchData }, dispatch);
+
+// export default connect(null, mapDispatchToProps)(MetricsPage);

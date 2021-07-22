@@ -51,10 +51,17 @@ function metricsReducer(state = initialState, action) {
       let queryrangechartsArray = [];
 
       payload.data.data.result.forEach((el) => {
-
+        const xqueryrange = [];
+        const yqueryrange = [];
         console.log('RECEIVE_QUERY_RANGE',el)
+        el.values.forEach((element) => {
+          xqueryrange.push(Math.floor(element[0]));
+          yqueryrange.push(Math.floor(element[1]));
+        })
+        el.xqueryrange = xqueryrange;
+        el.yqueryrange = yqueryrange;
         //el.metrics has the title of each line
-        queryrangechartsArray.push(el.values)
+        queryrangechartsArray.push(el)
       })
       return {...state, queryrangecharts: queryrangechartsArray};
 
