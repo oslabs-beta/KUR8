@@ -81,3 +81,7 @@ function MetricsPage() {
 }
 
 export default MetricsPage;
+// const mapDispatchToProps = dispatch =>
+//   bindActionCreators({ metricsFetchData }, dispatch);
+
+// export default connect(null, mapDispatchToProps)(MetricsPage);

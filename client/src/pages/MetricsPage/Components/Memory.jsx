@@ -2,7 +2,7 @@ import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import React, {Component} from 'react';
 
-export class MemoryGauge extends Component {
+export default class MemoryGauge extends Component {
     
     constructor(props) {
       super(props);
