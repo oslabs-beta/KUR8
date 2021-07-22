@@ -1,47 +1,35 @@
 import axios from 'axios';
 import * as actionTypes from './actionsTypes';
 
-export const receivePods = data => {
-  return {
-    type: actionTypes.RECEIVE_PODS,
-    payload: data,
-  };
-};
+export const receivePods = data => ({
+  type: actionTypes.RECEIVE_PODS,
+  payload: data,
+});
 
-export const receiveWorkerNodes = data => {
-  return {
-    type: actionTypes.RECEIVE_WORKER_NODES,
-    payload: data,
-  };
-};
+export const receiveWorkerNodes = data => ({
+  type: actionTypes.RECEIVE_WORKER_NODES,
+  payload: data,
+});
 
-export const receiveMasterNodes = data => {
-  return {
-    type: actionTypes.RECEIVE_MASTER_NODES,
-    payload: data,
-  };
-};
+export const receiveMasterNodes = data => ({
+  type: actionTypes.RECEIVE_MASTER_NODES,
+  payload: data,
+});
 
-export const receiveServices = data => {
-  return {
-    type: actionTypes.RECEIVE_SERVICES,
-    payload: data,
-  };
-};
+export const receiveServices = data => ({
+  type: actionTypes.RECEIVE_SERVICES,
+  payload: data,
+});
 
-export const receiveDeployments = data => {
-  return {
-    type: actionTypes.RECEIVE_DEPLOYMENTS,
-    payload: data,
-  };
-};
+export const receiveDeployments = data => ({
+  type: actionTypes.RECEIVE_DEPLOYMENTS,
+  payload: data,
+});
 
-export const receiveIngresses = data => {
-  return {
-    type: actionTypes.RECEIVE_INGRESSES,
-    payload: data,
-  };
-};
+export const receiveIngresses = data => ({
+  type: actionTypes.RECEIVE_INGRESSES,
+  payload: data,
+});
 
 const actionCreators = [
   receivePods,
@@ -61,11 +49,22 @@ export const endpointArray = (url = 'localhost:8080') => [
   `http://${url}/nodeList`,
 ];
 
+// fetchData immediately returns a function that receives `dispatch` as an arugument due to `redux-thunk` middleware.
+// redux-thunk middleware is applied in client/src/store.js
 export const fetchData = () => dispatch => {
+  // urls is set to an array of URL strings as described on line 43.
   const urls = endpointArray();
+  // Map returns an array. Here we map over the urls array to produce an array of promises in the form of fetch requests.
   const promises = urls.map(url => axios.get(url));
+  // Promise.all accepts an array of promises and waits for all promises to resolve.
+  // Once all promises are resolved, we enter the `then` method, which receives an array of data objects, in this case we name that array `values`.
+  // Each item in the `values` array is an object, which in turn is the resolution of it's corresponding promise from the `promises` array.
   Promise.all(promises).then(values => {
+    // `actionCreators` is an array of the actionCreators defined between lines 4 and 32.
+    // We loop over this array with .forEach() to gain access to each actionCreator and it's index value.
     actionCreators.forEach((actionCreator, index) => {
+      // Thanks to `redux-thunk`, we have access to the dispatch function via line 54.
+      // Here we dispatch each individual actionCreator, passing in the corresponding data object at the same index.
       dispatch(actionCreator(values[index]));
     });
   });

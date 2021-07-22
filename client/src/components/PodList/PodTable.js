@@ -33,24 +33,25 @@ export default function PodTable({ metadata, spec, status }) {
   const rowNames = ['metadata', 'spec', 'status'];
   const rowsArray = [metadataRows, specRows, statusRows];
 
+  // makeHeads receives an array of strings in order to produce an array of TableHead components.
   const makeHeads = strArray => {
     strArray.map(rowName =>
       rowHeads.push(
-        <TableHead className={classes.tableHead}>
-          <TableRow>
-            <TableCell className={classes.tableCellCatagory}>
-              {rowName.toUpperCase()}
-            </TableCell>
-          </TableRow>
-        </TableHead>
+        <TableRow>
+          <TableCell className={classes.tableCellCatagory}>
+            {rowName.toUpperCase()}
+          </TableCell>
+        </TableRow>
       )
     );
   };
 
+  // makeRows receives a state object and an empty array.
+  // It iterates over the state object to produce an array of TableRow components.
   const makeRows = (dataObj, rowArray) => {
     for (const [key, value] of Object.entries(dataObj)) {
       rowArray.push(
-        <TableRow key={`table-row-${key}`}>
+        <TableRow key={`pod-row-${key}`}>
           <TableCell
             component="th"
             scope="row"
@@ -66,6 +67,7 @@ export default function PodTable({ metadata, spec, status }) {
     return;
   };
 
+  // The helper functions above are used here to produce all elements needed to construct the Table.
   makeHeads(rowNames);
   makeRows(metadata, metadataRows);
   makeRows(spec, specRows);
@@ -74,11 +76,18 @@ export default function PodTable({ metadata, spec, status }) {
   return (
     <TableContainer>
       <Table className={classes.table} size="small" aria-label="a dense table">
+        {/* rowsArray is an array of arrays. */}
         {rowsArray.map((rows, index) => {
           return (
             <>
-              {rowHeads[index]}
-              <TableBody>{rows}</TableBody>
+              <TableHead className={classes.tableHead}>
+                {/* Include a single TableHead component for each collection of rows */}
+                {rowHeads[index]}
+              </TableHead>
+              <TableBody>
+                {/* Multiple TableRow elements */}
+                {rows}
+              </TableBody>
             </>
           );
         })}
