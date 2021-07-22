@@ -17,11 +17,14 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   tableCellCategory: {
+    padding: '6px 0px 6px 12px',
     textAlign: 'left',
     backgroundColor: theme.palette.grey[300],
   },
   tableCellItem: {
+    padding: '6px 0px 6px 12px',
     textAlign: 'left',
+    borderBottom: 'none',
   },
 }));
 
@@ -64,6 +67,9 @@ export default function IngressTable({ ingresses }) {
           {arrayOfValues.map((value, index) => {
             return (
               <TableCell
+                style={
+                  typeof value === 'number' ? { textAlign: 'center' } : null
+                }
                 key={`table-cell-${index}`}
                 align="left"
                 className={classes.tableCellItem}>
@@ -85,7 +91,12 @@ export default function IngressTable({ ingresses }) {
           <TableRow>
             {/* .map() over the columnNames array to produce an array of TableCell components. */}
             {columnNames.map((columnName, index) => (
-              <TableCell key={`column-name-${index}`} className={classes.tableCellCategory}>
+              <TableCell
+                style={
+                  columnName === 'servicePort' ? { textAlign: 'center' } : null
+                }
+                key={`column-name-${index}`}
+                className={classes.tableCellCategory}>
                 <Typography>{columnName}</Typography>
               </TableCell>
             ))}

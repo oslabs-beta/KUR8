@@ -23,10 +23,10 @@ function ingressesReducer(state = initialState, action) {
         },
         host: spec.rules[0].host,
         paths: spec.rules[0].http.paths.map(path => ({
-          path: path.path,
           pathType: path.pathType,
           serviceName: path.backend.serviceName,
           servicePort: path.backend.servicePort,
+          path: path.path,
         })),
       };
       return { ingresses: ingressData };
