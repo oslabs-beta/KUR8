@@ -18,7 +18,7 @@ export const CPUSelector = ({ cpuGauge }) => {
         })
         }
       </select>
-      <CPUGauge node={nodeID}/>
+      <CPUGauge nodeID={nodeID}/>
     </div>
 
   );

@@ -1,4 +1,11 @@
 import React from 'react';
+import {CPUGauge} from './Components/CPUGauge';
+import {MemoryGauge} from './Components/Memory'
+import CounterChart from '../../components/Charts/CounterChart'
+import {GaugeChart} from '../../components/Charts/GaugeChart'
+import {HistogramChart} from '../../components/Charts/HistogramChart'
+import {QueryRangeChart} from '../../components/Charts/QueryRangeChart'
+import {CPUSelector} from './Components/CPUSelector';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';

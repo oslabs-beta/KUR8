@@ -16,7 +16,10 @@ export class CPUGauge extends Component {
         config: {
           type: 'gauge',
           series: [{
-            values: [this.props.cpuGauge[1][2]]
+            // values: [this.props.cpuGauge[1][2]]
+            values: [this.props.cpuGauge.filter(node => {
+              node[1] === this.props.nodeID;
+            })[2]]
           }]
         }
       }
@@ -25,20 +28,20 @@ export class CPUGauge extends Component {
 
       //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
     render() {
-      let innerArr = this.props.cpuGauge.filter(node => {
-        node[1] === this.props.node;
-      })
+  //     let innerArr = this.props.cpuGauge.filter(node => {
+  //       node[1] === this.props.nodeID;
+  //     })
 
-      let targetVal = innerArr[2];
+  //     let targetVal = innerArr[2];
 
-      this.setState({
-        config: {
-          type: 'gauge',
-          series: [{
-            values: [targetVal]
-      }]
-    }
-  })
+  //     this.setState({
+  //       config: {
+  //         type: 'gauge',
+  //         series: [{
+  //           values: [targetVal]
+  //     }]
+  //   }
+  // })
 
       return (
         <div>
