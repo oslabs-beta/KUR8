@@ -39,7 +39,7 @@ const metricsActionCreators = [
 export const metricsEndpointArray = (query, start, end) => [
   `http://localhost:8080/getMetrics`,
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
-  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=2021-07-21T09:10:30.781Z&end=2021-07-22T15:30:00.781Z&step=15s`,
+  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=2021-07-22T1:33:07.471Z&end=2021-07-23T04:33:07.471Z&step=15s`,
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_cpu_seconds_total[1m]))%20*%20100)`
 ];
 
