@@ -14,9 +14,6 @@ module.exports = {
     hot: true,
     publicPath: '/build/',
     contentBase: path.join(__dirname, 'public'),
-    proxy: {
-      '/user': 'http://localhost:3000',
-    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -45,14 +42,6 @@ module.exports = {
         enforce: 'pre',
         use: ['source-map-loader'],
       },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
     ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
   },
 };
