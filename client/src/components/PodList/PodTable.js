@@ -51,7 +51,7 @@ export default function PodTable({ metadata, spec, status }) {
   const makeRows = (dataObj, rowArray) => {
     for (const [key, value] of Object.entries(dataObj)) {
       rowArray.push(
-        <TableRow key={`table-row-${key}`}>
+        <TableRow key={`pod-row-${key}`}>
           <TableCell
             component="th"
             scope="row"
@@ -81,7 +81,7 @@ export default function PodTable({ metadata, spec, status }) {
           return (
             <>
               <TableHead className={classes.tableHead}>
-                { /* Include a single TableHead component for each collection of rows */ }
+                {/* Include a single TableHead component for each collection of rows */}
                 {rowHeads[index]}
               </TableHead>
               <TableBody>
