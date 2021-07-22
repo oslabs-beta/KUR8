@@ -6,8 +6,7 @@ const GaugeChart = ({ defaultcharts, querycharts, queryrangecharts }) => {
   return (
     <div>
       im a gauge chart
-      {querycharts}
-      {queryrangecharts}
+      {/* {querycharts} */}
     </div>
   );
 };
@@ -16,7 +15,6 @@ export default connect(
   state => ({
     defaultcharts: state.metricsReducer.defaultcharts,
     querycharts: state.metricsReducer.querycharts,
-    queryrangecharts: state.metricsReducer.queryrangecharts,
   }),
   null
 )(GaugeChart);

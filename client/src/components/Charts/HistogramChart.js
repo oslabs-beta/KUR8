@@ -12,28 +12,30 @@ class HistogramChart extends Component {
     this.state = {
       config: {
         type: 'bar',
+        title: {
+          text: this.props.defaultcharts[0].help
+        },
         "scale-x":{  
-          "values": this.props.defaultcharts[25].labelsArray,  
-      },  
+          "values": this.props.defaultcharts[0].labelsArray,  
+        },
+        "scale-y":{  
+          format: '%v ms'
+          // item: {
+          //   'font-size':8
+          // }
+        },
         series: [{
-          values: this.props.defaultcharts[25].valueArray
+          values: this.props.defaultcharts[0].valueArray,
         }]
       }
     }
   }
-  
+
   render() {
-    // console.log('defaultcharts',this.props.defaultcharts[25].labelsArray)
+
     return (
       <div>
-        <select id="chart-selector" name="chart-selector">
-    
-          <option value="">Please Select An Option</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          
-        </select>
-        <ZingChart data={this.state.config}/>
+        <ZingChart id='histogramchart' data={this.state.config}/>
       </div>
     );
   }
@@ -43,6 +45,7 @@ class HistogramChart extends Component {
 export default connect(
   state => ({
     defaultcharts: state.metricsReducer.defaultcharts,
+    // histogramSelector: state.metricsReducer.histogramSelector,
   }),
   null
 )(HistogramChart);
