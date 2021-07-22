@@ -1,21 +1,17 @@
 import React from 'react';
 import {CPUGauge} from './Components/CPUGauge';
-import {MemoryGauge} from './Components/Memory'
+import MemoryGauge from './Components/Memory'
 import CounterChart from '../../components/Charts/CounterChart'
-import {GaugeChart} from '../../components/Charts/GaugeChart'
-import {HistogramChart} from '../../components/Charts/HistogramChart'
-import {QueryRangeChart} from '../../components/Charts/QueryRangeChart'
+import GaugeChart from '../../components/Charts/GaugeChart'
+import HistogramChart from '../../components/Charts/HistogramChart'
+import QueryRangeChart from '../../components/Charts/QueryRangeChart'
+import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
 import {CPUSelector} from './Components/CPUSelector';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import { CPUGauge } from './Components/cpu.jsx';
-import { MemoryGauge } from './Components/memory.jsx';
-import CounterChart from '../../components/Charts/CounterChart';
-import GaugeChart from '../../components/Charts/GaugeChart';
-import HistogramChart from '../../components/Charts/HistogramChart';
-import QueryRangeChart from '../../components/Charts/QueryRangeChart';
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -66,17 +62,23 @@ function MetricsPage() {
         </Paper>
       </Grid>
 
+      <Grid item xs={12} md={8}>
+        <Paper className={classes.paper}>
+          <QueryCpuRangeChart />
+        </Paper>
+      </Grid>
+
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <HistogramChart />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={8}>
+      {/* <Grid item xs={12} md={8}>
         <Paper className={classes.paper}>
           <CPUGauge />
         </Paper>
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useContext} from 'react';
 import { connect } from 'react-redux';
-import CPUGauge from './CPUGauge.jsx'
+import CPUGauge from './CPUGauge'
 
 export const CPUSelector = ({ cpuGauge }) => {
 
