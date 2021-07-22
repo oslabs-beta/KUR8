@@ -1,12 +1,8 @@
 import { useEffect, useState , useContext} from 'react';
 import { connect } from 'react-redux';
-import 'zingchart/es6';
-import ZingChart from 'zingchart-react';
-// EXPLICITLY IMPORT MODULE from node_modules
-import "zingchart/modules-es6/zingchart-maps.min.js";
-import "zingchart/modules-es6/zingchart-maps-usa.min.js";
+import CPUGauge from './CPUGauge'
 
-export const Selector = ({ cpuGauge }) => {
+export const CPUSelector = ({ cpuGauge }) => {
 
   const [nodeID, setNodeID] = useState("Node 1");
   //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
@@ -22,13 +18,9 @@ export const Selector = ({ cpuGauge }) => {
         })
         }
       </select>
+      <CPUGauge node={nodeID}/>
     </div>
+
   );
 };
 
-export default connect(
-  state => ({
-    cpuGauge: state.metricsReducer.cpuGauge,
-  }),
-  null
-)(Selector);
