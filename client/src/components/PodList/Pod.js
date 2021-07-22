@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close';
@@ -15,6 +15,16 @@ import Typography from '@material-ui/core/Typography';
 import PodTable from './PodTable';
 
 const useStyles = makeStyles(theme => ({
+  dialogTitle: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
   dialogContent: {
     padding: theme.spacing(2),
   },
@@ -57,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   chipClusterIp: {
     color: '#fff',
     borderColor: '#fff',
-    marginBottom: '15px',
+    margin: '15px 0px',
   },
   podText: {
     color: '#fff',
@@ -65,39 +75,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DialogTitleStyles = theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
-
-const DialogTitle = withStyles(DialogTitleStyles)(props => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
 function Pod({ containers, metadata, spec, status, clusterIP }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -127,9 +107,15 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
             open={open}>
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-              {containers.list[0].name}
-            </DialogTitle>
+            <MuiDialogTitle disableTypography className={classes.dialogTitle}>
+              <Typography variant="h6">{containers.list[0].name}</Typography>
+              <IconButton
+                aria-label="close"
+                className={classes.closeButton}
+                onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            </MuiDialogTitle>
             <MuiDialogContent dividers>
               <PodTable
                 metadata={metadata}
