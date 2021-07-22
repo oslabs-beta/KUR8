@@ -25,7 +25,7 @@ export const receiveQueryRange = data => {
 const metricsActionCreators = [
   receiveDefaultMetrics,
   // receiveQuery,
-  // receiveQueryRange,
+  receiveQueryRange,
 ];
 
 export const metricsEndpointArray = (query, start, end) => [

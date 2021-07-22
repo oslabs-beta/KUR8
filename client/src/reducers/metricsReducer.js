@@ -14,20 +14,28 @@ function metricsReducer(state = initialState, action) {
     case actionsTypes.RECEIVE_DEFAULT_METRICS:
       const { data } = payload;
       let chartArray = [];
-      console.log('default data', data)
+      console.log('default node exporter data', data)
+
       data.forEach((el) => {
-        if(el.type = 'histogram'){
+
+        if(el.type === 'histogram'){
           const valueArray = [];
           const labelsArray = [];
+          
           el.values.forEach((element) => {
-            valueArray.push(element.value);
-            labelsArray.push(element.labels.space);
-            // innerChart.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${element.value}, aggregator: ${el.aggregator}`)
+            if(element.metricName === 'nodejs_gc_duration_seconds_sum') {
+              console.log('got eem')
+              valueArray.push(element.value * 1000);
+              labelsArray.push(element.labels.kind);
+              // innerChart.push(`help: ${el.help}, name: ${el.name}, type: ${el.type}, value: ${element.value}, aggregator: ${el.aggregator}`)
+            }
           })
           el.valueArray = valueArray;
           el.labelsArray = labelsArray;
           chartArray.push(el)
         }
+
+        
       })
       return {...state, defaultcharts: chartArray};
 
@@ -44,7 +52,7 @@ function metricsReducer(state = initialState, action) {
 
       payload.data.data.result.forEach((el) => {
 
-        console.log(el)
+        console.log('RECEIVE_QUERY_RANGE',el)
         //el.metrics has the title of each line
         queryrangechartsArray.push(el.values)
       })
