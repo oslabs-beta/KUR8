@@ -59,20 +59,21 @@ function metricsReducer(state = initialState, action) {
       return {...state, queryrangecharts: queryrangechartsArray};
 
     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-    case actionsTypes.FETCH_CPU_DATA: 
-    data = payload.data;
-    let CPUdata = [];
-    let nodeCounter = 1;
-    let targetData = data.data.result;
-    targetData.forEach((node) => {
-      CPUdata.push([node.metric.instance, `Node ${nodeCounter}`, node.metric.value])
-      nodeCounter++;
-    });
     return {...state, cpuGauge, CPUdata};
+      let allData = payload.data;
+      let CPUdata = [];
+      let nodeCounter = 1;
+      let targetData = allData.data.result;
+      targetData.forEach((node) => {
+
+        //[[kind-control-plane, Node 1, 87], ]
+        CPUdata.push([node.metric.instance, `Node ${nodeCounter}`, node.metric.value[1]])
+        nodeCounter++;
+      });
+      return {...state, cpuGauge: CPUdata};
 
 
     //{"status":"success","data":{"resultType":"vector","result":[{"metric":{"instance":"kind-control-plane"},"value":[1626837285.504,"87.5030092592592"]},{"metric":{"instance":"kind-worker"},"value":[1626837285.504,"87.49791666666671"]},{"metric":{"instance":"kind-worker2"},"value":[1626837285.504,"87.49791666666671"]}]}}
-
     default:
       return state;
   }
