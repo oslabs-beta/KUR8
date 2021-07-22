@@ -17,7 +17,7 @@ class QueryRangeChart extends Component {
           text: this.props.queryrangecharts[0].help
         },
         "scale-x":{  
-          "values": this.props.queryrangecharts[0].yqueryrange,  
+          // "values": this.props.queryrangecharts[0].yqueryrange,  
           zooming: true
         },
         "scale-y":{  
