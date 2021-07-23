@@ -65,11 +65,10 @@ export class CPUGauge extends Component {
     this.chartDone = this.chartDone.bind(this);
   }
 
-
   // componentDidUpdate
   updateGauge = (nodeID) => {
-
-    cpuGauge.forEach(node => {
+    let nodeData;
+    this.props.cpuGauge.forEach(node => {
       if (node[1] === nodeID) nodeData = node[2]
     })
 
@@ -135,7 +134,7 @@ export class CPUGauge extends Component {
     return (
       <div>
           <div>
-            <select value={e.target.value} onChange={e => this.updateGauge(e.target.value)}>
+            <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
             <option disabled>Select Node</option>
             {this.props.cpuGauge.map((node, index) => {
               return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
