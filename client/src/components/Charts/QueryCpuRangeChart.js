@@ -14,34 +14,26 @@ class QueryCpuRangeChart extends Component {
         type: 'area',
         plot: {
           stacked: true,
-          marker:{
-            visible:false
-          }
-        },
-        title: {
-          text: 'The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)'
-        },
-        "scale-x":{  
-          // "values": this.props.cpuRangeChart[0].ycpurange,  
-          zooming: true
-        },
-        "scale-y":{  
-          // format: '%v \n bytes',
-          item: {
-            'font-size':8
+          marker: {
+            visible: false,
           },
         },
-        series: [
-          {values: this.props.cpuRangeChart[0].ycpurange},
-          {values: this.props.cpuRangeChart[1].ycpurange},
-          {values: this.props.cpuRangeChart[2].ycpurange},          
-          {values: this.props.cpuRangeChart[3].ycpurange},
-          {values: this.props.cpuRangeChart[4].ycpurange},
-          {values: this.props.cpuRangeChart[5].ycpurange},
-          {values: this.props.cpuRangeChart[6].ycpurange},
-          {values: this.props.cpuRangeChart[7].ycpurange},
-          {values: this.props.cpuRangeChart[8].ycpurange},
-        ],
+        title: {
+          text: 'The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)',
+        },
+        'scale-x': {
+          // "values": this.props.cpuRangeChart[0].ycpurange,
+          zooming: true,
+        },
+        'scale-y': {
+          // format: '%v \n bytes',
+          item: {
+            'font-size': 8,
+          },
+        },
+        series: this.props.cpuRangeChart.map(dataPoint => {
+          return dataPoint.ycpurange
+        }),
       },
     };
   }
@@ -57,7 +49,7 @@ class QueryCpuRangeChart extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     cpuRangeChart: state.metricsReducer.cpuRangeChart,
   }),
   null

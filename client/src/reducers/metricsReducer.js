@@ -1,5 +1,5 @@
 import * as actionsTypes from '../actions/actionsTypes';
- 
+
 const initialState = {
  defaultcharts: [],
  querycharts: [],
@@ -7,20 +7,20 @@ const initialState = {
  cpuGauge: [],
  cpuRangeChart: [],
 };
- 
+
 function metricsReducer(state = initialState, action) {
  const { type, payload } = action;
- 
+
  switch (type) {
    case actionsTypes.RECEIVE_DEFAULT_METRICS:
      let { data } = payload;
      let chartArray = [];
- 
+
      data.forEach(el => {
        if (el.type === 'histogram') {
          const valueArray = [];
          const labelsArray = [];
- 
+
          el.values.forEach(element => {
            if (element.metricName === 'nodejs_gc_duration_seconds_sum') {
              valueArray.push(element.value * 1000);
@@ -34,14 +34,14 @@ function metricsReducer(state = initialState, action) {
        }
      });
      return { ...state, defaultcharts: chartArray };
- 
+
    case actionsTypes.RECEIVE_QUERY:
      let querychartsArray = [];
      payload.data.data.forEach(el => {
        querychartsArray.push(el.value);
      });
      return { ...state, querycharts: querychartsArray };
- 
+
    case actionsTypes.RECEIVE_QUERY_RANGE:
      console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
      let queryrangechartsArray = [];
@@ -59,7 +59,7 @@ function metricsReducer(state = initialState, action) {
        queryrangechartsArray.push(el);
      });
      return { ...state, queryrangecharts: queryrangechartsArray };
- 
+
    case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
      console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
      let cpuRangeChart = [];
@@ -73,15 +73,15 @@ function metricsReducer(state = initialState, action) {
        el.xcpurange = xcpurange;
        el.ycpurange = ycpurange;
        //el.metrics has the title of each line
- 
+
        cpuRangeChart.push(el);
      });
      return { ...state, cpuRangeChart: cpuRangeChart };
- 
+
    case actionsTypes.FETCH_CPU_DATA:
      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
      let { result } = payload.data.data;
- 
+
      let CPUdata = [];
      result.forEach((node, index) => {
        //[[kind-control-plane, Node 1, 87], ]
@@ -92,12 +92,12 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, cpuGauge: CPUdata };
- 
+
    default:
      return state;
  }
 }
- 
+
 export default metricsReducer;
- 
+
 

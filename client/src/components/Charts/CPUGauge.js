@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'zingchart/es6';
-import { connect } from 'react-redux';
 import ZingChart from 'zingchart-react';
 
 // EXPLICITLY IMPORT MODULE from node_modules
@@ -14,21 +13,20 @@ class CPUGauge extends Component {
       config: {
         type: 'gauge',
         title: {
-          text: 'CPU usage in %'
+          text: 'CPU usage in %',
         },
-        "scale": {
-          "size-factor": 0.9
+        scale: {
+          'size-factor': 0.9,
         },
         series: [
           {
-            // values: [this.props.cpuGauge[1][2]]
-            values: [
-              this.props.cpuGauge.filter(node => {
-                node[1] === this.props.nodeID;
-              })[2],
-            ],
+            values: [Number(this.props.nodeData)],
           },
         ],
+          'scale-r': {
+            aperture: 200,     //Specify your scale range.
+            values: "0:100:20" //Provide min/max/step scale values.
+          }
       },
     };
     this.chartDone = this.chartDone.bind(this);
@@ -36,24 +34,10 @@ class CPUGauge extends Component {
 
   //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
   render() {
-    //     let innerArr = this.props.cpuGauge.filter(node => {
-    //       node[1] === this.props.nodeID;
-    //     })
-
-    //     let targetVal = innerArr[2];
-
-    //     this.setState({
-    //       config: {
-    //         type: 'gauge',
-    //         series: [{
-    //           values: [targetVal]
-    //     }]
-    //   }
-    // })
 
     return (
       <div>
-        <ZingChart data={this.state.config} complete={this.chartDone}/>
+        <ZingChart data={this.state.config} complete={this.chartDone} />
       </div>
     );
   }
@@ -61,10 +45,4 @@ class CPUGauge extends Component {
     console.log(`Event "Complete" - The chart is rendered\n`);
   }
 }
-
-export default connect(
-  state => ({
-    cpuGauge: state.metricsReducer.cpuGauge,
-  }),
-  null
-)(CPUGauge);
+export default CPUGauge;
