@@ -14,21 +14,21 @@ class QueryRangeChart extends Component {
         type: 'area',
         plot: {
           stacked: true,
-          marker:{
-            visible:false
-          }
+          marker: {
+            visible: false,
+          },
         },
         title: {
-          text: 'The average network traffic received, per second, over the last minute (in bytes)'
+          text: 'The average network traffic received, per second, over the last minute (in bytes)',
         },
-        "scale-x":{  
-          // "values": this.props.queryrangecharts[0].yqueryrange,  
-          zooming: true
+        'scale-x': {
+          // "values": this.props.queryrangecharts[0].yqueryrange,
+          zooming: true,
         },
-        "scale-y":{  
+        'scale-y': {
           // format: '%v \n bytes',
           item: {
-            'font-size':8
+            'font-size': 8,
           },
         },
         series: this.props.queryrangecharts.map(dataPoint => {
@@ -61,7 +61,7 @@ class QueryRangeChart extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     queryrangecharts: state.metricsReducer.queryrangecharts,
   }),
   null

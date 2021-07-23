@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CPUGauge from './CPUGauge.js';
+import { connect } from 'react-redux';
 
 const CPUSelector = ({ cpuGauge }) => {
   const [nodeID, setNodeID] = useState('Node 1');
-  //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
+  const [nodeData , setNodeData] = useState(cpuGauge[0][2])
   console.log('cpuGauge: ', cpuGauge);
+
+
+  useEffect(() => {
+    const findMatchData = (nodeID) => {
+      cpuGauge.forEach(node => {
+        if (node[1] === nodeID) setNodeData(node[2])
+      })
+    }
+
+    findMatchData(nodeID);
+  }, [nodeID]);
+
+
   return (
     <div>
       <select value={nodeID} onChange={e => setNodeID(e.target.value)}>
         <option disabled>Select Node</option>
-        {cpuGauge.map(node => {
-          return <option value={node[1]}>{node[1]}</option>;
+        {cpuGauge.map((node, index) => {
+          return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
         })}
       </select>
-      <CPUGauge nodeID={nodeID} />
+      <CPUGauge nodeID={nodeID} nodeData={nodeData}/>
     </div>
   );
 };
 
-export default CPUSelector;
+
+export default connect(
+  state => ({
+    cpuGauge: state.metricsReducer.cpuGauge,
+  }),
+  null
+)(CPUSelector);

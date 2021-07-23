@@ -14,21 +14,21 @@ class QueryCpuRangeChart extends Component {
         type: 'area',
         plot: {
           stacked: true,
-          marker:{
-            visible:false
-          }
+          marker: {
+            visible: false,
+          },
         },
         title: {
-          text: 'The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)'
+          text: 'The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)',
         },
-        "scale-x":{  
-          // "values": this.props.cpuRangeChart[0].ycpurange,  
-          zooming: true
+        'scale-x': {
+          // "values": this.props.cpuRangeChart[0].ycpurange,
+          zooming: true,
         },
-        "scale-y":{  
+        'scale-y': {
           // format: '%v \n bytes',
           item: {
-            'font-size':8
+            'font-size': 8,
           },
         },
         series: this.props.cpuRangeChart.map(dataPoint => {
@@ -66,7 +66,7 @@ class QueryCpuRangeChart extends Component {
 }
 
 export default connect(
-  (state) => ({
+  state => ({
     cpuRangeChart: state.metricsReducer.cpuRangeChart,
   }),
   null
