@@ -31,17 +31,21 @@ class QueryRangeChart extends Component {
             'font-size':8
           },
         },
-        series: [
-          {values: this.props.queryrangecharts[0].yqueryrange},
-          {values: this.props.queryrangecharts[1].yqueryrange},
-          {values: this.props.queryrangecharts[2].yqueryrange},          
-          {values: this.props.queryrangecharts[3].yqueryrange},
-          {values: this.props.queryrangecharts[4].yqueryrange},
-          {values: this.props.queryrangecharts[5].yqueryrange},
-          {values: this.props.queryrangecharts[6].yqueryrange},
-          {values: this.props.queryrangecharts[7].yqueryrange},
-          {values: this.props.queryrangecharts[8].yqueryrange},
-        ],
+        series: this.props.queryrangecharts.map(dataPoint => {
+          // console.log(`dataPoint.ycpurange`, dataPoint.yqueryrange)
+          return {values: dataPoint.yqueryrange}
+        }),
+        // series: [
+        //   {values: this.props.queryrangecharts[0].yqueryrange},
+        //   {values: this.props.queryrangecharts[1].yqueryrange},
+        //   {values: this.props.queryrangecharts[2].yqueryrange},          
+        //   {values: this.props.queryrangecharts[3].yqueryrange},
+        //   {values: this.props.queryrangecharts[4].yqueryrange},
+        //   {values: this.props.queryrangecharts[5].yqueryrange},
+        //   {values: this.props.queryrangecharts[6].yqueryrange},
+        //   {values: this.props.queryrangecharts[7].yqueryrange},
+        //   {values: this.props.queryrangecharts[8].yqueryrange},
+        // ],
       },
     };
   }
