@@ -7,27 +7,22 @@ const CPUSelector = ({ cpuGauge }) => {
   const [nodeData , setNodeData] = useState(cpuGauge[0][2])
   console.log('cpuGauge: ', cpuGauge);
 
-
-  useEffect(() => {
-    const findMatchData = (nodeID) => {
-      cpuGauge.forEach(node => {
-        if (node[1] === nodeID) setNodeData(node[2])
-      })
-    }
-
-    findMatchData(nodeID);
-  }, [nodeID]);
-
+  const findMatchData = (e, nodeID) => {
+    setNodeID(e.target.value);
+    cpuGauge.forEach(node => {
+      if (node[1] === nodeID) setNodeData(node[2])
+    })
+  }
 
   return (
     <div>
-      <select value={nodeID} onChange={e => setNodeID(e.target.value)}>
+      <select value={nodeID} onChange={findMatchData(e, nodeID)}>
         <option disabled>Select Node</option>
         {cpuGauge.map((node, index) => {
           return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
         })}
       </select>
-      <CPUGauge nodeID={nodeID} nodeData={nodeData}/>
+      <CPUGauge nodeData={nodeData}/>
     </div>
   );
 };
