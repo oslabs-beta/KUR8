@@ -18,12 +18,12 @@ const CPUSelector = ({ cpuGauge }) => {
 
   return (
     <div>
-      <select value={nodeID} onChange={e => findMatchData(e.target.value)}>
+      {/* <select value={nodeID} onChange={e => findMatchData(e.target.value)}>
         <option disabled>Select Node</option>
         {cpuGauge.map((node, index) => {
           return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
         })}
-      </select>
+      </select> */}
       <CPUGauge nodeData={nodeData} nodeID={nodeID} findMatchData={findMatchData}/>
     </div>
   );
