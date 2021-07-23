@@ -5,6 +5,8 @@ import servicesReducer from './reducers/servicesReducer';
 import deploymentsReducer from './reducers/deploymentsReducer';
 import ingressesReducer from './reducers/ingressesReducer';
 import metricsReducer from './reducers/metricsReducer';
+import masterNodesReducer from './reducers/masterNodesReducer';
+import workerNodesReducer from './reducers/workerNodesReducer';
 
 //ADD REDUCERS HERE
 const rootReducer = combineReducers({
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
   deploymentsReducer,
   ingressesReducer,
   metricsReducer,
+  masterNodesReducer,
+  workerNodesReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
