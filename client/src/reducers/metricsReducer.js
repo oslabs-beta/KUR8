@@ -43,7 +43,7 @@ function metricsReducer(state = initialState, action) {
      return { ...state, querycharts: querychartsArray };
 
    case actionsTypes.RECEIVE_QUERY_RANGE:
-     console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
+    //  console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
      let queryrangechartsArray = [];
      payload.data.data.result.forEach(el => {
        const xqueryrange = [];
@@ -61,7 +61,7 @@ function metricsReducer(state = initialState, action) {
      return { ...state, queryrangecharts: queryrangechartsArray };
 
    case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
-     console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
+    //  console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
      let cpuRangeChart = [];
      payload.data.data.result.forEach(el => {
        const xcpurange = [];

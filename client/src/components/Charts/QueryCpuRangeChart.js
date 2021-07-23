@@ -35,28 +35,16 @@ class QueryCpuRangeChart extends Component {
           // console.log(`dataPoint.ycpurange`, dataPoint.ycpurange)
           return {values: dataPoint.ycpurange}
         }),
-
-        // series: [
-        //   {values: this.props.cpuRangeChart[0].ycpurange},
-        //   {values: this.props.cpuRangeChart[1].ycpurange},
-        //   {values: this.props.cpuRangeChart[2].ycpurange},          
-        //   {values: this.props.cpuRangeChart[3].ycpurange},
-        //   {values: this.props.cpuRangeChart[4].ycpurange},
-        //   {values: this.props.cpuRangeChart[5].ycpurange},
-        //   {values: this.props.cpuRangeChart[6].ycpurange},
-        //   {values: this.props.cpuRangeChart[7].ycpurange},
-        //   {values: this.props.cpuRangeChart[8].ycpurange},
-        // ],
       },
     };
   }
   render() {
     // console.log('cpuRangeChart', this.props.cpuRangeChart);
     const checkme = this.props.cpuRangeChart.map(dataPoint => {
-      console.log(`dataPoint.ycpurange`, dataPoint.ycpurange)
+      // console.log(`dataPoint.ycpurange`, dataPoint.ycpurange)
       return dataPoint.ycpurange
     })
-    console.log('imcheckme', checkme)
+    // console.log('imcheckme', checkme)
     return (
       <div>
         <ZingChart id="querycpurangechart" data={this.state.config} />
