@@ -32,15 +32,12 @@ class QueryRangeChart extends Component {
           },
         },
         series: this.props.queryrangecharts.map(dataPoint => {
-          // console.log(`dataPoint.ycpurange`, dataPoint.yqueryrange)
           return {values: dataPoint.yqueryrange}
         }),
       },
     };
   }
   render() {
-    // console.log('queryrangecharts', this.props.queryrangecharts);
-
     return (
       <div>
         <ZingChart id="queryrangechart" data={this.state.config} />

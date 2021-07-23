@@ -12,6 +12,11 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useParams, useHistory } from 'react-router-dom';
 import MyAppBar from './MyAppBar';
+import CustomQuery from '../Charts/CustomQuery';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -89,6 +94,9 @@ const Layout = ({ children, history}) => {
                 <ListItemText primary={text} />
               </ListItem>
             ))}
+            <ListItem>
+              <CustomQuery />
+            </ListItem>
           </List>
         </div>
       </Drawer>
