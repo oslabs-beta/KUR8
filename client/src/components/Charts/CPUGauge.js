@@ -22,11 +22,43 @@ export class CPUGauge extends Component {
         series: [
           {
             values: [Number(this.props.cpuGauge[0][2])],
+            "csize": "10%", //Needle Indicator Width
+            "size": "70%", //Needle Indicator Length
+            "background-color": "#66CCFF #FFCCFF"
           },
         ],
           'scale-r': {
-            aperture: 200,     //Specify your scale range.
-            values: "0:100:20" //Provide min/max/step scale values.
+            aperture: 270,     //Specify your scale range.
+            values: "0:100:20", //Provide min/max/step scale values.
+            center: {  //Pivot Point
+              type: "gear9",   //Specify your marker shape.
+              size:15,
+            },
+            ring: {  //Gauge Ring
+              size:10,
+              rules: [
+                {
+                  rule: "%v >= 0 && %v <= 20",
+                  'background-color': "blue"
+                },
+                {
+                  rule: "%v >= 20 && %v <= 40",
+                  'background-color': "green"
+                },
+                {
+                  rule: "%v >= 40 && %v <= 60",
+                  'background-color': "yellow"
+                },
+                {
+                  rule: "%v >= 60 && %v <= 80",
+                  'background-color': "orange"
+                },
+                {
+                  rule: "%v >= 80 && %v <= 100",
+                  'background-color': "red"
+                },
+              ]
+            }
           }
       },
     };
@@ -53,11 +85,43 @@ export class CPUGauge extends Component {
         series: [
           {
             values: [Number(nodeData)],
+            "csize": "10%", //Needle Indicator Width
+            "size": "70%", //Needle Indicator Length
+            "background-color": "#66CCFF #FFCCFF"
           },
         ],
           'scale-r': {
-            aperture: 200,     //Specify your scale range.
-            values: "0:100:20" //Provide min/max/step scale values.
+            aperture: 270,     //Specify your scale range.
+            values: "0:100:20", //Provide min/max/step scale values.
+            center: {  //Pivot Point
+              type: "gear9",   //Specify your marker shape.
+              size:15,
+            },
+            ring: {  //Gauge Ring
+              size:10,
+              rules: [
+                {
+                  rule: "%v >= 0 && %v <= 20",
+                  'background-color': "blue"
+                },
+                {
+                  rule: "%v >= 20 && %v <= 40",
+                  'background-color': "green"
+                },
+                {
+                  rule: "%v >= 40 && %v <= 60",
+                  'background-color': "yellow"
+                },
+                {
+                  rule: "%v >= 60 && %v <= 80",
+                  'background-color': "orange"
+                },
+                {
+                  rule: "%v >= 80 && %v <= 100",
+                  'background-color': "red"
+                },
+              ]
+            }
           }
       },
     });
