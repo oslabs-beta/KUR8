@@ -12,6 +12,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useParams, useHistory } from 'react-router-dom';
 import MyAppBar from './MyAppBar';
+import CustomQuery from '../Charts/CustomQuery';
 
 const drawerWidth = 240;
 
@@ -89,6 +90,9 @@ const Layout = ({ children, history}) => {
                 <ListItemText primary={text} />
               </ListItem>
             ))}
+            <ListItem>
+              <CustomQuery />
+            </ListItem>
           </List>
         </div>
       </Drawer>
