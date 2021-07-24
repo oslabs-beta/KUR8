@@ -95,6 +95,7 @@ function metricsReducer(state = initialState, action) {
      return { ...state, cpuGauge: CPUdata };
 
   case actionsTypes.CUSTOM_QUERY:
+    console.log('here in custom query reducer')
     let customDataArray = [];
     let customData = payload.data.data.result;
     customData.forEach(el => {

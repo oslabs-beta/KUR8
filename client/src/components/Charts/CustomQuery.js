@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,11 +12,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Button } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { fetchCustomQuery } from '../../actions/metricsActionCreators';
 
 const drawerWidth = 240;
 
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomQuery() {
+function CustomQuery({ fetchCustomQuery }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -57,6 +56,7 @@ export default function CustomQuery() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log( 'query:', query, 'range: ', range, 'step', step); 
+    fetchCustomQuery(query, range, step);
   }
 
   const handleRangeChange = (event) => {
@@ -133,3 +133,8 @@ export default function CustomQuery() {
     </List>
   );
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchCustomQuery }, dispatch);
+
+  export default connect(null, mapDispatchToProps)(CustomQuery);
