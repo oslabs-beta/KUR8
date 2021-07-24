@@ -11,6 +11,7 @@ import HistogramChart from '../../components/Charts/HistogramChart';
 import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
+import CustomCharts from '../../components/Charts/CustomCharts';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MetricsPage({ cpuGauge }) {
+function MetricsPage({ cpuGauge, customDataArray }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
@@ -55,15 +56,17 @@ function MetricsPage({ cpuGauge }) {
         </Grid>
       </Grid> */}
 
+      <CustomCharts customDataArray={customDataArray}/>
+
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryRangeChart />
+          <QueryCpuRangeChart />
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryCpuRangeChart />
+          <QueryRangeChart />
         </Paper>
       </Grid>
 
@@ -92,6 +95,7 @@ const mapStateToProps = state => {
   console.log(`state`, state);
   return {
     cpuGauge: state.metricsReducer.cpuGauge,
+    customDataArray: state.metricsReducer.customDataArray,
   };
 };
 

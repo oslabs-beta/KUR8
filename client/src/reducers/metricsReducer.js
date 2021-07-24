@@ -114,7 +114,8 @@ function metricsReducer(state = initialState, action) {
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
-    let customDataArray = [];
+    let customDataArray = state.customDataArray;
+    let newCustomData = [];
     let customData = payload.data.data.result;
     customData.forEach(el => {
       const xRange = [];
@@ -126,24 +127,25 @@ function metricsReducer(state = initialState, action) {
       el.xRange = xRange;
       el.yRange = yRange;
       //el.metrics has the title of each line
-      customDataArray.push(el);
+      newCustomData.push(el);
     });
+    customDataArray.push(newCustomData)
     return { ...state, customDataArray: customDataArray };
 
-   case actionsTypes.FETCH_MEMORY_DATA:
-     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-     let resultMemory = payload.data.data.result;
+  //  case actionsTypes.FETCH_MEMORY_DATA:
+  //    //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+  //    let resultMemory = payload.data.data.result;
 
-     let Memorydata = [];
-     resultMemory.forEach((node, index) => {
-       //[[kind-control-plane, Node 1, 87], ]
-       Memorydata.push([
-         node.metric.instance,
-         `Node ${index + 1}`,
-         node.value[1],
-       ]);
-     });
-     return { ...state, memoryGauge: Memorydata };
+  //    let Memorydata = [];
+  //    resultMemory.forEach((node, index) => {
+  //      //[[kind-control-plane, Node 1, 87], ]
+  //      Memorydata.push([
+  //        node.metric.instance,
+  //        `Node ${index + 1}`,
+  //        node.value[1],
+  //      ]);
+  //    });
+  //    return { ...state, memoryGauge: Memorydata };
 
    case actionsTypes.FETCH_HTTP_REQUEST:
      let resultRequest = payload.data.data.result;
