@@ -5,10 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 import CounterChart from '../../components/Charts/CounterChart';
-import CPUSelector from '../../components/Charts/CPUSelector';
 import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
-import Memory from '../../components/Charts/Memory';
+// import MemoryGauge from '../../components/Charts/MemoryGauge';
+import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
 
@@ -75,15 +75,15 @@ function MetricsPage({ cpuGauge }) {
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <CPUSelector cpuGauge={cpuGauge} />
+          <CPUGauge cpuGauge={cpuGauge} />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <Memory />
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

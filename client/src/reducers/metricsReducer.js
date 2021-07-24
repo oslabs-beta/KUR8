@@ -7,6 +7,7 @@ const initialState = {
  cpuGauge: [],
  cpuRangeChart: [],
  customDataArray: [],
+ memoryGauge: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -81,10 +82,10 @@ function metricsReducer(state = initialState, action) {
 
    case actionsTypes.FETCH_CPU_DATA:
      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-     let { result } = payload.data.data;
+     let resultCPU = payload.data.data.result;
 
      let CPUdata = [];
-     result.forEach((node, index) => {
+     resultCPU.forEach((node, index) => {
        //[[kind-control-plane, Node 1, 87], ]
        CPUdata.push([
          node.metric.instance,
@@ -93,6 +94,7 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, cpuGauge: CPUdata };
+
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
@@ -108,10 +110,24 @@ function metricsReducer(state = initialState, action) {
       el.xRange = xRange;
       el.yRange = yRange;
       //el.metrics has the title of each line
-
       customDataArray.push(el);
     });
     return { ...state, customDataArray: customDataArray };
+
+   case actionsTypes.FETCH_MEMORY_DATA:
+     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+     let resultMemory = payload.data.data.result;
+
+     let Memorydata = [];
+     resultMemory.forEach((node, index) => {
+       //[[kind-control-plane, Node 1, 87], ]
+       Memorydata.push([
+         node.metric.instance,
+         `Node ${index + 1}`,
+         node.value[1],
+       ]);
+     });
+     return { ...state, memoryGauge: Memorydata };
 
    default:
      return state;
