@@ -6,6 +6,7 @@ const initialState = {
  queryrangecharts: [],
  cpuGauge: [],
  cpuRangeChart: [],
+ customDataArray: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -92,6 +93,24 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, cpuGauge: CPUdata };
+
+  case actionsTypes.CUSTOM_QUERY:
+    let customDataArray = [];
+    let customData = payload.data.data.result;
+    customData.forEach(el => {
+      const xRange = [];
+      const yRange = [];
+      el.values.forEach(element => {
+        xRange.push(element[0]);
+        yRange.push(element[1]);
+      });
+      el.xRange = xRange;
+      el.yRange = yRange;
+      //el.metrics has the title of each line
+
+      customDataArray.push(el);
+    });
+    return { ...state, customDataArray: customDataArray };
 
    default:
      return state;
