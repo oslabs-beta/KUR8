@@ -36,9 +36,26 @@ export const fetchCPUNode = data => {
   };
 };
 
+
 export const fetchMemoryNode = data => {
-  return {
+    return {
     type: actionTypes.FETCH_MEMORY_NODE,
+    payload: data,
+  };
+};
+  
+
+export const customQuery = data => {
+  return {
+    type: actionTypes.CUSTOM_QUERY,
+    payload: data,
+  };
+};
+    
+export const fetchMemoryData = data => {
+
+  return {
+    type: actionTypes.FETCH_MEMORY_DATA,
     payload: data,
   };
 };
@@ -69,14 +86,13 @@ const metricsActionCreators = [
 
 ];
 
-export const metricsEndpointArray = (query, start, end) => [
+export const metricsEndpointArray = (query, start, end, step) => [
   `http://localhost:8080/getMetrics`,
 
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
 
-  `http://localhost:9090/api/v1/query_range?query=rate(node_cpu_seconds_total{mode="system"}[1m])&start=2021-07-22T1:33:07.471Z&end=2021-07-23T04:33:07.471Z&step=15s`,
-
-  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=2021-07-22T1:33:07.471Z&end=2021-07-23T04:33:07.471Z&step=15s`,
+   `http://localhost:9090/api/v1/query_range?query=rate(node_cpu_seconds_total{mode="system"}[1m])&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
+  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
 
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_cpu_seconds_total[1m]))%20*%20100)`,
 
@@ -85,9 +101,7 @@ export const metricsEndpointArray = (query, start, end) => [
   `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=2021-07-24T05:05:21.471Z&end=2021-07-24T05:07:21.471Z&step=15s`,
 
   `http://localhost:9090/api/v1/query_range?query=topk(5,%20rate(container_cpu_usage_seconds_total[5m]))&start=2021-07-24T05:57:57.471Z&end=2021-07-24T06:25:21.471Z&step=15s`
-
 ];
-
 
 //on page load, call to metricsFetchdata, take url on line 31, create promises with values being map to the link, (data from each link); resolve promises and dispath action creator on line 25 to the corresopnding result in the URLl; which send it over to the reducers
 export const metricsFetchData = () => dispatch => {
@@ -99,3 +113,9 @@ export const metricsFetchData = () => dispatch => {
     });
   });
 };
+
+export const fetchCustomQuery = (query, range, step) => dispatch => {
+  console.log('fetching',query, range, step)
+  axios.get(`http://localhost:9090/api/v1/query_range?query=${query}&start=${new Date(new Date().setDate(new Date().getDate()-(range/24))).toISOString()}&end=${new Date().toISOString()}&step=${step}s`)
+  .then(data => dispatch(customQuery(data)));
+}

@@ -6,6 +6,7 @@ const initialState = {
  queryrangecharts: [],
  cpuGauge: [],
  cpuRangeChart: [],
+ customDataArray: [],
  memoryGauge: [],
  httpRequestData: [],
  cpuContainerData: []
@@ -47,7 +48,7 @@ function metricsReducer(state = initialState, action) {
      return { ...state, querycharts: querychartsArray };
 
    case actionsTypes.RECEIVE_QUERY_RANGE:
-     console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
+    //  console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
      let queryrangechartsArray = [];
      payload.data.data.result.forEach(el => {
        const xqueryrange = [];
@@ -65,7 +66,7 @@ function metricsReducer(state = initialState, action) {
      return { ...state, queryrangecharts: queryrangechartsArray };
 
    case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
-     console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
+    //  console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
      let cpuRangeChart = [];
      payload.data.data.result.forEach(el => {
        const xcpurange = [];
@@ -98,7 +99,6 @@ function metricsReducer(state = initialState, action) {
      return { ...state, cpuGauge: CPUdata };
 
    case actionsTypes.FETCH_MEMORY_NODE:
-     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
      let resultMemory = payload.data.data.result;
 
      let Memorydata = [];
@@ -112,8 +112,25 @@ function metricsReducer(state = initialState, action) {
      });
      return { ...state, memoryGauge: Memorydata };
 
+  case actionsTypes.CUSTOM_QUERY:
+    console.log('here in custom query reducer')
+    let customDataArray = [];
+    let customData = payload.data.data.result;
+    customData.forEach(el => {
+      const xRange = [];
+      const yRange = [];
+      el.values.forEach(element => {
+        xRange.push(element[0]);
+        yRange.push(element[1]);
+      });
+      el.xRange = xRange;
+      el.yRange = yRange;
+      //el.metrics has the title of each line
+      customDataArray.push(el);
+    });
+    return { ...state, customDataArray: customDataArray };
+
    case actionsTypes.FETCH_HTTP_REQUEST:
-     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
      let resultRequest = payload.data.data.result;
 
      let httpRequest = [];
@@ -128,7 +145,6 @@ function metricsReducer(state = initialState, action) {
      return { ...state, httpRequestData: httpRequest };
 
    case actionsTypes.FETCH_CPU_CONTAINER:
-     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
      let resultcpuContainer = payload.data.data.result;
 
      let cpuContainer = [];
