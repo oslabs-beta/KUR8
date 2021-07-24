@@ -98,6 +98,11 @@ function metricsReducer(state = initialState, action) {
      });
      return { ...state, cpuGauge: CPUdata };
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+   case actionsTypes.FETCH_MEMORY_NODE:
+=======
+=======
    case actionsTypes.FETCH_MEMORY_NODE:
      let resultMemory = payload.data.data.result;
 
@@ -111,6 +116,7 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, memoryGauge: Memorydata };
+>>>>>>> 7e10b1fde32431842c64a9905b823ef308d5d300
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
@@ -130,6 +136,25 @@ function metricsReducer(state = initialState, action) {
     });
     return { ...state, customDataArray: customDataArray };
 
+<<<<<<< HEAD
+   case actionsTypes.FETCH_MEMORY_DATA:
+>>>>>>> a2503c5e6e7ec68e32cd254cdab0dd26f60e1a69
+     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+     let resultMemory = payload.data.data.result;
+
+     let Memorydata = [];
+     resultMemory.forEach((node, index) => {
+       //[[kind-control-plane, Node 1, 87], ]
+       Memorydata.push([
+         node.metric.instance,
+         `Node ${index + 1}`,
+         node.value[1],
+       ]);
+     });
+     return { ...state, memoryGauge: Memorydata };
+
+=======
+>>>>>>> 7e10b1fde32431842c64a9905b823ef308d5d300
    case actionsTypes.FETCH_HTTP_REQUEST:
      let resultRequest = payload.data.data.result;
 
