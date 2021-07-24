@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-// EXPLICITLY IMPORT MODULE from node_modules
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
