@@ -10,6 +10,7 @@ import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 export class CPUGauge extends Component {
   constructor(props) {
     super(props);
+    console.log('this.props.cpuGauge',this.props.cpuGauge)
     this.state = {
       config: {
         type: 'gauge',
@@ -63,6 +64,8 @@ export class CPUGauge extends Component {
       },
     };
     this.chartDone = this.chartDone.bind(this);
+    // console.log('this.props.cpuGauge', this.props.cpuGauge); 
+
   }
 
   updateGauge = (nodeID) => {
