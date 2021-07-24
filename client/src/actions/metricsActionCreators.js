@@ -29,16 +29,30 @@ export const receiveCpuQueryRange = data => {
   };
 };
 
-export const fetchCPUData = data => {
+export const fetchCPUNode = data => {
   return {
-    type: actionTypes.FETCH_CPU_DATA,
+    type: actionTypes.FETCH_CPU_NODE,
     payload: data,
   };
 };
 
-export const fetchMemoryData = data => {
+export const fetchMemoryNode = data => {
   return {
-    type: actionTypes.FETCH_MEMORY_DATA,
+    type: actionTypes.FETCH_MEMORY_NODE,
+    payload: data,
+  };
+};
+
+export const fetchHTTPRequest = data => {
+  return {
+    type: actionTypes.FETCH_HTTP_REQUEST,
+    payload: data,
+  };
+};
+
+export const fetchCPUContainer = data => {
+  return {
+    type: actionTypes.FETCH_CPU_CONTAINER,
     payload: data,
   };
 };
@@ -48,18 +62,29 @@ const metricsActionCreators = [
   // receiveQuery,
   receiveCpuQueryRange, //The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)
   receiveQueryRange, //The average network traffic received, per second, over the last minute (in bytes)
-  fetchCPUData,
-  fetchMemoryData
+  fetchCPUNode,
+  fetchMemoryNode,
+  fetchHTTPRequest,
+  fetchCPUContainer,
 
 ];
 
 export const metricsEndpointArray = (query, start, end) => [
   `http://localhost:8080/getMetrics`,
+
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
+
   `http://localhost:9090/api/v1/query_range?query=rate(node_cpu_seconds_total{mode="system"}[1m])&start=2021-07-22T1:33:07.471Z&end=2021-07-23T04:33:07.471Z&step=15s`,
+
   `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=2021-07-22T1:33:07.471Z&end=2021-07-23T04:33:07.471Z&step=15s`,
+
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_cpu_seconds_total[1m]))%20*%20100)`,
-  `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_memory_seconds_total[1m]))%20*%20100)`
+
+  `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_memory_seconds_total[1m]))%20*%20100)`,
+
+  `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=2021-07-24T05:05:21.471Z&end=2021-07-24T05:07:21.471Z&step=15s`,
+
+  `http://localhost:9090/api/v1/query_range?query=topk(5,%20rate(container_cpu_usage_seconds_total[5m]))&start=2021-07-24T05:57:57.471Z&end=2021-07-24T06:25:21.471Z&step=15s`
 
 ];
 

@@ -7,6 +7,9 @@ const initialState = {
  cpuGauge: [],
  cpuRangeChart: [],
  memoryGauge: [],
+ httpRequestData: [],
+ cpuContainerData: []
+ 
 };
 
 function metricsReducer(state = initialState, action) {
@@ -79,12 +82,12 @@ function metricsReducer(state = initialState, action) {
      });
      return { ...state, cpuRangeChart: cpuRangeChart };
 
-   case actionsTypes.FETCH_CPU_DATA:
+   case actionsTypes.FETCH_CPU_NODE:
      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-     let resultCPU = payload.data.data.result;
+     let {result} = payload.data.data;
 
      let CPUdata = [];
-     resultCPU.forEach((node, index) => {
+     result.forEach((node, index) => {
        //[[kind-control-plane, Node 1, 87], ]
        CPUdata.push([
          node.metric.instance,
@@ -94,7 +97,7 @@ function metricsReducer(state = initialState, action) {
      });
      return { ...state, cpuGauge: CPUdata };
 
-   case actionsTypes.FETCH_MEMORY_DATA:
+   case actionsTypes.FETCH_MEMORY_NODE:
      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
      let resultMemory = payload.data.data.result;
 
@@ -108,6 +111,35 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, memoryGauge: Memorydata };
+
+   case actionsTypes.FETCH_HTTP_REQUEST:
+     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+     let resultRequest = payload.data.data.result;
+
+     let httpRequest = [];
+     resultRequest.forEach((thePath, index) => {
+       
+       httpRequest.push([
+         thePath.metric.path,
+         thePath.metric.method,
+         thePath.values
+       ]);
+     });
+     return { ...state, httpRequestData: httpRequest };
+
+   case actionsTypes.FETCH_CPU_CONTAINER:
+     //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
+     let resultcpuContainer = payload.data.data.result;
+
+     let cpuContainer = [];
+     resultcpuContainer.forEach((container, index) => {
+       //[[kind-control-plane, Node 1, 87], ]
+       cpuContainer.push([
+         container.metric.id,
+         container.values,
+       ]);
+     });
+     return { ...state, cpuContainerData: cpuContainer };
 
    default:
      return state;
