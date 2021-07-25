@@ -38,9 +38,9 @@ export class TotalHTTPRequest extends Component {
               }
             },
             "scale-x": {
-              "min-value": 1383292800000,
+              "min-value": Number(this.props.httpRequestData[0][2][0][0]) * 1000,
               "shadow": 0,
-              "step": 3600000,
+              "step": 30000,
               "transform": {
                 "type": "date",
                 "all": "%D, %d %M<br />%h:%i %A",
@@ -305,58 +305,91 @@ export class TotalHTTPRequest extends Component {
 
   }
 
-  getTimeFormat = (num) => {
-      //get it in miliseconds first;
-      num = num * 1000;
-      let graphDate = new Date(num);
-      let newFormat;
-      let newHour;
-      let newMinute;
-      let newSecond;
+//   getTimeFormat = (num) => {
+//       //get it in miliseconds first;
+//       num = num * 1000;
+//       let graphDate = new Date(num);
+//       let newFormat;
+//       let newHour;
+//       let newMinute;
+//       let newSecond;
 
-        //getting new data to put on x-axis;
-      if (String(graphDate.getHours()).length === 1) {
-          newHour = `0${graphDate.getHours()}`;
-      } 
-      if (String(graphDate.getHours()).length !== 1) {
-        newHour = graphDate.getHours();
-      } 
-      if (String(graphDate.getMinutes()).length === 1) {
-        newMinute = `0${graphDate.getMinutes()}`;
-      } 
-      if (String(graphDate.getMinutes()).length === 1) {
-        newMinute = `0${graphDate.getMinutes()}`;
-      } 
-      if (String(graphDate.getSeconds()).length === 1) {
-        newSecond = `0${graphDate.getSeconds()}`;
-      } 
-      if (String(graphDate.getSeconds()).length === 1) {
-        newSecond = `0${graphDate.getSeconds()}`;
-      };
+//         //getting new data to put on x-axis;
+//       if (String(graphDate.getHours()).length === 1) {
+//           newHour = `0${graphDate.getHours()}`;
+//       } 
+//       if (String(graphDate.getHours()).length !== 1) {
+//         newHour = graphDate.getHours();
+//       } 
+//       if (String(graphDate.getMinutes()).length === 1) {
+//         newMinute = `0${graphDate.getMinutes()}`;
+//       } 
+//       if (String(graphDate.getMinutes()).length === 1) {
+//         newMinute = `0${graphDate.getMinutes()}`;
+//       } 
+//       if (String(graphDate.getSeconds()).length === 1) {
+//         newSecond = `0${graphDate.getSeconds()}`;
+//       } 
+//       if (String(graphDate.getSeconds()).length === 1) {
+//         newSecond = `0${graphDate.getSeconds()}`;
+//       };
 
-      let newFormat = `${newHour}:${newMinute}:${newSecond}`;
-      return newFormat;
+//       let newFormat = `${newHour}:${newMinute}:${newSecond}`;
+//       return newFormat;
 
+//   }
+
+  stateFormat = () => {
+      let pathLength = this.props.httpRequestData.length;
+
+      let outerContainer = [];
+      let eachData = [];
+      let seriesObj;
+      let value;
+
+      let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
+      for (let i = 0; i < pathLength; i++) {
+          value = this.props.httpRequestData[i][2];
+
+          for (let j = 0; j < value.length; j++) {
+              eachData.push(j[1]);
+          }
+
+
+          seriesObj = {
+            "values": eachData,
+            "text": `${this.props.httpRequestData[i][0]}`,
+            "line-color": lineColor[i],
+            "legend-item": {
+              "background-color": "#007790",
+              "borderRadius": 5,
+              "font-color": "white"
+            },
+            "legend-marker": {
+              "visible": false
+            },
+            "marker": {
+              "background-color": "#007790",
+              "border-width": 1,
+              "shadow": 0,
+              "border-color": "#69dbf1"
+            },
+            "highlight-marker": {
+              "size": 6,
+              "background-color": "#007790",
+            }
+          },
+      }
+      
   }
 
-  //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
+
   render() {
 
     return (
-      <div>
-          <div>
-            <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
-            <option disabled>Select Node</option>
-            {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
-            })}
-          </select>
-        </div>
-
-        <div>
-          <ZingChart data={this.state.config} complete={this.chartDone} />
-        </div>
-      </div>
+    <div>
+        <ZingChart data={this.state.config} complete={this.chartDone} />
+    </div>
     );
   }
   chartDone(event) {
