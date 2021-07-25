@@ -73,7 +73,14 @@ export const fetchCPUContainer = data => {
   };
 };
 
+export const fetchAllQueries = data => {
+  return {
+    type: actionTypes.ALL_PROMQL,
+    payload: data,
+  }
+}
 const metricsActionCreators = [
+  fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph
   // receiveQuery,
   receiveCpuQueryRange, //The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)
@@ -86,6 +93,8 @@ const metricsActionCreators = [
 ];
 
 export const metricsEndpointArray = (query, start, end, step) => [
+  'http://localhost:9090/api/v1/label/__name__/values',
+  
   `http://localhost:8080/getMetrics`,
 
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`

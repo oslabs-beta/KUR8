@@ -15,6 +15,9 @@ import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { fetchCustomQuery } from '../../actions/metricsActionCreators';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useHistory } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -38,16 +41,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CustomQuery({ fetchCustomQuery }) {
+function CustomQuery({ fetchCustomQuery, allPromQL }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [range, setRange] = useState(12);
   const [step, setStep] = useState(30);
 
-  const handleQueryChange = (event) => {
-    setQuery(event.target.value);
-  };
+  const history = useHistory()
+
+  const handleQueryChange = (e, selectedObject) => {
+    if (selectedObject !== null)
+        setQuery(selectedObject)
+  }
 
   const handleNesting = () => {
     setOpen(!open);
@@ -57,6 +63,8 @@ function CustomQuery({ fetchCustomQuery }) {
     event.preventDefault();
     console.log( 'query:', query, 'range: ', range, 'step', step); 
     fetchCustomQuery(query, range, step);
+    history.push('/')
+    history.push('/custom')
   }
 
   const handleRangeChange = (event) => {
@@ -76,27 +84,32 @@ function CustomQuery({ fetchCustomQuery }) {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Custom Query" />
+        <ListItemText primary="Add New Chart" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <ListItem button className={classes.nested}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Enter Prometheus Query"
-              multiline
-              // maxRows={8}
+            <Autocomplete
+              id="autocomplete-query"
+              freeSolo
+              // fullWidth={true}
+              style = {{width: 1000}}
               value={query}
               onChange={handleQueryChange}
-              variant="outlined"
+              options={allPromQL.map((option) => option)}
+              renderOption={option => option}
+              renderInput={(params) => (
+                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" InputProps={{ ...params.InputProps, type: 'search'}}/>
+              )}
             />
             <Select
               labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
+              id="select-range"
               value={range}
               onChange={handleRangeChange}
               label="Choose a time range"
+              variant="outlined"
             >
               <MenuItem value="">
               </MenuItem>
@@ -108,10 +121,11 @@ function CustomQuery({ fetchCustomQuery }) {
             </Select>
             <Select
               labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
+              id="select-step"
               value={step}
               onChange={handleStepChange}
               label="Choose a step interval"
+              variant="outlined"
             >
               <MenuItem value="">
               </MenuItem>
@@ -123,6 +137,7 @@ function CustomQuery({ fetchCustomQuery }) {
             </Select>
             <Button
               type="submit"
+              variant="outlined"
               // className={classes.button}
             >
               Submit
@@ -134,7 +149,13 @@ function CustomQuery({ fetchCustomQuery }) {
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    allPromQL: state.metricsReducer.allPromQL,
+  };
+};
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ fetchCustomQuery }, dispatch);
 
-  export default connect(null, mapDispatchToProps)(CustomQuery);
+  export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);
