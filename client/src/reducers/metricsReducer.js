@@ -132,21 +132,6 @@ function metricsReducer(state = initialState, action) {
     customDataArray.push(newCustomData)
     return { ...state, customDataArray: customDataArray };
 
-  //  case actionsTypes.FETCH_MEMORY_DATA:
-  //    //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
-  //    let resultMemory = payload.data.data.result;
-
-  //    let Memorydata = [];
-  //    resultMemory.forEach((node, index) => {
-  //      //[[kind-control-plane, Node 1, 87], ]
-  //      Memorydata.push([
-  //        node.metric.instance,
-  //        `Node ${index + 1}`,
-  //        node.value[1],
-  //      ]);
-  //    });
-  //    return { ...state, memoryGauge: Memorydata };
-
    case actionsTypes.FETCH_HTTP_REQUEST:
      let resultRequest = payload.data.data.result;
 
