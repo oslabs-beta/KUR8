@@ -10,13 +10,11 @@ import store from './store';
 
 // ThemeProvider supplies our app with MUI's theme within the makeStyles hook. Modifications to the default theme are found in ./theme.js
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </Provider>,
   document.querySelector('#root')
 );

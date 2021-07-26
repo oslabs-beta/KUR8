@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: theme.spacing(5, 0),
     height: '50px',
     width: '200px',
     borderRadius: '25px',
