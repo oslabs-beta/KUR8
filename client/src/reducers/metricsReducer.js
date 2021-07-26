@@ -9,8 +9,8 @@ const initialState = {
  customDataArray: [],
  memoryGauge: [],
  httpRequestData: [],
- cpuContainerData: []
- 
+ cpuContainerData: [],
+ allPromQL: []
 };
 
 function metricsReducer(state = initialState, action) {
@@ -158,6 +158,10 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, cpuContainerData: cpuContainer };
+     
+     case actionsTypes.ALL_PROMQL:
+       const allPromQL = payload.data.data
+      return { ...state, allPromQL: allPromQL };
 
    default:
      return state;

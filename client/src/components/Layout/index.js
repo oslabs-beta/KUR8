@@ -13,6 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { useParams, useHistory } from 'react-router-dom';
 import MyAppBar from './MyAppBar';
 import CustomQuery from '../Charts/CustomQuery';
+import BarChartIcon from '@material-ui/icons/BarChart';
 
 const drawerWidth = 240;
 
@@ -79,20 +80,17 @@ const Layout = ({ children, history}) => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Structure', 'Metrics'].map((text, index) => (
+            {['Structure', 'Metrics', 'Custom'].map((text, index) => (
               <ListItem
                 button
                 key={text}
                 onClick={() => history.push(`/${text.toLowerCase()}`)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <LocationCityIcon /> : <AvTimerIcon />}
+                  {index === 0 ? <LocationCityIcon /> : index === 1 ? <AvTimerIcon /> : <BarChartIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
-            <ListItem>
-              <CustomQuery />
-            </ListItem>
           </List>
         </div>
       </Drawer>

@@ -4,14 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import CounterChart from '../../components/Charts/CounterChart';
-import GaugeChart from '../../components/Charts/GaugeChart';
+// import CounterChart from '../../components/Charts/CounterChart';
+// import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
 // import MemoryGauge from '../../components/Charts/MemoryGauge';
 import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
-import CustomCharts from '../../components/Charts/CustomCharts';
+// import CustomCharts from '../../components/Charts/CustomCharts';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MetricsPage({ cpuGauge, customDataArray }) {
+function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
@@ -56,7 +56,7 @@ function MetricsPage({ cpuGauge, customDataArray }) {
         </Grid>
       </Grid> */}
 
-      <CustomCharts customDataArray={customDataArray}/>
+      {/* <CustomCharts customDataArray={customDataArray}/> */}
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
@@ -95,7 +95,7 @@ const mapStateToProps = state => {
   console.log(`state`, state);
   return {
     cpuGauge: state.metricsReducer.cpuGauge,
-    customDataArray: state.metricsReducer.customDataArray,
+    // customDataArray: state.metricsReducer.customDataArray,
   };
 };
 
