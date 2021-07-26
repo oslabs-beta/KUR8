@@ -114,7 +114,7 @@ function metricsReducer(state = initialState, action) {
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
-    let customDataArray = state.customDataArray;
+    let newCustomDataArray = [...state.customDataArray];
     let newCustomData = [];
     let customData = payload.data.data.result;
     customData.forEach(el => {
@@ -129,8 +129,8 @@ function metricsReducer(state = initialState, action) {
       //el.metrics has the title of each line
       newCustomData.push(el);
     });
-    customDataArray.push(newCustomData)
-    return { ...state, customDataArray: customDataArray };
+    newCustomDataArray.push(newCustomData)
+    return { ...state, customDataArray: newCustomDataArray };
 
    case actionsTypes.FETCH_HTTP_REQUEST:
      let resultRequest = payload.data.data.result;
@@ -162,6 +162,10 @@ function metricsReducer(state = initialState, action) {
      case actionsTypes.ALL_PROMQL:
        const allPromQL = payload.data.data
       return { ...state, allPromQL: allPromQL };
+
+      case actionsTypes.HYDRATE_CUSTOM:
+        const localdata = payload || [];
+        return { ...state, customDataArray: localdata };
 
    default:
      return state;

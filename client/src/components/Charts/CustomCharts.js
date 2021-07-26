@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
@@ -38,10 +37,7 @@ export default function CustomCharts({ customDataArray }) {
   const classes = useStyles();
   const custom = [];
 
-  useEffect(()=> chartBuilder(), [customDataArray])
-
-  const chartBuilder = () => {
-    customDataArray.map( (dataSet, index) => {
+  customDataArray.map( (dataSet, index) => {
     const config = {
       type: 'area',
       plot: {
@@ -69,18 +65,11 @@ export default function CustomCharts({ customDataArray }) {
     custom.push(
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          <button>delete</button>
           <ZingChart id={`custom chart ${index}`} data={config} />
         </Paper>
       </Grid>
     )
-  })}
-  chartBuilder()
+  })
   return custom;
 }
-
-// export default connect(
-//   state => ({
-//     customDataArray: state.metricsReducer.customDataArray,
-//   }),
-//   null
-// )(CustomCharts);

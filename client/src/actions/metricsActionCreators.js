@@ -72,6 +72,14 @@ export const fetchAllQueries = data => {
     payload: data,
   }
 }
+
+export const hyrateCustom = data => {
+  return {
+    type: actionTypes.HYDRATE_CUSTOM,
+    payload: data,
+  }
+}
+
 const metricsActionCreators = [
   fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,11 +14,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { fetchCustomQuery } from '../../actions/metricsActionCreators';
+import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useHistory, useLocation } from 'react-router-dom';
-
-
 
 const drawerWidth = 240;
 
@@ -42,15 +39,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CustomQuery({ fetchCustomQuery, allPromQL }) {
+function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCustom }) {
+
+  useEffect(() => {
+    const retrieveStash = localStorage.getItem('customcharts');
+    if (retrieveStash) {
+      console.log(retrieveStash,'hyrating dispatch')
+      hyrateCustom(JSON.parse(retrieveStash))
+    };
+  },[]);
+
+  useEffect(() => {
+    localStorage.setItem('customcharts', JSON.stringify(customDataArray));
+  });
+
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [range, setRange] = useState(12);
   const [step, setStep] = useState(30);
-
-  const history = useHistory();
-  const location = useLocation();
 
   const handleQueryChange = (e, selectedObject) => {
     if (selectedObject !== null)
@@ -65,8 +72,6 @@ function CustomQuery({ fetchCustomQuery, allPromQL }) {
     event.preventDefault();
     console.log( 'query:', query, 'range: ', range, 'step', step); 
     fetchCustomQuery(query, range, step);
-    history.push('/')
-    history.push(location.pathname)
   }
 
   const handleRangeChange = (event) => {
@@ -102,7 +107,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL }) {
               options={allPromQL.map((option) => option)}
               renderOption={option => option}
               renderInput={(params) => (
-                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" InputProps={{ ...params.InputProps, type: 'search'}}/>
+                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" />
               )}
             />
             <Select
@@ -154,10 +159,11 @@ function CustomQuery({ fetchCustomQuery, allPromQL }) {
 const mapStateToProps = state => {
   return {
     allPromQL: state.metricsReducer.allPromQL,
+    customDataArray: state.metricsReducer.customDataArray,
   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchCustomQuery }, dispatch);
+  bindActionCreators({ fetchCustomQuery, hyrateCustom }, dispatch);
 
   export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);
