@@ -15,10 +15,10 @@ function nodesReducer(state = initialState, action) {
 
       // Differentiate between master and worker nodes.
       const masterNodes = items.filter(data =>
-        data.metadata.name.includes('control-plane')
+        data.metadata.labels.hasOwnProperty('node-role.kubernetes.io/control-plane')
       );
       const workerNodes = items.filter(data =>
-        data.metadata.name.includes('worker')
+        !data.metadata.labels.hasOwnProperty('node-role.kubernetes.io/control-plane')
       );
       let masters = [];
       let workers = [];
