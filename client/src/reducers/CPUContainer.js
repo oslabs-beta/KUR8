@@ -7,16 +7,15 @@ import { connect } from 'react-redux';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
-export class TotalHTTPRequest extends Component {
+export class CPUContainer extends Component {
   constructor(props) {
     super(props);
-    console.log('this.props.cpuGauge',this.props.cpuGauge)
     this.state = {
         config: {
             type: "line",
             "utc": true,
             "title": {
-              "text": "Total Kubelet Http Request",
+              "text": "Top 4 Container by CPU Usage",
               "font-size": "24px",
               "adjust-layout": true
             },
@@ -145,7 +144,7 @@ export class TotalHTTPRequest extends Component {
 //   }
 
   stateFormat = () => {
-      let pathLength = this.props.httpRequestData.length;
+      let pathLength = this.props.cpuContainerData.length;
 
       let outerContainer = [];
       let eachData = [];
@@ -154,7 +153,7 @@ export class TotalHTTPRequest extends Component {
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
-          value = this.props.httpRequestData[i][2];
+          value = this.props.cpuContainerData[i][2];
 
           for (let j = 0; j < value.length; j++) {
               eachData.push(j[1]);
@@ -162,7 +161,7 @@ export class TotalHTTPRequest extends Component {
 
           seriesObj = {
             "values": eachData,
-            "text": `${this.props.httpRequestData[i][0]}`,
+            "text": `${this.props.cpuContainerData[i][0]}`,
             "line-color": lineColor[i % lineColor.length],
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],
@@ -189,7 +188,6 @@ export class TotalHTTPRequest extends Component {
   }
 
   render() {
-
     return (
     <div>
         <ZingChart data={this.state.config} complete={this.chartDone} />
@@ -203,7 +201,7 @@ export class TotalHTTPRequest extends Component {
 
 export default connect(
   state => ({
-    httpRequestData: state.metricsReducer.httpRequestData,
+    cpuContainerData: state.metricsReducer.cpuContainerData,
   }),
   null
-)(TotalHTTPRequest);
+)(CPUContainer);

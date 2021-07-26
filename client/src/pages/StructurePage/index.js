@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import PodList from '../../components/PodList'
+import NodeList from '../../components/NodeList'
 
 const useStyles = makeStyles(theme => ({
   sampleStyle: {
@@ -14,8 +14,7 @@ export default function StructurePage() {
 
   return (
     <div>
-      <h1>podlist - structure page</h1>
-      <PodList />
+      <NodeList />
     </div>
   );
 }
