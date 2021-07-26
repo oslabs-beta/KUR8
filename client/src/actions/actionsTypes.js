@@ -19,10 +19,7 @@ export const FETCH_CPU_CONTAINER = 'FETCH_CPU_CONTAINER'
 export const CUSTOM_QUERY = 'CUSTOM_QUERY'
 export const ALL_PROMQL = 'ALL_PROMQL'
 export const HYDRATE_CUSTOM = 'HYDRATE_CUSTOM'
-<<<<<<< HEAD
 export const DELETE_CUSTOM = 'DELETE_CUSTOM'
 
 //Alerts
 export const RECEIVE_ALERTS = 'RECEIVE_ALERTS'
-=======
->>>>>>> 09d3d438665afe27459ceb81a5410dbabc5e0d90
