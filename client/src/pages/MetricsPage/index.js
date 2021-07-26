@@ -4,13 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import CounterChart from '../../components/Charts/CounterChart';
-import CPUSelector from '../../components/Charts/CPUSelector';
-import GaugeChart from '../../components/Charts/GaugeChart';
+// import CounterChart from '../../components/Charts/CounterChart';
+// import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
-import Memory from '../../components/Charts/Memory';
+// import MemoryGauge from '../../components/Charts/MemoryGauge';
+import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
-import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
+import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
+import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -55,15 +56,17 @@ function MetricsPage({ cpuGauge }) {
         </Grid>
       </Grid> */}
 
+      {/* <CustomCharts customDataArray={customDataArray}/> */}
+
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryRangeChart />
+          <QueryCpuRangeChart />
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryCpuRangeChart />
+          <QueryRangeChart />
         </Paper>
       </Grid>
 
@@ -75,15 +78,21 @@ function MetricsPage({ cpuGauge }) {
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <CPUSelector cpuGauge={cpuGauge} />
+          <CPUGauge cpuGauge={cpuGauge} />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <TotalHTTPRequest />
+        </Paper>
+      </Grid>
+
+      {/* <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <Memory />
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }
@@ -92,6 +101,7 @@ const mapStateToProps = state => {
   console.log(`state`, state);
   return {
     cpuGauge: state.metricsReducer.cpuGauge,
+    // customDataArray: state.metricsReducer.customDataArray,
   };
 };
 

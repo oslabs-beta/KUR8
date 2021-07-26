@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
-export class CPUGauge extends Component {
+export class MemoryGauge extends Component {
   constructor(props) {
     super(props);
-    console.log('this.props.cpuGauge',this.props.cpuGauge)
     this.state = {
       config: {
         type: 'gauge',
@@ -34,6 +33,8 @@ export class CPUGauge extends Component {
             center: {  //Pivot Point
               type: "gear9",   //Specify your marker shape.
               size:15,
+              "background-color": "#66CCFF #FFCCFF",
+              "border-color": "#CC0066",
             },
             ring: {  //Gauge Ring
               size:10,
@@ -64,10 +65,9 @@ export class CPUGauge extends Component {
       },
     };
     this.chartDone = this.chartDone.bind(this);
-    // console.log('this.props.cpuGauge', this.props.cpuGauge); 
-
   }
 
+  // componentDidUpdate
   updateGauge = (nodeID) => {
     let nodeData;
     this.props.cpuGauge.forEach(node => {
@@ -97,6 +97,8 @@ export class CPUGauge extends Component {
             center: {  //Pivot Point
               type: "gear9",   //Specify your marker shape.
               size:15,
+              "background-color": "#66CCFF #FFCCFF",
+              "border-color": "#CC0066",
             },
             ring: {  //Gauge Ring
               size:10,
@@ -126,6 +128,8 @@ export class CPUGauge extends Component {
           }
       },
     });
+
+
   }
 
   //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
@@ -158,5 +162,5 @@ export default connect(
     cpuGauge: state.metricsReducer.cpuGauge,
   }),
   null
-)(CPUGauge);
+)(MemoryGauge);
 

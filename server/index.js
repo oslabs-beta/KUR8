@@ -149,6 +149,12 @@ app.get('/metrics', (req, res) => {
     .sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
+app.get('/custom', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.join(__dirname, '../client/public/index.html'));
+});
+
 app.get('/', (req, res) => {
   return res
     .status(200)

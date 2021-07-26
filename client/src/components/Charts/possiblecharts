@@ -1,0 +1,2 @@
+1. kube_node_status_capacity
+2. rate(container_cpu_usage_seconds_total[1m])
