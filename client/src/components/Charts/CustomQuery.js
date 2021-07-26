@@ -16,7 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { fetchCustomQuery } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+
 
 
 const drawerWidth = 240;
@@ -48,7 +49,8 @@ function CustomQuery({ fetchCustomQuery, allPromQL }) {
   const [range, setRange] = useState(12);
   const [step, setStep] = useState(30);
 
-  const history = useHistory()
+  const history = useHistory();
+  const location = useLocation();
 
   const handleQueryChange = (e, selectedObject) => {
     if (selectedObject !== null)
@@ -64,7 +66,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL }) {
     console.log( 'query:', query, 'range: ', range, 'step', step); 
     fetchCustomQuery(query, range, step);
     history.push('/')
-    history.push('/custom')
+    history.push(location.pathname)
   }
 
   const handleRangeChange = (event) => {
