@@ -11,7 +11,8 @@ function nodesReducer(state = initialState, action) {
     // Only one case used due to both master and worker nodes being located within the same API endpoint
     case actionsTypes.RECEIVE_NODES:
       const { items } = payload.data.response.body;
-      
+      const processes = payload.data.nodeProcesses.response.body.items
+
       // Differentiate between master and worker nodes.
       const masterNodes = items.filter(data =>
         data.metadata.name.includes('control-plane')
@@ -37,6 +38,11 @@ function nodesReducer(state = initialState, action) {
             name: metadata.name,
             uid: metadata.uid,
           },
+          processes: processes.map(component => ({
+            name: component.metadata.name,
+            type: component.conditions[0].type,
+            status: component.conditions[0].status
+          })),
           status: {
             internalIP,
             hostName,
