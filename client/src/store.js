@@ -5,6 +5,7 @@ import servicesReducer from './reducers/servicesReducer';
 import deploymentsReducer from './reducers/deploymentsReducer';
 import ingressesReducer from './reducers/ingressesReducer';
 import metricsReducer from './reducers/metricsReducer';
+import alertsReducer from './reducers/alertsReducer'
 
 //ADD REDUCERS HERE
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   deploymentsReducer,
   ingressesReducer,
   metricsReducer,
+  alertsReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

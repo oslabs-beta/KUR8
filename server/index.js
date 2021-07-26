@@ -124,19 +124,8 @@ app.get('/nodeList', getNodeList, (req, res) => {
   res.status(201).send(res.locals.nodeList);
 });
 
-app.get('/structure', (req, res) => {
-  return res
-    .status(200)
-    .sendFile(path.join(__dirname, '../client/public/index.html'));
-});
-
-app.get('/metrics', (req, res) => {
-  return res
-    .status(200)
-    .sendFile(path.join(__dirname, '../client/public/index.html'));
-});
-
-app.get('/custom', (req, res) => {
+//serving index and letting react router handle client side routing
+app.get(['/structure', '/metrics', '/custom', '/alerts'], (req, res) => {
   return res
     .status(200)
     .sendFile(path.join(__dirname, '../client/public/index.html'));

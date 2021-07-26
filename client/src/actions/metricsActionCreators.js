@@ -80,6 +80,13 @@ export const hyrateCustom = data => {
   }
 }
 
+export const deleteCustom = data => {
+  return {
+    type: actionTypes.DELETE_CUSTOM,
+    payload: data,
+  }
+}
+
 const metricsActionCreators = [
   fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph
@@ -124,8 +131,8 @@ export const metricsFetchData = () => dispatch => {
   });
 };
 
-export const fetchCustomQuery = (query, range, step) => dispatch => {
+export const fetchCustomQuery = (query, range, step, title) => dispatch => {
   console.log('fetching',query, range, step)
   axios.get(`http://localhost:9090/api/v1/query_range?query=${query}&start=${new Date(new Date().setDate(new Date().getDate()-(range/24))).toISOString()}&end=${new Date().toISOString()}&step=${step}s`)
-  .then(data => dispatch(customQuery(data)));
+  .then(data => dispatch(customQuery(data, title)));
 }
