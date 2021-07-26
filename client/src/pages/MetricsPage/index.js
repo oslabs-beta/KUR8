@@ -10,7 +10,8 @@ import HistogramChart from '../../components/Charts/HistogramChart';
 // import MemoryGauge from '../../components/Charts/MemoryGauge';
 import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
-import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart'
+import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
+import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -76,6 +77,12 @@ function MetricsPage({ cpuGauge }) {
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <CPUGauge cpuGauge={cpuGauge} />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <TotalHTTPRequest />
         </Paper>
       </Grid>
 
