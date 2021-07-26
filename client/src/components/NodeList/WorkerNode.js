@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-import IngressTable from './IngressTable';
+import PodList from '../PodList';
+import WorkerNodeTable from './WorkerNodeTable';
 
 const useStyles = makeStyles(theme => ({
+  paper: {
+    backgroundColor: '#f3f3f3',
+    padding: theme.spacing(5),
+    margin: theme.spacing(1, 0),
+  },
+  chipNodeName: {
+    cursor: 'pointer',
+    color: '#000',
+    boxShadow: theme.shadows[3],
+    border: 'none',
+  },
   dialogTitle: {
     margin: 0,
     padding: theme.spacing(2),
@@ -29,21 +43,9 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  ingressContainer: {
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: theme.spacing(5, 0),
-    height: '50px',
-    width: '200px',
-    borderRadius: '25px',
-    boxShadow: theme.shadows[3],
-  },
 }));
 
-function Ingress({ ingresses }) {
+function WorkerNode({ pods, metadata, services }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -54,10 +56,14 @@ function Ingress({ ingresses }) {
     setOpen(false);
   };
   return (
-    <>
-      <div className={classes.ingressContainer} onClick={handleClickOpen}>
-        <Typography>Ingress</Typography>
-      </div>
+    <Paper className={classes.paper} elevation={2}>
+      <Chip
+        onClick={handleClickOpen}
+        className={classes.chipNodeName}
+        size="medium"
+        variant="outlined"
+        label={metadata.name}
+      />
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -66,7 +72,7 @@ function Ingress({ ingresses }) {
           onClose={handleClose}
           disableTypography
           className={classes.dialogTitle}>
-          <Typography variant="h6">Ingress</Typography>
+          <Typography variant="h6">{metadata.name}</Typography>
           <IconButton
             aria-label="close"
             className={classes.closeButton}
@@ -75,7 +81,8 @@ function Ingress({ ingresses }) {
           </IconButton>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          <IngressTable ingresses={ingresses} />
+          {/* <WorkerNodeTable /> */}
+          TABLE GOES HERE
         </MuiDialogContent>
         <MuiDialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
@@ -83,8 +90,9 @@ function Ingress({ ingresses }) {
           </Button>
         </MuiDialogActions>
       </Dialog>
-    </>
+      <PodList pods={pods} services={services} />
+    </Paper>
   );
 }
 
-export default Ingress;
+export default WorkerNode;
