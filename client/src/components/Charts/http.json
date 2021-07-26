@@ -1,0 +1,332 @@
+{
+    "status": "success",
+    "data": {
+    "resultType": "matrix",
+    "result": [
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "false",
+    "method": "GET",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "containerLogs",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "15"
+    ],
+    [
+    1627103136.471,
+    "15"
+    ],
+    [
+    1627103151.471,
+    "15"
+    ],
+    [
+    1627103166.471,
+    "15"
+    ],
+    [
+    1627103181.471,
+    "15"
+    ],
+    [
+    1627103196.471,
+    "15"
+    ],
+    [
+    1627103211.471,
+    "15"
+    ],
+    [
+    1627103226.471,
+    "15"
+    ],
+    [
+    1627103241.471,
+    "15"
+    ]
+    ]
+    },
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "false",
+    "method": "GET",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "metrics",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "1373"
+    ],
+    [
+    1627103136.471,
+    "1374"
+    ],
+    [
+    1627103151.471,
+    "1374"
+    ],
+    [
+    1627103166.471,
+    "1375"
+    ],
+    [
+    1627103181.471,
+    "1375"
+    ],
+    [
+    1627103196.471,
+    "1376"
+    ],
+    [
+    1627103211.471,
+    "1376"
+    ],
+    [
+    1627103226.471,
+    "1377"
+    ],
+    [
+    1627103241.471,
+    "1377"
+    ]
+    ]
+    },
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "false",
+    "method": "GET",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "metrics/cadvisor",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "1375"
+    ],
+    [
+    1627103136.471,
+    "1376"
+    ],
+    [
+    1627103151.471,
+    "1376"
+    ],
+    [
+    1627103166.471,
+    "1377"
+    ],
+    [
+    1627103181.471,
+    "1377"
+    ],
+    [
+    1627103196.471,
+    "1378"
+    ],
+    [
+    1627103211.471,
+    "1378"
+    ],
+    [
+    1627103226.471,
+    "1379"
+    ],
+    [
+    1627103241.471,
+    "1379"
+    ]
+    ]
+    },
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "false",
+    "method": "GET",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "metrics/probes",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "1379"
+    ],
+    [
+    1627103136.471,
+    "1380"
+    ],
+    [
+    1627103151.471,
+    "1380"
+    ],
+    [
+    1627103166.471,
+    "1381"
+    ],
+    [
+    1627103181.471,
+    "1381"
+    ],
+    [
+    1627103196.471,
+    "1382"
+    ],
+    [
+    1627103211.471,
+    "1382"
+    ],
+    [
+    1627103226.471,
+    "1383"
+    ],
+    [
+    1627103241.471,
+    "1383"
+    ]
+    ]
+    },
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "false",
+    "method": "POST",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "portForward",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "13"
+    ],
+    [
+    1627103136.471,
+    "13"
+    ],
+    [
+    1627103151.471,
+    "13"
+    ],
+    [
+    1627103166.471,
+    "13"
+    ],
+    [
+    1627103181.471,
+    "13"
+    ],
+    [
+    1627103196.471,
+    "13"
+    ],
+    [
+    1627103211.471,
+    "13"
+    ],
+    [
+    1627103226.471,
+    "13"
+    ],
+    [
+    1627103241.471,
+    "13"
+    ]
+    ]
+    },
+    {
+    "metric": {
+    "__name__": "kubelet_http_requests_total",
+    "endpoint": "https-metrics",
+    "instance": "192.168.65.4:10250",
+    "job": "kubelet",
+    "long_running": "true",
+    "method": "POST",
+    "metrics_path": "/metrics",
+    "namespace": "kube-system",
+    "node": "docker-desktop",
+    "path": "exec",
+    "server_type": "readwrite",
+    "service": "kubelet"
+    },
+    "values": [
+    [
+    1627103121.471,
+    "57"
+    ],
+    [
+    1627103136.471,
+    "57"
+    ],
+    [
+    1627103151.471,
+    "57"
+    ],
+    [
+    1627103166.471,
+    "57"
+    ],
+    [
+    1627103181.471,
+    "57"
+    ],
+    [
+    1627103196.471,
+    "57"
+    ],
+    [
+    1627103211.471,
+    "57"
+    ],
+    [
+    1627103226.471,
+    "57"
+    ],
+    [
+    1627103241.471,
+    "57"
+    ]
+    ]
+    }
+    ]
+    }
+    }
