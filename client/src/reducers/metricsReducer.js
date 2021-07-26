@@ -103,7 +103,6 @@ function metricsReducer(state = initialState, action) {
 
      let Memorydata = [];
      resultMemory.forEach((node, index) => {
-       //[[kind-control-plane, Node 1, 87], ]
        Memorydata.push([
          node.metric.instance,
          `Node ${index + 1}`,
@@ -151,7 +150,6 @@ function metricsReducer(state = initialState, action) {
 
      let cpuContainer = [];
      resultcpuContainer.forEach((container, index) => {
-       //[[kind-control-plane, Node 1, 87], ]
        cpuContainer.push([
          container.metric.id,
          container.values,
