@@ -12,8 +12,8 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useParams, useHistory } from 'react-router-dom';
 import MyAppBar from './MyAppBar';
-import CustomQuery from '../Charts/CustomQuery';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 
 const drawerWidth = 240;
 
@@ -39,7 +39,9 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ children, history}) => {
   const classes = useStyles();
-
+  const pages = ['Structure', 'Metrics', 'Custom', 'Alerts'];
+  const icons = [<LocationCityIcon />, <AvTimerIcon />, <BarChartIcon />, <NotificationsActiveIcon />];
+  
   // if (location.pathname === '/')
 
 //   <Drawer
@@ -80,13 +82,13 @@ const Layout = ({ children, history}) => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Structure', 'Metrics', 'Custom'].map((text, index) => (
+            {pages.map((text, index) => (
               <ListItem
                 button
                 key={text}
                 onClick={() => history.push(`/${text.toLowerCase()}`)}>
                 <ListItemIcon>
-                  {index === 0 ? <LocationCityIcon /> : index === 1 ? <AvTimerIcon /> : <BarChartIcon />}
+                  {icons[index]}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

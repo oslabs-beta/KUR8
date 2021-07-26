@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteCustom } from '../../actions/metricsActionCreators';
 import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
@@ -33,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomCharts({ customDataArray }) {
+function CustomCharts({ customDataArray, deleteCustom }) {
   const classes = useStyles();
   const custom = [];
 
@@ -47,7 +50,7 @@ export default function CustomCharts({ customDataArray }) {
         },
       },
       title: {
-        text: 'im custom bro',
+        text: dataSet[0].metric.__name__
       },
       'scale-x': {
         zooming: true,
@@ -61,11 +64,13 @@ export default function CustomCharts({ customDataArray }) {
         return {values: dataPoint.yRange}
       })
     }
-
+//
     custom.push(
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <button>delete</button>
+          <button
+          onClick={() => deleteCustom(index)}
+          >delete</button>
           <ZingChart id={`custom chart ${index}`} data={config} />
         </Paper>
       </Grid>
@@ -73,3 +78,8 @@ export default function CustomCharts({ customDataArray }) {
   })
   return custom;
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ deleteCustom }, dispatch);
+
+  export default connect(null, mapDispatchToProps)(CustomCharts);

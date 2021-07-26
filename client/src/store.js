@@ -5,6 +5,7 @@ import servicesReducer from './reducers/servicesReducer';
 import deploymentsReducer from './reducers/deploymentsReducer';
 import ingressesReducer from './reducers/ingressesReducer';
 import metricsReducer from './reducers/metricsReducer';
+import alertsReducer from './reducers/alertsReducer'
 import nodesReducer from './reducers/nodesReducer';
 
 //ADD REDUCERS HERE
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   deploymentsReducer,
   ingressesReducer,
   metricsReducer,
+  alertsReducer,
   nodesReducer,
 });
 

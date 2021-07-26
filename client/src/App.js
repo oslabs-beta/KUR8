@@ -10,6 +10,7 @@ import MetricsPage from './pages/MetricsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import StructurePage from './pages/StructurePage';
 import CustomMetricsPage from './pages/CustomMetricsPage';
+import AlertsPage from './pages/AlertsPage';
 
 import { metricsFetchData } from './actions/metricsActionCreators';
 
@@ -25,6 +26,7 @@ function App({ fetchData, metricsFetchData }) {
           <Route path="/structure" component={StructurePage} />
           <Route path="/metrics" component={MetricsPage} />
           <Route path="/custom" component={CustomMetricsPage} />
+          <Route path="/alerts" component={AlertsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

@@ -44,7 +44,6 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   useEffect(() => {
     const retrieveStash = localStorage.getItem('customcharts');
     if (retrieveStash) {
-      console.log(retrieveStash,'hyrating dispatch')
       hyrateCustom(JSON.parse(retrieveStash))
     };
   },[]);
@@ -56,23 +55,22 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [range, setRange] = useState(12);
-  const [step, setStep] = useState(30);
-
-  const handleQueryChange = (e, selectedObject) => {
-    if (selectedObject !== null)
-        setQuery(selectedObject)
-  }
+  const [title, setTitle] = useState('');
+  const [range, setRange] = useState('Range');
+  const [step, setStep] = useState('Step');
 
   const handleNesting = () => {
     setOpen(!open);
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log( 'query:', query, 'range: ', range, 'step', step); 
-    fetchCustomQuery(query, range, step);
+  const handleQueryChange = (e, selectedObject) => {
+    if (selectedObject !== null)
+        setQuery(selectedObject)
   }
+  
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
   const handleRangeChange = (event) => {
     setRange(event.target.value);
@@ -81,6 +79,12 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   const handleStepChange = (event) => {
     setStep(event.target.value);
   };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log( 'query:', query, 'range: ', range, 'step', step, 'title', title); 
+    fetchCustomQuery(query, range, step, title);
+  }
 
   const ranges = [1,2,3,4,8,12,18,24];
   const steps = [15,30,60,120];
@@ -110,16 +114,24 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
                 <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" />
               )}
             />
+            {/* <TextField
+              id="outlined-title"
+              label="Enter Chart Title"
+              value={title}
+              onChange={handleTitleChange}
+              multiline
+              variant="outlined"
+            /> */}
             <Select
-              labelId="demo-simple-select-outlined-label"
               id="select-range"
               value={range}
               onChange={handleRangeChange}
               label="Choose a time range"
               variant="outlined"
             >
-              <MenuItem value="">
-              </MenuItem>
+            <MenuItem value="Range">
+            <em>Select a time range</em>
+            </MenuItem>
               {ranges.map((ranges) => (
                 <MenuItem key={ranges} value={ranges}>
                   {`${ranges} hours`}
@@ -127,14 +139,14 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               ))}
             </Select>
             <Select
-              labelId="demo-simple-select-outlined-label"
               id="select-step"
               value={step}
               onChange={handleStepChange}
               label="Choose a step interval"
               variant="outlined"
             >
-              <MenuItem value="">
+              <MenuItem value="Step">
+              <em>Select a step interval</em>
               </MenuItem>
               {steps.map((steps) => (
                 <MenuItem key={steps} value={steps}>
