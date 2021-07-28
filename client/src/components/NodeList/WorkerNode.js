@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import PodList from '../PodList';
-// import WorkerNodeTable from './WorkerNodeTable';
+import WorkerNodeTable from './WorkerNodeTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -45,10 +45,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function WorkerNode({ pods, metadata, services }) {
+function WorkerNode({ pods, metadata, services, nodeData }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -81,8 +80,7 @@ function WorkerNode({ pods, metadata, services }) {
           </IconButton>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          {/* <WorkerNodeTable /> */}
-          TABLE GOES HERE
+          <WorkerNodeTable nodeData={nodeData} />
         </MuiDialogContent>
         <MuiDialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
