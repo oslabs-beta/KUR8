@@ -87,6 +87,13 @@ export const deleteCustom = data => {
   }
 }
 
+export const moveDnd = data => {
+  return {
+    type: actionTypes.MOVE_DND,
+    payload: data,
+  }
+}
+
 const metricsActionCreators = [
   fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph
