@@ -1,4 +1,4 @@
-skaffolName:         client-depl-569cc6789b-4tzqg
+Name:         client-depl-569cc6789b-4tzqg
 Namespace:    default
 Priority:     0
 Node:         docker-desktop/192.168.65.4
