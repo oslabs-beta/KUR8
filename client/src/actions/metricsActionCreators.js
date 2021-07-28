@@ -115,7 +115,9 @@ export const metricsEndpointArray = (query, start, end, step) => [
 
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_memory_seconds_total[1m]))%20*%20100)`,
 
-  `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
+  `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`,
+
+  // `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=2021-07-27T04:04:26.785Z&end=2021-07-28T04:05:44.691Z&step=1m`,
 
   `http://localhost:9090/api/v1/query_range?query=topk(5,%20rate(container_cpu_usage_seconds_total[5m]))&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
 ];

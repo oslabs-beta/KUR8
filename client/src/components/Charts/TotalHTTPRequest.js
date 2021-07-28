@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
-
-// EXPLICITLY IMPORT MODULE from node_modules
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
@@ -38,19 +36,25 @@ export class TotalHTTPRequest extends Component {
               }
             },
             "scale-x": {
-              "min-value" : Date.now() - 86400000,
-              "shadow": 0,
-              "step": 14400000,
-              "transform": {
-                "type": "date",
-                "all": "%D, %d %M<br />%h:%i %A",
-                "guide": {
-                  "visible": false
-                },
-                "item": {
-                  "visible": false
-                }
-              },
+              // "min-value" : Date.now() - 86400000,
+              "min-value": 1627359150,
+              "max-value": 1627445560,
+
+              // 'max-items':10,
+              zooming: true,
+
+              // "shadow": 0,
+              // "step": 83000,
+              // "transform": {
+                // "type": "date",
+              //   "all": "%D, %d %M<br />%h:%i %A",
+              //   "guide": {
+              //     "visible": false
+              //   },
+              //   "item": {
+              //     "visible": false
+              //   }
+              // },
               "label": {
                 "visible": false
               },
@@ -59,11 +63,17 @@ export class TotalHTTPRequest extends Component {
             "scale-y": {
               "line-color": "#f6f7f8",
               "shadow": 0,
+              "progression": "log",
+              "log-base": Math.E,
+              // "type": "line",
+              "plotarea": {
+                "adjust-layout": true,
+              },
               "guide": {
                 "line-style": "dashed"
               },
               "label": {
-                "text": "Page Views",
+                "text": "Requests",
               },
               "minor-ticks": 0,
               "thousands-separator": ","
@@ -109,40 +119,42 @@ export class TotalHTTPRequest extends Component {
     };
 
     this.chartDone = this.chartDone.bind(this);
+    console.log('this.props.http', this.props.httpRequestData)
   }
 
-//   getTimeFormat = (num) => {
-//       //get it in miliseconds first;
-//       num = num * 1000;
-//       let graphDate = new Date(num);
-//       let newFormat;
-//       let newHour;
-//       let newMinute;
-//       let newSecond;
 
-//         //getting new data to put on x-axis;
-//       if (String(graphDate.getHours()).length === 1) {
-//           newHour = `0${graphDate.getHours()}`;
-//       } 
-//       if (String(graphDate.getHours()).length !== 1) {
-//         newHour = graphDate.getHours();
-//       } 
-//       if (String(graphDate.getMinutes()).length === 1) {
-//         newMinute = `0${graphDate.getMinutes()}`;
-//       } 
-//       if (String(graphDate.getMinutes()).length === 1) {
-//         newMinute = `0${graphDate.getMinutes()}`;
-//       } 
-//       if (String(graphDate.getSeconds()).length === 1) {
-//         newSecond = `0${graphDate.getSeconds()}`;
-//       } 
-//       if (String(graphDate.getSeconds()).length === 1) {
-//         newSecond = `0${graphDate.getSeconds()}`;
-//       };
+  getTimeFormat = (num) => {
+    //get it in miliseconds first;
+    num = num * 1000;
+    let graphDate = new Date(num);
+    let newFormat;
+    let newHour;
+    let newMinute;
+    let newSecond;
 
-//       let newFormat = `${newHour}:${newMinute}:${newSecond}`;
-//       return newFormat;
-//   }
+      // getting new data to put on x-axis;
+    if (String(graphDate.getHours()).length === 1) {
+        newHour = `0${graphDate.getHours()}`;
+    } 
+    if (String(graphDate.getHours()).length !== 1) {
+      newHour = graphDate.getHours();
+    } 
+    if (String(graphDate.getMinutes()).length === 1) {
+      newMinute = `0${graphDate.getMinutes()}`;
+    } 
+    if (String(graphDate.getMinutes()).length === 1) {
+      newMinute = `0${graphDate.getMinutes()}`;
+    } 
+    if (String(graphDate.getSeconds()).length === 1) {
+      newSecond = `0${graphDate.getSeconds()}`;
+    } 
+    if (String(graphDate.getSeconds()).length === 1) {
+      newSecond = `0${graphDate.getSeconds()}`;
+    };
+
+    newFormat = `${newHour}:${newMinute}:${newSecond}`;
+    return newFormat;
+}
 
   stateFormat = () => {
       let pathLength = this.props.httpRequestData.length;
@@ -151,14 +163,19 @@ export class TotalHTTPRequest extends Component {
       let eachData = [];
       let seriesObj;
       let value;
+      // let millisecond;
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
           value = this.props.httpRequestData[i][2];
 
+
           for (let j = 0; j < value.length; j++) {
-              eachData.push(j[1]);
+            // millisecond = Number(value[j][0]);
+            // millisecond *=  1000;
+              eachData.push([Number(value[j][0]), Number(value[j][1])]);
           }
+          console.log('eachdata', eachData)
 
           seriesObj = {
             "values": eachData,
@@ -167,7 +184,7 @@ export class TotalHTTPRequest extends Component {
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],
               "borderRadius": 5,
-              "font-color": "white"
+              "font-color": "black"
             },
             "legend-marker": {
               "visible": false
@@ -184,7 +201,9 @@ export class TotalHTTPRequest extends Component {
             },
           }
           outerContainer.push(seriesObj);
+          eachData = [];
       } 
+      console.log('outerContainer', outerContainer)
       return outerContainer;     
   }
 
