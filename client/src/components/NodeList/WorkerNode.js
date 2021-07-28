@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import PodList from '../PodList';
-import WorkerNodeTable from './WorkerNodeTable';
+// import WorkerNodeTable from './WorkerNodeTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
