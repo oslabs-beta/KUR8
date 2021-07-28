@@ -105,23 +105,23 @@ export class MemoryGauge extends Component {
               rules: [
                 {
                   rule: "%v >= 0 && %v <= 20",
-                  'background-color': "blue"
+                  'background-color': "#9EC1CF"
                 },
                 {
                   rule: "%v >= 20 && %v <= 40",
-                  'background-color': "green"
+                  'background-color': "#9EE09E"
                 },
                 {
                   rule: "%v >= 40 && %v <= 60",
-                  'background-color': "yellow"
+                  'background-color': "#FDFD97"
                 },
                 {
                   rule: "%v >= 60 && %v <= 80",
-                  'background-color': "orange"
+                  'background-color': "#FEB144"
                 },
                 {
                   rule: "%v >= 80 && %v <= 100",
-                  'background-color': "red"
+                  'background-color': "#FF6663"
                 },
               ]
             }
