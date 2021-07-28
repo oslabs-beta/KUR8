@@ -11,14 +11,19 @@ function nodesReducer(state = initialState, action) {
     // Only one case used due to both master and worker nodes being located within the same API endpoint
     case actionsTypes.RECEIVE_NODES:
       const { items } = payload.data.response.body;
-      const processes = payload.data.nodeProcesses.response.body.items
+      const processes = payload.data.nodeProcesses.response.body.items;
 
       // Differentiate between master and worker nodes.
       const masterNodes = items.filter(data =>
-        data.metadata.labels.hasOwnProperty('node-role.kubernetes.io/control-plane')
+        data.metadata.labels.hasOwnProperty(
+          'node-role.kubernetes.io/control-plane'
+        )
       );
-      const workerNodes = items.filter(data =>
-        !data.metadata.labels.hasOwnProperty('node-role.kubernetes.io/control-plane')
+      const workerNodes = items.filter(
+        data =>
+          !data.metadata.labels.hasOwnProperty(
+            'node-role.kubernetes.io/control-plane'
+          )
       );
       let masters = [];
       let workers = [];
@@ -41,35 +46,38 @@ function nodesReducer(state = initialState, action) {
           processes: processes.map(component => ({
             name: component.metadata.name,
             type: component.conditions[0].type,
-            status: component.conditions[0].status
+            status: component.conditions[0].status,
           })),
           status: {
             internalIP,
             hostName,
-            capacity: {
-              cpu: status.capacity.cpu,
-              memory: status.capacity.memory,
-              pods: status.capacity.pods,
-            },
-            conditions: status.conditions.map(condition => ({
-              type: condition.type,
-              message: condition.message,
-            })),
-            images: status.images.map(image => ({
-              name: image.names[0],
-              sizeBytes: image.sizeBytes,
-            })),
-            nodeInfo: {
-              arch: status.nodeInfo.architecture,
-              os: status.nodeInfo.operatingSystem,
-              osImage: status.nodeInfo.osImage,
-            },
+          },
+          capacity: {
+            cpu: status.capacity.cpu,
+            memory: status.capacity.memory,
+            pods: status.capacity.pods,
+          },
+          conditions: status.conditions.map(condition => ({
+            type: condition.type,
+            message: condition.message,
+          })),
+          images: status.images.map(image => ({
+            name: image.names[0],
+            sizeBytes: image.sizeBytes,
+          })),
+          nodeInfo: {
+            arch: status.nodeInfo.architecture,
+            os: status.nodeInfo.operatingSystem,
+            osImage: status.nodeInfo.osImage,
           },
         });
       });
 
       // Manipulate data to produce worker nodes
       workerNodes.forEach(workerNode => {
+        const conditionsObj = {};
+        const conditionsKeys = [];
+        const conditionsValues = [];
         const { metadata, status } = workerNode;
         let internalIP, hostName;
 
@@ -78,6 +86,17 @@ function nodesReducer(state = initialState, action) {
           if (address.type === 'Hostname') hostName = address.address;
         });
 
+        status.conditions.forEach(condition => {
+          for (const [key, value] of Object.entries(condition)) {
+            if (key === 'type') conditionsKeys.push(value);
+            if (key === 'message') conditionsValues.push(value);
+          }
+        });
+
+        conditionsKeys.forEach((key, index) => {
+          conditionsObj[key] = conditionsValues[index];
+        });
+        
         workers.push({
           metadata: {
             name: metadata.name,
@@ -86,20 +105,17 @@ function nodesReducer(state = initialState, action) {
           status: {
             internalIP,
             hostName,
-            capacity: {
-              cpu: status.capacity.cpu,
-              memory: status.capacity.memory,
-              pods: status.capacity.pods,
-            },
-            conditions: status.conditions.map(condition => ({
-              type: condition.type,
-              message: condition.message,
-            })),
-            nodeInfo: {
-              arch: status.nodeInfo.architecture,
-              os: status.nodeInfo.operatingSystem,
-              osImage: status.nodeInfo.osImage,
-            },
+          },
+          capacity: {
+            cpu: status.capacity.cpu,
+            memory: status.capacity.memory,
+            pods: status.capacity.pods,
+          },
+          conditions: conditionsObj,
+          nodeInfo: {
+            arch: status.nodeInfo.architecture,
+            os: status.nodeInfo.operatingSystem,
+            osImage: status.nodeInfo.osImage,
           },
         });
       });

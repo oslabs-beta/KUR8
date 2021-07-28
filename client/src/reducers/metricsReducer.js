@@ -172,6 +172,10 @@ function metricsReducer(state = initialState, action) {
       remaining.splice(payload, 1);
       return { ...state, customDataArray: remaining };
 
+      case actionsTypes.MOVE_DND:
+        console.log('moving in reducer')
+        return { ...state, customDataArray: payload };
+
     default:
       return state;
   }
