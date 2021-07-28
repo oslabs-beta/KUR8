@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
-export class TotalHTTPRequest extends Component {
+export class CPUContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ export class TotalHTTPRequest extends Component {
             type: "line",
             "utc": true,
             "title": {
-              "text": "Total Kubelet Http Request",
+              "text": "CPU Usage by Container",
               "font-size": "24px",
               "adjust-layout": true
             },
@@ -72,7 +72,7 @@ export class TotalHTTPRequest extends Component {
                 "line-style": "dashed"
               },
               "label": {
-                "text": "Requests",
+                "text": "CPU Usage",
               },
               "minor-ticks": 0,
               "thousands-separator": ","
@@ -118,11 +118,11 @@ export class TotalHTTPRequest extends Component {
     };
 
     this.chartDone = this.chartDone.bind(this);
-    console.log('this.props.http', this.props.httpRequestData)
+    console.log('cpuContainerData', this.props.cpuContainerData)
   }
 
   findMax = () => {
-    let data = this.props.httpRequestData;
+    let data = this.props.cpuContainerData;
     let maximumVal = -Infinity;
     let dataVal;
 
@@ -141,7 +141,7 @@ export class TotalHTTPRequest extends Component {
   }
 
   findMin = () => {
-    let data = this.props.httpRequestData;
+    let data = this.props.cpuContainerData;
     let minimumVal = Infinity;
     let dataVal;
 
@@ -161,7 +161,7 @@ export class TotalHTTPRequest extends Component {
 
 
   stateFormat = () => {
-      let pathLength = this.props.httpRequestData.length;
+      let pathLength = this.props.cpuContainerData.length;
 
       let outerContainer = [];
       let eachData = [];
@@ -171,7 +171,7 @@ export class TotalHTTPRequest extends Component {
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
-          value = this.props.httpRequestData[i][2];
+          value = this.props.cpuContainerData[i][2];
 
 
           for (let j = 0; j < value.length; j++) {
@@ -183,7 +183,7 @@ export class TotalHTTPRequest extends Component {
 
           seriesObj = {
             "values": eachData,
-            "text": `${this.props.httpRequestData[i][0]}`,
+            "text": `${this.props.cpuContainerData[i][0]}`,
             "line-color": lineColor[i % lineColor.length],
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],
@@ -226,7 +226,7 @@ export class TotalHTTPRequest extends Component {
 
 export default connect(
   state => ({
-    httpRequestData: state.metricsReducer.httpRequestData,
+    cpuContainerData: state.metricsReducer.cpuContainerData,
   }),
   null
-)(TotalHTTPRequest);
+)(CPUContainer);

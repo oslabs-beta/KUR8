@@ -137,7 +137,7 @@ export class CPUGauge extends Component {
             <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
             <option disabled>Select Node</option>
             {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
+              return <option key={`note-options-${index}`} value={node[1]-node[0]}>{node[1]-node[0]}</option>;
             })}
           </select>
         </div>

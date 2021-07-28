@@ -14,7 +14,7 @@ export class MemoryGauge extends Component {
       config: {
         type: 'gauge',
         title: {
-          text: 'CPU usage in %',
+          text: 'Memory usage in %',
         },
         scale: {
           'size-factor': 0.9,
@@ -70,7 +70,7 @@ export class MemoryGauge extends Component {
   // componentDidUpdate
   updateGauge = (nodeID) => {
     let nodeData;
-    this.props.cpuGauge.forEach(node => {
+    this.props.memoryGauge.forEach(node => {
       if (node[1] === nodeID) nodeData = node[2]
     })
 
@@ -140,8 +140,8 @@ export class MemoryGauge extends Component {
           <div>
             <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
             <option disabled>Select Node</option>
-            {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
+            {this.props.memoryGauge.map((node, index) => {
+              return <option key={`note-options-${index}`} value={node[1]-node[0]}>{node[1]-node[0]}</option>;
             })}
           </select>
         </div>
@@ -159,7 +159,7 @@ export class MemoryGauge extends Component {
 
 export default connect(
   state => ({
-    cpuGauge: state.metricsReducer.cpuGauge,
+    memoryGauge: state.metricsReducer.memoryGauge,
   }),
   null
 )(MemoryGauge);
