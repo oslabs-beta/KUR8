@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import MasterNode from './MasterNode';
-import WorkerNode from './WorkerNode';
 import Ingress from './Ingress';
+import MasterNode from './MasterNode';
 import Pod from '../PodList/Pod';
+import WorkerNode from './WorkerNode';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -98,6 +97,7 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
                   name={masterProps.metadata.name}
                   processes={masterProps.processes}
                   status={masterProps.status}
+                  nodeData={masterProps}
                 />
               ))}
             </Grid>
