@@ -110,7 +110,7 @@ export class CPUContainer extends Component {
               "animation": {
                 "effect": 1,
                 "sequence": 2,
-                "speed": 100,
+                "speed": 1000,
               }
             },
             "series": this.stateFormat()
@@ -118,11 +118,11 @@ export class CPUContainer extends Component {
     };
 
     this.chartDone = this.chartDone.bind(this);
-    console.log('cpuContainerData', this.props.cpuContainerData)
+    console.log('cpuContainerData', this.props.cpuContainer)
   }
 
   findMax = () => {
-    let data = this.props.cpuContainerData;
+    let data = this.props.cpuContainer;
     let maximumVal = -Infinity;
     let dataVal;
 
@@ -141,7 +141,7 @@ export class CPUContainer extends Component {
   }
 
   findMin = () => {
-    let data = this.props.cpuContainerData;
+    let data = this.props.cpuContainer;
     let minimumVal = Infinity;
     let dataVal;
 
@@ -161,7 +161,7 @@ export class CPUContainer extends Component {
 
 
   stateFormat = () => {
-      let pathLength = this.props.cpuContainerData.length;
+      let pathLength = this.props.cpuContainer.length;
 
       let outerContainer = [];
       let eachData = [];
@@ -171,7 +171,7 @@ export class CPUContainer extends Component {
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
-          value = this.props.cpuContainerData[i][2];
+          value = this.props.cpuContainer[i][2];
 
 
           for (let j = 0; j < value.length; j++) {
@@ -183,7 +183,7 @@ export class CPUContainer extends Component {
 
           seriesObj = {
             "values": eachData,
-            "text": `${this.props.cpuContainerData[i][0]}`,
+            "text": `${this.props.cpuContainer[i][0]}`,
             "line-color": lineColor[i % lineColor.length],
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],
@@ -226,7 +226,7 @@ export class CPUContainer extends Component {
 
 export default connect(
   state => ({
-    cpuContainerData: state.metricsReducer.cpuContainerData,
+    cpuContainer: state.metricsReducer.cpuContainer,
   }),
   null
 )(CPUContainer);
