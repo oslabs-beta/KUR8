@@ -3,15 +3,6 @@ services:
 dist: xenial
 script:
   - docker-compose -f docker-compose-test.yml up --abort-on-container-exit
-  - python3 -V
-  - pip -V
-before_deploy:
-  # install the aws cli
-  - python3 -m pip install --user awscli
-  # install the elastic beanstalk cli
-  - python3 -m pip install --user awsebcli
-  # Append exe location to our PATH
-  - export PATH=$PATH:$HOME/.local/bin
 env:
   global:
     - PATH=/opt/python/3.7.1/bin:$PATH
