@@ -157,7 +157,7 @@ function metricsReducer(state = initialState, action) {
          container.values,
        ]);
      });
-     return { ...state, cpuContainerData: cpuContainer };
+     return { ...state, cpuContainer: cpuContainer };
      
      case actionsTypes.ALL_PROMQL:
        const allPromQL = payload.data.data
