@@ -3,6 +3,8 @@ services:
 dist: xenial
 script:
   - docker-compose -f docker-compose-test.yml up --abort-on-container-exit
+  - python3 -V
+  - pip -
 env:
   global:
     - PATH=/opt/python/3.7.1/bin:$PATH
