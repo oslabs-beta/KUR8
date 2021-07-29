@@ -89,7 +89,7 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Paper className={classes.paper}>
           <CPUContainer />
         </Paper>
@@ -99,7 +99,7 @@ function MetricsPage({ cpuGauge }) {
         <Paper className={classes.paper}>
           <MemoryGauge />
         </Paper>
-      </Grid> 
+      </Grid>  */}
     </Grid>
   );
 }
