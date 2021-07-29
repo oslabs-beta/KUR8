@@ -59,7 +59,7 @@ function MetricsPage({ cpuGauge }) {
 
       {/* <CustomCharts customDataArray={customDataArray}/> */}
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Paper className={classes.paper}>
           <QueryCpuRangeChart />
         </Paper>
@@ -69,7 +69,7 @@ function MetricsPage({ cpuGauge }) {
         <Paper className={classes.paper}>
           <QueryRangeChart />
         </Paper>
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
@@ -89,13 +89,13 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <Paper className={classes.paper}>
           <CPUContainer />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={4}>
+       {/* <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <MemoryGauge />
         </Paper>
