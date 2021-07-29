@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=PRODUCTION webpack",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
     "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
-    "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/"
+    "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "express": "^4.17.1",
     "highcharts": "^9.1.2",
     "highcharts-react-official": "^3.0.0",
+    "jest": "^27.0.6",
     "moment": "^2.29.1",
     "mongodb": "^4.0.0",
     "mongoose": "^5.13.3",
@@ -55,6 +57,7 @@
     "mini-css-extract-plugin": "^1.6.0",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
+    "supertest": "^6.1.4",
     "webpack-cli": "^4.6.0"
   }
 }
