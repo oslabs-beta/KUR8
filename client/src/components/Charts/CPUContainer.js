@@ -127,7 +127,7 @@ export class CPUContainer extends Component {
     let dataVal;
 
     for (let i = 0; i < data.length; i++) {
-      dataVal = data[i][2];
+      dataVal = data[i][1];
 
       for (let j = 0; j < dataVal.length; j++) {
         if (dataVal[j][0] > maximumVal) {
@@ -146,7 +146,7 @@ export class CPUContainer extends Component {
     let dataVal;
 
     for (let i = 0; i < data.length; i++) {
-      dataVal = data[i][2];
+      dataVal = data[i][1];
 
       for (let j = 0; j < dataVal.length; j++) {
         if (dataVal[j][0] < minimumVal) {
@@ -171,7 +171,7 @@ export class CPUContainer extends Component {
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
-          value = this.props.cpuContainer[i][2];
+          value = this.props.cpuContainer[i][1];
 
 
           for (let j = 0; j < value.length; j++) {
