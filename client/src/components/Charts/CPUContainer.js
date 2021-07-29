@@ -183,7 +183,7 @@ export class CPUContainer extends Component {
 
           seriesObj = {
             "values": eachData,
-            "text": `${this.props.cpuContainer[i][0]}`,
+            "text": `${this.props.cpuContainer[i][0]-this.props.cpuContainer[i][2]}`,
             "line-color": lineColor[i % lineColor.length],
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],

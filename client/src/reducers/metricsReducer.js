@@ -11,6 +11,7 @@ const initialState = {
   httpRequestData: [],
   cpuContainerData: [],
   allPromQL: [],
+  podPerNamespace: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -155,6 +156,7 @@ function metricsReducer(state = initialState, action) {
        cpuContainer.push([
          container.metric.id,
          container.values,
+         container.metric.node,
        ]);
      });
      return { ...state, cpuContainer: cpuContainer };
@@ -176,9 +178,22 @@ function metricsReducer(state = initialState, action) {
         console.log('moving in reducer')
         return { ...state, customDataArray: payload };
 
+   case actionsTypes.FETCH_NUM_POD_NAMESPACE:
+     let resultPodPerNamespace = payload.data.data.result;
+
+     let podNamespaceContainer = [];
+     resultPodPerNamespace.forEach((namespace, index) => {
+      podNamespaceContainer.push([
+         namespace.metric.namespace,
+         namespace.values[1],
+       ]);
+     });
+     return { ...state, podPerNamespace: podNamespaceContainer };
+
     default:
       return state;
   }
 }
 
 export default metricsReducer;
+
