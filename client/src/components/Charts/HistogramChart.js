@@ -13,7 +13,9 @@ class HistogramChart extends Component {
       config: {
         type: 'bar',
         title: {
-          text: this.props.defaultcharts[0].help
+          text: this.props.defaultcharts[0].help,
+          'font-size': 14
+
         },
         "scale-x":{  
           "values": this.props.defaultcharts[0].labelsArray,  

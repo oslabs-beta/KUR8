@@ -1,21 +1,18 @@
 import React from 'react';
-import {CPUGauge} from './Components/CPUGauge';
-import {MemoryGauge} from './Components/Memory'
-import CounterChart from '../../components/Charts/CounterChart'
-import {GaugeChart} from '../../components/Charts/GaugeChart'
-import {HistogramChart} from '../../components/Charts/HistogramChart'
-import {QueryRangeChart} from '../../components/Charts/QueryRangeChart'
-import {CPUSelector} from './Components/CPUSelector';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import { CPUGauge } from './Components/cpu.jsx';
-import { MemoryGauge } from './Components/memory.jsx';
-import CounterChart from '../../components/Charts/CounterChart';
-import GaugeChart from '../../components/Charts/GaugeChart';
+// import CounterChart from '../../components/Charts/CounterChart';
+// import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
+import MemoryGauge from '../../components/Charts/MemoryGauge';
+import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
+import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
+import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
+import CPUContainer from '../../components/Charts/CPUContainer';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -43,11 +40,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MetricsPage() {
+function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <Grid item>
           <Paper className={classes.halfedTop}>
             <CounterChart />
@@ -58,23 +55,43 @@ function MetricsPage() {
             <GaugeChart />
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      <Grid item xs={12} md={8}>
+      {/* <CustomCharts customDataArray={customDataArray}/> */}
+
+      <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryRangeChart />
+          <QueryCpuRangeChart />
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          <QueryRangeChart />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={4}>
+        <Paper className={classes.paper}>
           <HistogramChart />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <CPUGauge />
+          <CPUGauge cpuGauge={cpuGauge} />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <TotalHTTPRequest />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <CPUContainer />
         </Paper>
       </Grid>
 
@@ -82,13 +99,17 @@ function MetricsPage() {
         <Paper className={classes.paper}>
           <MemoryGauge />
         </Paper>
-      </Grid>
+      </Grid> 
     </Grid>
   );
 }
 
-export default MetricsPage;
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators({ metricsFetchData }, dispatch);
+const mapStateToProps = state => {
+  console.log(`state`, state);
+  return {
+    cpuGauge: state.metricsReducer.cpuGauge,
+    // customDataArray: state.metricsReducer.customDataArray,
+  };
+};
 
-// export default connect(null, mapDispatchToProps)(MetricsPage);
+export default connect(mapStateToProps, null)(MetricsPage);

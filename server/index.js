@@ -16,7 +16,7 @@ const k8sApi3 = kc.makeApiClient(k8s.AppsV1Api);
 
 //Prom API
 // Getting teh default value;
-client.collectDefaultMetrics()
+client.collectDefaultMetrics();
 
 app.use(cors());
 app.use(express.json());
@@ -30,11 +30,10 @@ const __dirname = path.dirname(moduleURL.pathname);
 
 //Prom API data default endpoint
 app.get('/getMetrics', async (req, res) => {
-  console.log('Scraped')
+  console.log('Scraped');
   // console.log(await client.register.getMetricsAsJSON())
-  res.send(await client.register.getMetricsAsJSON())
-})
-
+  res.send(await client.register.getMetricsAsJSON());
+});
 
 // Kubernetes API data endpoint and middleware
 const getPodList = (req, res, next) => {
@@ -113,10 +112,24 @@ const getNodeList = (req, res, next) => {
     .listNode('default')
     .then(data => {
       res.locals.nodeList = data;
-      return next();
+      k8sApi
+        .listComponentStatus()
+        .then(data => {
+          res.locals.nodeList.nodeProcesses = data;
+          return next()
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .send(
+              `error found in get request to /nodeList at listComponentStatus(), ${err}`
+            );
+        });
     })
     .catch(err => {
-      res.status(500).send(`error found in get request to /nodeList, ${err}`);
+      res
+        .status(500)
+        .send(`error found in get request to /nodeList at listNode, ${err}`);
     });
 };
 
@@ -124,13 +137,8 @@ app.get('/nodeList', getNodeList, (req, res) => {
   res.status(201).send(res.locals.nodeList);
 });
 
-app.get('/structure', (req, res) => {
-  return res
-    .status(200)
-    .sendFile(path.join(__dirname, '../client/public/index.html'));
-});
-
-app.get('/metrics', (req, res) => {
+//serving index and letting react router handle client side routing
+app.get(['/structure', '/metrics', '/custom', '/alerts'], (req, res) => {
   return res
     .status(200)
     .sendFile(path.join(__dirname, '../client/public/index.html'));

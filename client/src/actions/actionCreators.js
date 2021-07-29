@@ -6,13 +6,8 @@ export const receivePods = data => ({
   payload: data,
 });
 
-export const receiveWorkerNodes = data => ({
-  type: actionTypes.RECEIVE_WORKER_NODES,
-  payload: data,
-});
-
-export const receiveMasterNodes = data => ({
-  type: actionTypes.RECEIVE_MASTER_NODES,
+export const receiveNodes = data => ({
+  type: actionTypes.RECEIVE_NODES,
   payload: data,
 });
 
@@ -31,13 +26,13 @@ export const receiveIngresses = data => ({
   payload: data,
 });
 
+// TYPE 'RECEIVE_MASTER_NODES' is not being dispatched
 const actionCreators = [
   receivePods,
   receiveServices,
   receiveIngresses,
   receiveDeployments,
-  receiveWorkerNodes,
-  receiveMasterNodes,
+  receiveNodes,
 ];
 
 export const endpointArray = (url = 'localhost:8080') => [
@@ -45,7 +40,6 @@ export const endpointArray = (url = 'localhost:8080') => [
   `http://${url}/serviceList`,
   `http://${url}/ingressList`,
   `http://${url}/deploymentList`,
-  `http://${url}/nodeList`,
   `http://${url}/nodeList`,
 ];
 
@@ -65,7 +59,7 @@ export const fetchData = () => dispatch => {
     actionCreators.forEach((actionCreator, index) => {
       // Thanks to `redux-thunk`, we have access to the dispatch function via line 54.
       // Here we dispatch each individual actionCreator, passing in the corresponding data object at the same index.
-      dispatch(actionCreator(values[index]));
+      return dispatch(actionCreator(values[index]));
     });
   });
 };
