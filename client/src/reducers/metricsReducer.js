@@ -95,6 +95,8 @@ function metricsReducer(state = initialState, action) {
          `Node ${index + 1}`,
          node.value[1],
        ]);
+
+       console.log(CPUdata);
      });
      return { ...state, cpuGauge: CPUdata };
 
@@ -169,6 +171,10 @@ function metricsReducer(state = initialState, action) {
       const remaining = [...state.customDataArray];
       remaining.splice(payload, 1);
       return { ...state, customDataArray: remaining };
+
+      case actionsTypes.MOVE_DND:
+        console.log('moving in reducer')
+        return { ...state, customDataArray: payload };
 
     default:
       return state;

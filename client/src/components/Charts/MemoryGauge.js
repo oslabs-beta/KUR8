@@ -14,7 +14,7 @@ export class MemoryGauge extends Component {
       config: {
         type: 'gauge',
         title: {
-          text: 'CPU usage in %',
+          text: 'Memory usage in %',
         },
         scale: {
           'size-factor': 0.9,
@@ -70,7 +70,7 @@ export class MemoryGauge extends Component {
   // componentDidUpdate
   updateGauge = (nodeID) => {
     let nodeData;
-    this.props.cpuGauge.forEach(node => {
+    this.props.memoryGauge.forEach(node => {
       if (node[1] === nodeID) nodeData = node[2]
     })
 
@@ -105,23 +105,23 @@ export class MemoryGauge extends Component {
               rules: [
                 {
                   rule: "%v >= 0 && %v <= 20",
-                  'background-color': "blue"
+                  'background-color': "#9EC1CF"
                 },
                 {
                   rule: "%v >= 20 && %v <= 40",
-                  'background-color': "green"
+                  'background-color': "#9EE09E"
                 },
                 {
                   rule: "%v >= 40 && %v <= 60",
-                  'background-color': "yellow"
+                  'background-color': "#FDFD97"
                 },
                 {
                   rule: "%v >= 60 && %v <= 80",
-                  'background-color': "orange"
+                  'background-color': "#FEB144"
                 },
                 {
                   rule: "%v >= 80 && %v <= 100",
-                  'background-color': "red"
+                  'background-color': "#FF6663"
                 },
               ]
             }
@@ -140,8 +140,8 @@ export class MemoryGauge extends Component {
           <div>
             <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
             <option disabled>Select Node</option>
-            {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]}>{node[1]}</option>;
+            {this.props.memoryGauge.map((node, index) => {
+              return <option key={`note-options-${index}`} value={node[1]-node[0]}>{node[1]-node[0]}</option>;
             })}
           </select>
         </div>
@@ -159,7 +159,7 @@ export class MemoryGauge extends Component {
 
 export default connect(
   state => ({
-    cpuGauge: state.metricsReducer.cpuGauge,
+    memoryGauge: state.metricsReducer.memoryGauge,
   }),
   null
 )(MemoryGauge);

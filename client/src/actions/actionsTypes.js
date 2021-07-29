@@ -20,6 +20,7 @@ export const CUSTOM_QUERY = 'CUSTOM_QUERY'
 export const ALL_PROMQL = 'ALL_PROMQL'
 export const HYDRATE_CUSTOM = 'HYDRATE_CUSTOM'
 export const DELETE_CUSTOM = 'DELETE_CUSTOM'
+export const MOVE_DND = 'MOVE_DND'
 
 //Alerts
 export const RECEIVE_ALERTS = 'RECEIVE_ALERTS'
