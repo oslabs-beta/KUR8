@@ -18,13 +18,18 @@ export class PodByNamespace extends Component {
         config: {
             type: 'bar',
             "title": {
-                "text": "Number of Pods by Namespace",
+                "text": "Number of Pods Not Ready Per Namespace",
                 "font-color": "black",
                 "backgroundColor": "none",
                 "font-size": "22px",
+                "alpha": 1,
+                "adjust-layout": true,
             },
-            plot: {
+            "plot": {
               'border-radius': "9px", /* Rounded Corners */
+            },
+            "plotarea": {
+                "margin": "dynamic"
             },
             'scale-x': {
                 label: { /* Scale Title */
@@ -50,9 +55,9 @@ export class PodByNamespace extends Component {
               "crosshair-x": {
                 "line-width": "100%",
                 "alpha": 0.18,
-                "plot-label": {
-                  "header-text": "%kv Pod"
-                }
+                // "plot-label": {
+                // //   "header-text": "%kv Pod"
+                // }
               },
             series: [{
                 values: this.seriesFormat(),
@@ -60,6 +65,7 @@ export class PodByNamespace extends Component {
                 "borderRadiusTopLeft": 7,
                 alpha: 0.3, /* Transparency (more transparent) */
               },
+              
             ]
         }
       }

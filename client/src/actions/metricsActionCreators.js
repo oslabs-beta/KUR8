@@ -101,6 +101,16 @@ export const numOfPodPerNamespace = data => {
   }
 }
 
+
+export const numOfPodNotReady = data => {
+  return {
+    type: actionTypes.FETCH_POD_NOT_READY,
+    payload: data,
+  }
+}
+
+
+
 const metricsActionCreators = [
   fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph
@@ -112,6 +122,7 @@ const metricsActionCreators = [
   fetchHTTPRequest,
   fetchCPUContainer,
   numOfPodPerNamespace,
+  numOfPodNotReady
 ];
 
 export const metricsEndpointArray = (query, start, end, step) => [
@@ -135,9 +146,12 @@ export const metricsEndpointArray = (query, start, end, step) => [
 
   `http://localhost:9090/api/v1/query_range?query=topk(5,%20rate(container_cpu_usage_seconds_total[5m]))&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`,
 
-  // `http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_info)&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`,
+  // `http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_info)&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=24h`,
 
-  `http://localhost:9090/api/v1/query?query=sum%20by%20(namespace)%20(kube_pod_info)&time=${new Date().toISOString()}`
+  `http://localhost:9090/api/v1/query?query=sum%20by%20(namespace)%20(kube_pod_info)&time=${new Date().toISOString()}`,
+
+  `http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`
+
 ];
 
 //on page load, call to metricsFetchdata, take url on line 31, create promises with values being map to the link, (data from each link); resolve promises and dispath action creator on line 25 to the corresopnding result in the URLl; which send it over to the reducers
