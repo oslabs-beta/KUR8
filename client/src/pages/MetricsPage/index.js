@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 // import CounterChart from '../../components/Charts/CounterChart';
 // import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
-import MemoryGauge from '../../components/Charts/MemoryGauge';
+import MemoryGauge from '../../components/Charts/MemoryNode';
 import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
@@ -15,6 +15,7 @@ import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
 import CPUContainer from '../../components/Charts/CPUContainer';
 import PodByNamespace from '../../components/Charts/PodByNamespace';
 import PodsNotReady from '../../components/Charts/PodsNotReady';
+import MemoryNode from '../../components/Charts/MemoryNode';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -115,9 +116,13 @@ function MetricsPage({ cpuGauge }) {
           <PodsNotReady />
         </Paper>
       </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <MemoryNode />
+        </Paper>
+      </Grid>
     </Grid>
-
-
   );
 }
 

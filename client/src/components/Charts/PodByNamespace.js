@@ -1,13 +1,13 @@
 //sum by (namespace) (kube_pod_info)
 
 import React, { Component } from 'react';
-// import 'zingchart/es6';
+import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
 
 // EXPLICITLY IMPORT MODULE from node_modules
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+import 'zingchart/modules-es6/zingchart-maps.min.js';
+import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 //http://localhost:9090/api/v1/query?query=sum%20by%20(namespace)%20(kube_pod_info)&time=2021-07-28T01:53:02.662Z
 
