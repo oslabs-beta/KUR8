@@ -132,9 +132,9 @@ export const metricsEndpointArray = (query, start, end, step) => [
 
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
 
-   `http://localhost:9090/api/v1/query_range?query=rate(node_cpu_seconds_total{mode="system"}[1m])&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
+   `http://localhost:9090/api/v1/query_range?query=sum by (cpu) (rate(node_cpu_seconds_total{mode="system"}[1m]))&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=5m`,
    
-  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=30s`,
+  `http://localhost:9090/api/v1/query_range?query=rate(node_network_receive_bytes_total[1m])&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=5m`,
 
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_cpu_seconds_total[1m]))%20*%20100)`,
 
