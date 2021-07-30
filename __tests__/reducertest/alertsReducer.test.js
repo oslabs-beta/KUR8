@@ -4,7 +4,7 @@ const alertsReducer = require('../../client/src/reducers/alertsReducer');
 describe('alertsreducer', () => {
   let initialState;
   const fakeAction = { type: 'NOT_A_REAL_ACTION' };
-
+  
   beforeEach(() => {
     initialState = {
       alertGroups: [],
@@ -12,12 +12,12 @@ describe('alertsreducer', () => {
   });
 
   it('should provide a default state', () => {
-    const result = alertsReducer(undefined, fakeAction);
+    const result = alertsReducer.default(undefined, fakeAction);
     expect(result).toEqual(initialState);
   });
 
-  it('should return the same state object for unrecognized actions', () => {docker
-    const result = alertsReducer(initialState, fakeAction);
+  it('should return the same state object for unrecognized actions', () => {
+    const result = alertsReducer.default(initialState, fakeAction);
     expect(result).toBe(initialState);
   });
 
@@ -28,22 +28,23 @@ describe('alertsreducer', () => {
       action = {
         type: 'RECEIVE_ALERTS',
         payload: {
-          status: 'success',
           data: {
-            groups: [],
-          },
+            status: 'success',
+            data: {
+              groups: [],
+            },
+          }
         },
       };
     });
 
     it('should list all alerts in alertGroups', () => {
-      const result = alertsReducer(initialState, action);
-      console.log(result);
+      const result = alertsReducer.default(initialState, action);
       expect(result).toHaveProperty('alertGroups', []);
     });
 
     it('should return a new state object', () => {
-      const result = alertsReducer(initialState, action);
+      const result = alertsReducer.default(initialState, action);
       expect(result).not.toBe(initialState);
     });
   });
