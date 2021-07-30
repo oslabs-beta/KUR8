@@ -14,9 +14,36 @@ class QueryCpuRangeChart extends Component {
         type: 'area',
         plot: {
           stacked: true,
-          marker: {
-            visible: false,
+            "line-width": 2,
+            "marker": {
+              "size": 1,
+              "visible": false
+            },
+            "tooltip": {
+              "font-family": "Roboto",
+              "font-size": "15px",
+              "text": "There were %v %t on %data-days",
+              "text-align": "left",
+              "border-radius": 5,
+              "padding": 10
+            },
+            marker: {
+              visible: false,
           },
+        },
+        "plotarea": {
+          "margin-top": "10%",
+          "margin-right": "dynamic",
+          "margin-bottom": "dynamic",
+          "margin-left": "dynamic",
+          "adjust-layout": true
+        },
+        "crosshair-x": {
+          "line-color": "#fff",
+          "line-width": 1,
+          "plot-label": {
+            "visible": false
+          }
         },
         title: {
           text: 'The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)',
@@ -45,6 +72,7 @@ class QueryCpuRangeChart extends Component {
     );
   }
 }
+
 
 export default connect(
   state => ({

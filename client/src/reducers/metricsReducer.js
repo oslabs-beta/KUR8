@@ -12,6 +12,7 @@ const initialState = {
   cpuContainerData: [],
   allPromQL: [],
   podPerNamespace: [],
+  podNotReady: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -185,10 +186,23 @@ function metricsReducer(state = initialState, action) {
      resultPodPerNamespace.forEach((namespace, index) => {
       podNamespaceContainer.push([
          namespace.metric.namespace,
-         namespace.values[1],
+         namespace.value[1],
        ]);
      });
      return { ...state, podPerNamespace: podNamespaceContainer };
+
+   case actionsTypes.FETCH_POD_NOT_READY:
+     let resultNotReadyPod = payload.data.data.result;
+
+     let podNotWorking = [];
+     resultNotReadyPod.forEach((namespace, index) => {
+       
+      podNotWorking.push([
+         namespace.metric.namespace,
+         namespace.values,
+       ]);
+     });
+     return { ...state, podNotReady: podNotWorking };
 
     default:
       return state;
