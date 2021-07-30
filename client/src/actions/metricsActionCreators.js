@@ -138,7 +138,7 @@ export const metricsEndpointArray = (query, start, end, step) => [
 
   `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_cpu_seconds_total[1m]))%20*%20100)`,
 
-  `http://localhost:9090/api/v1/query?query=100%20-%20(avg%20by%20(instance)%20(rate(node_memory_seconds_total[1m]))%20*%20100)`,
+  `http://localhost:9090/api/v1/query_range?query=sum(container_memory_usage_bytes)%20by%20(node)&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`,
 
   `http://localhost:9090/api/v1/query_range?query=kubelet_http_requests_total&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=1m`,
 
