@@ -78,6 +78,8 @@ const useStyles = makeStyles(theme => ({
 function Pod({ containers, metadata, spec, status, clusterIP }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  let containersObj = {};
+  let podName;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,6 +87,18 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // Create a containersObj to spread into PodTable props.
+  containers.forEach(container => {
+    Object.entries(container).forEach(entry => {
+      const [key, value] = entry;
+      podName = key;
+      containersObj = {
+        ...containersObj,
+        [key]: value,
+      };
+    });
+  });
 
   return (
     <Grid item>
@@ -100,7 +114,7 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
           </Tooltip>
           <Tooltip disableFocusListener placement="left" title="More Info">
             <div className={classes.containersShape} onClick={handleClickOpen}>
-              {containers.list.length}
+              {containers.length}
             </div>
           </Tooltip>
           <Dialog
@@ -108,7 +122,7 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
             aria-labelledby="customized-dialog-title"
             open={open}>
             <MuiDialogTitle disableTypography className={classes.dialogTitle}>
-              <Typography variant="h6">{containers.list[0].name}</Typography>
+              <Typography variant="h6">{containers.length > 1 ? 'POD DETAILS' : podName}</Typography>
               <IconButton
                 aria-label="close"
                 className={classes.closeButton}
@@ -121,7 +135,7 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
                 metadata={metadata}
                 spec={spec}
                 status={status}
-                containers={containers}
+                {...containersObj}
               />
             </MuiDialogContent>
             <MuiDialogActions>
@@ -134,7 +148,7 @@ function Pod({ containers, metadata, spec, status, clusterIP }) {
         </div>
       </div>
       <Typography className={classes.podName} as="body1">
-        {containers.list[0].name}
+        {containers.length > 1 ? null : podName}
       </Typography>
     </Grid>
   );
