@@ -7,10 +7,12 @@ const initialState = {
   cpuGauge: [],
   cpuRangeChart: [],
   customDataArray: [],
-  memoryGauge: [],
+  memoryNode: [],
   httpRequestData: [],
   cpuContainerData: [],
   allPromQL: [],
+  podPerNamespace: [],
+  podNotReady: [],
 };
 
 function metricsReducer(state = initialState, action) {
@@ -103,15 +105,14 @@ function metricsReducer(state = initialState, action) {
    case actionsTypes.FETCH_MEMORY_NODE:
      let resultMemory = payload.data.data.result;
 
-     let Memorydata = [];
+     let memoryNode = [];
      resultMemory.forEach((node, index) => {
-       Memorydata.push([
-         node.metric.instance,
-         `Node ${index + 1}`,
-         node.value[1],
+       memoryNode.push([
+         node.metric.node,
+         node.values,
        ]);
      });
-     return { ...state, memoryGauge: Memorydata };
+     return { ...state, memoryNode: memoryNode };
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
@@ -155,6 +156,7 @@ function metricsReducer(state = initialState, action) {
        cpuContainer.push([
          container.metric.id,
          container.values,
+         container.metric.node,
        ]);
      });
      return { ...state, cpuContainer: cpuContainer };
@@ -176,9 +178,35 @@ function metricsReducer(state = initialState, action) {
         console.log('moving in reducer')
         return { ...state, customDataArray: payload };
 
+   case actionsTypes.FETCH_NUM_POD_NAMESPACE:
+     let resultPodPerNamespace = payload.data.data.result;
+
+     let podNamespaceContainer = [];
+     resultPodPerNamespace.forEach((namespace, index) => {
+      podNamespaceContainer.push([
+         namespace.metric.namespace,
+         namespace.value[1],
+       ]);
+     });
+     return { ...state, podPerNamespace: podNamespaceContainer };
+
+   case actionsTypes.FETCH_POD_NOT_READY:
+     let resultNotReadyPod = payload.data.data.result;
+
+     let podNotWorking = [];
+     resultNotReadyPod.forEach((namespace, index) => {
+       
+      podNotWorking.push([
+         namespace.metric.namespace,
+         namespace.values,
+       ]);
+     });
+     return { ...state, podNotReady: podNotWorking };
+
     default:
       return state;
   }
 }
 
 export default metricsReducer;
+

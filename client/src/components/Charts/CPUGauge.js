@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import 'zingchart/es6';
+// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
 
 // EXPLICITLY IMPORT MODULE from node_modules
-import 'zingchart/modules-es6/zingchart-maps.min.js';
-import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+// import 'zingchart/modules-es6/zingchart-maps.min.js';
+// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class CPUGauge extends Component {
   constructor(props) {
@@ -137,7 +137,7 @@ export class CPUGauge extends Component {
             <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
             <option disabled>Select Node</option>
             {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]-node[0]}>{node[1]-node[0]}</option>;
+              return <option key={`note-options-${index}`} value={node[1]}>{node[0]}</option>;
             })}
           </select>
         </div>
