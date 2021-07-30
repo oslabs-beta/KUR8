@@ -10,6 +10,7 @@ class QueryCpuRangeChart extends Component {
   constructor(props) {
     super(props);
     console.log('this.props.cpuRangeChart',this.props.cpuRangeChart)
+    this.dataFormat();
     this.state = {
       config: {
         "globals": {
@@ -17,7 +18,7 @@ class QueryCpuRangeChart extends Component {
         },
         "graphset": [{
           "type": "area",
-          "background-color": "#fff",
+          // "background-color": "#fff",
           "utc": true,
           "title": {
             "y": "15px",
@@ -85,21 +86,20 @@ class QueryCpuRangeChart extends Component {
               "font-color": "#05636c"
             },
             "zooming": 1,
-            "max-labels": 12,
-            "labels": [
-              "Sept<br>19",
-              "Sept<br>20",
-              "Sept<br>21",
-              "Sept<br>22",
-              "Sept<br>23",
-              "Sept<br>24",
-              "Sept<br>25",
-              "Sept<br>26",
-              "Sept<br>27",
-              "Sept<br>28",
-              "Sept<br>29",
-              "Sept<br>30"
-            ],
+            // "labels": [
+            //   "Sept<br>19",
+            //   "Sept<br>20",
+            //   "Sept<br>21",
+            //   "Sept<br>22",
+            //   "Sept<br>23",
+            //   "Sept<br>24",
+            //   "Sept<br>25",
+            //   "Sept<br>26",
+            //   "Sept<br>27",
+            //   "Sept<br>28",
+            //   "Sept<br>29",
+            //   "Sept<br>30"
+            // ],
             "max-items": 12,
             "items-overlap": true,
             "guide": {
@@ -117,13 +117,12 @@ class QueryCpuRangeChart extends Component {
             }
           },
           "scale-y": {
-            "values": "0:2500:500",
             "item": {
               "font-color": "#05636c",
               "font-weight": "normal"
             },
             "label": {
-              "text": "Metrics",
+              "text": "CPU Range Data",
               "font-size": "14px"
             },
             "guide": {
@@ -141,124 +140,13 @@ class QueryCpuRangeChart extends Component {
             "tooltip": {
               "font-family": "Roboto",
               "font-size": "15px",
-              "text": "There were %v %t on %data-days",
+              "text": `%t value is %v`,
               "text-align": "left",
               "border-radius": 5,
               "padding": 10
             }
           },
-          "series": [{
-              "values": [
-                1204,
-                1179,
-                1146,
-                1182,
-                1058,
-                1086,
-                1141,
-                1105,
-                1202,
-                992,
-                373,
-                466
-              ],
-              "data-days": [
-                "Sept 19",
-                "Sept 20",
-                "Sept 21",
-                "Sept 22",
-                "Sept 23",
-                "Sept 24",
-                "Sept 25",
-                "Sept 26",
-                "Sept 27",
-                "Sept 28",
-                "Sept 29",
-                "Sept 30"
-              ],
-              "line-color": "#fc8d62",
-              "aspect": "spline",
-              "background-color": "#fc8d62",
-              "alpha-area": ".5",
-              "font-family": "Roboto",
-              "font-size": "14px",
-              "text": "returns"
-            },
-            {
-              "values": [
-                1625,
-                1683,
-                1659,
-                1761,
-                1904,
-                1819,
-                1631,
-                1592,
-                1498,
-                1594,
-                1782,
-                1644
-              ],
-              "data-days": [
-                "Sept 19",
-                "Sept 20",
-                "Sept 21",
-                "Sept 22",
-                "Sept 23",
-                "Sept 24",
-                "Sept 25",
-                "Sept 26",
-                "Sept 27",
-                "Sept 28",
-                "Sept 29",
-                "Sept 30"
-              ],
-              "line-color": "#66c2a5",
-              "background-color": "#66c2a5",
-              "alpha-area": ".3",
-              "text": "clicks",
-              "aspect": "spline",
-              "font-family": "Roboto",
-              "font-size": "14px"
-            },
-            {
-              "values": [
-                314,
-                1395,
-                1292,
-                1259,
-                1269,
-                1132,
-                1012,
-                1082,
-                1116,
-                1039,
-                1132,
-                1227
-              ],
-              "data-days": [
-                "Sept 19",
-                "Sept 20",
-                "Sept 21",
-                "Sept 22",
-                "Sept 23",
-                "Sept 24",
-                "Sept 25",
-                "Sept 26",
-                "Sept 27",
-                "Sept 28",
-                "Sept 29",
-                "Sept 30"
-              ],
-              "line-color": "#8da0cb",
-              "background-color": "#8da0cb",
-              "aspect": "spline",
-              "alpha-area": "0.2",
-              "text": "visitors",
-              "font-family": "Roboto",
-              "font-size": "14px"
-            }
-          ]
+          "series": this.dataFormat()
         }]
       }
     };
@@ -270,6 +158,9 @@ class QueryCpuRangeChart extends Component {
     let valueObj = {};
     let values = [];
     let dataTime = [];
+    let timeValue;
+    let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
+
     for (let i = 0; i < dataLength; i++) {
       timeValue = this.props.cpuRangeChart[i][1];
 
@@ -281,9 +172,9 @@ class QueryCpuRangeChart extends Component {
       valueObj = {
         "values": values,
         "dataTime": dataTime,
-        "line-color": "#fc8d62",
+        "line-color": lineColor[i % lineColor.length],
         "aspect": "spline",
-        "background-color": "#fc8d62",
+        "background-color": lineColor[i % lineColor.length],
         "alpha-area": ".5",
         "font-family": "Roboto",
         "font-size": "14px",
@@ -297,6 +188,11 @@ class QueryCpuRangeChart extends Component {
     }
     console.log('refactor', outerContainer);
     return outerContainer;
+  }
+
+  labelFormat = () => {
+    const labelContainer = [];
+
   }
 
 
