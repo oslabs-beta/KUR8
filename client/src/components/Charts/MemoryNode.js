@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import 'zingchart/modules-es6/zingchart-maps.min.js';
 import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
-export class CPUContainer extends Component {
+export class MemoryNode extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ export class CPUContainer extends Component {
             type: "line",
             "utc": true,
             "title": {
-              "text": "CPU Usage by Container",
+              "text": "Kubernetes Node Memory Usage",
               "font-size": "24px",
               "adjust-layout": true
             },
@@ -78,7 +78,7 @@ export class CPUContainer extends Component {
                 "line-style": "dashed"
               },
               "label": {
-                "text": "CPU Usage",
+                "text": "Memory Usage",
               },
               "minor-ticks": 0,
               "thousands-separator": ","
@@ -124,11 +124,11 @@ export class CPUContainer extends Component {
     };
 
     this.chartDone = this.chartDone.bind(this);
-    console.log('cpuContainerData', this.props.cpuContainer)
+    console.log('memoryNode', this.props.memoryNode)
   }
 
   findMax = () => {
-    let data = this.props.cpuContainer;
+    let data = this.props.memoryNode;
     let maximumVal = -Infinity;
     let dataVal;
 
@@ -147,7 +147,7 @@ export class CPUContainer extends Component {
   }
 
   findMin = () => {
-    let data = this.props.cpuContainer;
+    let data = this.props.memoryNode;
     let minimumVal = Infinity;
     let dataVal;
 
@@ -167,7 +167,7 @@ export class CPUContainer extends Component {
 
 
   stateFormat = () => {
-      let pathLength = this.props.cpuContainer.length;
+      let pathLength = this.props.memoryNode.length;
 
       let outerContainer = [];
       let eachData = [];
@@ -177,7 +177,7 @@ export class CPUContainer extends Component {
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
-          value = this.props.cpuContainer[i][1];
+          value = this.props.memoryNode[i][1];
 
 
           for (let j = 0; j < value.length; j++) {
@@ -189,7 +189,7 @@ export class CPUContainer extends Component {
 
           seriesObj = {
             "values": eachData,
-            "text": `${this.props.cpuContainer[i][0]}-${this.props.cpuContainer[i][2]}`,
+            "text": `${this.props.memoryNode[i][0]}`,
             "line-color": lineColor[i % lineColor.length],
             "legend-item": {
               "background-color": lineColor[i % lineColor.length],
@@ -232,7 +232,7 @@ export class CPUContainer extends Component {
 
 export default connect(
   state => ({
-    cpuContainer: state.metricsReducer.cpuContainer,
+    memoryNode: state.metricsReducer.memoryNode,
   }),
   null
-)(CPUContainer);
+)(MemoryNode);

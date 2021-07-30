@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-// import 'zingchart/es6';
+import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+import 'zingchart/modules-es6/zingchart-maps.min.js';
+import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class TotalHTTPRequest extends Component {
   constructor(props) {
