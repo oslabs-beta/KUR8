@@ -16,7 +16,7 @@ describe('alertsreducer', () => {
     expect(result).toEqual(initialState);
   });
 
-  it('should return the same state object for unrecognized actions', () => {
+  it('should return the same state object for unrecognized actions', () => {docker
     const result = alertsReducer(initialState, fakeAction);
     expect(result).toBe(initialState);
   });
