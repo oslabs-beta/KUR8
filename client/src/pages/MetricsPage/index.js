@@ -97,7 +97,7 @@ function MetricsPage({ cpuGauge }) {
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <PodsNotReady />
+          {/* <PodsNotReady /> */}
         </Paper>
       </Grid>
 
