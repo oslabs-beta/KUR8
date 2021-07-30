@@ -68,22 +68,17 @@ function metricsReducer(state = initialState, action) {
      return { ...state, queryrangecharts: queryrangechartsArray };
 
    case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
-    //  console.log('this is in RECEIVE_CPU_QUERY_RANGE', payload.data);
-     let cpuRangeChart = [];
-     payload.data.data.result.forEach(el => {
-       const xcpurange = [];
-       const ycpurange = [];
-       el.values.forEach(element => {
-         xcpurange.push(element[0]);
-         ycpurange.push(element[1]);
-       });
-       el.xcpurange = xcpurange;
-       el.ycpurange = ycpurange;
-       //el.metrics has the title of each line
+    let resultCpuRange = payload.data.data.result;
 
-       cpuRangeChart.push(el);
-     });
-     return { ...state, cpuRangeChart: cpuRangeChart };
+    let CPURange = [];
+    resultCpuRange.forEach((cpu, index) => {
+      CPURange.push([
+        `CPU ${cpu.metric.cpu}`,
+        cpu.values,
+      ]);
+    });
+    return { ...state, cpuRangeChart: CPURange };
+
 
    case actionsTypes.FETCH_CPU_NODE:
      //create action/actionCreator first; use payload.data to manipulate the data; //array of 3 arrays, each for 1 node;
