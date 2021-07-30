@@ -7,7 +7,7 @@ const initialState = {
   cpuGauge: [],
   cpuRangeChart: [],
   customDataArray: [],
-  memoryGauge: [],
+  memoryNode: [],
   httpRequestData: [],
   cpuContainerData: [],
   allPromQL: [],
@@ -105,15 +105,14 @@ function metricsReducer(state = initialState, action) {
    case actionsTypes.FETCH_MEMORY_NODE:
      let resultMemory = payload.data.data.result;
 
-     let Memorydata = [];
+     let memoryNode = [];
      resultMemory.forEach((node, index) => {
-       Memorydata.push([
-         node.metric.instance,
-         `Node ${index + 1}`,
-         node.value[1],
+       memoryNode.push([
+         node.metric.node,
+         node.values,
        ]);
      });
-     return { ...state, memoryGauge: Memorydata };
+     return { ...state, memoryNode: memoryNode };
 
   case actionsTypes.CUSTOM_QUERY:
     console.log('here in custom query reducer')
