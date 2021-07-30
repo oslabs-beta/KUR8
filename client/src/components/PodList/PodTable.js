@@ -23,34 +23,45 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PodTable({ metadata, spec, status }) {
+export default function PodTable(props) {
   const classes = useStyles();
-  const statusRows = [];
-  const specRows = [];
-  const metadataRows = [];
-  const rowHeads = [];
+  const headNames = ['metadata', 'spec', 'status'];
+  const rowNames = [];
+  const rowData = [];
+  const rowsArray = [];
 
-  const rowNames = ['metadata', 'spec', 'status'];
-  const rowsArray = [metadataRows, specRows, statusRows];
+  // Iterate over all the passed down props
+  Object.entries(props).forEach(entry => {
+    const [key, value] = entry;
+    rowNames.push(key);
+    rowData.push(value);
+  });
 
-  // makeHeads receives an array of strings in order to produce an array of TableHead components.
-  const makeHeads = strArray => {
-    strArray.map(rowName =>
-      rowHeads.push(
-        <TableRow>
-          <TableCell className={classes.tableCellCatagory}>
-            {rowName.toUpperCase()}
-          </TableCell>
-        </TableRow>
-      )
+  // Produce an array of TableHead components from the rowNames array.
+  const rowHeads = rowNames.map(rowName => {
+    // If there are any containers, add the 'CONTAINER' string to the TableCell header.
+    let isContainer = !headNames.includes(rowName);
+    return (
+      <TableRow>
+        <TableCell className={classes.tableCellCatagory}>
+          {isContainer
+            ? `${rowName.toUpperCase()} CONTAINER`
+            : rowName.toUpperCase()}
+        </TableCell>
+      </TableRow>
     );
-  };
+  });
 
-  // makeRows receives a state object and an empty array.
-  // It iterates over the state object to produce an array of TableRow components.
-  const makeRows = (dataObj, rowArray) => {
-    for (const [key, value] of Object.entries(dataObj)) {
-      rowArray.push(
+  // Create an array of TableRow components from each data object.
+  // Each data object corresponds to table section.
+  rowData.forEach(dataObj => {
+    let temp = [];
+
+    Object.entries(dataObj).forEach(entry => {
+      const [key, value] = entry;
+      // Remove non-primitive values, since they wont render within a TableCell correctly.
+      if (typeof value === 'object') return;
+      temp.push(
         <TableRow key={`pod-row-${key}`}>
           <TableCell
             component="th"
@@ -59,19 +70,15 @@ export default function PodTable({ metadata, spec, status }) {
             {key}
           </TableCell>
           <TableCell align="left" className={classes.tableCellItem}>
-            {value}
+            {String(value)}
           </TableCell>
         </TableRow>
       );
-    }
-    return;
-  };
-
-  // The helper functions above are used here to produce all elements needed to construct the Table.
-  makeHeads(rowNames);
-  makeRows(metadata, metadataRows);
-  makeRows(spec, specRows);
-  makeRows(status, statusRows);
+    });
+    // Construct an larger array of arrays
+    rowsArray.push(temp);
+    temp = [];
+  });
 
   return (
     <TableContainer>
