@@ -9,7 +9,13 @@
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
     "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
     "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/",
-    "test": "jest"
+    "test": "jest",
+    "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!test-component).+\\.js$"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -26,7 +32,6 @@
     "express": "^4.17.1",
     "highcharts": "^9.1.2",
     "highcharts-react-official": "^3.0.0",
-    "jest": "^27.0.6",
     "moment": "^2.29.1",
     "mongodb": "^4.0.0",
     "mongoose": "^5.13.3",
@@ -46,14 +51,19 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.6",
     "mini-css-extract-plugin": "^1.6.0",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
