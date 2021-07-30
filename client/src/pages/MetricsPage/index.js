@@ -14,6 +14,7 @@ import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
 import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
 import CPUContainer from '../../components/Charts/CPUContainer';
 import PodByNamespace from '../../components/Charts/PodByNamespace';
+import PodsNotReady from '../../components/Charts/PodsNotReady';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '512px',
+    height: '622px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -78,11 +79,11 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-      {/* <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <CPUGauge cpuGauge={cpuGauge} />
         </Paper>
-      </Grid> */}
+      </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
@@ -96,7 +97,7 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-       {/* <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <MemoryGauge />
         </Paper>
@@ -107,7 +108,16 @@ function MetricsPage({ cpuGauge }) {
           <PodByNamespace />
         </Paper>
       </Grid>
+
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          <PodsNotReady />
+        </Paper>
+      </Grid>
     </Grid>
+
+
   );
 }
 
