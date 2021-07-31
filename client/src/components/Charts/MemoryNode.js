@@ -116,7 +116,7 @@ export class MemoryNode extends Component {
               "animation": {
                 "effect": 1,
                 "sequence": 2,
-                "speed": 1000,
+                "speed": 100000,
               }
             },
             "series": this.stateFormat()
