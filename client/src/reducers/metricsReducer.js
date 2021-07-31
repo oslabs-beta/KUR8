@@ -50,22 +50,17 @@ function metricsReducer(state = initialState, action) {
      return { ...state, querycharts: querychartsArray };
 
    case actionsTypes.RECEIVE_QUERY_RANGE:
-    //  console.log('this is in RECEIVE_QUERY_RANGE', payload.data);
-     let queryrangechartsArray = [];
-     payload.data.data.result.forEach(el => {
-       const xqueryrange = [];
-       const yqueryrange = [];
-       // console.log('RECEIVE_QUERY_RANGE',el)
-       el.values.forEach(element => {
-         xqueryrange.push(Math.floor(element[0]));
-         yqueryrange.push(Math.floor(element[1]));
-       });
-       el.xqueryrange = xqueryrange;
-       el.yqueryrange = yqueryrange;
-       //el.metrics has the title of each line
-       queryrangechartsArray.push(el);
-     });
-     return { ...state, queryrangecharts: queryrangechartsArray };
+    let resultRange = payload.data.data.result;
+
+    let range = [];
+    resultRange.forEach((device, index) => {
+      range.push([
+        device.metric.device,
+        device.values,
+      ]);
+    });
+    return { ...state, querycharts: range };
+
 
    case actionsTypes.RECEIVE_CPU_QUERY_RANGE:
     let resultCpuRange = payload.data.data.result;
