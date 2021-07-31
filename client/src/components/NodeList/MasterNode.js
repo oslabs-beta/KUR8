@@ -12,7 +12,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import MasterNodeTable from './MasterNodeTable';
+import ModalTable from './ModalTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -110,7 +110,7 @@ function MasterNode({ name, nodeData }) {
               </Grid>
             </MuiDialogTitle>
             <MuiDialogContent dividers>
-              <MasterNodeTable nodeData={nodeData} />
+              <ModalTable nodeData={nodeData} />
             </MuiDialogContent>
             <MuiDialogActions>
               <Button autoFocus onClick={handleClose} color="primary">

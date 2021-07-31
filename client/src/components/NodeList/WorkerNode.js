@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import PodList from '../PodList';
-import WorkerNodeTable from './WorkerNodeTable';
+import ModalTable from './ModalTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -87,7 +87,7 @@ function WorkerNode({ pods, metadata, services, nodeData }) {
           </IconButton>
         </MuiDialogTitle>
         <MuiDialogContent dividers>
-          <WorkerNodeTable nodeData={nodeData} />
+          <ModalTable nodeData={nodeData} />
         </MuiDialogContent>
         <MuiDialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
