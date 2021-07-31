@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  input: {
+    height: 50
+  }
 }));
 
 function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCustom }) {
@@ -64,8 +67,8 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   };
 
   const handleQueryChange = (e, selectedObject) => {
-    if (selectedObject !== null)
-        setQuery(selectedObject)
+    console.log(e.target.value, selectedObject)
+    setQuery(selectedObject)
   }
   
   const handleTitleChange = (event) => {
@@ -99,7 +102,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
+        <ListItem button>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Autocomplete
               id="autocomplete-query"
@@ -111,23 +114,16 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               options={allPromQL.map((option) => option)}
               renderOption={option => option}
               renderInput={(params) => (
-                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" />
+                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" className={classes.input}/>
               )}
             />
-            {/* <TextField
-              id="outlined-title"
-              label="Enter Chart Title"
-              value={title}
-              onChange={handleTitleChange}
-              multiline
-              variant="outlined"
-            /> */}
             <Select
               id="select-range"
               value={range}
               onChange={handleRangeChange}
               label="Choose a time range"
               variant="outlined"
+              className={classes.input}
             >
             <MenuItem value="Range">
             <em>Select a time range</em>
@@ -144,6 +140,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               onChange={handleStepChange}
               label="Choose a step interval"
               variant="outlined"
+              className={classes.input}
             >
               <MenuItem value="Step">
               <em>Select a step interval</em>
@@ -157,7 +154,8 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
             <Button
               type="submit"
               variant="outlined"
-              // className={classes.button}
+              className={classes.input}
+              style={{marginBottom:4}}
             >
               Submit
             </Button>
