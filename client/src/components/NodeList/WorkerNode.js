@@ -88,7 +88,7 @@ function WorkerNode({ pods, metadata, services, nodeData }) {
           </Button>
         </MuiDialogActions>
       </Dialog>
-      <PodList pods={pods} services={services} />
+      <PodList pods={pods ? pods : null} services={services} />
     </Paper>
   );
 }
