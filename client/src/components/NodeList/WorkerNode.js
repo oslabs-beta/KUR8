@@ -17,8 +17,15 @@ import WorkerNodeTable from './WorkerNodeTable';
 const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: '#f3f3f3',
-    padding: theme.spacing(5),
+    padding: theme.spacing(2),
+    width: '100%',
     margin: theme.spacing(1, 0),
+    '&:first-child': {
+      margin: theme.spacing(0, 0, 1),
+    },
+    '&:last-child': {
+      margin: theme.spacing(1, 0, 0),
+    },
   },
   chipNodeName: {
     cursor: 'pointer',

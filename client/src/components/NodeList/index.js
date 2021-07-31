@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -12,22 +13,23 @@ import WorkerNode from './WorkerNode';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding: theme.spacing(5, 0),
+    padding: theme.spacing(2),
   },
   masterContainer: {
     height: '100%',
   },
-  ingressContainer: {
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: theme.spacing(5, 0),
-    height: '50px',
-    width: '200px',
-    borderRadius: '25px',
-    boxShadow: theme.shadows[3],
+  masterNodesContainer: {
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0, 0, 3),
+    },
+  },
+  workerNodesContainer: {
+    [theme.breakpoints.down(1300)]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
 }));
 
@@ -84,13 +86,26 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
     return (
       <Paper className={classes.paper}>
         <Grid container direction="row">
-          <Grid item xs={3}>
+          <Grid
+            container
+            className={classes.masterNodesContainer}
+            direction="column"
+            justifyContent="space-between"
+            alignItems="center"
+            sm={12}
+            md={3}>
             <Grid
               container
-              direction="column"
-              justifyContent="center"
+              direction="row"
+              justifyContent="flex-start"
               alignItems="center">
-              <Ingress ingresses={ingresses} />
+              <Chip
+                variant="outlined"
+                size="large"
+                label="Cluster Environment"
+              />
+            </Grid>
+            <Grid item direction="row">
               {masterNodes.map(masterProps => (
                 <MasterNode
                   key={masterProps.metadata.uid}
@@ -101,10 +116,14 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
                 />
               ))}
             </Grid>
+            <Grid item direction="row">
+              <Ingress ingresses={ingresses} />
+            </Grid>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item sm={12} md={9}>
             <Grid
               container
+              className={classes.workerNodesContainer}
               direction="column"
               justifyContent="flex-start"
               alignItems="flex-start">
