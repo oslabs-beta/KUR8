@@ -17,26 +17,7 @@ import Select from '@material-ui/core/Select';
 import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerContainer: {
-    overflow: 'auto',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
   input: {
     height: 50
   }
@@ -83,7 +64,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
     setStep(event.target.value);
   };
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log( 'query:', query, 'range: ', range, 'step', step, 'title', title); 
     fetchCustomQuery(query, range, step, title);
