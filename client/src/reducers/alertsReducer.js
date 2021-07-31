@@ -19,5 +19,3 @@ function alertsReducer(state = initialState, action) {
 }
 
 export default alertsReducer;
-
-

@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-// import CounterChart from '../../components/Charts/CounterChart';
-// import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
 import MemoryGauge from '../../components/Charts/MemoryNode';
 import CPUGauge from '../../components/Charts/CPUGauge';
@@ -47,20 +45,6 @@ function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
-      {/* <Grid item xs={12} md={4}>
-        <Grid item>
-          <Paper className={classes.halfedTop}>
-            <CounterChart />
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper className={classes.halfedBottom}>
-            <GaugeChart />
-          </Paper>
-        </Grid>
-      </Grid> */}
-
-      {/* <CustomCharts customDataArray={customDataArray}/> */}
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
@@ -112,7 +96,7 @@ function MetricsPage({ cpuGauge }) {
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <PodsNotReady />
+          {/* <PodsNotReady /> */}
         </Paper>
       </Grid>
 

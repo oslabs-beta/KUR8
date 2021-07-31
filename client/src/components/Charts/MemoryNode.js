@@ -5,11 +5,11 @@
 //http://localhost:9090/api/v1/query_range?query=sum(container_memory_usage_bytes)%20by%20(node)&start=2021-07-29T01:27:12.276Z&end=2021-07-30T01:27:40.862Z&step=1m
 
 import React, { Component } from 'react';
-import 'zingchart/es6';
+// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
-import 'zingchart/modules-es6/zingchart-maps.min.js';
-import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+// import 'zingchart/modules-es6/zingchart-maps.min.js';
+// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class MemoryNode extends Component {
   constructor(props) {

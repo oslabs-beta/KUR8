@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import PodList from '../PodList';
-// import WorkerNodeTable from './WorkerNodeTable';
+import WorkerNodeTable from './WorkerNodeTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -88,7 +88,7 @@ function WorkerNode({ pods, metadata, services, nodeData }) {
           </Button>
         </MuiDialogActions>
       </Dialog>
-      <PodList pods={pods} services={services} />
+      <PodList pods={pods ? pods : null} services={services} />
     </Paper>
   );
 }
