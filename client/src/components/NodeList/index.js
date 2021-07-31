@@ -4,12 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 
-import Ingress from './Ingress';
+import SingleNode from './SingleNode';
 import MasterNode from './MasterNode';
-import Pod from '../PodList/Pod';
 import WorkerNode from './WorkerNode';
+import Ingress from './Ingress';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -17,6 +16,9 @@ const useStyles = makeStyles(theme => ({
   },
   masterContainer: {
     height: '100%',
+  },
+  ingressContainer: {
+    padding: theme.spacing(3, 0)
   },
   masterNodesContainer: {
     [theme.breakpoints.down('sm')]: {
@@ -54,31 +56,12 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
   // this will render all pods/containers within that node as the primary UI.
   if (!workerNodes.length) {
     return (
-      <Paper className={classes.paper} elevation={1}>
-        <Typography>Node</Typography>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center">
-          <Ingress ingresses={ingresses} />
-        </Grid>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center">
-          {pods.map((pod, index) => {
-            return (
-              <Pod
-                key={`pod-${index}`}
-                clusterIP={services[index].spec.clusterIP}
-                {...pod}
-              />
-            );
-          })}
-        </Grid>
-      </Paper>
+      <SingleNode
+        masterNodeData={masterNodes}
+        ingresses={ingresses}
+        services={services}
+        pods={pods}
+      />
     );
   } else {
     // Otherwise, the primary UI will be composed of masterNodes with multiple workerNodes,
@@ -101,7 +84,7 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
               alignItems="center">
               <Chip
                 variant="outlined"
-                size="large"
+                size="medium"
                 label="Cluster Environment"
               />
             </Grid>
@@ -116,7 +99,7 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
                 />
               ))}
             </Grid>
-            <Grid item direction="row">
+            <Grid item direction="row" className={classes.ingressContainer}>
               <Ingress ingresses={ingresses} />
             </Grid>
           </Grid>
