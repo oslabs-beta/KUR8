@@ -86,6 +86,12 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
+      <Grid item xs={12} md={4}>
+        <Paper className={classes.paper}>
+          <PodByNamespace />
+        </Paper>
+      </Grid>
+
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <TotalHTTPRequest />
@@ -103,13 +109,6 @@ function MetricsPage({ cpuGauge }) {
           <MemoryGauge />
         </Paper>
       </Grid>  */}
-
-    <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <PodByNamespace />
-        </Paper>
-      </Grid>
-
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>

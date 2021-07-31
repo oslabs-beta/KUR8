@@ -17,7 +17,7 @@ class QueryCpuRangeChart extends Component {
           "font-family": "Roboto"
         },
         "graphset": [{
-          "type": "area",
+          "type": "line",
           // "background-color": "#fff",
           "utc": true,
           "title": {
@@ -36,43 +36,7 @@ class QueryCpuRangeChart extends Component {
             "margin-left": "dynamic",
             "adjust-layout": true
           },
-          "labels": [{
-              "text": "Visitors: %plot-2-value",
-              "default-value": "",
-              "color": "#8da0cb",
-              "x": "20%",
-              "y": 50,
-              "width": 120,
-              "text-align": "left",
-              "bold": 0,
-              "font-size": "14px",
-              "font-weight": "bold"
-            },
-            {
-              "text": "Clicks: %plot-1-value",
-              "default-value": "",
-              "color": "#66c2a5",
-              "x": "45%",
-              "y": 50,
-              "width": 120,
-              "text-align": "left",
-              "bold": 0,
-              "font-size": "14px",
-              "font-weight": "bold"
-            },
-            {
-              "text": "Returns: %plot-0-value",
-              "default-value": "",
-              "color": "#fc8d62",
-              "x": "70%",
-              "y": 50,
-              "width": 120,
-              "text-align": "left",
-              "bold": 0,
-              "font-size": "14px",
-              "font-weight": "bold"
-            }
-          ],
+          "labels": this.labelFormat(),
           "scale-x": {
             "label": {
               "text": "Date Range",
@@ -100,7 +64,7 @@ class QueryCpuRangeChart extends Component {
             //   "Sept<br>29",
             //   "Sept<br>30"
             // ],
-            "max-items": 12,
+            // "max-items": 12,
             "items-overlap": true,
             "guide": {
               "line-width": "0px"
@@ -152,6 +116,7 @@ class QueryCpuRangeChart extends Component {
     };
   }
 
+
   dataFormat = () => {
     let outerContainer = [];
     let dataLength = this.props.cpuRangeChart.length;
@@ -192,8 +157,74 @@ class QueryCpuRangeChart extends Component {
 
   labelFormat = () => {
     const labelContainer = [];
+    let labelObj = {};
+    let dataLength = this.props.cpuRangeChart.length;
+    let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
 
+    const gap = Math.floor(100 / dataLength);
+    let start = 0;
+
+    for (let i = 0; i < dataLength; i++) {
+
+      labelObj = {
+        "text": `${this.props.cpuRangeChart[i][0]}: %plot-${i}-value`,
+        "default-value": "",
+        "color": lineColor[i % lineColor.length],
+        "x": `${start + gap}%`,
+        "y": 50,
+        "width": 140,
+        "text-align": "left",
+        "bold": 0,
+        "font-size": "12px",
+        "font-weight": "bold",
+        "layout": "float",
+        "adjust-layout": true,
+      }
+
+      start = start + gap;
+      labelContainer.push(labelObj);
+    }
+    return labelContainer;
   }
+
+  findMax = () => {
+    let data = this.props.cpuContainer;
+    let maximumVal = -Infinity;
+    let dataVal;
+
+    for (let i = 0; i < data.length; i++) {
+      dataVal = data[i][1];
+
+      for (let j = 0; j < dataVal.length; j++) {
+        if (dataVal[j][0] > maximumVal) {
+          maximumVal = dataVal[j][0];
+        }
+
+      }
+      
+    }
+    return maximumVal * 1000;
+  }
+
+  findMin = () => {
+    let data = this.props.cpuContainer;
+    let minimumVal = Infinity;
+    let dataVal;
+
+    for (let i = 0; i < data.length; i++) {
+      dataVal = data[i][1];
+
+      for (let j = 0; j < dataVal.length; j++) {
+        if (dataVal[j][0] < minimumVal) {
+          minimumVal = dataVal[j][0];
+        }
+
+      }
+      
+    }
+    return minimumVal * 1000;
+  }
+
 
 
   render() {

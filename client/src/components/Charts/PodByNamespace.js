@@ -18,7 +18,7 @@ export class PodByNamespace extends Component {
         config: {
             type: 'bar',
             "title": {
-                "text": "Number of Pods Not Ready Per Namespace",
+                "text": "Number of Pods Per Namespace",
                 "font-color": "black",
                 "backgroundColor": "none",
                 "font-size": "22px",
