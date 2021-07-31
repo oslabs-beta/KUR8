@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import NodeList from '../../components/NodeList'
+// import SearchBar from '../../components/SearchBar'
 
 const useStyles = makeStyles(theme => ({
   sampleStyle: {
@@ -14,6 +15,7 @@ export default function StructurePage() {
 
   return (
     <div>
+      {/* <SearchBar /> */}
       <NodeList />
     </div>
   );

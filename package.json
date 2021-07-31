@@ -13,6 +13,11 @@
     "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit"
   },
   "jest": {
+    "testEnvironment": "jsdom",
+    "verbose": true,
+    "globals": {
+      "window": {}
+    },
     "transformIgnorePatterns": [
       "/node_modules/(?!test-component).+\\.js$"
     ]
@@ -42,6 +47,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^16.14.0",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "uuid": "^8.3.2",
@@ -67,6 +73,7 @@
     "html-webpack-plugin": "^5.3.1",
     "jest": "^27.0.6",
     "mini-css-extract-plugin": "^1.6.0",
+    "redux-mock-store": "^1.5.4",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
     "supertest": "^6.1.4",
