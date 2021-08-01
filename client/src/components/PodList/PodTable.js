@@ -42,7 +42,7 @@ export default function PodTable(props) {
     // If there are any containers, add the 'CONTAINER' string to the TableCell header.
     let isContainer = !headNames.includes(rowName);
     return (
-      <TableRow>
+      <TableRow key={`row-${rowName}`}>
         <TableCell className={classes.tableCellCatagory}>
           {isContainer
             ? `${rowName.toUpperCase()} CONTAINER`
@@ -86,7 +86,7 @@ export default function PodTable(props) {
         {/* rowsArray is an array of arrays. */}
         {rowsArray.map((rows, index) => {
           return (
-            <>
+            <div key={`table-section-${index}`}>
               <TableHead className={classes.tableHead}>
                 {/* Include a single TableHead component for each collection of rows */}
                 {rowHeads[index]}
@@ -95,7 +95,7 @@ export default function PodTable(props) {
                 {/* Multiple TableRow elements */}
                 {rows}
               </TableBody>
-            </>
+            </div>
           );
         })}
       </Table>
