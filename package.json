@@ -7,10 +7,11 @@
     "start": "cross-env NODE_ENV=PRODUCTION nodemon ./server/index.js",
     "build": "cross-env NODE_ENV=PRODUCTION webpack",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
-    "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
+    "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 3068:3068\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
     "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/",
-    "test": "jest",
-    "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit"
+    "test": "jest --verbose",
+    "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit",
+    "cypress:open": "cypress open"
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -67,6 +68,7 @@
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
+    "cypress": "^8.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "file-loader": "^6.2.0",

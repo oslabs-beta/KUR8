@@ -58,21 +58,21 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={6}>
         <Paper className={classes.paper}>
           <HistogramChart />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <Paper className={classes.paper}>
+          <PodByNamespace />
         </Paper>
       </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <CPUGauge cpuGauge={cpuGauge} />
-        </Paper>
-      </Grid>
-
-      <Grid item xs={12} md={4}>
-        <Paper className={classes.paper}>
-          <PodByNamespace />
         </Paper>
       </Grid>
 
