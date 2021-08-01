@@ -82,7 +82,6 @@ class QueryRangeChart extends Component {
           "plot": {
             "line-width": 2,
             "marker": {
-              "size": 1,
               "visible": false
             },
             "tooltip": {
