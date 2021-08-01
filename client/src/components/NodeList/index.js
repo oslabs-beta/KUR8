@@ -13,12 +13,16 @@ import Ingress from './Ingress';
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey[900]
+        : theme.palette.grey[200],
   },
   masterContainer: {
     height: '100%',
   },
   ingressContainer: {
-    padding: theme.spacing(3, 0)
+    padding: theme.spacing(3, 0),
   },
   masterNodesContainer: {
     [theme.breakpoints.down('sm')]: {

@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,7 +19,11 @@ const useStyles = makeStyles(theme => ({
   tableCellCategory: {
     padding: '6px 0px 6px 12px',
     textAlign: 'left',
-    backgroundColor: theme.palette.grey[300],
+    border: 'none',
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.defaultDarkBackground
+        : theme.palette.common.defaultLightBackground,
   },
   tableCellItem: {
     padding: '6px 0px 6px 12px',

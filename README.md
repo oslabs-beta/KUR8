@@ -1,4 +1,8 @@
 # FTRI2-Crows-Nest
+[![Build Status](https://travis-ci.com/oslabs-beta/Kur8.svg?branch=dev)](https://travis-ci.com/oslabs-beta/Kur8)
+![Docker Pulls](https://img.shields.io/docker/pulls/kur8/dashboard)
+![GitHub](https://img.shields.io/github/license/oslabs-beta/Kur8)
+
 A visual overview of Kubernetes architecture and Prometheus metrics
 
 ---
