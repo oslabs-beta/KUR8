@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,18 +9,25 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles(theme => ({
   table: {
-    minWidth: 300,
+    minWidth: 600,
     border: 'none',
   },
   tableHead: {
     width: '100%',
   },
   tableCellCatagory: {
-    backgroundColor: theme.palette.grey[300],
+    border: 'none',
+    minWidth: '200px',
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.defaultDarkBackground
+        : theme.palette.grey[400],
   },
   tableCellItem: {
     borderBottom: 'none',
+    overflowWrap: 'anywhere',
   },
+  row: {},
 }));
 
 export default function ModalTable({ nodeData }) {
@@ -83,7 +90,7 @@ export default function ModalTable({ nodeData }) {
         {/* rowsArray is an array of arrays. */}
         {rowsArray.map((rows, index) => {
           return (
-            <div key={`table-section-${index}`}>
+            <div className={classes.row} key={`table-section-${index}`}>
               <TableHead className={classes.tableHead}>
                 {/* Include a single TableHead component for each collection of rows */}
                 {rowHeads[index]}

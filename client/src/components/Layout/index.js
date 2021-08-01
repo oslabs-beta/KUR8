@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.defaultDarkBackground
+        : theme.palette.grey[200],
   },
   drawerContainer: {
     overflow: 'auto',
@@ -34,13 +38,22 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey['A400']
+        : theme.palette.grey[300],
   },
 }));
 
-const Layout = ({ children, history, toggleDarkMode, darkMode}) => {
+const Layout = ({ children, history, toggleDarkMode, darkMode }) => {
   const classes = useStyles();
   const pages = ['Structure', 'Metrics', 'Custom', 'Alerts'];
-  const icons = [<LocationCityIcon />, <AvTimerIcon />, <BarChartIcon />, <NotificationsActiveIcon />];
+  const icons = [
+    <LocationCityIcon />,
+    <AvTimerIcon />,
+    <BarChartIcon />,
+    <NotificationsActiveIcon />,
+  ];
 
   return (
     <div className={classes.root}>
@@ -61,9 +74,7 @@ const Layout = ({ children, history, toggleDarkMode, darkMode}) => {
                 button
                 key={text}
                 onClick={() => history.push(`/${text.toLowerCase()}`)}>
-                <ListItemIcon>
-                  {icons[index]}
-                </ListItemIcon>
+                <ListItemIcon>{icons[index]}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}

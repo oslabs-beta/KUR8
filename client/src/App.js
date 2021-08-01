@@ -33,15 +33,16 @@ function App({ fetchData, metricsFetchData }) {
       createTheme({
         palette: {
           primary: {
-            main: '#540500',
-            light: '#86352b',
-            dark: '#320000',
-            contrastText: '#ffffff',
+            main: '#fff',
+            light: '#fff',
+            dark: '#b2b2b2',
+            contrastText: '#000',
+            accent: '#923f2e',
           },
           secondary: {
-            main: '#342636',
-            light: '#5e4e60',
-            dark: '#0e0010',
+            main: '#000',
+            light: '#333',
+            dark: '#000',
             contrastText: '#ffffff',
           },
           common: {
