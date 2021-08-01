@@ -57,6 +57,7 @@ function metricsReducer(state = initialState, action) {
       range.push([
         device.metric.device,
         device.values,
+        device.metric.pod,
       ]);
     });
     return { ...state, querycharts: range };
