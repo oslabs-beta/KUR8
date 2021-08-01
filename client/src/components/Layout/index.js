@@ -37,41 +37,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Layout = ({ children, history}) => {
+const Layout = ({ children, history, toggleDarkMode, darkMode}) => {
   const classes = useStyles();
   const pages = ['Structure', 'Metrics', 'Custom', 'Alerts'];
   const icons = [<LocationCityIcon />, <AvTimerIcon />, <BarChartIcon />, <NotificationsActiveIcon />];
-  
-  // if (location.pathname === '/')
-
-//   <Drawer
-//   className={classes.drawer}
-//   variant="permanent"
-//   classes={{
-//     paper: classes.drawerPaper,
-//   }}>
-//   <Toolbar />
-//   <div className={classes.drawerContainer}>
-//     <List>
-//       {['Structure', 'Metrics'].map((text, index) => (
-//         <ListItem
-//           button
-//           key={text}
-//           onClick={() => history.push(`/${text.toLowerCase()}`)}>
-//           <ListItemIcon>
-//             {index % 2 === 0 ? <LocationCityIcon /> : <AvTimerIcon />}
-//           </ListItemIcon>
-//           <ListItemText primary={text} />
-//         </ListItem>
-//       ))}
-//     </List>
-//   </div>
-// </Drawer>
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MyAppBar />
+      <MyAppBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       {/* {Display} */}
       <Drawer
         className={classes.drawer}
