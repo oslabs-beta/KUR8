@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 import IngressTable from './IngressTable';
 
@@ -39,6 +39,14 @@ const useStyles = makeStyles(theme => ({
     width: '200px',
     borderRadius: '25px',
     boxShadow: theme.shadows[3],
+    color:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.white
+        : theme.palette.common.black,
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey['A400']
+        : theme.palette.grey[100],
   },
 }));
 
