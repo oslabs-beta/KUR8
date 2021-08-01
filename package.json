@@ -9,7 +9,7 @@
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
     "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
     "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/",
-    "test": "jest",
+    "test": "jest --verbose",
     "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit"
   },
   "jest": {

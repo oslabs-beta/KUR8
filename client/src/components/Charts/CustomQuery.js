@@ -17,7 +17,7 @@ import Select from '@material-ui/core/Select';
 import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   input: {
     height: 50
   }
@@ -75,14 +75,14 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
 
   return (
     <List>
-      <ListItem button onClick={handleNesting}>
+      <ListItem id="addnewchart" button onClick={handleNesting}>
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Add New Chart" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse id='collapse' in={open} timeout="auto" unmountOnExit>
         <ListItem button>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Autocomplete
