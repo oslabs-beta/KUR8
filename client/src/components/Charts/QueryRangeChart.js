@@ -20,7 +20,7 @@ class QueryRangeChart extends Component {
           // "utc": true,
           "title": {
             "y": "15px",
-            "text": "CPU Query Range Chart",
+            "text": "Query Range Chart",
             "background-color": "none",
             "font-color": "#05636c",
             "font-size": "24px",
@@ -139,7 +139,7 @@ class QueryRangeChart extends Component {
     const labelContainer = [];
     let labelObj = {};
     let dataLength = this.props.querycharts.length;
-    let lineColor = ["#9DDCE0", "#FF9AA2", "#9ED2F6", "#ADD4FF","#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"];
+    let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
 
     // const gap = Math.floor(100 / dataLength);
     let start = 5;
@@ -149,7 +149,7 @@ class QueryRangeChart extends Component {
 
       if (i <= 4) {
         labelObj = {
-          "text": `${this.props.querycharts[i][0]}: %plot-${i}-value`,
+          "text": `${this.props.querycharts[i][0]}-${this.props.querycharts[i][2]}: %plot-${i}-value`,
           "default-value": "",
           "color": lineColor[i % lineColor.length],
           "x": `${start}%`,

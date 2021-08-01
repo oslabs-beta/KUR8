@@ -37,6 +37,7 @@ function AlertPage({ fetchAlerts, alertGroups }) {
           {alerts}
         </Grid>
       </Grid>
+      
     )
   })
 
