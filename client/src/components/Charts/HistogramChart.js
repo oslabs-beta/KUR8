@@ -13,21 +13,51 @@ class HistogramChart extends Component {
       config: {
         type: 'bar',
         title: {
-          text: this.props.defaultcharts[0].help,
-          'font-size': 14
-
+          'text': this.props.defaultcharts[0].help,
+          "font-color": "black",
+          "backgroundColor": "none",
+          "font-size": "22px",
+          "alpha": 1,
+          "adjust-layout": true,
+        },
+        "plot": {
+          'border-radius': "9px", /* Rounded Corners */
+        },
+        "plotarea": {
+            "margin": "dynamic"
         },
         "scale-x":{  
+          label: {
+            text: "Device"
+          },
           "values": this.props.defaultcharts[0].labelsArray,  
         },
         "scale-y":{  
-          format: '%v ms'
-          // item: {
-          //   'font-size':8
+          format: '%v ms',
+          text: "Amount of Garbage"
+        },
+        "plot": {
+          "bars-space-left": 0.15,
+          "bars-space-right": 0.15,
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM",
+            "sequence": 0,
+            "speed": 800,
+            "delay": 800
+          }
+        },
+        "crosshair-x": {
+          "line-width": "100%",
+          "alpha": 0.18,
+          // "plot-label": {
+          // //   "header-text": "%kv Pod"
           // }
         },
         series: [{
           values: this.props.defaultcharts[0].valueArray,
+          'background-color': "green blue", /* Bar fill color (gradient) */
+          "borderRadiusTopLeft": 7,
+          alpha: 0.3, /* Transparency (more transparent) */
         }]
       }
     }
@@ -51,3 +81,9 @@ export default connect(
   }),
   null
 )(HistogramChart);
+
+
+
+
+
+
