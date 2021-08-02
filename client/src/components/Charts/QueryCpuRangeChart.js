@@ -209,7 +209,6 @@ class QueryCpuRangeChart extends Component {
   }
 }
 
-
 export default connect(
   state => ({
     cpuRangeChart: state.metricsReducer.cpuRangeChart,
