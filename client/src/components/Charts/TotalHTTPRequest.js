@@ -128,6 +128,7 @@ export class TotalHTTPRequest extends Component {
     for (let i = 0; i < data.length; i++) {
       dataVal = data[i][2];
 
+      
       for (let j = 0; j < dataVal.length; j++) {
         if (dataVal[j][0] > maximumVal) {
           maximumVal = dataVal[j][0];
