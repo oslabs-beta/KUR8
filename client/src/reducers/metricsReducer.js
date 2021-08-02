@@ -105,7 +105,6 @@ function metricsReducer(state = initialState, action) {
      return { ...state, memoryNode: memoryNode };
 
   case actionsTypes.CUSTOM_QUERY:
-    console.log('here in custom query reducer')
     let newCustomDataArray = [...state.customDataArray];
     let newCustomData = [];
     let customData = payload.data.data.result;

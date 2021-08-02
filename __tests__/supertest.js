@@ -49,17 +49,4 @@ xdescribe('Route integration', () => {
           .expect(200));
     });
   });
-  // describe('/login', () => {
-  //   describe('POST', () => {
-  //     it('login should return true when successful, user must exist in database', () => request(server)
-  //       .post('/login')
-  //       .send({ username: 'jimmy', password: 'jimmy' })
-  //       .set('Accept', 'application/json')
-  //       .expect((res) => {
-  //         res.body = true
-  //       })
-  //       .expect(200)
-  //     );
-  //   });
-  // });
 });
