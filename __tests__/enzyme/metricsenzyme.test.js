@@ -58,7 +58,7 @@ describe('MetricsPage', () => {
     expect(wrapper.find(HistogramChart)).toHaveLength(1);
   });
 
-  xit('Contains one PodByNamespace Component', () => {
+  it('Contains one PodByNamespace Component', () => {
     expect(wrapper.find(PodByNamespace)).toHaveLength(1);
   });
 
