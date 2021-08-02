@@ -138,10 +138,10 @@ class QueryRangeChart extends Component {
   dateFormat = () => {
     let dateArr = [];
     let timeValue;
-    let dataLength = this.props.cpuRangeChart.length;
+    let dataLength = this.props.querycharts.length;
 
     for (let i = 0; i < dataLength; i++) {
-      timeValue = this.props.cpuRangeChart[i][1];
+      timeValue = this.props.querycharts[i][1];
 
       for (let j = 0; j < timeValue.length; j++) {
         
@@ -178,7 +178,7 @@ class QueryRangeChart extends Component {
           "font-size": "14px",
           "font-weight": "bold",
         }
-        start = start + 20;
+        start = start + 25;
       } else if ( i<= 9) {
           labelObj = {
             "text": `${this.props.querycharts[i][0]}: %plot-${i}-value`,
@@ -192,7 +192,7 @@ class QueryRangeChart extends Component {
             "font-size": "14px",
             "font-weight": "bold",
           }
-          secondStart = secondStart + 20;
+          secondStart = secondStart + 25;
         } else if ( i<= 9) {
         labelObj = {
           "text": `${this.props.querycharts[i][0]}: %plot-${i}-value`,
@@ -206,13 +206,50 @@ class QueryRangeChart extends Component {
           "font-size": "14px",
           "font-weight": "bold",
         }
-        thirdStart = thirdStart + 20;
+        thirdStart = thirdStart + 25;
       }
         labelContainer.push(labelObj);
       }
       return labelContainer;
   }
 
+  findMax = () => {
+    let data = this.props.querycharts;
+    let maximumVal = -Infinity;
+    let dataVal;
+
+    for (let i = 0; i < data.length; i++) {
+      dataVal = data[i][1];
+
+      for (let j = 0; j < dataVal.length; j++) {
+        if (dataVal[j][0] > maximumVal) {
+          maximumVal = dataVal[j][0];
+        }
+
+      }
+      
+    }
+    return maximumVal * 1000;
+  }
+
+  findMin = () => {
+    let data = this.props.querycharts;
+    let minimumVal = Infinity;
+    let dataVal;
+
+    for (let i = 0; i < data.length; i++) {
+      dataVal = data[i][1];
+
+      for (let j = 0; j < dataVal.length; j++) {
+        if (dataVal[j][0] < minimumVal) {
+          minimumVal = dataVal[j][0];
+        }
+
+      }
+      
+    }
+    return minimumVal * 1000;
+  }
 
   render() {
     return (
