@@ -1,22 +1,16 @@
+import { connect } from 'react-redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import NodeList from '../../components/NodeList'
-// import SearchBar from '../../components/SearchBar'
 
-const useStyles = makeStyles(theme => ({
-  sampleStyle: {
-    color: '#000',
-  },
-}));
+import NodeList from '../../components/NodeList';
 
-export default function StructurePage() {
-  const classes = useStyles();
-
-  return (
-    <div>
-      {/* <SearchBar /> */}
-      <NodeList />
-    </div>
-  );
+function StructurePage({ isLoading }) {
+  console.log(`isLoading`, isLoading)
+  return isLoading ? <LinearProgress color="secondary" /> : <NodeList />;
 }
+
+const mapStateToProps = state => ({
+  isLoading: state.nodesReducer.isLoading,
+});
+
+export default connect(mapStateToProps, null)(StructurePage);
