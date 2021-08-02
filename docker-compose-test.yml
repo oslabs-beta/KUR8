@@ -4,7 +4,7 @@ services:
     image: kur8/dashboard
     container_name: 'kur8-test'
     ports:
-      - '8080:8080'
+      - '3068:3068'
     volumes: 
       - .:/usr/src/app
       - node_modules:/usr/src/app/node_modules

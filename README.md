@@ -13,17 +13,21 @@ A visual overview of Kubernetes architecture and Prometheus metrics
 
 ## Deploying KUR8
 
-<br/>
+Kur8 requires your Kubernetes cluster to be up and running
 
-Assuming you already have a Kubernetes cluster running, you can get started by:
+An image of the application has been pushed to [Docker Hub](https://hub.docker.com/repository/docker/kur8/dashboard) for those who would like to build the image directly from the public repository.
 
-<br/>
+We recommend deploying Kur8 directly to your Kubernetes cluster through kubectl using our config file [kur8-depl.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/kur8-depl.yaml).
 
-In KUR8 directory run:  `skaffold dev`
+`kubectl apply -f kur8-depl.yaml`
 
-Once deployed open up port to KUR8 app: `kubectl port-forward deployment/kur8-depl 3068:3068`
+`kubectl port-forward deployment/kur8-depl 3068:3068`
 
-Now open up `localhost:3068` in your browser
+In addition, in order to allow reading resources of the API, you must configure a set of permissions. We have set up a YAML file using RBAC authorization which you can apply directly to your Kubernetes cluster using the command line: [fabric8-rbac.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/fabric8-rbac.yaml)
+
+`kubectl apply -f fabric8-rbac.yaml`
+
+Then, open your web browser to http://localhost:3068.
 
 The structures tab on the left will query your Kubernetes API to view the cluster's architecture.
 

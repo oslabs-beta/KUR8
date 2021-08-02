@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import { Provider } from 'react-redux';
 import { configure, shallow } from 'enzyme';
 import { expect } from '@jest/globals';
 import Adapter from 'enzyme-adapter-react-16';
@@ -14,7 +13,6 @@ import CustomMetricsPage from '../../client/src/pages/CustomMetricsPage';
 import CustomQuery from '../../client/src/components/Charts/CustomQuery';
 import CustomCharts from '../../client/src/components/Charts/CustomCharts';
 
-// Newer Enzyme versions require an adapter to a particular version of React
 configure({ adapter: new Adapter() });
 
 const initialState = {

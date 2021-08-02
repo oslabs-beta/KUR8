@@ -9,9 +9,9 @@ import ZingChart from 'zingchart-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -50,22 +50,19 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
   const custom = [];
 
   //drag and drop
-  const list = [...customDataArray]
+  const list = [...customDataArray];
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
-    const items = reorder(
-      list,
-      result.source.index,
-      result.destination.index
-    );
-    moveDnd(items)
-  }
+    const items = reorder(list, result.source.index, result.destination.index);
+    moveDnd(items);
+  };
 
   //create custom charts
-  customDataArray.map( (dataSet, index) => {
+  customDataArray.map((dataSet, index) => {
+    if(dataSet.length !== 0){
     const config = {
       type: 'area',
       plot: {
@@ -75,7 +72,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
         },
       },
       title: {
-        text: dataSet[0].metric.__name__
+        text: dataSet[0].metric.__name__,
       },
       'scale-x': {
         zooming: true,
@@ -85,42 +82,39 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
           'font-size': 8,
         },
       },
-      series: dataSet.map(dataPoint => {
-        return {values: dataPoint.yRange}
-      })
-    }
+      series: dataSet.map((dataPoint) => {
+        return { values: dataPoint.yRange };
+      }),
+    };
 
     custom.push(
       <Draggable key={index} draggableId={`${index}`} index={index}>
         {(provided, snapshot) => (
           <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
           >
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <button
-                onClick={() => deleteCustom(index)}
-                >delete</button>
+                <button onClick={() => deleteCustom(index)}>delete</button>
                 <ZingChart id={`custom chart ${index}`} data={config} />
               </Paper>
             </Grid>
           </div>
         )}
       </Draggable>
-    )
-  })
+    );
+        }
+  });
 
   return (
     <Grid item xs={12}>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}>
-                {custom}
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {custom}
               {provided.placeholder}
             </div>
           )}
@@ -130,7 +124,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
   );
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ deleteCustom, moveDnd }, dispatch);
 
-  export default connect(null, mapDispatchToProps)(CustomCharts);
+export default connect(null, mapDispatchToProps)(CustomCharts);

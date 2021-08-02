@@ -21,7 +21,7 @@ class QueryCpuRangeChart extends Component {
           "utc": true,
           "title": {
             "y": "15px",
-            "text": "CPU Query Range Chart",
+            "text": "The average amount of CPU time spent in system mode",
             "background-color": "none",
             "font-color": "#05636c",
             "font-size": "24px",
@@ -161,6 +161,7 @@ class QueryCpuRangeChart extends Component {
     // const gap = Math.floor(100 / dataLength);
     let start = 5;
     let secondStart = 15;
+    let thirdStart = 25;
 
     for (let i = 0; i < dataLength; i++) {
 
@@ -178,8 +179,7 @@ class QueryCpuRangeChart extends Component {
           "font-weight": "bold",
         }
         start = start + 20;
-      } else {
-
+      } else if (i <= 9) {
           labelObj = {
             "text": `${this.props.cpuRangeChart[i][0]}: %plot-${i}-value`,
             "default-value": "",
@@ -193,6 +193,21 @@ class QueryCpuRangeChart extends Component {
             "font-weight": "bold",
           }
           secondStart = secondStart + 20;
+        } else if (i <= 14) {
+          labelObj = {
+            "text": `${this.props.cpuRangeChart[i][0]}: %plot-${i}-value`,
+            "default-value": "",
+            "color": lineColor[i % lineColor.length],
+            "x": `${thirdStart}%`,
+            "y": 80,
+            "width": 120,
+            "text-align": "left",
+            "bold": 0,
+            "font-size": "14px",
+            "font-weight": "bold",
+          }
+          thirdStart = thirdStart + 20;
+
         }
         labelContainer.push(labelObj);
       }
@@ -208,7 +223,6 @@ class QueryCpuRangeChart extends Component {
     );
   }
 }
-
 
 export default connect(
   state => ({

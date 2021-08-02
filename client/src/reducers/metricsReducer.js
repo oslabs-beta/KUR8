@@ -200,4 +200,3 @@ function metricsReducer(state = initialState, action) {
 }
 
 export default metricsReducer;
-
