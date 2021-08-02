@@ -20,7 +20,7 @@ class QueryRangeChart extends Component {
           // "utc": true,
           "title": {
             "y": "15px",
-            "text": "Query Range Chart",
+            "text": "The average network traffic received, per second, over the last minute (in bytes)",
             "background-color": "none",
             "font-color": "#05636c",
             "font-size": "24px",
@@ -70,7 +70,7 @@ class QueryRangeChart extends Component {
               "font-weight": "normal"
             },
             "label": {
-              "text": "The average network traffic received, per second, over the last minute (in bytes)",
+              "text": "Query Range Data",
               "font-size": "14px"
             },
             "guide": {
@@ -82,6 +82,7 @@ class QueryRangeChart extends Component {
           "plot": {
             "line-width": 2,
             "marker": {
+              "size": 1,
               "visible": false
             },
             "tooltip": {
