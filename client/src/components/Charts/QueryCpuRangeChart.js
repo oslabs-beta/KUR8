@@ -21,7 +21,7 @@ class QueryCpuRangeChart extends Component {
           "utc": true,
           "title": {
             "y": "15px",
-            "text": "CPU Query Range Chart",
+            "text": "The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)",
             "background-color": "none",
             "font-color": "#05636c",
             "font-size": "24px",
