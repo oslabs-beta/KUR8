@@ -1,177 +1,77 @@
-import { useParams, useHistory } from 'react-router-dom';
-import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import { withRouter } from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 
-const useStyles = makeStyles((theme) => ({
+import { metricsFetchData } from '../../actions/metricsActionCreators';
+import { fetchData } from '../../actions/nodesActionCreators';
+import Instructions from './Instructions';
+
+const useStyles = makeStyles({
   root: {
+    flexGrow: 1,
     width: '100%',
   },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
+  dialog: {
+    width: '1000px',
   },
-  actionsContainer: {
-    marginBottom: theme.spacing(2),
-  },
-  resetContainer: {
-    padding: theme.spacing(3),
-  },
-  chip: {
-    color: 'black',
-    backgroundColor: 'white',
-    textAlign: 'center',
-  },
+});
 
-  codeBlock: {
-    backgroundColor: '#3B3B3B',
-    color: 'white',
-  },
-}));
-
-export default function VerticalLinearStepper() {
+function GetStartedPage({ fetchData, metricsFetchData, history }) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
-  const history = useHistory();
+  const [open, setOpen] = useState(true);
+  const cookies = new UniversalCookie();
 
-  function getSteps() {
-    return ['If you don\'t have your instance of Prometheus installed begin by:', 'Once setup is complete run:', 'If you want to open up Prometheus UI run:', 'Now open up localhost:9090 in your browser.'];
-  }
-  
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <div>
-          <code className={classes.codeBlock}>
-                 kubectl create -f infra/manifests/setup
-          </code>
-          <Chip className={classes.chip}
-            size="small"
-            icon={<FileCopyIcon />}
-            label="Copy"
-            onClick={() =>
-              navigator.clipboard.writeText(
-                'kubectl create -f infra/manifests/setup'
-              )
-            }
-            color="black"
-          />
-        </div>;
-      case 1:
-        return <div>
-        <code className={classes.codeBlock}>
-              kubectl create -f infra/manifests/
-        </code>
-        <Chip className={classes.chip}
-          size="small"
-          icon={<FileCopyIcon />}
-          label="Copy"
-          onClick={() =>
-            navigator.clipboard.writeText(
-              'kubectl create -f infra/manifests/'
-            )
-          }
-          color="black"
-        />
-        </div>;
-      case 2:
-        return <div>
-          <code className={classes.codeBlock}>
-            kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-          </code>
-          <Chip className={classes.chip}
-            size="small"
-            icon={<FileCopyIcon />}
-            label="Copy"
-            onClick={() =>
-              navigator.clipboard.writeText(
-                'kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090'
-              )
-            }
-            color="black"
-          />
-          </div>;
-      case 3: 
-        return `You may also view the Prometheus tab in KUR8 localhost:8080 to view and create your custom dashboard.`
-      default:
-        return 'Unknown step';
-    }
-  }
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  // On intial load, perform all fetch requests to populate our app with data
+  // Check to see if GetStartedPage has set a cookie
+  useEffect(() => {
+    const beenHere = cookies.get('hasSeenGetStartedPage');
+    fetchData();
+    metricsFetchData();
+    if (beenHere) history.push('/structure');
+  }, []);
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleDone = () => {
-    history.push('/structure');
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+  const closeModal = () => {
+    setOpen(false);
   };
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h6" component="h1">
-           <center>
-             <strong>Getting Started</strong>
-           </center>
-         </Typography>
-         <Typography variant="body1"><center>Deploying Prometheus</center></Typography>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              {getStepContent(index)}
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography></Typography>
-          <Button onClick={handleDone} className={classes.button}>
-            Main Page
-          </Button>
-          <Button color="primary" variant="contained" onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </div>
+    <Dialog
+      fullWidth
+      maxWidth="md"
+      aria-labelledby="customized-dialog-title"
+      open={open}>
+      <MuiDialogTitle disableTypography className={classes.dialogTitle}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="space-between"
+          alignItems="center">
+          <Typography textAlign="center" variant="h6" component="h1">
+            Getting Started
+          </Typography>
+          <Typography textAlign="center" variant="body1">
+            Deploying Prometheus
+          </Typography>
+        </Grid>
+      </MuiDialogTitle>
+      <MuiDialogContent dividers>
+        <Grid container direction="column" alignItems="flex-start">
+          <Instructions closeModal={closeModal} cookies={cookies} />
+        </Grid>
+      </MuiDialogContent>
+    </Dialog>
   );
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchData, metricsFetchData }, dispatch);
+
+export default connect(null, mapDispatchToProps)(withRouter(GetStartedPage));
