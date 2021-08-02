@@ -35,7 +35,7 @@ const actionCreators = [
   receiveNodes,
 ];
 
-export const endpointArray = (url = 'localhost:8080') => [
+export const endpointArray = (url = 'localhost:3068') => [
   `http://${url}/podList`,
   `http://${url}/serviceList`,
   `http://${url}/ingressList`,
