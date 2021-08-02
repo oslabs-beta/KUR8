@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,17 +9,23 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles(theme => ({
   table: {
-    minWidth: 300,
+    minWidth: 600,
     border: 'none',
   },
   tableHead: {
     width: '100%',
   },
-  tableCellCatagory: {
-    backgroundColor: theme.palette.grey[300],
+  tableCellCategory: {
+    border: 'none',
+    minWidth: '200px',
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.defaultDarkBackground
+        : theme.palette.grey[400],
   },
   tableCellItem: {
     borderBottom: 'none',
+    overflowWrap: 'anywhere'
   },
 }));
 
@@ -42,8 +48,8 @@ export default function PodTable(props) {
     // If there are any containers, add the 'CONTAINER' string to the TableCell header.
     let isContainer = !headNames.includes(rowName);
     return (
-      <TableRow>
-        <TableCell className={classes.tableCellCatagory}>
+      <TableRow key={`row-${rowName}`}>
+        <TableCell className={classes.tableCellCategory}>
           {isContainer
             ? `${rowName.toUpperCase()} CONTAINER`
             : rowName.toUpperCase()}
@@ -86,7 +92,7 @@ export default function PodTable(props) {
         {/* rowsArray is an array of arrays. */}
         {rowsArray.map((rows, index) => {
           return (
-            <>
+            <div key={`table-section-${index}`}>
               <TableHead className={classes.tableHead}>
                 {/* Include a single TableHead component for each collection of rows */}
                 {rowHeads[index]}
@@ -95,7 +101,7 @@ export default function PodTable(props) {
                 {/* Multiple TableRow elements */}
                 {rows}
               </TableBody>
-            </>
+            </div>
           );
         })}
       </Table>

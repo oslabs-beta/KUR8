@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.common.defaultDarkBackground
+        : theme.palette.grey[200],
   },
   drawerContainer: {
     overflow: 'auto',
@@ -34,44 +38,27 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey['A400']
+        : theme.palette.grey[300],
   },
 }));
 
-const Layout = ({ children, history}) => {
+const Layout = ({ children, history, toggleDarkMode, darkMode }) => {
   const classes = useStyles();
   const pages = ['Structure', 'Metrics', 'Custom', 'Alerts'];
-  const icons = [<LocationCityIcon />, <AvTimerIcon />, <BarChartIcon />, <NotificationsActiveIcon />];
-  
-  // if (location.pathname === '/')
-
-//   <Drawer
-//   className={classes.drawer}
-//   variant="permanent"
-//   classes={{
-//     paper: classes.drawerPaper,
-//   }}>
-//   <Toolbar />
-//   <div className={classes.drawerContainer}>
-//     <List>
-//       {['Structure', 'Metrics'].map((text, index) => (
-//         <ListItem
-//           button
-//           key={text}
-//           onClick={() => history.push(`/${text.toLowerCase()}`)}>
-//           <ListItemIcon>
-//             {index % 2 === 0 ? <LocationCityIcon /> : <AvTimerIcon />}
-//           </ListItemIcon>
-//           <ListItemText primary={text} />
-//         </ListItem>
-//       ))}
-//     </List>
-//   </div>
-// </Drawer>
+  const icons = [
+    <LocationCityIcon />,
+    <AvTimerIcon />,
+    <BarChartIcon />,
+    <NotificationsActiveIcon />,
+  ];
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MyAppBar />
+      <MyAppBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       {/* {Display} */}
       <Drawer
         className={classes.drawer}
@@ -87,9 +74,7 @@ const Layout = ({ children, history}) => {
                 button
                 key={text}
                 onClick={() => history.push(`/${text.toLowerCase()}`)}>
-                <ListItemIcon>
-                  {icons[index]}
-                </ListItemIcon>
+                <ListItemIcon>{icons[index]}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
