@@ -101,8 +101,7 @@ export class TotalHTTPRequest extends Component {
               "shadow": 0,
               "line-width": "2px",
               "marker": {
-                "type": "circle",
-                "size": 3
+                "visible": false,
               },
               "highlight-state": {
                 "line-width": 3
