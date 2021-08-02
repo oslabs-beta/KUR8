@@ -1,4 +1,4 @@
-describe('My First Test', () => {
+describe('Structure Page', () => {
   it('Gets and asserts', () => {
     cy.visit('http://localhost:3068/')
 

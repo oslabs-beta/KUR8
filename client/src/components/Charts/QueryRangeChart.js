@@ -71,7 +71,7 @@ class QueryRangeChart extends Component {
               "font-weight": "normal"
             },
             "label": {
-              "text": "Query Range Data",
+              "text": "The average network traffic received, per second, over the last minute (in bytes)",
               "font-size": "14px"
             },
             "guide": {
