@@ -138,7 +138,7 @@ const metricsActionCreators = [
 export const metricsEndpointArray = (query, start, end, step) => [
   'http://localhost:9090/api/v1/label/__name__/values',
   
-  `http://localhost:8080/getMetrics`,
+  `http://localhost:3068/getMetrics`,
 
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
 
