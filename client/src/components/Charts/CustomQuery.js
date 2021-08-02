@@ -47,7 +47,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   };
 
   const handleQueryChange = (event, selectedObject) => {
-    setQuery(event.target.value)
+    setQuery(selectedObject)
   }
 
   const handleRangeChange = (event) => {

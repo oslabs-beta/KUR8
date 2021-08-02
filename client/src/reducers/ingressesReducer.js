@@ -12,13 +12,14 @@ function ingressesReducer(state = initialState, action) {
       const { items } = payload.data;
 
       const { metadata, spec } = items[0];
+      console.log('metadata', metadata)
       const ingressData = {
         metadata: {
           class: metadata.annotations['kubernetes.io/ingress.class'],
           creationTime: metadata.creationTimestamp,
           name: metadata.name,
           namespace: metadata.namespace,
-          managedBy: metadata.labels['app.kubernetes.io/managed-by'],
+          // managedBy: metadata.labels['app.kubernetes.io/managed-by'],
           uid: metadata.uid,
         },
         host: spec.rules[0].host,
@@ -29,6 +30,7 @@ function ingressesReducer(state = initialState, action) {
           path: path.path,
         })),
       };
+      if(metadata.labels) ingressData.metadata.managedBy = metadata.labels['app.kubernetes.io/managed-by'];
       return { ingresses: ingressData };
     default:
       return state;

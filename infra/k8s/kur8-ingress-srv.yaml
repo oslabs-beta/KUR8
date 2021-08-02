@@ -20,6 +20,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: client-srv
+                name: kur8-srv
                 port:
                   number: 3000
