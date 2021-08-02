@@ -72,7 +72,7 @@ export default function VerticalLinearStepper() {
         <code className={classes.codeBlock}>
               kubectl create -f infra/manifests/
         </code>
-        <Chip
+        <Chip className={classes.chip}
           size="small"
           icon={<FileCopyIcon />}
           label="Copy"
@@ -89,7 +89,7 @@ export default function VerticalLinearStepper() {
           <code className={classes.codeBlock}>
             kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
           </code>
-          <Chip
+          <Chip className={classes.chip}
             size="small"
             icon={<FileCopyIcon />}
             label="Copy"
