@@ -48,7 +48,8 @@ class QueryRangeChart extends Component {
               "font-color": "#05636c"
             },
             "zooming": 1,
-            labels: [1627751524.279, 1627755124.279, 1627758724.279, 1627762324.279],
+            labels: this.dateFormat(),
+            "max-items": 4,
             "items-overlap": true,
             "guide": {
               "line-width": "0px"
@@ -130,9 +131,25 @@ class QueryRangeChart extends Component {
       valueObj = {};
       values = [];
     }
-    console.log('refactor', outerContainer);
     return outerContainer;
   }
+
+  dateFormat = () => {
+    let dateArr = [];
+    let timeValue;
+    let dataLength = this.props.cpuRangeChart.length;
+
+    for (let i = 0; i < dataLength; i++) {
+      timeValue = this.props.cpuRangeChart[i][1];
+
+      for (let j = 0; j < timeValue.length; j++) {
+        
+        dateArr.push(new Date(Number(timeValue[j][0]) * 1000).toLocaleString());
+      }
+    }
+    return dateArr;
+  }
+
 
   labelFormat = () => {
     const labelContainer = [];
@@ -143,6 +160,7 @@ class QueryRangeChart extends Component {
     // const gap = Math.floor(100 / dataLength);
     let start = 5;
     let secondStart = 15;
+    let thirdStart = 25;
 
     for (let i = 0; i < dataLength; i++) {
 
@@ -160,8 +178,7 @@ class QueryRangeChart extends Component {
           "font-weight": "bold",
         }
         start = start + 20;
-      } else {
-
+      } else if ( i<= 9) {
           labelObj = {
             "text": `${this.props.querycharts[i][0]}: %plot-${i}-value`,
             "default-value": "",
@@ -175,7 +192,21 @@ class QueryRangeChart extends Component {
             "font-weight": "bold",
           }
           secondStart = secondStart + 20;
+        } else if ( i<= 9) {
+        labelObj = {
+          "text": `${this.props.querycharts[i][0]}: %plot-${i}-value`,
+          "default-value": "",
+          "color": lineColor[i % lineColor.length],
+          "x": `${thirdStart}%`,
+          "y": 80,
+          "width": 120,
+          "text-align": "left",
+          "bold": 0,
+          "font-size": "14px",
+          "font-weight": "bold",
         }
+        thirdStart = thirdStart + 20;
+      }
         labelContainer.push(labelObj);
       }
       return labelContainer;
@@ -217,11 +248,6 @@ class QueryRangeChart extends Component {
       
     }
     return minimumVal * 1000;
-  }
-
-  xAxis = () => {
-    let axisLabel = [];
-
   }
 
   render() {
