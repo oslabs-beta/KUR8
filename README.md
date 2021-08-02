@@ -1,4 +1,4 @@
-# FTRI2-Crows-Nest
+# Kur8
 [![Build Status](https://travis-ci.com/oslabs-beta/Kur8.svg?branch=dev)](https://travis-ci.com/oslabs-beta/Kur8)
 ![Docker Pulls](https://img.shields.io/docker/pulls/kur8/dashboard)
 ![GitHub](https://img.shields.io/github/license/oslabs-beta/Kur8)
@@ -21,9 +21,9 @@ Assuming you already have a Kubernetes cluster running, you can get started by:
 
 In KUR8 directory run:  `skaffold dev`
 
-Once deployed open up port to KUR8 app: `kubectl port-forward deployment/kur8-depl 8080:8080`
+Once deployed open up port to KUR8 app: `kubectl port-forward deployment/kur8-depl 3068:3068`
 
-Now open up `localhost:8080` in your browser
+Now open up `localhost:3068` in your browser
 
 The structures tab on the left will query your Kubernetes API to view the cluster's architecture.
 
@@ -41,7 +41,7 @@ In KUR8 directory run: `kubectl create -f infra/manifests/setup`
 
 Once setup is complete run: `kubectl create -f infra/manifests/`
 
-If you want to open up Prometheus  UI run: `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
+If you want to open up Prometheus UI run: `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
 
 Now open up `localhost:9090` in your browser
 

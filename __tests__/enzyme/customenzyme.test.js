@@ -3,43 +3,104 @@
  */
 
 import React from 'react';
+import { Provider } from 'react-redux';
 import { configure, shallow } from 'enzyme';
+import { expect } from '@jest/globals';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-// Enzyme is a wrapper around React test utilities which makes it easier to
-// shallow render and traverse the shallow rendered tree.
-import CustomMetricsPage from '../../client/src/pages/CustomMetricsPage'
-import Grid from '@material-ui/core/Grid';
+import CustomMetricsPage from '../../client/src/pages/CustomMetricsPage';
+import CustomQuery from '../../client/src/components/Charts/CustomQuery';
+import CustomCharts from '../../client/src/components/Charts/CustomCharts';
+
 // Newer Enzyme versions require an adapter to a particular version of React
 configure({ adapter: new Adapter() });
 
 const initialState = {
   metricsReducer: {
+    fetchCustomQuery: [],
+    allPromQL: [],
     customDataArray: [],
+    hyrateCustom: [],
   },
 };
 
-const mockStore = configureMockStore();
-const store = mockStore(initialState);
+const mockStore = configureMockStore([thunk]);
+let store;
 
-describe('React unit tests', () => {
-  describe('CustomMetricsPage', () => {
+describe('CustomMetricsPage', () => {
+  let wrapper;
+
+  const props = {
+    metricsReducer: {
+      customDataArray: [],
+    },
+  };
+
+  beforeAll(() => {
+    store = mockStore(initialState);
+    wrapper = shallow(<CustomMetricsPage {...props} store={store} />)
+      .children()
+      .dive();
+  });
+
+  it('Contains one CustomQuery Component', () => {
+    expect(wrapper.find(CustomQuery)).toHaveLength(1);
+  });
+
+  it('Contains one CustomCharts Component', () => {
+    expect(wrapper.find(CustomCharts)).toHaveLength(1);
+  });
+
+  describe('CustomQuery', () => {
     let wrapper;
 
     const props = {
       metricsReducer: {
+        fetchCustomQuery: [],
+        allPromQL: [],
         customDataArray: [],
+        hyrateCustom: [],
       },
     };
 
+    // const setState = jest.fn();
+    // const useStateSpy = jest.spyOn(React, 'useState');
+    // useStateSpy.mockImplementation((state) => [state, setState]);
+
     beforeAll(() => {
-      wrapper = shallow(<CustomMetricsPage store={store} />).dive();
+      store = mockStore(initialState);
+      wrapper = shallow(<CustomQuery {...props} store={store} />)
+        .children()
+        .dive();
     });
 
-    it('Renders a <Grid> tag', () => {
-      wrapper.debug()
-      expect(wrapper.type()).toEqual(<Grid />);
+    // afterEach(() => {
+    //   jest.clearAllMocks();
+    // });
+
+    it('Renders the Add New Chart button', () => {
+      const button = wrapper.find('#addnewchart');
+      expect(button).toHaveLength(1);
+    });
+
+    it('Clicking the Add New Chart button changes prop "in" from false to true and vice versa', () => {
+      expect(wrapper.find('#collapse').prop('in')).toEqual(false);
+      wrapper.find('#addnewchart').simulate('click');
+      expect(wrapper.find('#collapse').prop('in')).toEqual(true);
+      wrapper.find('#addnewchart').simulate('click');
+      expect(wrapper.find('#collapse').prop('in')).toEqual(false);
+    });
+
+    describe('filling out form', () => {
+      beforeAll(() => {
+        wrapper.find('#addnewchart').simulate('click');
+      });
+
+      it("input query defaults to ''", () => {
+        expect(wrapper.find('#autocomplete-query').prop('value')).toEqual('');
+      });
     });
   });
 });

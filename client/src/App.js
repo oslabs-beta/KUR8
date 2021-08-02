@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import React, { useState, useEffect, useMemo } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import { fetchData } from './actions/actionCreators';
+import { fetchData } from './actions/nodesActionCreators';
 import { metricsFetchData } from './actions/metricsActionCreators';
 import AlertsPage from './pages/AlertsPage';
 import CustomMetricsPage from './pages/CustomMetricsPage';

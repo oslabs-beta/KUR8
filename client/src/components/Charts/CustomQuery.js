@@ -17,7 +17,7 @@ import Select from '@material-ui/core/Select';
 import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   input: {
     height: 50
   }
@@ -39,7 +39,6 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [title, setTitle] = useState('');
   const [range, setRange] = useState('Range');
   const [step, setStep] = useState('Step');
 
@@ -47,14 +46,9 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
     setOpen(!open);
   };
 
-  const handleQueryChange = (e, selectedObject) => {
-    console.log(e.target.value, selectedObject)
-    setQuery(selectedObject)
+  const handleQueryChange = (event, selectedObject) => {
+    setQuery(event.target.value)
   }
-  
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
 
   const handleRangeChange = (event) => {
     setRange(event.target.value);
@@ -66,8 +60,8 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log( 'query:', query, 'range: ', range, 'step', step, 'title', title); 
-    fetchCustomQuery(query, range, step, title);
+    console.log( 'query:', query, 'range: ', range, 'step', step); 
+    fetchCustomQuery(query, range, step);
   }
 
   const ranges = [1,2,3,4,8,12,18,24];
@@ -75,14 +69,14 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
 
   return (
     <List>
-      <ListItem button onClick={handleNesting}>
+      <ListItem id="addnewchart" button onClick={handleNesting}>
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Add New Chart" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse id='collapse' in={open} timeout="auto" unmountOnExit>
         <ListItem button>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Autocomplete
