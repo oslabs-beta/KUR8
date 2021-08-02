@@ -236,45 +236,6 @@ class QueryCpuRangeChart extends Component {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // class QueryCpuRangeChart extends Component {
 //   constructor(props) {
 //     super(props);

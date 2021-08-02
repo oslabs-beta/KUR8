@@ -107,7 +107,6 @@ const mapStateToProps = state => {
   console.log(`state`, state);
   return {
     cpuGauge: state.metricsReducer.cpuGauge,
-    // customDataArray: state.metricsReducer.customDataArray,
   };
 };
 
