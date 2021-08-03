@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 // import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import {withStyles} from "@material-ui/core/styles";
 
 // EXPLICITLY IMPORT MODULE from node_modules
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+
+
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 140,
+    display: "flex",
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+});
+
 
 export class CPUGauge extends Component {
   constructor(props) {
@@ -130,16 +150,33 @@ export class CPUGauge extends Component {
 
   //   [[kind-control-plane, Node 1, 87], [worker-node, Node 2, 109], [worker-node, Node 3, 71]]
   render() {
+    const { classes } = this.props;
 
     return (
       <div>
           <div>
-            <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
-            <option disabled>Select Node</option>
-            {this.props.cpuGauge.map((node, index) => {
+            {/* <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
+            <option disabled>Select Node</option> */}
+              <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Select Node</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={event.target.value}
+                defaultValue=""
+                onChange={e => this.updateGauge(e.target.value)}
+                label="Select Node"
+              >
+                {this.props.cpuGauge.map((node, index) => {
+                return (
+                <MenuItem value={node[1]}>{node[0]}</MenuItem>
+                )})}
+              </Select>
+              </FormControl>
+            {/* {this.props.cpuGauge.map((node, index) => {
               return <option key={`note-options-${index}`} value={node[1]}>{node[0]}</option>;
-            })}
-          </select>
+            })} */}
+          {/* </select> */}
         </div>
 
         <div>
@@ -153,10 +190,14 @@ export class CPUGauge extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    cpuGauge: state.metricsReducer.cpuGauge,
-  }),
-  null
-)(CPUGauge);
+
+
+// export connect(
+//   state => ({
+//     cpuGauge: state.metricsReducer.cpuGauge,
+//   }),
+//   null
+// )(CPUGauge);
+
+export default withStyles(styles, { withTheme: true })(CPUGauge);
 

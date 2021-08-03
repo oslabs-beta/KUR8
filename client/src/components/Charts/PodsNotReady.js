@@ -21,9 +21,18 @@ export class PodsNotReady extends Component {
               "font-size": "24px",
               "adjust-layout": true
             },
+            "globals":{
+              "font-family": "Roboto",
+              "background-color": "#3B3B3B",
+            },
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
             },
+            "plot": {
+              "animation": {
+                  "effect": "ANIMATION_SLIDE_LEFT"
+              },
+          },
             "legend": {
               "layout": "float",
               "background-color": "none",

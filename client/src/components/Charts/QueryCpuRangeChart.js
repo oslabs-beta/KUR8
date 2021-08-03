@@ -35,6 +35,11 @@ class QueryCpuRangeChart extends Component {
             "margin-left": "dynamic",
             "adjust-layout": true
           },
+          "plot": {
+            "animation": {
+                "effect": "ANIMATION_SLIDE_LEFT"
+            },
+        },
           "labels": this.labelFormat(),
           "scale-x": {
             "label": {

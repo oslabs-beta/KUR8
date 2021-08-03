@@ -9,11 +9,12 @@ import ZingChart from 'zingchart-react';
 class HistogramChart extends Component {
   constructor(props) {
     super(props);
+    console.log("this.props.defaultcharts[0].help", this.props.defaultcharts[0].help)
     this.state = {
       config: {
         type: 'bar',
         title: {
-          'text': this.props.defaultcharts[0].help,
+          'text': 'Garbage Collection Duration by Kind',
           "font-color": "black",
           "backgroundColor": "none",
           "font-size": "22px",
@@ -28,7 +29,7 @@ class HistogramChart extends Component {
         },
         "scale-x":{  
           label: {
-            text: "Device"
+            text: "Kind"
           },
           "values": this.props.defaultcharts[0].labelsArray,  
         },
@@ -57,7 +58,7 @@ class HistogramChart extends Component {
           values: this.props.defaultcharts[0].valueArray,
           'background-color': "green blue", /* Bar fill color (gradient) */
           "borderRadiusTopLeft": 7,
-          alpha: 0.3, /* Transparency (more transparent) */
+          alpha: 0.5, /* Transparency (more transparent) */
         }]
       }
     }

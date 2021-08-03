@@ -1,5 +1,7 @@
 const { expect } = require('@jest/globals');
 const metricsReducer = require('../../client/src/reducers/metricsReducer');
+import * as types from '../../client/src/actions/metricsActionCreators';
+import expect from 'expect';
 
 describe('metricsReducer', () => {
   let initialState;
