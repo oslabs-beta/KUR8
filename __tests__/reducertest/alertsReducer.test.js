@@ -4,7 +4,7 @@ const alertsReducer = require('../../client/src/reducers/alertsReducer');
 describe('alertsreducer', () => {
   let initialState;
   const fakeAction = { type: 'NOT_A_REAL_ACTION' };
-  
+
   beforeEach(() => {
     initialState = {
       alertGroups: [],
@@ -33,7 +33,7 @@ describe('alertsreducer', () => {
             data: {
               groups: [],
             },
-          }
+          },
         },
       };
     });

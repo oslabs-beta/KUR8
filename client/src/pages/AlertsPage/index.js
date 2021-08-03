@@ -3,15 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { fetchAlerts } from '../../actions/alertsActionCreator'
+import { fetchAlerts } from '../../actions/alertsActionCreator';
 import { Typography } from '@material-ui/core';
 
 function AlertPage({ fetchAlerts, alertGroups }) {
-
-  useEffect(() => fetchAlerts(),[])
+  useEffect(() => fetchAlerts(), []);
 
   const alertsList = alertGroups.map((group) => {
-
     const alerts = group.rules.map((data) => {
       return (
         <Paper>
@@ -28,28 +26,28 @@ function AlertPage({ fetchAlerts, alertGroups }) {
           {`type: ${data.type}`}
         </Paper>
       );
-    })
+    });
 
     return (
       <Grid container spacing={4}>
-        <Grid item xs={12}>        
+        <Grid item xs={12}>
           {group.name}
           {alerts}
         </Grid>
       </Grid>
-      
-    )
-  })
+    );
+  });
 
   return alertsList;
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     alertGroups: state.alertsReducer.alertGroups,
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchAlerts }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ fetchAlerts }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlertPage);

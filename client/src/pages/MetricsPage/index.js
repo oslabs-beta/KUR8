@@ -15,7 +15,7 @@ import PodByNamespace from '../../components/Charts/PodByNamespace';
 import PodsNotReady from '../../components/Charts/PodsNotReady';
 import MemoryNode from '../../components/Charts/MemoryNode';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -45,7 +45,6 @@ function MetricsPage({ cpuGauge }) {
   const classes = useStyles();
   return (
     <Grid container spacing={4}>
-
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <QueryCpuRangeChart />
@@ -103,7 +102,7 @@ function MetricsPage({ cpuGauge }) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log(`state`, state);
   return {
     cpuGauge: state.metricsReducer.cpuGauge,
