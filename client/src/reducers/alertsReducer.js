@@ -51,6 +51,8 @@ function alertsReducer(state = initialState, action) {
       rules.forEach((rule, index) => {
         ruleArr.push({
           name: rule.name,
+          label: rule.labels,
+          annotation: rule.annotations,
           query: rule.query,
           timeMonitored: rule.duration,
           alerts: rule.alert,

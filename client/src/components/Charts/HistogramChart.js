@@ -13,6 +13,9 @@ class HistogramChart extends Component {
     this.state = {
       config: {
         type: 'bar',
+        "globals": {
+          "font-family": "Roboto"
+        },
         title: {
           'text': 'Garbage Collection Duration by Kind',
           "font-color": "black",
@@ -23,9 +26,13 @@ class HistogramChart extends Component {
         },
         "plot": {
           'border-radius': "9px", /* Rounded Corners */
+          'width':'100%',
+          'height': '100%'
         },
         "plotarea": {
-            "margin": "dynamic"
+            "margin": "dynamic",
+            'width':'100%',
+            'height': '100%'
         },
         "scale-x":{  
           label: {
@@ -69,6 +76,7 @@ class HistogramChart extends Component {
     return (
       <div>
         <ZingChart id='histogramchart' data={this.state.config}/>
+
       </div>
     );
   }

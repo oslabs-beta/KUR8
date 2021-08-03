@@ -11,6 +11,9 @@ export class CPUContainer extends Component {
     this.state = {
         config: {
             type: "line",
+            "globals": {
+              "font-family": "Roboto"
+            },
             "utc": true,
             "title": {
               "text": "CPU Usage by Container",
@@ -19,10 +22,14 @@ export class CPUContainer extends Component {
             },
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
+              'width':'100%',
+              'height': '100%'
             },
             'plot': {
               'animation': {
-                  'effect': "ANIMATION_SLIDE_LEFT"
+                  'effect': "ANIMATION_SLIDE_LEFT",
+                  'width':'100%',
+                  'height': '100%'
               },
           },
             "legend": {

@@ -34,6 +34,9 @@ export class CPUGauge extends Component {
     this.state = {
       config: {
         type: 'gauge',
+        "globals": {
+          "font-family": "Roboto"
+        },
         title: {
           text: 'CPU usage in %',
         },

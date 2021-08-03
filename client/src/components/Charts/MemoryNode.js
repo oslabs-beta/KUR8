@@ -8,15 +8,23 @@ import React, { Component } from 'react';
 // import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
+import { useTheme } from '@material-ui/core/styles';
+
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class MemoryNode extends Component {
+
   constructor(props) {
     super(props);
+    
+    const theme = useTheme();
     this.state = {
         config: {
             type: "line",
+            "globals": {
+              "font-family": "Roboto"
+            },
             "utc": true,
             "title": {
               "text": "Kubernetes Node Memory Usage",
@@ -25,10 +33,14 @@ export class MemoryNode extends Component {
             },
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
+              'width':'100%',
+              'height': '100%'
             },
             "plot": {
               "animation": {
-                  "effect": "ANIMATION_SLIDE_LEFT"
+                  "effect": "ANIMATION_SLIDE_LEFT",
+                  'width':'100%',
+                  'height': '100%'
               },
           },
             "legend": {
@@ -120,7 +132,7 @@ export class MemoryNode extends Component {
               "animation": {
                 "effect": 1,
                 "sequence": 2,
-                "speed": 100000,
+                "speed": 1000000,
               }
             },
             "series": this.stateFormat()
@@ -179,7 +191,7 @@ export class MemoryNode extends Component {
       let value;
       // let millisecond;
 
-      let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
+      let lineColor = ["#9ED2F6", "#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
           value = this.props.memoryNode[i][1];
 
