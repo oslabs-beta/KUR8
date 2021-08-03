@@ -32,6 +32,7 @@ function CustomQuery({
   customDataArray,
   hyrateCustom,
 }) {
+  //on page load this useEffect will check to see if any custom charts have been stored in local storage and dispatch them to hydrate the store via the reducer
   useEffect(() => {
     const retrieveStash = localStorage.getItem('customcharts');
     if (retrieveStash) {
@@ -39,20 +40,22 @@ function CustomQuery({
     }
   }, []);
 
+  //This useEffect comes after the hydrate to not overwrite the previous localstorage before hydrating when adding new charts
   useEffect(() => {
     localStorage.setItem('customcharts', JSON.stringify(customDataArray));
   });
 
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const [range, setRange] = useState('Range');
-  const [step, setStep] = useState('Step');
+  const [open, setOpen] = useState(false); //state of collapsable Custom Query Form, true = expanded, false = collpased
+  const [query, setQuery] = useState(''); //current query inputted
+  const [range, setRange] = useState('Range'); //current data time range selected
+  const [step, setStep] = useState('Step'); //current step interval selected
 
   const handleNesting = () => {
     setOpen(!open);
   };
 
+  //only updates query state on select or enter press for some reason
   const handleQueryChange = (event, selectedObject) => {
     setQuery(selectedObject);
   };
@@ -65,13 +68,16 @@ function CustomQuery({
     setStep(event.target.value);
   };
 
+  //queries Prometheus with query: string, range: number, step: number
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('query:', query, 'range: ', range, 'step', step);
     fetchCustomQuery(query, range, step);
   };
 
+  //default values for data time ranges in select drop down menu
   const ranges = [1, 2, 3, 4, 8, 12, 18, 24];
+  //default values for data step intervals in select drop down menu
   const steps = [15, 30, 60, 120];
 
   return (
@@ -89,7 +95,6 @@ function CustomQuery({
             <Autocomplete
               id="autocomplete-query"
               freeSolo
-              // fullWidth={true}
               style={{ width: 1000 }}
               value={query}
               onChange={handleQueryChange}
