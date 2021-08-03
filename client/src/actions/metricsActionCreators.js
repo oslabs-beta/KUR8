@@ -161,7 +161,7 @@ export const metricsEndpointArray = (query, start, end, step) => [
 
   `http://localhost:9090/api/v1/query?query=sum%20by%20(namespace)%20(kube_pod_info)&time=${new Date().toISOString()}`,
 
-  `http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=2m`,
+  `http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=${new Date(new Date().setDate(new Date().getDate()-1)).toISOString()}&end=${new Date().toISOString()}&step=5m`,
 
 ];
 

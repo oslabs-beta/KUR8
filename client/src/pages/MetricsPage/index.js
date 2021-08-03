@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '622px',
+    height: '580px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -75,7 +75,7 @@ function MetricsPage({ cpuGauge }) {
           <PodByNamespace />
         </Paper>
       </Grid>
-      
+
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <TotalHTTPRequest />
