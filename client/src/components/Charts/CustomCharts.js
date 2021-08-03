@@ -6,7 +6,7 @@ import ZingChart from 'zingchart-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '512px',
+    height: '580px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -96,8 +96,18 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
               {...provided.dragHandleProps}
             >
               <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Button onClick={() => deleteCustom(index)} variant="outlined">delete</Button>
+                <Paper
+                  className={classes.paper}
+                  style={{ display: 'flex', alignItems: 'flex-end' }}
+                >
+                  <Button
+                    onClick={() => deleteCustom(index)}
+                    variant="outlined"
+                    style={{ width: 100 }}
+                  >
+                    delete
+                  </Button>
+                  <br />
                   <ZingChart id={`custom chart ${index}`} data={config} />
                 </Paper>
               </Grid>
