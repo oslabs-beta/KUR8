@@ -63,7 +63,7 @@ export class PodByNamespace extends Component {
                 values: this.seriesFormat(),
                 'background-color': "#6666FF #FF0066", /* Bar fill color (gradient) */
                 "borderRadiusTopLeft": 7,
-                alpha: 0.3, /* Transparency (more transparent) */
+                alpha: 0.5, /* Transparency (more transparent) */
               },
               
             ]

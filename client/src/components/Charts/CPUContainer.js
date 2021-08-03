@@ -20,6 +20,11 @@ export class CPUContainer extends Component {
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
             },
+            'plot': {
+              'animation': {
+                  'effect': "ANIMATION_SLIDE_LEFT"
+              },
+          },
             "legend": {
               "layout": "float",
               "background-color": "none",
