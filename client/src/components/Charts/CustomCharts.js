@@ -100,6 +100,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
                   className={classes.paper}
                   style={{ display: 'flex', alignItems: 'flex-end' }}
                 >
+                  {/* Passing in the dispatch with current index of the graph to map each delete button to its own chart*/}
                   <Button
                     onClick={() => deleteCustom(index)}
                     variant="outlined"
@@ -108,6 +109,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
                     delete
                   </Button>
                   <br />
+                  {/* Passing in the index to allow the deleteCustom function to find this chart*/}
                   <ZingChart id={`custom chart ${index}`} data={config} />
                 </Paper>
               </Grid>
