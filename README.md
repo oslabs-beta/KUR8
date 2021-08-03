@@ -36,7 +36,7 @@ The structures tab on the left will query your Kubernetes API to view the cluste
 
 <br/>
 
-If you don't have your instance of Prometheus installed begin by:
+If you don't have your instance of Prometheus installed begin by cloning this repo:
 
 <br/>
 
@@ -44,8 +44,6 @@ In KUR8 directory run: `kubectl create -f infra/manifests/setup`
 
 Once setup is complete run: `kubectl create -f infra/manifests/`
 
-If you want to open up Prometheus UI run: `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
-
-Now open up `localhost:9090` in your browser
+If you want to connect Kur8 to Prometheus open up the port by: `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
 
 You may also view the Prometheus tab in KUR8 `localhost:8080` to view and create your custom dashboard.
