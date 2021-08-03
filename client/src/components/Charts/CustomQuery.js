@@ -127,6 +127,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               ))}
             </Select>
             <Button
+              id="submit-custom"
               type="submit"
               variant="outlined"
               className={classes.input}
