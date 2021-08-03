@@ -208,7 +208,7 @@ function AlertPage({ fetchAlerts, alertGroups, isLoading }) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     alertGroups: state.alertsReducer.alertGroups,
     isLoading: state.alertsReducer.isLoading,

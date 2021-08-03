@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MasterNode({ name, nodeData }) {
+function MasterNode({ id, name, nodeData }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -87,7 +87,7 @@ function MasterNode({ name, nodeData }) {
             />
           </Tooltip>
           <Tooltip disableFocusListener placement="left" title="More Info">
-            <div className={classes.containersShape} onClick={handleClickOpen}>
+            <div id={`Master${id}`} className={classes.containersShape} onClick={handleClickOpen}>
               <Typography className={classes.moreInfo} variant="h4">
                 i
               </Typography>

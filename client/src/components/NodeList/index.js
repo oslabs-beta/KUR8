@@ -93,8 +93,9 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
               />
             </Grid>
             <Grid item direction="row">
-              {masterNodes.map(masterProps => (
+              {masterNodes.map((masterProps, index) => (
                 <MasterNode
+                  id={index}
                   key={masterProps.metadata.uid}
                   name={masterProps.metadata.name}
                   processes={masterProps.processes}
@@ -114,8 +115,9 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
               direction="column"
               justifyContent="flex-start"
               alignItems="flex-start">
-              {workerNodes.map(workerProps => (
+              {workerNodes.map((workerProps, index) => (
                 <WorkerNode
+                  id={index}
                   key={workerProps.metadata.uid}
                   pods={workerNodePods[workerProps.metadata.name]}
                   metadata={workerProps.metadata}

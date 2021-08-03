@@ -14,41 +14,51 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
+import {
+  fetchCustomQuery,
+  hyrateCustom,
+} from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles(() => ({
   input: {
-    height: 50
-  }
+    height: 50,
+  },
 }));
 
-function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCustom }) {
-
+function CustomQuery({
+  fetchCustomQuery,
+  allPromQL,
+  customDataArray,
+  hyrateCustom,
+}) {
+  //on page load this useEffect will check to see if any custom charts have been stored in local storage and dispatch them to hydrate the store via the reducer
   useEffect(() => {
     const retrieveStash = localStorage.getItem('customcharts');
     if (retrieveStash) {
-      hyrateCustom(JSON.parse(retrieveStash))
-    };
-  },[]);
+      hyrateCustom(JSON.parse(retrieveStash));
+    }
+  }, []);
 
+  //This useEffect comes after the hydrate to not overwrite the previous localstorage before hydrating when adding new charts
   useEffect(() => {
     localStorage.setItem('customcharts', JSON.stringify(customDataArray));
   });
 
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const [range, setRange] = useState('Range');
-  const [step, setStep] = useState('Step');
+  const [open, setOpen] = useState(false); //state of collapsable Custom Query Form, true = expanded, false = collpased
+  const [query, setQuery] = useState(''); //current query inputted
+  const [range, setRange] = useState('Range'); //current data time range selected
+  const [step, setStep] = useState('Step'); //current step interval selected
 
   const handleNesting = () => {
     setOpen(!open);
   };
 
+  //only updates query state on select or enter press for some reason
   const handleQueryChange = (event, selectedObject) => {
-    setQuery(selectedObject)
-  }
+    setQuery(selectedObject);
+  };
 
   const handleRangeChange = (event) => {
     setRange(event.target.value);
@@ -58,14 +68,17 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
     setStep(event.target.value);
   };
 
+  //queries Prometheus with query: string, range: number, step: number
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log( 'query:', query, 'range: ', range, 'step', step); 
+    console.log('query:', query, 'range: ', range, 'step', step);
     fetchCustomQuery(query, range, step);
-  }
+  };
 
-  const ranges = [1,2,3,4,8,12,18,24];
-  const steps = [15,30,60,120];
+  //default values for data time ranges in select drop down menu
+  const ranges = [1, 2, 3, 4, 8, 12, 18, 24];
+  //default values for data step intervals in select drop down menu
+  const steps = [15, 30, 60, 120];
 
   return (
     <List>
@@ -76,20 +89,25 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
         <ListItemText primary="Add New Chart" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse id='collapse' in={open} timeout="auto" unmountOnExit>
+      <Collapse id="collapse" in={open} timeout="auto" unmountOnExit>
         <ListItem button>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Autocomplete
               id="autocomplete-query"
               freeSolo
-              // fullWidth={true}
-              style = {{width: 1000}}
+              style={{ width: 1000 }}
               value={query}
               onChange={handleQueryChange}
               options={allPromQL.map((option) => option)}
-              renderOption={option => option}
+              renderOption={(option) => option}
               renderInput={(params) => (
-                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" className={classes.input}/>
+                <TextField
+                  {...params}
+                  label="Enter Prometheus Query"
+                  margin="normal"
+                  variant="outlined"
+                  className={classes.input}
+                />
               )}
             />
             <Select
@@ -100,9 +118,9 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               variant="outlined"
               className={classes.input}
             >
-            <MenuItem value="Range">
-            <em>Select a time range</em>
-            </MenuItem>
+              <MenuItem value="Range">
+                <em>Select a time range</em>
+              </MenuItem>
               {ranges.map((ranges) => (
                 <MenuItem key={ranges} value={ranges}>
                   {`${ranges} hours`}
@@ -118,7 +136,7 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               className={classes.input}
             >
               <MenuItem value="Step">
-              <em>Select a step interval</em>
+                <em>Select a step interval</em>
               </MenuItem>
               {steps.map((steps) => (
                 <MenuItem key={steps} value={steps}>
@@ -127,10 +145,11 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               ))}
             </Select>
             <Button
+              id="submit-custom"
               type="submit"
               variant="outlined"
               className={classes.input}
-              style={{marginBottom:4}}
+              style={{ marginBottom: 4 }}
             >
               Submit
             </Button>
@@ -141,14 +160,14 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     allPromQL: state.metricsReducer.allPromQL,
     customDataArray: state.metricsReducer.customDataArray,
   };
 };
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ fetchCustomQuery, hyrateCustom }, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);

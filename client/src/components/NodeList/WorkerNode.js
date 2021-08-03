@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function WorkerNode({ pods, metadata, services, nodeData }) {
+function WorkerNode({ id, pods, metadata, services, nodeData }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -75,7 +75,7 @@ function WorkerNode({ pods, metadata, services, nodeData }) {
     setOpen(false);
   };
   return (
-    <Paper className={classes.paper} elevation={2}>
+    <Paper id={`Node${id}`} className={classes.paper} elevation={2}>
       <Chip
         onClick={handleClickOpen}
         className={classes.chipNodeName}

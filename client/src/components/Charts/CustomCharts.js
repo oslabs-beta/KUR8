@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteCustom, moveDnd } from '../../actions/metricsActionCreators';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '512px',
+    height: '580px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -37,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//takes in the list of custom charts and position index and reorders the list of charts depending on where its dropped
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -60,52 +59,65 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
     moveDnd(items);
   };
 
-  //create custom charts
+  //create an array custom charts
   customDataArray.map((dataSet, index) => {
-    if(dataSet.length !== 0){
-    const config = {
-      type: 'area',
-      plot: {
-        stacked: true,
-        marker: {
-          visible: false,
+    if (dataSet.length !== 0) {
+      const config = {
+        type: 'area',
+        plot: {
+          stacked: true,
+          marker: {
+            visible: false,
+          },
         },
-      },
-      title: {
-        text: dataSet[0].metric.__name__,
-      },
-      'scale-x': {
-        zooming: true,
-      },
-      'scale-y': {
-        item: {
-          'font-size': 8,
+        title: {
+          text: dataSet[0].metric.__name__,
         },
-      },
-      series: dataSet.map((dataPoint) => {
-        return { values: dataPoint.yRange };
-      }),
-    };
+        'scale-x': {
+          zooming: true,
+        },
+        'scale-y': {
+          item: {
+            'font-size': 8,
+          },
+        },
+        series: dataSet.map((dataPoint) => {
+          return { values: dataPoint.yRange };
+        }),
+      };
 
-    custom.push(
-      <Draggable key={index} draggableId={`${index}`} index={index}>
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <button onClick={() => deleteCustom(index)}>delete</button>
-                <ZingChart id={`custom chart ${index}`} data={config} />
-              </Paper>
-            </Grid>
-          </div>
-        )}
-      </Draggable>
-    );
-        }
+      //pushing each indivual chart into its own draggable component
+      custom.push(
+        <Draggable key={index} draggableId={`${index}`} index={index}>
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
+              <Grid item xs={12}>
+                <Paper
+                  className={classes.paper}
+                  style={{ display: 'flex', alignItems: 'flex-end' }}
+                >
+                  {/* Passing in the dispatch with current index of the graph to map each delete button to its own chart*/}
+                  <Button
+                    onClick={() => deleteCustom(index)}
+                    variant="outlined"
+                    style={{ width: 100 }}
+                  >
+                    delete
+                  </Button>
+                  <br />
+                  {/* Passing in the index to allow the deleteCustom function to find this chart*/}
+                  <ZingChart id={`custom chart ${index}`} data={config} />
+                </Paper>
+              </Grid>
+            </div>
+          )}
+        </Draggable>
+      );
+    }
   });
 
   return (
