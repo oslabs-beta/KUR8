@@ -3,13 +3,12 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/kur8/dashboard)
 ![GitHub](https://img.shields.io/github/license/oslabs-beta/Kur8)
 
-A visual overview of Kubernetes architecture and Prometheus metrics
+A visual overview of Kubernetes architecture and Prometheus metrics.
 
+![kur8-structure-demo-gif](https://github.com/oslabs-beta/Kur8/blob/dev/kur8-structures-demo.gif)
 ---
 
 # Getting started
-
-<br/>
 
 ## Deploying KUR8
 
