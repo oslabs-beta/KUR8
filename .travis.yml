@@ -1,9 +1,6 @@
 services:
   - docker
 dist: xenial
-before_script:
-  - docker build -t kur8/dashboard .
-  - docker push kur8/dashboard
 script:
   - docker-compose -f docker-compose-test.yml up --abort-on-container-exit
 env:
