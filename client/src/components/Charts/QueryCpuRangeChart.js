@@ -33,17 +33,20 @@ class QueryCpuRangeChart extends Component {
             "margin-right": "dynamic",
             "margin-bottom": "dynamic",
             "margin-left": "dynamic",
-            "adjust-layout": true
+            "adjust-layout": true,
+            'width':'100%',
+            'height': '100%'
           },
           "plot": {
             "animation": {
-                "effect": "ANIMATION_SLIDE_LEFT"
+                "effect": "ANIMATION_SLIDE_LEFT",
+                'width':'100%',
+                'height': '100%'
             },
         },
           "labels": this.labelFormat(),
           "scale-x": {
             "label": {
-              "text": "Time Range",
               "font-size": "14px",
               "font-weight": "normal",
               "offset-x": "10%",
@@ -55,7 +58,8 @@ class QueryCpuRangeChart extends Component {
             },
             "zooming": 1,
             labels: this.dateFormat(),
-            "max-items": 4,
+            "max-items": 6,
+            "min-items": 4,
             "items-overlap": true,
             "guide": {
               "line-width": "0px"
@@ -145,13 +149,29 @@ class QueryCpuRangeChart extends Component {
     let dateArr = [];
     let timeValue;
     let dataLength = this.props.cpuRangeChart.length;
+    let formatTime;
 
     for (let i = 0; i < dataLength; i++) {
       timeValue = this.props.cpuRangeChart[i][1];
 
       for (let j = 0; j < timeValue.length; j++) {
-        
-        dateArr.push(new Date(Number(timeValue[j][0]) * 1000).toLocaleString());
+        let time = `${new Date(Number(timeValue[j][0]) * 1000).toUTCString()}`;
+        let timeArr = time.split(' ');
+        //["Mon,", "13", "Dec", "2021", "19:20:43", "GMT"]
+        let timePiece = timeArr[4].split(':');
+        if (timePiece[0] === "01" || timePiece[0] === "02" || timePiece[0] === "03" || timePiece[0] === "04" || timePiece[0] === "05" || timePiece[0] === "06" || timePiece[0] === "07" || timePiece[0] === "08" || timePiece[0] === "09" || timePiece[0] === "10" || timePiece[0] === "11") {
+          formatTime = `${timeArr[0]} ${timeArr[1]} ${timeArr[2]}\n${timeArr[4]} AM`
+        } else if (timePiece[0] === "00" ) {
+          timePiece[0] = '12';
+          let afterJoin = timePiece.join(':');
+          formatTime = `${timeArr[0]} ${timeArr[1]} ${timeArr[2]}\n${afterJoin} AM`
+        } else if (timePiece[0] === "12" || timePiece[0] === "13" || timePiece[0] === "14" || timePiece[0] === "15" || timePiece[0] === "16" || timePiece[0] === "17" || timePiece[0] === "18" || timePiece[0] === "19" || timePiece[0] === "20" || timePiece[0] === "21" || timePiece[0] === "22" || timePiece[0] === "23") {
+          timePiece[0] = String(Number(timePiece[0]) - 12);
+          let afterJoin = timePiece.join(':');
+          console.log('after',afterJoin)
+          formatTime = `${timeArr[0]} ${timeArr[1]} ${timeArr[2]}\n${afterJoin} PM`
+        }
+        dateArr.push(formatTime);
       }
     }
     return dateArr;

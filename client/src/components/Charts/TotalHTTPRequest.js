@@ -11,6 +11,9 @@ export class TotalHTTPRequest extends Component {
     this.state = {
         config: {
             type: "line",
+            "globals": {
+              "font-family": "Roboto",
+            },
             "utc": true,
             "title": {
               "text": "Total Kubelet Http Request",
@@ -19,10 +22,14 @@ export class TotalHTTPRequest extends Component {
             },
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
+              'width':'100%',
+              'height': '100%'
             },
             "plot": {
               "animation": {
-                  "effect": "ANIMATION_SLIDE_LEFT"
+                  "effect": "ANIMATION_SLIDE_LEFT",
+                  'width':'100%',
+                  'height': '100%'
               },
           },
             "legend": {
@@ -114,7 +121,7 @@ export class TotalHTTPRequest extends Component {
               "animation": {
                 "effect": 1,
                 "sequence": 2,
-                "speed": 100,
+                "speed": 1000,
               }
             },
             "series": this.stateFormat()

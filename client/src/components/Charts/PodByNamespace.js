@@ -25,11 +25,17 @@ export class PodByNamespace extends Component {
                 "alpha": 1,
                 "adjust-layout": true,
             },
+            "globals": {
+                "font-family": "Roboto"
+              },
             "plot": {
               'border-radius': "9px", /* Rounded Corners */
+              'width':'100%',
+              
             },
             "plotarea": {
-                "margin": "dynamic"
+                "margin": "dynamic",
+                'width':'100%',
             },
             'scale-x': {
                 label: { /* Scale Title */
@@ -48,8 +54,8 @@ export class PodByNamespace extends Component {
                 "animation": {
                   "effect": "ANIMATION_SLIDE_BOTTOM",
                   "sequence": 0,
-                  "speed": 800,
-                  "delay": 800
+                  "speed": 1500,
+                  "delay": 200
                 }
               },
               "crosshair-x": {
