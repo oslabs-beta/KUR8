@@ -122,7 +122,6 @@ const timeFormat = (num) => {
 
 
 const metricsActionCreators = [
-  fetchAllQueries,
   receiveDefaultMetrics, //using this one for garbage collection graph
   // receiveQuery,
   receiveCpuQueryRange, //The average amount of CPU time spent in system mode, per second, over the last minute (in seconds)
@@ -136,8 +135,6 @@ const metricsActionCreators = [
 ];
 
 export const metricsEndpointArray = (query, start, end, step) => [
-  'http://localhost:9090/api/v1/label/__name__/values',
-  
   `http://localhost:3068/getMetrics`,
 
   // `http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total[1m])`
@@ -180,4 +177,9 @@ export const fetchCustomQuery = (query, range, step, title) => dispatch => {
   console.log('fetching',query, range, step)
   axios.get(`http://localhost:9090/api/v1/query_range?query=${query}&start=${new Date(new Date().setDate(new Date().getDate()-(range/24))).toISOString()}&end=${new Date().toISOString()}&step=${step}s`)
   .then(data => dispatch(customQuery(data, title)));
+}
+
+export const fetchProm = () => dispatch => {
+  axios.get(`http://localhost:9090/api/v1/label/__name__/values`)
+  .then(data => dispatch(fetchAllQueries(data)));
 }
