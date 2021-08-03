@@ -1,12 +1,10 @@
 const { expect } = require('@jest/globals');
 const metricsReducer = require('../../client/src/reducers/metricsReducer');
-import * as types from '../../client/src/actions/metricsActionCreators';
-import expect from 'expect';
 
 describe('metricsReducer', () => {
   let initialState;
   const fakeAction = { type: 'NOT_A_REAL_ACTION' };
-  
+
   beforeEach(() => {
     initialState = {
       defaultcharts: [],
@@ -46,14 +44,14 @@ describe('metricsReducer', () => {
             data: {
               result: [],
             },
-          }
+          },
         },
       };
     });
 
     it('should list all arrays of charts in customDataArray', () => {
       const result = metricsReducer.default(initialState, action);
-      expect(result).toHaveProperty('customDataArray', [ [] ]);
+      expect(result).toHaveProperty('customDataArray', [[]]);
     });
 
     it('should return a new state object', () => {

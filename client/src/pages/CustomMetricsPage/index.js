@@ -8,14 +8,14 @@ function CustomMetricsPage({ customDataArray }) {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-          <CustomQuery />
+        <CustomQuery />
       </Grid>
-      <CustomCharts customDataArray={customDataArray}/>
+      <CustomCharts customDataArray={customDataArray} />
     </Grid>
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     customDataArray: state.metricsReducer.customDataArray,
   };
