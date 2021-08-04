@@ -94,7 +94,19 @@ describe('metricsReducer', () => {
           data: {
             status: 'success',
             data: {
-              result: [],
+              result: [
+                {
+                  metrics: {
+                    __name__: 'ALERTS_FOR_STATE',
+                    alertname: 'CPUThrottlingHigh',
+                    container: 'blackbox-exporter',
+                    namespace: 'monitoring',
+                    pod: 'blackbox-exporter-6c95587d7-m224m',
+                    severity: 'info',
+                  },
+                  values: [1628008072.054, '1628008052'],
+                },
+              ],
             },
           },
         },
@@ -103,7 +115,23 @@ describe('metricsReducer', () => {
 
     it('should list all arrays of charts in customDataArray', () => {
       const result = metricsReducer.default(initialState, action);
-      expect(result).toHaveProperty('customDataArray', [[]]);
+      expect(result).toHaveProperty('customDataArray', [
+        [
+          {
+            metrics: {
+              __name__: 'ALERTS_FOR_STATE',
+              alertname: 'CPUThrottlingHigh',
+              container: 'blackbox-exporter',
+              namespace: 'monitoring',
+              pod: 'blackbox-exporter-6c95587d7-m224m',
+              severity: 'info',
+            },
+            values: [1628008072.054, '1628008052'],
+            xRange: [undefined, '1'],
+            yRange: [undefined, '6'],
+          },
+        ],
+      ]);
     });
 
     it('should return a new state object', () => {
