@@ -131,7 +131,7 @@ function MetricsPage({ metrics, metricsFetchData, isLoading }) {
         </Paper>
       </Grid>
 
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <Paper className={classes.paper}>
           {metrics.defaultcharts.length ? (
             <PodsNotReady podNotReady={metrics.podNotReady} />
@@ -139,7 +139,7 @@ function MetricsPage({ metrics, metricsFetchData, isLoading }) {
             circleSpinner
           )}
         </Paper>
-      </Grid> */}
+      </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
