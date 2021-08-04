@@ -87,7 +87,7 @@ function AlertPage({ fetchAlerts, alertGroups, isLoading }) {
     });
   });
 
-  // This is a helper function used on LINE 166 to produce an array of headers, one for each group of alerts.
+  // This is a helper function used on LINE 193 to produce an array of headers, one for each group of alerts.
   const makeGroupHeaders = (name, index) => {
     titles.push(
       <div className={classes.groupHeader}>
