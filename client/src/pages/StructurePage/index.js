@@ -5,7 +5,6 @@ import React from 'react';
 import NodeList from '../../components/NodeList';
 
 function StructurePage({ isLoading }) {
-  console.log(`isLoading`, isLoading)
   return isLoading ? <LinearProgress color="secondary" /> : <NodeList />;
 }
 

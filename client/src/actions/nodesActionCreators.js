@@ -27,11 +27,11 @@ export const receiveIngresses = data => ({
 });
 
 export const nodesFetchStarted = () => ({
-  type: actionTypes.FETCH_STARTED,
+  type: actionTypes.NODE_FETCH_STARTED,
 });
 
 export const nodesFetchComplete = () => ({
-  type: actionTypes.FETCH_COMPLETE,
+  type: actionTypes.NODE_FETCH_COMPLETE,
 });
 
 // TYPE 'RECEIVE_MASTER_NODES' is not being dispatched

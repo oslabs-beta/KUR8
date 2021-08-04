@@ -158,8 +158,7 @@ export class CPUGauge extends Component {
     return (
       <div>
           <div>
-            {/* <select value={event.target.value} onChange={e => this.updateGauge(e.target.value)}>
-            <option disabled>Select Node</option> */}
+
               <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Select Node</InputLabel>
               <Select
@@ -176,10 +175,6 @@ export class CPUGauge extends Component {
                 )})}
               </Select>
               </FormControl>
-            {/* {this.props.cpuGauge.map((node, index) => {
-              return <option key={`note-options-${index}`} value={node[1]}>{node[0]}</option>;
-            })} */}
-          {/* </select> */}
         </div>
 
         <div>

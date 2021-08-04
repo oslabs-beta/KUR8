@@ -15,12 +15,11 @@ import { CompassCalibrationOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    height: 50
-  }
+    height: 50,
+  },
 }));
 
 function SearchBar() {
-
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -28,28 +27,31 @@ function SearchBar() {
   const handleNesting = () => {
     setOpen(!open);
   };
-  
+
   const handleChange = (event) => {
     setSearch(event.target.value);
-    highlight()
+    highlight();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log( 'search:', search); 
+    console.log('search:', search);
     // fetchCustomQuery(query, range, step, title);
-  }
+  };
 
   const highlight = () => {
-    let divs= document.getElementsByTagName('div');
+    let divs = document.getElementsByTagName('div');
     for (let i = 0; i < divs.length; i++) {
-      if(divs[i].innerHTML.indexOf(search) !== -1 && divs[i].className.includes('kubernetesShapeWrap')) {
-        console.log(divs[i], search)
-        divs[i].classList.remove("kubernetesShape")
-        divs[i].className = "kubernetesShapeHighlighted"
+      if (
+        divs[i].innerHTML.indexOf(search) !== -1 &&
+        divs[i].className.includes('kubernetesShapeWrap')
+      ) {
+        console.log(divs[i], search);
+        divs[i].classList.remove('kubernetesShape');
+        divs[i].className = 'kubernetesShapeHighlighted';
       }
     }
-  }
+  };
 
   return (
     <List>
@@ -78,13 +80,10 @@ function SearchBar() {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-
-  };
+const mapStateToProps = (state) => {
+  return {};
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

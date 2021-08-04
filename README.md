@@ -18,13 +18,19 @@ An image of the application has been pushed to [Docker Hub](https://hub.docker.c
 
 We recommend deploying Kur8 directly to your Kubernetes cluster through kubectl using our config file [kur8-depl.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/kur8-depl.yaml).
 
-`kubectl apply -f kur8-depl.yaml`
+```
+kubectl apply -f kur8-depl.yaml
+```
 
-`kubectl port-forward deployment/kur8-depl 3068:3068`
+```
+kubectl port-forward deployment/kur8-depl 3068:3068
+```
 
 In addition, in order to allow reading resources of the API, you must configure a set of permissions. We have set up a YAML file using RBAC authorization which you can apply directly to your Kubernetes cluster using the command line: [fabric8-rbac.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/fabric8-rbac.yaml)
 
-`kubectl apply -f fabric8-rbac.yaml`
+```
+kubectl apply -f fabric8-rbac.yaml
+```
 
 Then, open your web browser to http://localhost:3068.
 
@@ -36,16 +42,27 @@ The structures tab on the left will query your Kubernetes API to view the cluste
 
 <br/>
 
-If you don't have your instance of Prometheus installed begin by:
+If you don't have your instance of Prometheus installed begin by cloning this repo:
 
 <br/>
 
-In KUR8 directory run: `kubectl create -f infra/manifests/setup`
+In KUR8 directory run: 
+```
+kubectl create -f infra/manifests/setup
+```
 
-Once setup is complete run: `kubectl create -f infra/manifests/`
+Once setup is complete run: 
+```
+kubectl create -f infra/manifests/
+```
 
-If you want to open up Prometheus UI run: `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
+If you want to connect Kur8 to Prometheus open up the port by: 
+```
+kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+```
 
-Now open up `localhost:9090` in your browser
-
-You may also view the Prometheus tab in KUR8 `localhost:8080` to view and create your custom dashboard.
+You may also view the Prometheus tab in KUR8 
+```
+localhost:8080
+``` 
+to view and create your custom dashboard.

@@ -12,107 +12,12 @@ class QueryCpuRangeChart extends Component {
   constructor(props) {
     super(props);
     console.log('this.props.theme.palette.type', this.props.theme.palette.type);
-    this.state = {
+    // this.state = {
       // color: this.props.theme.palette.type,
-      config: {
-        "globals": {
-          "font-family": "Roboto",
-          "background-color": this.props.theme.palette.type === 'dark' ? "black" : "white",
-        },
-        "graphset": [{
-          "type": "line",
-          "utc": true,
-          "title": {
-            "y": "15px",
-            "text": "The average amount of CPU time spent in system mode",
-            "background-color": "none",
-            "font-color": "white",
-            "font-size": "24px",
-            "height": "25px",
-            "adjust-layout": true
-          },
-          "plotarea": {
-            "margin-top": "10%",
-            "margin-right": "dynamic",
-            "margin-bottom": "dynamic",
-            "margin-left": "dynamic",
-            "adjust-layout": true,
-            'width': '100%',
-            'height': '100%'
-          },
-          "plot": {
-            "animation": {
-              "effect": "ANIMATION_SLIDE_LEFT",
-              'width': '100%',
-              'height': '100%'
-            },
-          },
-          "labels": this.labelFormat(),
-          "scale-x": {
-            "label": {
-              "font-size": "14px",
-              "font-weight": "normal",
-              "offset-x": "10%",
-              "font-angle": 360,
-            },
-            "item": {
-              "text-align": "center",
-              "font-color": "#05636c"
-            },
-            "zooming": 1,
-            labels: this.dateFormat(),
-            "max-items": 6,
-            "min-items": 4,
-            "items-overlap": true,
-            "guide": {
-              "line-width": "0px"
-            },
-            "tick": {
-              "line-width": "2px"
-            },
-          },
-          "crosshair-x": {
-            "line-color": "#fff",
-            "line-width": 1,
-            "plot-label": {
-              "visible": false
-            }
-          },
-          "scale-y": {
-            "item": {
-              "font-color": "white",
-              "font-weight": "normal"
-            },
-            "label": {
-              "text": "CPU Range Data",
-              "font-size": "14px"
-            },
-            "guide": {
-              "line-width": "0px",
-              "alpha": 0.2,
-              "line-style": "dashed"
-            }
-          },
-          "plot": {
-            "line-width": 2,
-            "marker": {
-              "visible": false
-            },
-            "tooltip": {
-              "font-family": "Roboto",
-              "font-size": "15px",
-              "text": `%t value is %v`,
-              "text-align": "left",
-              "border-radius": 5,
-              "padding": 10
-            }
-          },
-          "series": this.dataFormat()
-        }]
-      }
-    };
 
-    this.handleClick = this.handleClick.bind(this);
+    // };
+
+    // this.handleClick = this.handleClick.bind(this);
 
   }
 
@@ -247,121 +152,218 @@ class QueryCpuRangeChart extends Component {
 
   }
 
-  componentDidMount() {
-      let toggleButton = document.querySelector('#themetouglebutton');
-      toggleButton.addEventListener('click', this.handleClick);
-  }
+  // componentDidMount() {
+  //     let toggleButton = document.querySelector('#themetouglebutton');
+  //     toggleButton.addEventListener('click', this.handleClick);
+  // }
 
-  handleClick() {
-    console.log('hi we are clicking hahaha')
-    this.setState({
-      color: this.props.theme.palette.type,
-      config: {
-        "globals": {
-          "font-family": "Roboto",
-          "background-color": this.props.theme.palette.type === 'dark' ? "black" : "white",
-        },
-        "graphset": [{
-          "type": "line",
-          "utc": true,
-          "title": {
-            "y": "15px",
-            "text": "The average amount of CPU time spent in system mode",
-            "background-color": "none",
-            "font-color": "white",
-            "font-size": "24px",
-            "height": "25px",
-            "adjust-layout": true
-          },
-          "plotarea": {
-            "margin-top": "10%",
-            "margin-right": "dynamic",
-            "margin-bottom": "dynamic",
-            "margin-left": "dynamic",
-            "adjust-layout": true,
-            'width': '100%',
-            'height': '100%'
-          },
-          "plot": {
-            "animation": {
-              "effect": "ANIMATION_SLIDE_LEFT",
-              'width': '100%',
-              'height': '100%'
-            },
-          },
-          "labels": this.labelFormat(),
-          "scale-x": {
-            "label": {
-              "font-size": "14px",
-              "font-weight": "normal",
-              "offset-x": "10%",
-              "font-angle": 360,
-            },
-            "item": {
-              "text-align": "center",
-              "font-color": "#05636c"
-            },
-            "zooming": 1,
-            labels: this.dateFormat(),
-            "max-items": 6,
-            "min-items": 4,
-            "items-overlap": true,
-            "guide": {
-              "line-width": "0px"
-            },
-            "tick": {
-              "line-width": "2px"
-            },
-          },
-          "crosshair-x": {
-            "line-color": "#fff",
-            "line-width": 1,
-            "plot-label": {
-              "visible": false
-            }
-          },
-          "scale-y": {
-            "item": {
-              "font-color": "white",
-              "font-weight": "normal"
-            },
-            "label": {
-              "text": "CPU Range Data",
-              "font-size": "14px"
-            },
-            "guide": {
-              "line-width": "0px",
-              "alpha": 0.2,
-              "line-style": "dashed"
-            }
-          },
-          "plot": {
-            "line-width": 2,
-            "marker": {
-              "visible": false
-            },
-            "tooltip": {
-              "font-family": "Roboto",
-              "font-size": "15px",
-              "text": `%t value is %v`,
-              "text-align": "left",
-              "border-radius": 5,
-              "padding": 10
-            }
-          },
-          "series": this.dataFormat()
-        }]
-      }
-    });
+  // handleClick() {
+  //   console.log('hi we are clicking hahaha')
+  //   this.setState({
+  //     color: this.props.theme.palette.type,
+  //     config: {
+  //       "globals": {
+  //         "font-family": "Roboto",
+  //         "background-color": this.props.theme.palette.type === 'dark' ? "black" : "white",
+  //       },
+  //       "graphset": [{
+  //         "type": "line",
+  //         "utc": true,
+  //         "title": {
+  //           "y": "15px",
+  //           "text": "The average amount of CPU time spent in system mode",
+  //           "background-color": "none",
+  //           "font-color": "white",
+  //           "font-size": "24px",
+  //           "height": "25px",
+  //           "adjust-layout": true
+  //         },
+  //         "plotarea": {
+  //           "margin-top": "10%",
+  //           "margin-right": "dynamic",
+  //           "margin-bottom": "dynamic",
+  //           "margin-left": "dynamic",
+  //           "adjust-layout": true,
+  //           'width': '100%',
+  //           'height': '100%'
+  //         },
+  //         "plot": {
+  //           "animation": {
+  //             "effect": "ANIMATION_SLIDE_LEFT",
+  //             'width': '100%',
+  //             'height': '100%'
+  //           },
+  //         },
+  //         "labels": this.labelFormat(),
+  //         "scale-x": {
+  //           "label": {
+  //             "font-size": "14px",
+  //             "font-weight": "normal",
+  //             "offset-x": "10%",
+  //             "font-angle": 360,
+  //           },
+  //           "item": {
+  //             "text-align": "center",
+  //             "font-color": "#05636c"
+  //           },
+  //           "zooming": 1,
+  //           labels: this.dateFormat(),
+  //           "max-items": 6,
+  //           "min-items": 4,
+  //           "items-overlap": true,
+  //           "guide": {
+  //             "line-width": "0px"
+  //           },
+  //           "tick": {
+  //             "line-width": "2px"
+  //           },
+  //         },
+  //         "crosshair-x": {
+  //           "line-color": "#fff",
+  //           "line-width": 1,
+  //           "plot-label": {
+  //             "visible": false
+  //           }
+  //         },
+  //         "scale-y": {
+  //           "item": {
+  //             "font-color": "white",
+  //             "font-weight": "normal"
+  //           },
+  //           "label": {
+  //             "text": "CPU Range Data",
+  //             "font-size": "14px"
+  //           },
+  //           "guide": {
+  //             "line-width": "0px",
+  //             "alpha": 0.2,
+  //             "line-style": "dashed"
+  //           }
+  //         },
+  //         "plot": {
+  //           "line-width": 2,
+  //           "marker": {
+  //             "visible": false
+  //           },
+  //           "tooltip": {
+  //             "font-family": "Roboto",
+  //             "font-size": "15px",
+  //             "text": `%t value is %v`,
+  //             "text-align": "left",
+  //             "border-radius": 5,
+  //             "padding": 10
+  //           }
+  //         },
+  //         "series": this.dataFormat()
+  //       }]
+  //     }
+  //   });
 
-  }
+  // }
 
 
   render() {
+    console.log('ahohoho', this.props.theme.palette.type)
+    let myConfig = {
+      "globals": {
+        "font-family": "Roboto",
+        "background-color": this.props.theme.palette.type === 'dark' ? 'black': 'white',
+      },
+      "graphset": [{
+        "type": "line",
+        "utc": true,
+        "title": {
+          "y": "15px",
+          "text": "The average amount of CPU time spent in system mode",
+          "background-color": "none",
+          "font-color": "white",
+          "font-size": "24px",
+          "height": "25px",
+          "adjust-layout": true
+        },
+        "plotarea": {
+          "margin-top": "10%",
+          "margin-right": "dynamic",
+          "margin-bottom": "dynamic",
+          "margin-left": "dynamic",
+          "adjust-layout": true,
+          'width': '100%',
+          'height': '100%'
+        },
+        "plot": {
+          "animation": {
+            "effect": "ANIMATION_SLIDE_LEFT",
+            'width': '100%',
+            'height': '100%'
+          },
+        },
+        "labels": this.labelFormat(),
+        "scale-x": {
+          "label": {
+            "font-size": "14px",
+            "font-weight": "normal",
+            "offset-x": "10%",
+            "font-angle": 360,
+          },
+          "item": {
+            "text-align": "center",
+            "font-color": "#05636c"
+          },
+          "zooming": 1,
+          labels: this.dateFormat(),
+          "max-items": 6,
+          "min-items": 4,
+          "items-overlap": true,
+          "guide": {
+            "line-width": "0px"
+          },
+          "tick": {
+            "line-width": "2px"
+          },
+        },
+        "crosshair-x": {
+          "line-color": "#fff",
+          "line-width": 1,
+          "plot-label": {
+            "visible": false
+          }
+        },
+        "scale-y": {
+          "item": {
+            "font-color": "white",
+            "font-weight": "normal"
+          },
+          "label": {
+            "text": "CPU Range Data",
+            "font-size": "14px"
+          },
+          "guide": {
+            "line-width": "0px",
+            "alpha": 0.2,
+            "line-style": "dashed"
+          }
+        },
+        "plot": {
+          "line-width": 2,
+          "marker": {
+            "visible": false
+          },
+          "tooltip": {
+            "font-family": "Roboto",
+            "font-size": "15px",
+            "text": `%t value is %v`,
+            "text-align": "left",
+            "border-radius": 5,
+            "padding": 10
+          }
+        },
+        "series": this.dataFormat()
+      }]
+    }
     
     return (
       <div>
-        <ZingChart id="querycpurangechart" data={this.state.config} />
+        <ZingChart id="querycpurangechart" data={myConfig} />
       </div>
     );
   }

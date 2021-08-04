@@ -9,12 +9,12 @@ const initialState = {
 function nodesReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case actionsTypes.FETCH_STARTED:
+    case actionsTypes.NODE_FETCH_STARTED:
       return {
         ...state,
         isLoading: true,
       };
-    case actionsTypes.FETCH_COMPLETE:
+    case actionsTypes.NODE_FETCH_COMPLETE:
       return {
         ...state,
         isLoading: false,
