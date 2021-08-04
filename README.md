@@ -1,9 +1,16 @@
-# Kur8
-[![Build Status](https://travis-ci.com/oslabs-beta/Kur8.svg?branch=dev)](https://travis-ci.com/oslabs-beta/Kur8)
-![Docker Pulls](https://img.shields.io/docker/pulls/kur8/dashboard)
-![GitHub](https://img.shields.io/github/license/oslabs-beta/Kur8)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83550543/128225963-e0d5db59-b453-402c-a949-1d12ed6f0e48.jpg"/>
+</p>
 
-A visual overview of Kubernetes architecture and Prometheus metrics.
+<p align="center">
+  <img src="https://travis-ci.com/oslabs-beta/Kur8.svg?branch=dev"/>
+  <img src="https://img.shields.io/docker/pulls/kur8/dashboard"/>
+  <img src="https://img.shields.io/github/license/oslabs-beta/Kur8" /> 
+</p>
+
+<p align="center">
+ A visual overview of Kubernetes architecture and Prometheus metrics.
+</p>
 
 ---
 
@@ -79,8 +86,8 @@ to view and create your custom dashboard.
 
 ## Contributors
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Jimmy Ngo](https://www.linkedin.com/in/jimmycngo/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> jimmycngo](https://github.com/jimmycngo)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Jimmy Ngo](https://www.linkedin.com/in/jimmycngo/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> jimmycngo](https://github.com/jimmycngo)
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ivy Yu](https://www.linkedin.com/in/ivy-yu-746a5b132/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> ivy118](https://github.com/ivy118)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ivy Yu](https://www.linkedin.com/in/ivy-yu-746a5b132/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> ivy118](https://github.com/ivy118)
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Steven Del Rosario](https://www.linkedin.com/in/stevendelro/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> stevendelro](https://github.com/stevendelro)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Steven Del Rosario](https://www.linkedin.com/in/stevendelro/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> stevendelro](https://github.com/stevendelro)
