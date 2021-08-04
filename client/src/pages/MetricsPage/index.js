@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '580px',
+    height: '560px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -87,11 +87,11 @@ function MetricsPage({ cpuGauge }) {
         </Paper>
       </Grid>
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Paper className={classes.paper}>
           <PodsNotReady />
         </Paper>
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>

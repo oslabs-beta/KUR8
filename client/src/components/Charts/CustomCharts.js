@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +47,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
   const classes = useStyles();
+  const theme = useTheme();
   const custom = [];
 
   //drag and drop

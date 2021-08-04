@@ -4,131 +4,11 @@ import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+import { withTheme } from '@material-ui/core/styles';
 
 export class TotalHTTPRequest extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        config: {
-            type: "line",
-            "globals": {
-              "font-family": "Roboto",
-            },
-            "utc": true,
-            "title": {
-              "text": "Total Kubelet Http Request",
-              "font-size": "24px",
-              "adjust-layout": true
-            },
-            "plotarea": {
-              "margin": "dynamic 45 60 dynamic",
-              'width':'100%',
-              'height': '100%'
-            },
-            "plot": {
-              "animation": {
-                  "effect": "ANIMATION_SLIDE_LEFT",
-                  'width':'100%',
-                  'height': '100%'
-              },
-          },
-            "legend": {
-              "layout": "float",
-              "background-color": "none",
-              "border-width": 0,
-              "shadow": 0,
-              "align": "center",
-              "adjust-layout": true,
-              "toggle-action": "remove",
-              "item": {
-                "padding": 7,
-                "marginRight": 17,
-                "cursor": "hand"
-              }
-            },
-            "scale-x": {
-              // "min-value" : Date.now() - 86400000,
-              "min-value": this.findMin(),
-              "max-value": this.findMax(),
-              "step": "hour",
-              // 'max-items':10,
-              zooming: true,
-
-              "shadow": 0,
-              // "step": 83000,
-              "transform": {
-                "type": "date",
-                "all": "%D, %d %M<br />%h:%i %A",
-                "guide": {
-                  "visible": false
-                },
-                "item": {
-                  "visible": false
-                }
-              },
-              "label": {
-                "visible": false
-              },
-              "minor-ticks": 0
-            },
-            "scale-y": {
-              "line-color": "#f6f7f8",
-              "shadow": 0,
-              "progression": "log",
-              "log-base": Math.E,
-              // "type": "line",
-              "plotarea": {
-                "adjust-layout": true,
-              },
-              "guide": {
-                "line-style": "dashed"
-              },
-              "label": {
-                "text": "Requests",
-              },
-              "minor-ticks": 0,
-              "thousands-separator": ","
-            },
-            "crosshair-x": {
-              "line-color": "#efefef",
-              "plot-label": {
-                "border-radius": "5px",
-                "border-width": "1px",
-                "border-color": "#f6f7f8",
-                "padding": "10px",
-                "font-weight": "bold"
-              },
-              "scale-label": {
-                "font-color": "#000",
-                "background-color": "#f6f7f8",
-                "border-radius": "5px"
-              }
-            },
-            "tooltip": {
-              "visible": false
-            },
-            "plot": {
-              "highlight": true,
-              "tooltip-text": "%t views: %v<br>%k",
-              "shadow": 0,
-              "line-width": "2px",
-              "marker": {
-                "visible": false,
-              },
-              "highlight-state": {
-                "line-width": 3
-              },
-              "animation": {
-                "effect": 1,
-                "sequence": 2,
-                "speed": 1000,
-              }
-            },
-            "series": this.stateFormat()
-      },
-    };
-
-    this.chartDone = this.chartDone.bind(this);
     console.log('this.props.http', this.props.httpRequestData)
   }
 
@@ -224,15 +104,132 @@ export class TotalHTTPRequest extends Component {
   }
 
   render() {
+    let myConfig = {
+      type: "line",
+      "globals": {
+        "font-family": "Roboto",
+        "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
+        "color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+      },
+      "utc": true,
+      "title": {
+        "text": "Total Kubelet Http Request",
+        "font-size": "24px",
+        "adjust-layout": true
+      },
+      "plotarea": {
+        "margin": "dynamic 45 60 dynamic",
+        'width':'100%',
+        'height': '100%'
+      },
+      "plot": {
+        "animation": {
+            "effect": "ANIMATION_SLIDE_LEFT",
+            'width':'100%',
+            'height': '100%'
+        },
+    },
+      "legend": {
+        "layout": "float",
+        "background-color": "none",
+        "border-width": 0,
+        "shadow": 0,
+        "align": "center",
+        "adjust-layout": true,
+        "toggle-action": "remove",
+        "item": {
+          "padding": 7,
+          "marginRight": 17,
+          "cursor": "hand"
+        }
+      },
+      "scale-x": {
+        // "min-value" : Date.now() - 86400000,
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "min-value": this.findMin(),
+        "max-value": this.findMax(),
+        "step": "hour",
+        // 'max-items':10,
+        zooming: true,
+
+        "shadow": 0,
+        // "step": 83000,
+        "transform": {
+          "type": "date",
+          "all": "%D, %d %M<br />%h:%i %A",
+          "guide": {
+            "visible": false
+          },
+          "item": {
+            "visible": false
+          }
+        },
+        "label": {
+          "visible": false
+        },
+        "minor-ticks": 0
+      },
+      "scale-y": {
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "shadow": 0,
+        "progression": "log",
+        "log-base": Math.E,
+        // "type": "line",
+        "plotarea": {
+          "adjust-layout": true,
+        },
+        "guide": {
+          "line-style": "dashed"
+        },
+        "label": {
+          "text": "Requests",
+        },
+        "minor-ticks": 0,
+        "thousands-separator": ","
+      },
+      "crosshair-x": {
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "plot-label": {
+          "border-radius": "5px",
+          "border-width": "1px",
+          "border-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+          "padding": "10px",
+          "font-weight": "bold"
+        },
+        "scale-label": {
+          "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+          "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
+          "border-radius": "5px"
+        }
+      },
+      "tooltip": {
+        "visible": false
+      },
+      "plot": {
+        "highlight": true,
+        "tooltip-text": "%t views: %v<br>%k",
+        "shadow": 0,
+        "line-width": "2px",
+        "marker": {
+          "visible": false,
+        },
+        "highlight-state": {
+          "line-width": 3
+        },
+        "animation": {
+          "effect": 1,
+          "sequence": 2,
+          "speed": 1000,
+        }
+      },
+      "series": this.stateFormat()
+}
 
     return (
     <div>
-        <ZingChart data={this.state.config} complete={this.chartDone} />
+        <ZingChart data={myConfig} />
     </div>
     );
-  }
-  chartDone(event) {
-    console.log(`Event "Complete" - The chart is rendered\n`);
   }
 }
 
@@ -241,4 +238,4 @@ export default connect(
     httpRequestData: state.metricsReducer.httpRequestData,
   }),
   null
-)(TotalHTTPRequest);
+)(withTheme(TotalHTTPRequest));

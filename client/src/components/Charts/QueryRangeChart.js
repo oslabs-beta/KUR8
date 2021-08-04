@@ -12,113 +12,6 @@ class QueryRangeChart extends Component {
     super(props);
     this.dataFormat();
     // this.props.theme.palette.type,
-    this.state = {
-      config: {
-        "globals": {
-          "font-family": "Roboto"
-        },
-        "graphset": [{
-          "type": "area",
-          // "utc": true,
-          "title": {
-            "y": "15px",
-            "text": "The Average Network Traffic Received",
-            "background-color": "none",
-            "font-color": "black",
-            "font-size": "24px",
-            "height": "25px",
-            "adjust-layout": true
-          },
-          "plotarea": {
-            "margin-top": "10%",
-            "margin-right": "dynamic",
-            "margin-bottom": "dynamic",
-            "margin-left": "dynamic",
-            "adjust-layout": true,
-            'width':'100%',
-            'height': '100%'
-          },
-          "labels": this.labelFormat(),
-          "scale-x": {
-            "label": {
-              "font-size": "14px",
-              "font-weight": "normal",
-              "offset-x": "10%",
-              "font-angle": 360,
-            },
-            "item": {
-              "text-align": "center",
-              "font-color": "#05636c"
-            },
-            "zooming": 1,
-            labels: this.dateFormat(),
-            "max-items": 6,
-            "min-items": 4,
-            "items-overlap": true,
-            "guide": {
-              "line-width": "0px"
-            },
-            "tick": {
-              "line-width": "2px"
-            },
-          },
-          "crosshair-x": {
-            "line-color": "#fff",
-            "plot-label": {
-              "border-radius": "5px",
-              "border-width": "1px",
-              "border-color": "#f6f7f8",
-              "padding": "10px",
-              "font-weight": "bold"
-            },
-            "scale-label": {
-              "font-color": "#000",
-              "background-color": "#f6f7f8",
-              "border-radius": "5px"
-            },
-
-            "line-width": 1,
-            "plot-label": {
-              "visible": false
-            }
-          },
-          "scale-y": {
-            "item": {
-              "font-color": "black",
-              "font-weight": "normal"
-            },
-
-            "label": {
-              "text": "Query Range Data",
-              "font-size": "14px"
-            },
-            "guide": {
-              "line-width": "0px",
-              "alpha": 0.2,
-              "line-style": "dashed"
-            }
-          },
-          "plot": {
-            "line-width": 2,
-            'width':'100%',
-            'height': '100%',
-            "marker": {
-              "size": 1,
-              "visible": false
-            },
-            "tooltip": {
-              "font-family": "Roboto",
-              "font-size": "15px",
-              "text": `%t value is %v`,
-              "text-align": "left",
-              "border-radius": 5,
-              "padding": 10
-            }
-          },
-          "series": this.dataFormat()
-        }]
-      }
-    };
   }
 
 
@@ -290,9 +183,117 @@ class QueryRangeChart extends Component {
   }
 
   render() {
+    let myConfig = {
+      "globals": {
+        "font-family": "Roboto",
+        "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
+        "color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+      },
+      "graphset": [{
+        "type": "area",
+        // "utc": true,
+        "title": {
+          "y": "15px",
+          "text": "The Average Network Traffic Received",
+          "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+          "background-color": "none",
+          "font-size": "24px",
+          "height": "25px",
+          "adjust-layout": true
+        },
+        "plotarea": {
+          "margin-top": "10%",
+          "margin-right": "dynamic",
+          "margin-bottom": "dynamic",
+          "margin-left": "dynamic",
+          "adjust-layout": true,
+          'width':'100%',
+          'height': '100%'
+        },
+        "labels": this.labelFormat(),
+        "scale-x": {
+          "label": {
+            
+            "font-size": "14px",
+            "font-weight": "normal",
+            "offset-x": "10%",
+            "font-angle": 360,
+          },
+          "item": {
+            "text-align": "center",
+            "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+          },
+          "zooming": 1,
+          labels: this.dateFormat(),
+          "max-items": 6,
+          "min-items": 4,
+          "items-overlap": true,
+          "guide": {
+            "line-width": "0px"
+          },
+          "tick": {
+            "line-width": "2px"
+          },
+        },
+        "crosshair-x": {
+          "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+          "plot-label": {
+            "border-radius": "5px",
+            "border-width": "1px",
+            "border-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+            "padding": "10px",
+            "font-weight": "bold"
+          },
+          "scale-label": {
+            "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+            "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
+            "border-radius": "5px"
+          },
+
+          "line-width": 1,
+          "plot-label": {
+            "visible": false
+          }
+        },
+        "scale-y": {
+          "item": {
+            "font-color": "black",
+            "font-weight": "normal"
+          },
+
+          "label": {
+            "text": "Query Range Data",
+            "font-size": "14px"
+          },
+          "guide": {
+            "line-width": "0px",
+            "alpha": 0.2,
+            "line-style": "dashed"
+          }
+        },
+        "plot": {
+          "line-width": 2,
+          'width':'100%',
+          'height': '100%',
+          "marker": {
+            "size": 1,
+            "visible": false
+          },
+          "tooltip": {
+            "font-family": "Roboto",
+            "font-size": "15px",
+            "text": `%t value is %v`,
+            "text-align": "left",
+            "border-radius": 5,
+            "padding": 10
+          }
+        },
+        "series": this.dataFormat()
+      }]
+    }
     return (
       <div>
-        <ZingChart id="queryrangechart" data={this.state.config} />
+        <ZingChart id="queryrangechart" data={myConfig} />
       </div>
     );
   }

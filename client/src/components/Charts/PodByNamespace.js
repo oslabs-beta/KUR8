@@ -15,19 +15,42 @@ import { withTheme } from '@material-ui/core/styles';
 export class PodByNamespace extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-        config: {
+
+      this.chartDone = this.chartDone.bind(this);
+    }
+
+    seriesFormat = () => {
+        //[[kubesystem, 9], ...]
+        let valueArr = [];
+
+        for (let i = 0; i < this.props.podPerNamespace.length; i++) {
+            valueArr.push(Number(this.props.podPerNamespace[i][1]));
+        }
+        return valueArr;
+    }
+
+    stateLabel = () => {
+        let labelArr = [];
+        for (let i = 0; i < this.props.podPerNamespace.length; i++) {
+            labelArr.push(this.props.podPerNamespace[i][0]);
+        }
+        return labelArr;
+
+    }
+    render() {
+        let myConfig = {
             type: 'bar',
             "title": {
                 "text": "Number of Pods Per Namespace",
-                "font-color": "black",
+                "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
                 "backgroundColor": "none",
                 "font-size": "22px",
                 "alpha": 1,
                 "adjust-layout": true,
             },
             "globals": {
-                "font-family": "Roboto"
+                "font-family": "Roboto",
+                "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
               },
             "plot": {
               'border-radius': "9px", /* Rounded Corners */
@@ -39,12 +62,14 @@ export class PodByNamespace extends Component {
                 'width':'100%',
             },
             'scale-x': {
+                "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
                 label: { /* Scale Title */
                     text: "Namespace",
                 },
                 labels: this.stateLabel(), /* Scale Labels */
             },
             'scale-y': {
+                "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
                 label: { /* Scale Title */
                     text: "Number of Pods",
                 },
@@ -68,40 +93,17 @@ export class PodByNamespace extends Component {
               },
             series: [{
                 values: this.seriesFormat(),
-                'background-color': "#6666FF #FF0066", /* Bar fill color (gradient) */
+                'background-color': this.props.theme.palette.type === 'dark' ? "blue pink": "#6666FF #FF0066", /* Bar fill color (gradient) */
                 "borderRadiusTopLeft": 7,
-                alpha: 0.5, /* Transparency (more transparent) */
+                alpha: this.props.theme.palette.type === 'dark' ? 0.8: 0.6, /* Transparency (more transparent) */
               },
               
             ]
         }
-      }
-      this.chartDone = this.chartDone.bind(this);
-    }
-
-    seriesFormat = () => {
-        //[[kubesystem, 9], ...]
-        let valueArr = [];
-
-        for (let i = 0; i < this.props.podPerNamespace.length; i++) {
-            valueArr.push(Number(this.props.podPerNamespace[i][1]));
-        }
-        return valueArr;
-    }
-
-    stateLabel = () => {
-        let labelArr = [];
-        for (let i = 0; i < this.props.podPerNamespace.length; i++) {
-            labelArr.push(this.props.podPerNamespace[i][0]);
-        }
-        return labelArr;
-
-    }
-    render() {
 
         return (
         <div>
-            <ZingChart data={this.state.config} complete={this.chartDone} />
+            <ZingChart data={myConfig} complete={this.chartDone} />
         </div>
         );
     }
@@ -115,4 +117,4 @@ export class PodByNamespace extends Component {
         podPerNamespace: state.metricsReducer.podPerNamespace,
     }),
     null
-    )(PodByNamespace);
+    )(withTheme(PodByNamespace));
