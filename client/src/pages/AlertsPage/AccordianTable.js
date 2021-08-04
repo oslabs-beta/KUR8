@@ -72,6 +72,9 @@ export default function AccordianTable({ groupData }) {
             // prettier-ignore
             modifiedValue = `${isoDate.substr(11, 8)} - ${isoDate.substr(0, 10)} `;
           }
+
+          if (!value || value === 'undefined') modifiedValue = `no data available`;
+
           return (
             <TableCell
               key={uuidv4()}
