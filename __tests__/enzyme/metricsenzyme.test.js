@@ -23,7 +23,19 @@ configure({ adapter: new Adapter() });
 
 const initialState = {
   metricsReducer: {
-    cpuGauge: [],
+    isLoading: false,
+    defaultcharts: [{ chart: 'chart' }],
+    querycharts: [{ chart: 'chart' }],
+    queryrangecharts: [{ chart: 'chart' }],
+    cpuGauge: [{ chart: 'chart' }],
+    cpuRangeChart: [{ chart: 'chart' }],
+    customDataArray: [{ chart: 'chart' }],
+    memoryNode: [{ chart: 'chart' }],
+    httpRequestData: [{ chart: 'chart' }],
+    cpuContainerData: [{ chart: 'chart' }],
+    allPromQL: [{ chart: 'chart' }],
+    podPerNamespace: [{ chart: 'chart' }],
+    podNotReady: [{ chart: 'chart' }],
   },
 };
 
@@ -33,15 +45,9 @@ let store;
 describe('MetricsPage', () => {
   let wrapper;
 
-  const props = {
-    metricsReducer: {
-      cpuGauge: [],
-    },
-  };
-
   beforeAll(() => {
     store = mockStore(initialState);
-    wrapper = shallow(<MetricsPage {...props} store={store} />)
+    wrapper = shallow(<MetricsPage store={store} />)
       .children()
       .dive();
   });

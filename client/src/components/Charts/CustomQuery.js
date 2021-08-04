@@ -60,16 +60,16 @@ function CustomQuery({
     setQuery(selectedObject);
   };
 
-  const handleRangeChange = (event) => {
+  const handleRangeChange = event => {
     setRange(event.target.value);
   };
 
-  const handleStepChange = (event) => {
+  const handleStepChange = event => {
     setStep(event.target.value);
   };
 
   //queries Prometheus with query: string, range: number, step: number
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     console.log('query:', query, 'range: ', range, 'step', step);
     fetchCustomQuery(query, range, step);
@@ -98,9 +98,9 @@ function CustomQuery({
               style={{ width: 1000 }}
               value={query}
               onChange={handleQueryChange}
-              options={allPromQL.map((option) => option)}
-              renderOption={(option) => option}
-              renderInput={(params) => (
+              options={allPromQL.map(option => option)}
+              renderOption={option => option}
+              renderInput={params => (
                 <TextField
                   {...params}
                   label="Enter Prometheus Query"
@@ -121,7 +121,7 @@ function CustomQuery({
               <MenuItem value="Range">
                 <em>Select a time range</em>
               </MenuItem>
-              {ranges.map((ranges) => (
+              {ranges.map(ranges => (
                 <MenuItem key={ranges} value={ranges}>
                   {`${ranges} hours`}
                 </MenuItem>
@@ -138,7 +138,7 @@ function CustomQuery({
               <MenuItem value="Step">
                 <em>Select a step interval</em>
               </MenuItem>
-              {steps.map((steps) => (
+              {steps.map(steps => (
                 <MenuItem key={steps} value={steps}>
                   {`${steps} seconds`}
                 </MenuItem>
@@ -160,14 +160,14 @@ function CustomQuery({
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     allPromQL: state.metricsReducer.allPromQL,
     customDataArray: state.metricsReducer.customDataArray,
   };
 };
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ fetchCustomQuery, hyrateCustom }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);
