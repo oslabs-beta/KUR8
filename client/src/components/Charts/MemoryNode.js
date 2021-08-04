@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 // import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
-import { useTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
@@ -17,8 +17,7 @@ export class MemoryNode extends Component {
 
   constructor(props) {
     super(props);
-    
-    const theme = useTheme();
+
     this.state = {
         config: {
             type: "line",
@@ -252,3 +251,6 @@ export default connect(
   }),
   null
 )(MemoryNode);
+const theme = withTheme(MemoryNode);
+
+export {theme};

@@ -5,11 +5,13 @@ import ZingChart from 'zingchart-react';
 // EXPLICITLY IMPORT MODULE from node_modules
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+import { withTheme } from '@material-ui/core/styles';
 
 class QueryRangeChart extends Component {
   constructor(props) {
     super(props);
     this.dataFormat();
+    // this.props.theme.palette.type,
     this.state = {
       config: {
         "globals": {
@@ -20,9 +22,9 @@ class QueryRangeChart extends Component {
           // "utc": true,
           "title": {
             "y": "15px",
-            "text": "The average network traffic received, per second, over the last minute (in bytes)",
+            "text": "The Average Network Traffic Received",
             "background-color": "none",
-            "font-color": "#05636c",
+            "font-color": "black",
             "font-size": "24px",
             "height": "25px",
             "adjust-layout": true
@@ -82,7 +84,7 @@ class QueryRangeChart extends Component {
           },
           "scale-y": {
             "item": {
-              "font-color": "#05636c",
+              "font-color": "black",
               "font-weight": "normal"
             },
 
@@ -302,4 +304,4 @@ export default connect(
     querycharts: state.metricsReducer.querycharts,
   }),
   null
-)(QueryRangeChart);
+)(withTheme(QueryRangeChart));

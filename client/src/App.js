@@ -16,10 +16,13 @@ import StructurePage from './pages/StructurePage';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [colorMode, setColorMode] = useState(false);
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
 
   useEffect(() => {
     prefersDarkMode ? setDarkMode(true) : setDarkMode(false);
+    prefersDarkMode? setColorMode(true) : setColorMode(false);
   }, [prefersDarkMode]);
 
   const theme = useMemo(
@@ -44,6 +47,7 @@ function App() {
             defaultLightBackground: '#f5f5f5',
           },
           type: darkMode ? 'dark' : 'light',
+          color: colorMode ? 'black': 'white',
         },
       }),
     [darkMode]

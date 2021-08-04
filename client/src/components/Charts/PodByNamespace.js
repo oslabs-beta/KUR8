@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 // import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
+import { withTheme } from '@material-ui/core/styles';
 
 // EXPLICITLY IMPORT MODULE from node_modules
 // import 'zingchart/modules-es6/zingchart-maps.min.js';

@@ -8,16 +8,15 @@ import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
 // import 'zingchart/modules-es6/zingchart-maps.min.js';
 // import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+import { withTheme } from '@material-ui/core/styles';
 
 export class PodsNotReady extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        // color: this.
         config: {
             type: "line",
-            "globals": {
-              "font-family": "Roboto"
-            },
             "utc": true,
             "title": {
               "text": "Pods Not Ready Per Namespace",
@@ -26,7 +25,7 @@ export class PodsNotReady extends Component {
             },
             "globals":{
               "font-family": "Roboto",
-              "background-color": "#3B3B3B",
+              "background-color": this.props.theme.palette.type === 'dark'? "black": "white",
             },
             "plotarea": {
               "margin": "dynamic 45 60 dynamic",
@@ -247,4 +246,4 @@ export default connect(
     podNotReady: state.metricsReducer.podNotReady,
   }),
   null
-)(PodsNotReady);
+)(withTheme(PodsNotReady));
