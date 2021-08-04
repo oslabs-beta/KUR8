@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -19,6 +19,9 @@ import MemoryNode from '../../components/Charts/MemoryNode';
 import { metricsFetchData } from '../../actions/metricsActionCreators';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+  },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -54,13 +57,19 @@ const circleSpinner = (
 
 function MetricsPage({ metrics, metricsFetchData, isLoading }) {
   const classes = useStyles();
+  const theme = useTheme();
   useEffect(() => {
     metricsFetchData();
   }, []);
 
-  if (isLoading) return <LinearProgress color="secondary" />;
+  if (isLoading)
+    return (
+      <LinearProgress
+        color={theme.palette.type === 'dark' ? 'primary' : 'secondary'}
+      />
+    );
   return (
-    <Grid container spacing={4} className={classes.metricsPageRoot}>
+    <Grid className={classes.root} container spacing={2}>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           {console.log('metrics',metrics)}

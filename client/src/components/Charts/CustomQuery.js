@@ -1,28 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import React, { useState, useEffect } from 'react';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
 import {
   fetchCustomQuery,
   hyrateCustom,
 } from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
+  customQueryRoot: {
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2),
+    width: '100%',
+    height: '200px',
+  },
+  addChartText: {
+    marginLeft: theme.spacing(2),
+  },
+  icon: {
+    color: theme.palette.grey[700],
+  },
+  mainSearchInput: {
+    width: '100%',
+    '& > .Mui-focused': {
+      borderColor: 'red',
+    },
+  },
+  timeRange: {
+    marginRight: theme.spacing(2),
+  },
   input: {
-    height: 50,
+    height: '50px',
+  },
+  submitButton: {
+    height: '50px',
+    width: '100Px',
+    '&:hover': {
+      color: theme.palette.common.white,
+      background:
+        theme.palette.type === 'dark'
+          ? theme.palette.grey[900]
+          : theme.palette.grey[700],
+    },
   },
 }));
 
@@ -81,43 +110,52 @@ function CustomQuery({
   const steps = [15, 30, 60, 120];
 
   return (
-    <List>
-      <ListItem id="addnewchart" button onClick={handleNesting}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add New Chart" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse id="collapse" in={open} timeout="auto" unmountOnExit>
-        <ListItem button>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <Autocomplete
-              id="autocomplete-query"
-              freeSolo
-              style={{ width: 1000 }}
-              value={query}
-              onChange={handleQueryChange}
-              options={allPromQL.map(option => option)}
-              renderOption={option => option}
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  label="Enter Prometheus Query"
-                  margin="normal"
-                  variant="outlined"
-                  className={classes.input}
-                />
-              )}
+    <Paper className={classes.customQueryRoot}>
+      <Grid
+        className={classes.addChartContainer}
+        container
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="center">
+        <InboxIcon className={classes.icon} />
+        <Typography
+          className={classes.addChartText}
+          variant="h6"
+          component="h1">
+          Add New Chart
+        </Typography>
+      </Grid>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <Autocomplete
+          id="autocomplete-query"
+          freeSolo
+          className={classes.mainSearchInput}
+          value={query}
+          onChange={handleQueryChange}
+          options={allPromQL.map(option => option)}
+          renderOption={option => option}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Enter Prometheus Query"
+              margin="normal"
+              variant="outlined"
             />
+          )}
+        />
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center">
+          <Grid item>
             <Select
               id="select-range"
               value={range}
               onChange={handleRangeChange}
               label="Choose a time range"
               variant="outlined"
-              className={classes.input}
-            >
+              className={classes.timeRange}>
               <MenuItem value="Range">
                 <em>Select a time range</em>
               </MenuItem>
@@ -132,9 +170,7 @@ function CustomQuery({
               value={step}
               onChange={handleStepChange}
               label="Choose a step interval"
-              variant="outlined"
-              className={classes.input}
-            >
+              variant="outlined">
               <MenuItem value="Step">
                 <em>Select a step interval</em>
               </MenuItem>
@@ -144,19 +180,20 @@ function CustomQuery({
                 </MenuItem>
               ))}
             </Select>
+          </Grid>
+
+          <Grid item>
             <Button
               id="submit-custom"
               type="submit"
               variant="outlined"
-              className={classes.input}
-              style={{ marginBottom: 4 }}
-            >
+              className={classes.submitButton}>
               Submit
             </Button>
-          </form>
-        </ListItem>
-      </Collapse>
-    </List>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
   );
 }
 
