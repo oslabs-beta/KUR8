@@ -52,7 +52,7 @@ describe('servicesReducer', () => {
       };
     });
 
-    it('should list an array of all services', () => {
+    it('should return an array of all services', () => {
       const result = servicesReducer.default(initialState, action);
       expect(result).toHaveProperty('services', [
         {

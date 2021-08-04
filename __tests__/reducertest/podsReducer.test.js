@@ -37,7 +37,10 @@ describe('podsReducer', () => {
                   namespace: 'ns',
                   uid: 0,
                 },
-                spec: { nodeName: 'nodename', schedulerName: 'schedulerName' },
+                spec: {
+                  nodeName: 'nodename',
+                  schedulerName: 'schedulerName',
+                },
                 status: {
                   containerStatuses: [{ name: 'containername' }],
                   phase: 'phase',
@@ -52,7 +55,7 @@ describe('podsReducer', () => {
       };
     });
 
-    it('should list an array of all pods', () => {
+    it('should return an array of all pods', () => {
       const result = podsReducer.default(initialState, action);
       expect(result).toHaveProperty('pods', [
         {

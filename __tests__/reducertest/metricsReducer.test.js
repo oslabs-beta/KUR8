@@ -113,7 +113,7 @@ describe('metricsReducer', () => {
       };
     });
 
-    it('should list all arrays of charts in customDataArray', () => {
+    it('should return an array of charts in customDataArray', () => {
       const result = metricsReducer.default(initialState, action);
       expect(result).toHaveProperty('customDataArray', [
         [
