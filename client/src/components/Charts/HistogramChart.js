@@ -19,7 +19,7 @@ class HistogramChart extends Component {
         'text': 'Garbage Collection Duration by Kind',
         "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
         "backgroundColor": "none",
-        "font-size": "22px",
+        "font-size": "24px",
         "alpha": 1,
         "adjust-layout": true,
       },
@@ -34,14 +34,26 @@ class HistogramChart extends Component {
           'height': '100%'
       },
       "scale-x":{  
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         label: {
-          text: "Kind"
+          text: "Kind",
+          "font-size": "14px",
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
         },
         "values": this.props.defaultcharts[0].labelsArray,  
       },
       "scale-y":{  
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
+        label: {
+          text: "Time",
+          "font-size": "14px"
+        },
         format: '%v ms',
         text: "Amount of Garbage"
       },
@@ -64,9 +76,9 @@ class HistogramChart extends Component {
       },
       series: [{
         values: this.props.defaultcharts[0].valueArray,
-        'background-color': this.props.theme.palette.type === 'dark'? "blue purple": "red yellow", /* Bar fill color (gradient) */
+        'background-color': this.props.theme.palette.type === 'dark'? " #EAB6A7 #EFE8CD": "#B1D9CD #FAD2A7", /* Bar fill color (gradient) */
         "borderRadiusTopLeft": 7,
-        alpha: this.props.theme.palette.type === 'dark'? 0.8: 0.6, /* Transparency (more transparent) */
+        alpha: this.props.theme.palette.type === 'dark'? 1: 1, /* Transparency (more transparent) */
       }]
     }
 

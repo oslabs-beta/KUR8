@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ZingChart from 'zingchart-react';
 import { withTheme } from '@material-ui/core/styles';
 
-class QueryRangeChart extends Component {
+export class QueryRangeChart extends Component {
   constructor(props) {
     super(props);
     this.dataFormat();
@@ -240,7 +240,9 @@ class QueryRangeChart extends Component {
         },
         "labels": this.labelFormat(),
         "scale-x": {
+          "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
           "label": {
+            "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
             
             "font-size": "14px",
             "font-weight": "normal",
@@ -285,13 +287,14 @@ class QueryRangeChart extends Component {
         },
         "scale-y": {
           "item": {
-            "font-color": "black",
+            "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
             "font-weight": "normal"
           },
 
           "label": {
-            "text": "Query Range Data",
-            "font-size": "14px"
+            "text": "Bytes",
+            "font-size": "14px",
+            "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
           },
           "guide": {
             "line-width": "0px",
