@@ -7,6 +7,7 @@ describe('alertsreducer', () => {
 
   beforeEach(() => {
     initialState = {
+      isLoading: false,
       alertGroups: [],
     };
   });
@@ -19,6 +20,46 @@ describe('alertsreducer', () => {
   it('should return the same state object for unrecognized actions', () => {
     const result = alertsReducer.default(initialState, fakeAction);
     expect(result).toBe(initialState);
+  });
+
+  describe('ALERTS_FETCH_STARTED', () => {
+    let action;
+
+    beforeEach(() => {
+      action = {
+        type: 'ALERTS_FETCH_STARTED',
+      };
+    });
+
+    it('isLoading should return true', () => {
+      const result = alertsReducer.default(initialState, action);
+      expect(result).toHaveProperty('isLoading', true);
+    });
+
+    it('should return a new state object', () => {
+      const result = alertsReducer.default(initialState, action);
+      expect(result).not.toBe(initialState);
+    });
+  });
+
+  describe('ALERTS_FETCH_COMPLETE', () => {
+    let action;
+
+    beforeEach(() => {
+      action = {
+        type: 'ALERTS_FETCH_COMPLETE',
+      };
+    });
+
+    it('isLoading should return false', () => {
+      const result = alertsReducer.default(initialState, action);
+      expect(result).toHaveProperty('isLoading', false);
+    });
+
+    it('should return a new state object', () => {
+      const result = alertsReducer.default(initialState, action);
+      expect(result).not.toBe(initialState);
+    });
   });
 
   describe('RECEIVE_ALERTS', () => {
