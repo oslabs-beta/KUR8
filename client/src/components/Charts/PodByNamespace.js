@@ -34,7 +34,7 @@ export class PodByNamespace extends Component {
                 "text": "Number of Pods Per Namespace",
                 "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
                 "backgroundColor": "none",
-                "font-size": "22px",
+                "font-size": "24px",
                 "alpha": 1,
                 "adjust-layout": true,
             },
@@ -52,16 +52,27 @@ export class PodByNamespace extends Component {
                 'width':'100%',
             },
             'scale-x': {
-                "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+                "item": {
+                    'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+                    'font-weight': 'normal',
+                  },
                 label: { /* Scale Title */
                     text: "Namespace",
+                    'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+                    "font-size": "14px",
+  
                 },
                 labels: this.stateLabel(), /* Scale Labels */
             },
             'scale-y': {
-                "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+                "item": {
+                    'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+                    'font-weight': 'normal',
+                  },
                 label: { /* Scale Title */
                     text: "Number of Pods",
+                    'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+                    "font-size": "14px",
                 },
             },
             "plot": {
@@ -83,9 +94,9 @@ export class PodByNamespace extends Component {
               },
             series: [{
                 values: this.seriesFormat(),
-                'background-color': this.props.theme.palette.type === 'dark' ? "blue pink": "#6666FF #FF0066", /* Bar fill color (gradient) */
+                'background-color': this.props.theme.palette.type === 'dark' ? "#BBE6F6 #F7B9DD": "#D4D4FF #F8CDE8", /* Bar fill color (gradient) */
                 "borderRadiusTopLeft": 7,
-                alpha: this.props.theme.palette.type === 'dark' ? 0.8: 0.6, /* Transparency (more transparent) */
+                alpha: this.props.theme.palette.type === 'dark' ? 1: 1, /* Transparency (more transparent) */
               },
               
             ]

@@ -45,7 +45,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
+function CustomCharts({ customDataArray, deleteCustom, moveDnd, props }) {
   const classes = useStyles();
   const theme = useTheme();
   const custom = [];
@@ -66,6 +66,10 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
     if (dataSet.length !== 0) {
       const config = {
         type: 'area',
+        "globals": {
+          "font-family": "Roboto",
+          "background-color": props.theme.palette.type === 'dark' ? '#424242': 'white',
+        },
         plot: {
           stacked: true,
           marker: {

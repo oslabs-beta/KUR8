@@ -40,6 +40,7 @@ export function CPUGauge(props) {
     },
     title: {
       text: 'CPU usage in %',
+      "font-size": "24px",
     },
     scale: {
       'size-factor': 0.9,

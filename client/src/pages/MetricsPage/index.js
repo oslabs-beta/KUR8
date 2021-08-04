@@ -60,7 +60,7 @@ function MetricsPage({ metrics, metricsFetchData, isLoading }) {
 
   if (isLoading) return <LinearProgress color="secondary" />;
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} className={classes.metricsPageRoot}>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           {console.log('metrics',metrics)}

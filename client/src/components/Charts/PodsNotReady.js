@@ -1,6 +1,14 @@
+//sum by (namespace) (kube_pod_status_ready{condition="false"})
+
+//http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=2021-07-28T01:53:02.662Z&end=2021-07-29T01:53:26.813Z&step=1m
+
 import React, { Component } from 'react';
+// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
+import { connect } from 'react-redux';
 import { withTheme } from '@material-ui/core/styles';
+// import 'zingchart/modules-es6/zingchart-maps.min.js';
+// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class PodsNotReady extends Component {
   constructor(props) {
@@ -19,11 +27,12 @@ export class PodsNotReady extends Component {
         if (dataVal[j][0] > maximumVal) {
           maximumVal = dataVal[j][0];
         }
-      }
 
+      }
+      
     }
     return maximumVal * 1000;
-  };
+  }
 
   findMin = () => {
     let data = this.props.podNotReady;
@@ -37,60 +46,63 @@ export class PodsNotReady extends Component {
         if (dataVal[j][0] < minimumVal) {
           minimumVal = dataVal[j][0];
         }
-      }
 
+      }
+      
     }
     return minimumVal * 1000;
-  };
+  }
+
 
   stateFormat = () => {
-    let pathLength = this.props.podNotReady.length;
+      let pathLength = this.props.podNotReady.length;
 
-    let outerContainer = [];
-    let eachData = [];
-    let seriesObj;
-    let value;
-    // let millisecond;
+      let outerContainer = [];
+      let eachData = [];
+      let seriesObj;
+      let value;
+      // let millisecond;
 
-    let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
-    for (let i = 0; i < pathLength; i++) {
-      value = this.props.podNotReady[i][1];
+      let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
+      for (let i = 0; i < pathLength; i++) {
+          value = this.props.podNotReady[i][1];
 
 
-      for (let j = 0; j < value.length; j++) {
-        // millisecond = Number(value[j][0]);
-        eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
-      }
-      console.log('eachdata', eachData)
+          for (let j = 0; j < value.length; j++) {
+            // millisecond = Number(value[j][0]);
+            // millisecond *=  1000;
+              eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
+          }
+          console.log('eachdata', eachData)
 
-      seriesObj = {
-        "values": eachData,
-        "text": `${this.props.podNotReady[i][0]}`,
-        "line-color": lineColor[i % lineColor.length],
-        "legend-item": {
-          "background-color": lineColor[i % lineColor.length],
-          "borderRadius": 5,
-          "font-color": "black"
-        },
-        "legend-marker": {
-          "visible": false
-        },
-        "marker": {
-          "background-color": lineColor[i % lineColor.length],
-          "border-width": 1,
-          "shadow": 0,
-          "border-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
-        },
-        "highlight-marker": {
-          "size": 6,
-          "background-color": lineColor[i % lineColor.length],
-        },
-      }
-      outerContainer.push(seriesObj);
-      eachData = [];
-    }
-    console.log('outerContainer', outerContainer)
-    return outerContainer;
+          seriesObj = {
+            "values": eachData,
+            "text": `${this.props.podNotReady[i][0]}`,
+            "line-color": lineColor[i % lineColor.length],
+            "legend-item": {
+              "background-color": lineColor[i % lineColor.length],
+              "borderRadius": 5,
+              "font-color": "black"
+            },
+            "legend-marker": {
+              "visible": false
+            },
+            "marker": {
+              "background-color": lineColor[i % lineColor.length],
+              "border-width": 1,
+              "shadow": 0,
+              "border-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+            },
+            "highlight-marker": {
+              "size": 6,
+              "background-color": lineColor[i % lineColor.length],
+            },
+          }
+          outerContainer.push(seriesObj);
+          eachData = [];
+      } 
+      console.log('outerContainer', outerContainer)
+      return outerContainer;     
   }
 
   render() {
@@ -101,22 +113,21 @@ export class PodsNotReady extends Component {
         "text": "Pods Not Ready Per Namespace",
         "font-size": "24px",
         "adjust-layout": true,
-      "globals": {
+        "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+      },
+      "globals":{
         "font-family": "Roboto",
-        "background-color": this.props.theme.palette.type === 'dark' ? "#424242" : "white",
+        "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
       },
       "plotarea": {
         "margin": "dynamic 45 60 dynamic",
-        'width': '100%',
-        'height': '100%'
+        
       },
       "plot": {
         "animation": {
-          "effect": "ANIMATION_SLIDE_LEFT",
-          'width': '100%',
-          'height': '100%'
+            "effect": "ANIMATION_SLIDE_LEFT"
         },
-      },
+    },
       "legend": {
         "layout": "float",
         "background-color": "none",
@@ -132,8 +143,11 @@ export class PodsNotReady extends Component {
         }
       },
       "scale-x": {
-        "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         // "min-value" : Date.now() - 86400000,
         "min-value": this.findMin(),
         "max-value": this.findMax(),
@@ -159,8 +173,11 @@ export class PodsNotReady extends Component {
         "minor-ticks": 0
       },
       "scale-y": {
-        "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
@@ -173,15 +190,18 @@ export class PodsNotReady extends Component {
         },
         "label": {
           "text": "Number of Pods",
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-size': "14px",
         },
         "minor-ticks": 0,
         "thousands-separator": ","
       },
       "crosshair-x": {
+        "line-color": "#efefef",
         "plot-label": {
           "border-radius": "5px",
           "border-width": "1px",
-          "border-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+          "border-color": "#f6f7f8",
           "padding": "10px",
           "font-weight": "bold"
         },
@@ -212,14 +232,16 @@ export class PodsNotReady extends Component {
         }
       },
       "series": this.stateFormat()
-    },
-  }
+}
 
-  return(
+    return (
     <div>
-  <ZingChart data={myConfig} />
-    </div >
-    );
+        <ZingChart data={myConfig} complete={this.chartDone} />
+    </div>
+    )
+  }
+  chartDone(event) {
+    console.log(`Event "Complete" - The chart is rendered\n`);
   }
 }
 
