@@ -42,6 +42,7 @@ function SingleNode({ masterNodeData, pods, ingresses, services }) {
   const handleClose = () => {
     setOpen(false);
   };
+  if (masterNodeData.length === 0) return 'loading'
   return (
     <Paper className={classes.paper} elevation={1}>
       <Tooltip

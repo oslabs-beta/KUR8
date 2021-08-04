@@ -9,7 +9,6 @@ import { fetchStructurePageData } from '../../actions/nodesActionCreators';
 
 function StructurePage({ isLoading, fetchStructurePageData }) {
   useEffect(() => {
-    console.log(`inside useEffect`)
     fetchStructurePageData()
   }, []);
   return isLoading ? <LinearProgress color="secondary" /> : <NodeList />;
