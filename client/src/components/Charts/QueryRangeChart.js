@@ -5,6 +5,7 @@ class QueryRangeChart extends Component {
   constructor(props) {
     super(props);
     this.dataFormat();
+    // this.props.theme.palette.type,
     this.state = {
       config: {
         globals: {

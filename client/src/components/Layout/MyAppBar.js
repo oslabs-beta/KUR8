@@ -68,6 +68,7 @@ function MyAppBar({ history, darkMode, toggleDarkMode }) {
               className={classes.darkModeSwitchContainer}
               control={
                 <StyledSwitch
+                  id="themetouglebutton"
                   // className={classes.darkModeSwitch}
                   checked={darkMode}
                   onChange={toggleDarkMode}
