@@ -1,126 +1,12 @@
 import React, { Component } from 'react';
 import ZingChart from 'zingchart-react';
+import { withTheme } from '@material-ui/core/styles';
 
 export class MemoryNode extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      config: {
-        type: 'line',
-        globals: {
-          'font-family': 'Roboto',
-        },
-        utc: true,
-        title: {
-          text: 'Kubernetes Node Memory Usage',
-          'font-size': '24px',
-          'adjust-layout': true,
-        },
-        plotarea: {
-          margin: 'dynamic 45 60 dynamic',
-          width: '100%',
-          height: '100%',
-        },
-        plot: {
-          animation: {
-            effect: 'ANIMATION_SLIDE_LEFT',
-            width: '100%',
-            height: '100%',
-          },
-        },
-        legend: {
-          layout: 'float',
-          'background-color': 'none',
-          'border-width': 0,
-          shadow: 0,
-          align: 'center',
-          'adjust-layout': true,
-          'toggle-action': 'remove',
-          item: {
-            padding: 7,
-            marginRight: 17,
-            cursor: 'hand',
-          },
-        },
-        'scale-x': {
-          'min-value': this.findMin(),
-          'max-value': this.findMax(),
-          step: 'hour',
-          zooming: true,
-
-          shadow: 0,
-          transform: {
-            type: 'date',
-            all: '%D, %d %M<br />%h:%i %A',
-            guide: {
-              visible: false,
-            },
-            item: {
-              visible: false,
-            },
-          },
-          label: {
-            visible: false,
-          },
-          'minor-ticks': 0,
-        },
-        'scale-y': {
-          'line-color': '#f6f7f8',
-          shadow: 0,
-          progression: 'log',
-          'log-base': Math.E,
-          plotarea: {
-            'adjust-layout': true,
-          },
-          guide: {
-            'line-style': 'dashed',
-          },
-          label: {
-            text: 'Memory Usage',
-          },
-          'minor-ticks': 0,
-          'thousands-separator': ',',
-        },
-        'crosshair-x': {
-          'line-color': '#efefef',
-          'plot-label': {
-            'border-radius': '5px',
-            'border-width': '1px',
-            'border-color': '#f6f7f8',
-            padding: '10px',
-            'font-weight': 'bold',
-          },
-          'scale-label': {
-            'font-color': '#000',
-            'background-color': '#f6f7f8',
-            'border-radius': '5px',
-          },
-        },
-        tooltip: {
-          visible: false,
-        },
-        plot: {
-          highlight: true,
-          'tooltip-text': '%t views: %v<br>%k',
-          shadow: 0,
-          'line-width': '2px',
-          marker: {
-            visible: false,
-          },
-          'highlight-state': {
-            'line-width': 3,
-          },
-          animation: {
-            effect: 1,
-            sequence: 2,
-            speed: 1000000,
-          },
-        },
-        series: this.stateFormat(),
-      },
-    };
-    this.chartDone = this.chartDone.bind(this);
+    console.log('memoryNode', this.props.memoryNode)
   }
 
   findMax = () => {
@@ -183,40 +69,164 @@ export class MemoryNode extends Component {
         eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
       }
 
-      seriesObj = {
-        values: eachData,
-        text: `${this.props.memoryNode[i][0]}`,
-        'line-color': lineColor[i % lineColor.length],
-        'legend-item': {
-          'background-color': lineColor[i % lineColor.length],
-          borderRadius: 5,
-          'font-color': 'black',
-        },
-        'legend-marker': {
-          visible: false,
-        },
-        marker: {
-          'background-color': lineColor[i % lineColor.length],
-          'border-width': 1,
-          shadow: 0,
-          'border-color': '#69dbf1',
-        },
-        'highlight-marker': {
-          size: 6,
-          'background-color': lineColor[i % lineColor.length],
-        },
-      };
-      outerContainer.push(seriesObj);
-      eachData = [];
-    }
-    return outerContainer;
-  };
+          seriesObj = {
+            "values": eachData,
+            "text": `${this.props.memoryNode[i][0]}`,
+            "line-color": lineColor[i % lineColor.length],
+            "legend-item": {
+              "background-color": lineColor[i % lineColor.length],
+              "borderRadius": 5,
+              "font-color": "black"
+            },
+            "legend-marker": {
+              "visible": false
+            },
+            "marker": {
+              "background-color": lineColor[i % lineColor.length],
+              "border-width": 1,
+              "shadow": 0,
+              "border-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+            },
+            "highlight-marker": {
+              "size": 6,
+              "background-color": lineColor[i % lineColor.length],
+            },
+          }
+          outerContainer.push(seriesObj);
+          eachData = [];
+      } 
+      console.log('outerContainer', outerContainer)
+      return outerContainer;     
+  }
 
   render() {
+    let myConfig = {
+      type: "line",
+      "globals": {
+        "font-family": "Roboto",
+        "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
+        "color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+      },
+      "utc": true,
+      "title": {
+        "text": "Kubernetes Node Memory Usage",
+        "font-size": "24px",
+        "adjust-layout": true,
+      },
+      "plotarea": {
+        "margin": "dynamic 45 60 dynamic",
+        'width':'100%',
+        'height': '100%'
+      },
+      "plot": {
+        "animation": {
+            "effect": "ANIMATION_SLIDE_LEFT",
+            'width':'100%',
+            'height': '100%'
+        },
+    },
+      "legend": {
+        "layout": "float",
+        "background-color": "none",
+        "border-width": 0,
+        "shadow": 0,
+        "align": "center",
+        "adjust-layout": true,
+        "toggle-action": "remove",
+        "item": {
+          "padding": 7,
+          "marginRight": 17,
+          "cursor": "hand"
+        }
+      },
+      "scale-x": {
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        // "min-value" : Date.now() - 86400000,
+        "min-value": this.findMin(),
+        "max-value": this.findMax(),
+        "step": "hour",
+        // 'max-items':10,
+        zooming: true,
+
+        "shadow": 0,
+        // "step": 83000,
+        "transform": {
+          "type": "date",
+          "all": "%D, %d %M<br />%h:%i %A",
+          "guide": {
+            "visible": false
+          },
+          "item": {
+            "visible": false
+          }
+        },
+        "label": {
+          "visible": false
+        },
+        "minor-ticks": 0
+      },
+      "scale-y": {
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "shadow": 0,
+        "progression": "log",
+        "log-base": Math.E,
+        // "type": "line",
+        "plotarea": {
+          "adjust-layout": true,
+        },
+        "guide": {
+          "line-style": "dashed"
+        },
+        "label": {
+          "text": "Memory Usage",
+        },
+        "minor-ticks": 0,
+        "thousands-separator": ","
+      },
+      "crosshair-x": {
+        "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "plot-label": {
+          "border-radius": "5px",
+          "border-width": "1px",
+          "border-color": this.props.theme.palette.type === 'dark' ? '#white': '#424242',
+          "padding": "10px",
+          "font-weight": "bold"
+        },
+        "scale-label": {
+          "font-color": "#000",
+          "background-color": this.props.theme.palette.type === 'dark' ? '#white': '#424242',
+          "border-radius": "5px"
+        }
+      },
+      "tooltip": {
+        "visible": false
+      },
+      "plot": {
+        "highlight": true,
+        "tooltip-text": "%t views: %v<br>%k",
+        "shadow": 0,
+        "line-width": "2px",
+        "marker": {
+          "visible": false,
+        },
+        "highlight-state": {
+          "line-width": 3
+        },
+        "animation": {
+          "effect": 1,
+          "sequence": 2,
+          "speed": 1000000,
+        }
+      },
+      "series": this.stateFormat()
+}
+
     return (
-      <div>
-        <ZingChart data={this.state.config} complete={this.chartDone} />
-      </div>
+    <div>
+        <ZingChart data={myConfig} complete={this.chartDone} />
+    </div>
     );
   }
   chartDone(event) {
@@ -224,4 +234,4 @@ export class MemoryNode extends Component {
   }
 }
 
-export default MemoryNode;
+export default withTheme(MemoryNode);

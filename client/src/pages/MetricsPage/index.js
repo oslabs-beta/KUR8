@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '580px',
+    height: '560px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),

@@ -172,14 +172,15 @@ class QueryCpuRangeChart extends Component {
       labelContainer.push(labelObj);
     }
     return labelContainer;
-  };
+
+  }
+
 
   render() {
     let myConfig = {
-      globals: {
-        'font-family': 'Roboto',
-        'background-color':
-          this.props.theme.palette.type === 'dark' ? 'black' : 'white',
+      "globals": {
+        "font-family": "Roboto",
+        "background-color": this.props.theme.palette.type === 'dark' ? "#424242":"white",
       },
       graphset: [
         {
