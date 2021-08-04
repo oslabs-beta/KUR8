@@ -142,8 +142,13 @@ class CPUContainer extends Component {
           "cursor": "hand"
         }
       },
+
       "scale-x": {
         // "min-value" : Date.now() - 86400000,
+        item: {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        },
+
         "min-value": this.findMin(),
         "max-value": this.findMax(),
         "step": "hour",
@@ -182,8 +187,15 @@ class CPUContainer extends Component {
         "guide": {
           "line-style": "dashed"
         },
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         "label": {
           "text": "CPU Usage",
+          'font-size': '14px',
+          "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+
         },
         "minor-ticks": 0,
         "thousands-separator": ","

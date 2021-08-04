@@ -141,7 +141,10 @@ export class MemoryNode extends Component {
       },
       "scale-x": {
         "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         // "min-value" : Date.now() - 86400000,
         "min-value": this.findMin(),
         "max-value": this.findMax(),
@@ -168,7 +171,10 @@ export class MemoryNode extends Component {
       },
       "scale-y": {
         "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
@@ -181,6 +187,8 @@ export class MemoryNode extends Component {
         },
         "label": {
           "text": "Memory Usage",
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          "font-size": "14px"
         },
         "minor-ticks": 0,
         "thousands-separator": ","

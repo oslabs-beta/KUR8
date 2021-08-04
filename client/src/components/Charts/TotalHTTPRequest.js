@@ -108,6 +108,8 @@ export class TotalHTTPRequest extends Component {
       "utc": true,
       "title": {
         "text": "Total Kubelet Http Request",
+        "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        
         "font-size": "24px",
         "adjust-layout": true
       },
@@ -138,7 +140,10 @@ export class TotalHTTPRequest extends Component {
         }
       },
       "scale-x": {
-        // "min-value" : Date.now() - 86400000,
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
         "min-value": this.findMin(),
         "max-value": this.findMax(),
@@ -165,6 +170,10 @@ export class TotalHTTPRequest extends Component {
       },
       "scale-y": {
         "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
+        "item": {
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-weight': 'normal',
+        },
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
@@ -177,6 +186,8 @@ export class TotalHTTPRequest extends Component {
         },
         "label": {
           "text": "Requests",
+          'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
+          'font-size': '14px',
         },
         "minor-ticks": 0,
         "thousands-separator": ","

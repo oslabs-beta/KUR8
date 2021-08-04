@@ -58,7 +58,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
+function CustomCharts({ customDataArray, deleteCustom, moveDnd, props }) {
   const classes = useStyles();
   const theme = useTheme();
   const custom = [];

@@ -180,7 +180,9 @@ class QueryCpuRangeChart extends Component {
     let myConfig = {
       "globals": {
         "font-family": "Roboto",
-        "background-color": this.props.theme.palette.type === 'dark' ? "#424242":"white",
+        "background-color": this.props.theme.palette.type === 'dark' ? "#424242" : "white",
+        "color": this.props.theme.palette.type === 'dark' ? "white": "#424242",
+        "padding": "16px"
       },
       graphset: [
         {
@@ -190,7 +192,7 @@ class QueryCpuRangeChart extends Component {
             y: '15px',
             text: 'The average amount of CPU time spent in system mode',
             'background-color': 'none',
-            'font-color': 'white',
+            "color": this.props.theme.palette.type === 'dark' ? "white": "#424242",
             'font-size': '24px',
             height: '25px',
             'adjust-layout': true,
@@ -221,7 +223,7 @@ class QueryCpuRangeChart extends Component {
             },
             item: {
               'text-align': 'center',
-              'font-color': '#05636c',
+              'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
             },
             zooming: 1,
             labels: this.dateFormat(),
@@ -236,7 +238,7 @@ class QueryCpuRangeChart extends Component {
             },
           },
           'crosshair-x': {
-            'line-color': '#fff',
+            'line-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
             'line-width': 1,
             'plot-label': {
               visible: false,
@@ -244,12 +246,13 @@ class QueryCpuRangeChart extends Component {
           },
           'scale-y': {
             item: {
-              'font-color': 'white',
+              'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
               'font-weight': 'normal',
             },
             label: {
-              text: 'CPU Range Data',
+              text: 'Seconds',
               'font-size': '14px',
+              "font-color": this.props.theme.palette.type === 'dark' ? "white": "#424242",
             },
             guide: {
               'line-width': '0px',
