@@ -22,7 +22,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
   },
   chipClusterIp: {
-    color: theme.palette.common.black,
+    color:
+    theme.palette.type === 'dark'
+      ? theme.palette.common.white
+      : theme.palette.common.black,
     borderColor: 'none',
     margin: '15px 0px',
     cursor: 'pointer',
@@ -47,7 +50,7 @@ function SingleNode({ masterNodeData, pods, ingresses, services }) {
     <Paper className={classes.paper} elevation={1}>
       <Tooltip
         disableFocusListener
-        placement="top"
+        placement="right"
         title="More Info"
         onClick={handleClickOpen}>
         <Chip
