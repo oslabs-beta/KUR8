@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-import { connect } from 'react-redux';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 import { withTheme } from '@material-ui/core/styles';
 
 export class TotalHTTPRequest extends Component {
@@ -20,17 +16,14 @@ export class TotalHTTPRequest extends Component {
     for (let i = 0; i < data.length; i++) {
       dataVal = data[i][2];
 
-
       for (let j = 0; j < dataVal.length; j++) {
         if (dataVal[j][0] > maximumVal) {
           maximumVal = dataVal[j][0];
         }
-
       }
-      
     }
     return maximumVal * 1000;
-  }
+  };
 
   findMin = () => {
     let data = this.props.httpRequestData;
@@ -44,64 +37,65 @@ export class TotalHTTPRequest extends Component {
         if (dataVal[j][0] < minimumVal) {
           minimumVal = dataVal[j][0];
         }
-
       }
-      
     }
     return minimumVal * 1000;
-  }
-
+  };
 
   stateFormat = () => {
-      let pathLength = this.props.httpRequestData.length;
+    let pathLength = this.props.httpRequestData.length;
 
-      let outerContainer = [];
-      let eachData = [];
-      let seriesObj;
-      let value;
-      // let millisecond;
+    let outerContainer = [];
+    let eachData = [];
+    let seriesObj;
+    let value;
 
-      let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
-      for (let i = 0; i < pathLength; i++) {
-          value = this.props.httpRequestData[i][2];
+    let lineColor = [
+      '#FF9AA2',
+      '#FFB7B2',
+      '#FFDAC1',
+      '#E2F0CB',
+      '#B5EAD7',
+      '#C7CEEA',
+      '#9ED2F6',
+      '#9DDCE0',
+      '#ADD4FF',
+    ];
+    for (let i = 0; i < pathLength; i++) {
+      value = this.props.httpRequestData[i][2];
 
+      for (let j = 0; j < value.length; j++) {
+        eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
+      }
 
-          for (let j = 0; j < value.length; j++) {
-            // millisecond = Number(value[j][0]);
-            // millisecond *=  1000;
-              eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
-          }
-          console.log('eachdata', eachData)
-
-          seriesObj = {
-            "values": eachData,
-            "text": `${this.props.httpRequestData[i][0]}`,
-            "line-color": lineColor[i % lineColor.length],
-            "legend-item": {
-              "background-color": lineColor[i % lineColor.length],
-              "borderRadius": 5,
-              "font-color": "black"
-            },
-            "legend-marker": {
-              "visible": false
-            },
-            "marker": {
-              "background-color": lineColor[i % lineColor.length],
-              "border-width": 1,
-              "shadow": 0,
-              "border-color": "#69dbf1"
-            },
-            "highlight-marker": {
-              "size": 6,
-              "background-color": lineColor[i % lineColor.length],
-            },
-          }
-          outerContainer.push(seriesObj);
-          eachData = [];
-      } 
-      console.log('outerContainer', outerContainer)
-      return outerContainer;     
-  }
+      seriesObj = {
+        values: eachData,
+        text: `${this.props.httpRequestData[i][0]}`,
+        'line-color': lineColor[i % lineColor.length],
+        'legend-item': {
+          'background-color': lineColor[i % lineColor.length],
+          borderRadius: 5,
+          'font-color': 'black',
+        },
+        'legend-marker': {
+          visible: false,
+        },
+        marker: {
+          'background-color': lineColor[i % lineColor.length],
+          'border-width': 1,
+          shadow: 0,
+          'border-color': '#69dbf1',
+        },
+        'highlight-marker': {
+          size: 6,
+          'background-color': lineColor[i % lineColor.length],
+        },
+      };
+      outerContainer.push(seriesObj);
+      eachData = [];
+    }
+    return outerContainer;
+  };
 
   render() {
     let myConfig = {
@@ -233,9 +227,4 @@ export class TotalHTTPRequest extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    httpRequestData: state.metricsReducer.httpRequestData,
-  }),
-  null
-)(withTheme(TotalHTTPRequest));
+export default withTheme(TotalHTTPRequest);

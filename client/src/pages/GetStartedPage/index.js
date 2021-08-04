@@ -1,5 +1,3 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,8 +7,6 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 
-import { metricsFetchData } from '../../actions/metricsActionCreators';
-import { fetchData } from '../../actions/nodesActionCreators';
 import Instructions from './Instructions';
 
 const useStyles = makeStyles({
@@ -23,18 +19,15 @@ const useStyles = makeStyles({
   },
 });
 
-function GetStartedPage({ fetchData, metricsFetchData, history }) {
+function GetStartedPage({ history }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const cookies = new UniversalCookie();
-
 
   // On intial load, perform all fetch requests to populate our app with data
   // Check to see if GetStartedPage has set a cookie
   useEffect(() => {
     const beenHere = cookies.get('hasSeenGetStartedPage');
-    fetchData();
-    metricsFetchData();
     if (beenHere) history.push('/structure');
   }, []);
 
@@ -71,7 +64,4 @@ function GetStartedPage({ fetchData, metricsFetchData, history }) {
   );
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchData, metricsFetchData }, dispatch);
-
-export default connect(null, mapDispatchToProps)(withRouter(GetStartedPage));
+export default withRouter(GetStartedPage);

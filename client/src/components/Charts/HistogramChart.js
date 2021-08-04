@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-// EXPLICITLY IMPORT MODULE from node_modules
-// import "zingchart/modules-es6/zingchart-maps.min.js";
-// import "zingchart/modules-es6/zingchart-maps-usa.min.js";
 import { withTheme } from '@material-ui/core/styles';
-import MyAppBar from '../Layout/MyAppBar';
 
 class HistogramChart extends Component {
   constructor(props) {
@@ -86,13 +80,7 @@ class HistogramChart extends Component {
 }
 
 
-export default connect(
-  state => ({
-    defaultcharts: state.metricsReducer.defaultcharts,
-    // histogramSelector: state.metricsReducer.histogramSelector,
-  }),
-  null
-)(withTheme(HistogramChart));
+export default withTheme(HistogramChart);
 
 
 

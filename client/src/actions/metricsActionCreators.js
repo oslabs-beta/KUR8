@@ -1,112 +1,127 @@
 import axios from 'axios';
 import * as actionTypes from './actionsTypes';
 
-export const receiveDefaultMetrics = (data) => {
+export const receiveDefaultMetrics = data => {
   return {
     type: actionTypes.RECEIVE_DEFAULT_METRICS,
     payload: data,
   };
 };
 
-export const receiveQuery = (data) => {
+export const receiveQuery = data => {
   return {
     type: actionTypes.RECEIVE_QUERY,
     payload: data,
   };
 };
 
-export const receiveQueryRange = (data) => {
+export const receiveQueryRange = data => {
   return {
     type: actionTypes.RECEIVE_QUERY_RANGE,
     payload: data,
   };
 };
 
-export const receiveCpuQueryRange = (data) => {
+export const receiveCpuQueryRange = data => {
   return {
     type: actionTypes.RECEIVE_CPU_QUERY_RANGE,
     payload: data,
   };
 };
 
-export const fetchCPUNode = (data) => {
+export const fetchCPUNode = data => {
   return {
     type: actionTypes.FETCH_CPU_NODE,
     payload: data,
   };
 };
 
-export const fetchMemoryNode = (data) => {
+export const fetchMemoryNode = data => {
   return {
     type: actionTypes.FETCH_MEMORY_NODE,
     payload: data,
   };
 };
 
-export const customQuery = (data) => {
+export const customQuery = data => {
   return {
     type: actionTypes.CUSTOM_QUERY,
     payload: data,
   };
 };
 
-export const fetchHTTPRequest = (data) => {
+export const fetchHTTPRequest = data => {
   return {
     type: actionTypes.FETCH_HTTP_REQUEST,
     payload: data,
   };
 };
 
-export const fetchCPUContainer = (data) => {
+export const fetchCPUContainer = data => {
   return {
     type: actionTypes.FETCH_CPU_CONTAINER,
     payload: data,
   };
 };
 
-export const fetchAllQueries = (data) => {
+export const fetchAllQueries = data => {
   return {
     type: actionTypes.ALL_PROMQL,
     payload: data,
   };
 };
 
-export const hyrateCustom = (data) => {
+export const hyrateCustom = data => {
   return {
     type: actionTypes.HYDRATE_CUSTOM,
     payload: data,
   };
 };
 
-export const deleteCustom = (data) => {
+export const deleteCustom = data => {
   return {
     type: actionTypes.DELETE_CUSTOM,
     payload: data,
   };
 };
 
-export const moveDnd = (data) => {
+export const moveDnd = data => {
   return {
     type: actionTypes.MOVE_DND,
     payload: data,
   };
 };
 
-export const numOfPodPerNamespace = (data) => {
+export const numOfPodPerNamespace = data => {
   return {
     type: actionTypes.FETCH_NUM_POD_NAMESPACE,
     payload: data,
   };
 };
 
-export const numOfPodNotReady = (data) => {
+export const numOfPodNotReady = data => {
   return {
     type: actionTypes.FETCH_POD_NOT_READY,
     payload: data,
   };
 };
 
-const timeFormat = (num) => {
+export const metricsFetchStarted = () => ({
+  type: actionTypes.METRICS_FETCH_STARTED,
+});
+
+export const metricsFetchComplete = () => ({
+  type: actionTypes.METRICS_FETCH_COMPLETE,
+});
+export const customMetricsFetchStarted = () => ({
+  type: actionTypes.CUSTOM_METRICS_FETCH_STARTED,
+});
+
+export const customMetricsFetchComplete = () => ({
+  type: actionTypes.CUSTOM_METRICS_FETCH_COMPLETE,
+});
+
+const timeFormat = num => {
   const now = Date.now();
   const someHours = 3600000 * num;
 
@@ -169,29 +184,35 @@ export const metricsEndpointArray = (query, start, end, step) => [
 ];
 
 //on page load, call to metricsFetchdata, take url on line 31, create promises with values being map to the link, (data from each link); resolve promises and dispath action creator on line 25 to the corresopnding result in the URLl; which send it over to the reducers
-export const metricsFetchData = () => (dispatch) => {
+export const metricsFetchData = () => dispatch => {
   const urls = metricsEndpointArray();
-  const promises = urls.map((url) => axios.get(url));
-  Promise.all(promises).then((values) => {
-    metricsActionCreators.forEach((actionCreator, index) => {
-      dispatch(actionCreator(values[index]));
-    });
-  });
+  const promises = urls.map(url => axios.get(url));
+  dispatch(metricsFetchStarted());
+  Promise.all(promises)
+    .then(values => {
+      metricsActionCreators.forEach((actionCreator, index) => {
+        dispatch(actionCreator(values[index]));
+      });
+    })
+    .then(() => dispatch(metricsFetchComplete()))
+    .catch(error => console.error('ERROR IN METRICS FETCH: ', error));
 };
 
-export const fetchCustomQuery = (query, range, step, title) => (dispatch) => {
-  console.log('fetching', query, range, step);
+export const fetchCustomQuery = (query, range, step, title) => dispatch => {
+  dispatch(customMetricsFetchStarted());
   axios
     .get(
       `http://localhost:9090/api/v1/query_range?query=${query}&start=${new Date(
         new Date().setDate(new Date().getDate() - range / 24)
       ).toISOString()}&end=${new Date().toISOString()}&step=${step}s`
     )
-    .then((data) => dispatch(customQuery(data, title)));
+    .then(data => dispatch(customQuery(data, title)))
+    .then(() => dispatch(customMetricsFetchComplete()))
+    .catch(error => console.error('ERROR IN METRICS FETCH: ', error));
 };
 
-export const fetchProm = () => (dispatch) => {
+export const fetchProm = () => dispatch => {
   axios
     .get(`http://localhost:9090/api/v1/label/__name__/values`)
-    .then((data) => dispatch(fetchAllQueries(data)));
+    .then(data => dispatch(fetchAllQueries(data)));
 };

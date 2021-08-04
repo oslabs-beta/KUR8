@@ -1,13 +1,5 @@
-//sum by (namespace) (kube_pod_status_ready{condition="false"})
-
-//http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=2021-07-28T01:53:02.662Z&end=2021-07-29T01:53:26.813Z&step=1m
-
 import React, { Component } from 'react';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-import { connect } from 'react-redux';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 import { withTheme } from '@material-ui/core/styles';
 
 export class PodsNotReady extends Component {
@@ -27,12 +19,11 @@ export class PodsNotReady extends Component {
         if (dataVal[j][0] > maximumVal) {
           maximumVal = dataVal[j][0];
         }
-
       }
 
     }
     return maximumVal * 1000;
-  }
+  };
 
   findMin = () => {
     let data = this.props.podNotReady;
@@ -46,13 +37,11 @@ export class PodsNotReady extends Component {
         if (dataVal[j][0] < minimumVal) {
           minimumVal = dataVal[j][0];
         }
-
       }
 
     }
     return minimumVal * 1000;
-  }
-
+  };
 
   stateFormat = () => {
     let pathLength = this.props.podNotReady.length;
@@ -189,7 +178,6 @@ export class PodsNotReady extends Component {
         "thousands-separator": ","
       },
       "crosshair-x": {
-        "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
         "plot-label": {
           "border-radius": "5px",
           "border-width": "1px",
@@ -235,9 +223,4 @@ export class PodsNotReady extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    podNotReady: state.metricsReducer.podNotReady,
-  }),
-  null
-)(withTheme(PodsNotReady));
+export default withTheme(PodsNotReady);

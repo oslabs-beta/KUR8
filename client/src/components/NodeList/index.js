@@ -71,7 +71,7 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
     // Otherwise, the primary UI will be composed of masterNodes with multiple workerNodes,
     // with each workerNode producing a list of it's own pods/containers.
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} square>
         <Grid container direction="row">
           <Grid
             container

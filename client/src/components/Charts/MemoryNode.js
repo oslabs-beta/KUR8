@@ -1,21 +1,8 @@
-//Node Memory Usage
-
-//sum(container_memory_usage_bytes) by (node)
-
-//http://localhost:9090/api/v1/query_range?query=sum(container_memory_usage_bytes)%20by%20(node)&start=2021-07-29T01:27:12.276Z&end=2021-07-30T01:27:40.862Z&step=1m
-
 import React, { Component } from 'react';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
-import { connect } from 'react-redux';
 import { withTheme } from '@material-ui/core/styles';
-import MyAppBar from '../Layout/MyAppBar';
-
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 
 export class MemoryNode extends Component {
-
   constructor(props) {
     super(props);
 
@@ -34,12 +21,10 @@ export class MemoryNode extends Component {
         if (dataVal[j][0] > maximumVal) {
           maximumVal = dataVal[j][0];
         }
-
       }
-      
     }
     return maximumVal * 1000;
-  }
+  };
 
   findMin = () => {
     let data = this.props.memoryNode;
@@ -53,34 +38,36 @@ export class MemoryNode extends Component {
         if (dataVal[j][0] < minimumVal) {
           minimumVal = dataVal[j][0];
         }
-
       }
-      
     }
     return minimumVal * 1000;
-  }
-
+  };
 
   stateFormat = () => {
-      let pathLength = this.props.memoryNode.length;
+    let pathLength = this.props.memoryNode.length;
 
-      let outerContainer = [];
-      let eachData = [];
-      let seriesObj;
-      let value;
-      // let millisecond;
+    let outerContainer = [];
+    let eachData = [];
+    let seriesObj;
+    let value;
 
-      let lineColor = ["#9ED2F6", "#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9DDCE0", "#ADD4FF"];
-      for (let i = 0; i < pathLength; i++) {
-          value = this.props.memoryNode[i][1];
+    let lineColor = [
+      '#9ED2F6',
+      '#FF9AA2',
+      '#FFB7B2',
+      '#FFDAC1',
+      '#E2F0CB',
+      '#B5EAD7',
+      '#C7CEEA',
+      '#9DDCE0',
+      '#ADD4FF',
+    ];
+    for (let i = 0; i < pathLength; i++) {
+      value = this.props.memoryNode[i][1];
 
-
-          for (let j = 0; j < value.length; j++) {
-            // millisecond = Number(value[j][0]);
-            // millisecond *=  1000;
-              eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
-          }
-          console.log('eachdata', eachData)
+      for (let j = 0; j < value.length; j++) {
+        eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
+      }
 
           seriesObj = {
             "values": eachData,
@@ -247,9 +234,4 @@ export class MemoryNode extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    memoryNode: state.metricsReducer.memoryNode,
-  }),
-  null
-)(withTheme(MemoryNode));
+export default withTheme(MemoryNode);

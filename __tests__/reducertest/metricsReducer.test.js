@@ -32,6 +32,58 @@ describe('metricsReducer', () => {
     expect(result).toBe(initialState);
   });
 
+  describe('RECEIVE_DEFAULT_METRICS', () => {
+    let action;
+
+    beforeEach(() => {
+      action = {
+        type: 'RECEIVE_DEFAULT_METRICS',
+        payload: {
+          status: 'success',
+          data: [
+            {
+              type: 'histogram',
+              values: [
+                {
+                  metricName: 'nodejs_gc_duration_seconds_sum',
+                  value: 1,
+                  labels: {
+                    kind: 'pod',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      };
+    });
+
+    it('should list an arrays of data points in defaultcharts', () => {
+      const result = metricsReducer.default(initialState, action);
+      expect(result).toHaveProperty('defaultcharts', [
+        {
+          labelsArray: ['pod'],
+          type: 'histogram',
+          valueArray: [1000],
+          values: [
+            {
+              metricName: 'nodejs_gc_duration_seconds_sum',
+              value: 1,
+              labels: {
+                kind: 'pod',
+              },
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should return a new state object', () => {
+      const result = metricsReducer.default(initialState, action);
+      expect(result).not.toBe(initialState);
+    });
+  });
+
   describe('CUSTOM_QUERY', () => {
     let action;
 
@@ -42,16 +94,44 @@ describe('metricsReducer', () => {
           data: {
             status: 'success',
             data: {
-              result: [],
+              result: [
+                {
+                  metrics: {
+                    __name__: 'ALERTS_FOR_STATE',
+                    alertname: 'CPUThrottlingHigh',
+                    container: 'blackbox-exporter',
+                    namespace: 'monitoring',
+                    pod: 'blackbox-exporter-6c95587d7-m224m',
+                    severity: 'info',
+                  },
+                  values: [1628008072.054, '1628008052'],
+                },
+              ],
             },
           },
         },
       };
     });
 
-    it('should list all arrays of charts in customDataArray', () => {
+    it('should return an array of charts in customDataArray', () => {
       const result = metricsReducer.default(initialState, action);
-      expect(result).toHaveProperty('customDataArray', [[]]);
+      expect(result).toHaveProperty('customDataArray', [
+        [
+          {
+            metrics: {
+              __name__: 'ALERTS_FOR_STATE',
+              alertname: 'CPUThrottlingHigh',
+              container: 'blackbox-exporter',
+              namespace: 'monitoring',
+              pod: 'blackbox-exporter-6c95587d7-m224m',
+              severity: 'info',
+            },
+            values: [1628008072.054, '1628008052'],
+            xRange: [undefined, '1'],
+            yRange: [undefined, '6'],
+          },
+        ],
+      ]);
     });
 
     it('should return a new state object', () => {

@@ -5,7 +5,15 @@
 
 A visual overview of Kubernetes architecture and Prometheus metrics.
 
-![kur8-structure-demo-gif](https://github.com/oslabs-beta/Kur8/blob/dev/kur8-structures-demo.gif)
+---
+
+Navigate through the structures page to easily see your control planes and worker nodes with all their pods inside. Click on the components to see more details about its metadata, status, and specifications. Easily find information regarding the image IDs or IP addresses of anything from containers to ingresses.
+
+![kur8-structure-demo-gif](https://github.com/oslabs-beta/Kur8/blob/dev/demo-gifs/kur8-structures-demo.gif)
+
+All of your Prometheus alerts including your custom ones are displayed here in the Alerts tab. Find out if any alerts are firing and which rule groups they fall under.
+
+![kur8-alerts-demo-gif](https://github.com/oslabs-beta/Kur8/blob/dev/demo-gifs/kur8-alerts-demo.gif)
 ---
 
 # Getting started
@@ -66,3 +74,13 @@ You may also view the Prometheus tab in KUR8
 localhost:8080
 ``` 
 to view and create your custom dashboard.
+
+---
+
+## Contributors
+
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Jimmy Ngo](https://www.linkedin.com/in/jimmycngo/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> jimmycngo](https://github.com/jimmycngo)
+
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ivy Yu](https://www.linkedin.com/in/ivy-yu-746a5b132/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> ivy118](https://github.com/ivy118)
+
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Steven Del Rosario](https://www.linkedin.com/in/stevendelro/) - [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> stevendelro](https://github.com/stevendelro)

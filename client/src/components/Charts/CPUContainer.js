@@ -144,12 +144,11 @@ class CPUContainer extends Component {
       },
       "scale-x": {
         // "min-value" : Date.now() - 86400000,
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
         "min-value": this.findMin(),
         "max-value": this.findMax(),
         "step": "hour",
         "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
-
+        
 
         // 'max-items':10,
         zooming: true,
@@ -173,7 +172,6 @@ class CPUContainer extends Component {
       },
       "scale-y": {
         "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
-        "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
@@ -191,15 +189,16 @@ class CPUContainer extends Component {
         "thousands-separator": ","
       },
       "crosshair-x": {
+        "line-color": "#efefef",
         "plot-label": {
           "border-radius": "5px",
           "border-width": "1px",
-          "color": this.props.theme.palette.type === 'dark' ? "#424242" : "white",
           "border-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
           "padding": "10px",
           "font-weight": "bold"
         },
         "scale-label": {
+          "font-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
           "background-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
           "border-radius": "5px"
         }
