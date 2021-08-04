@@ -1,10 +1,17 @@
+import { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
 
 import NodeList from '../../components/NodeList';
+import { fetchStructurePageData } from '../../actions/nodesActionCreators';
 
-function StructurePage({ isLoading }) {
+function StructurePage({ isLoading, fetchStructurePageData }) {
+  useEffect(() => {
+    console.log(`inside useEffect`)
+    fetchStructurePageData()
+  }, []);
   return isLoading ? <LinearProgress color="secondary" /> : <NodeList />;
 }
 
@@ -12,4 +19,7 @@ const mapStateToProps = state => ({
   isLoading: state.nodesReducer.isLoading,
 });
 
-export default connect(mapStateToProps, null)(StructurePage);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchStructurePageData }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(StructurePage);

@@ -53,7 +53,7 @@ export const endpointArray = (url = 'localhost:3068') => [
 
 // fetchData immediately returns a function that receives `dispatch` as an arugument due to `redux-thunk` middleware.
 // redux-thunk middleware is applied in client/src/store.js
-export const fetchData = () => async dispatch => {
+export const fetchStructurePageData = () => async dispatch => {
   // urls is set to an array of URL strings as described on line 43.
   const urls = endpointArray();
   // Map returns an array. Here we map over the urls array to produce an array of promises in the form of fetch requests.

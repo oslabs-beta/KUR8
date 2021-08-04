@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import { metricsFetchData } from '../../actions/metricsActionCreators';
-import { fetchData } from '../../actions/nodesActionCreators';
 import Instructions from './Instructions';
 
 const useStyles = makeStyles({
@@ -23,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-function GetStartedPage({ fetchData, metricsFetchData, history }) {
+function GetStartedPage({ metricsFetchData, history }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const cookies = new UniversalCookie();
@@ -33,7 +32,6 @@ function GetStartedPage({ fetchData, metricsFetchData, history }) {
   // Check to see if GetStartedPage has set a cookie
   useEffect(() => {
     const beenHere = cookies.get('hasSeenGetStartedPage');
-    fetchData();
     metricsFetchData();
     if (beenHere) history.push('/structure');
   }, []);
@@ -72,6 +70,6 @@ function GetStartedPage({ fetchData, metricsFetchData, history }) {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchData, metricsFetchData }, dispatch);
+  bindActionCreators({ metricsFetchData }, dispatch);
 
 export default connect(null, mapDispatchToProps)(withRouter(GetStartedPage));
