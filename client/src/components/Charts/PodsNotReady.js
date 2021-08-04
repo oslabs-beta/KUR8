@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ZingChart from 'zingchart-react';
+import { withTheme } from '@material-ui/core/styles';
 
 export class PodsNotReady extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // color: this.
       config: {
         type: 'line',
         utc: true,
@@ -47,15 +47,12 @@ export class PodsNotReady extends Component {
         },
       },
       'scale-x': {
-        // "min-value" : Date.now() - 86400000,
         'min-value': this.findMin(),
         'max-value': this.findMax(),
         step: 'hour',
-        // 'max-items':10,
         zooming: true,
 
         shadow: 0,
-        // "step": 83000,
         transform: {
           type: 'date',
           all: '%D, %d %M<br />%h:%i %A',
@@ -76,7 +73,6 @@ export class PodsNotReady extends Component {
         shadow: 0,
         progression: 'log',
         'log-base': Math.E,
-        // "type": "line",
         plotarea: {
           'adjust-layout': true,
         },
@@ -230,4 +226,4 @@ export class PodsNotReady extends Component {
   }
 }
 
-export default PodsNotReady;
+export default withTheme(PodsNotReady);
