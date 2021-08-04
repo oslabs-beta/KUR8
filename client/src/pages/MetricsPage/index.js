@@ -20,7 +20,13 @@ import { metricsFetchData } from '../../actions/metricsActionCreators';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    height: '100%',
+    width: '100%',
     padding: theme.spacing(2),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey[900]
+        : theme.palette.grey[200],
   },
   paper: {
     padding: theme.spacing(2),

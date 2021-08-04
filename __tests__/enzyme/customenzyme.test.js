@@ -51,7 +51,7 @@ describe('CustomMetricsPage', () => {
     expect(wrapper.find(CustomCharts)).toHaveLength(1);
   });
 
-  describe('CustomQuery', () => {
+  xdescribe('CustomQuery', () => {
     let wrapper;
 
     const props = {
@@ -91,7 +91,7 @@ describe('CustomMetricsPage', () => {
       expect(wrapper.find('#collapse').prop('in')).toEqual(false);
     });
 
-    describe('filling out form', () => {
+    xdescribe('filling out form', () => {
       beforeAll(() => {
         wrapper.find('#addnewchart').simulate('click');
       });
