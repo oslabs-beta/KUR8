@@ -1,17 +1,18 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import React from 'react';
 
-import SingleNode from './SingleNode';
-import MasterNode from './MasterNode';
-import WorkerNode from './WorkerNode';
 import Ingress from './Ingress';
+import MasterNode from './MasterNode';
+import SingleNode from './SingleNode';
+import WorkerNode from './WorkerNode';
 
 const useStyles = makeStyles(theme => ({
   paper: {
+    height: '100vh',
     padding: theme.spacing(2),
     backgroundColor:
       theme.palette.type === 'dark'

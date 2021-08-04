@@ -37,6 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     width: '100%',
+    height: '100%',
     flexGrow: 1,
     backgroundColor:
       theme.palette.type === 'dark'
