@@ -36,13 +36,13 @@ const useStyles = makeStyles(theme => ({
 function SingleNode({ masterNodeData, pods, ingresses, services }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  console.log(`masterNodeData`, masterNodeData);
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  if (masterNodeData.length === 0) return 'loading'
   return (
     <Paper className={classes.paper} elevation={1}>
       <Tooltip

@@ -17,7 +17,7 @@ import AccordianTable from './AccordianTable';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 2, 2),
   },
   flexRow: {
     display: 'flex',

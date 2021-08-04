@@ -1,7 +1,7 @@
-import React from 'react';
-import { withRouter } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -9,11 +9,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
-import Toolbar from '@material-ui/core/Toolbar';
-import { useParams, useHistory } from 'react-router-dom';
-import MyAppBar from './MyAppBar';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import React from 'react';
+import Toolbar from '@material-ui/core/Toolbar';
+
+import MyAppBar from './MyAppBar';
 
 const drawerWidth = 240;
 
@@ -36,8 +36,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   content: {
+    width: '100%',
     flexGrow: 1,
-    padding: theme.spacing(3),
     backgroundColor:
       theme.palette.type === 'dark'
         ? theme.palette.grey['A400']
