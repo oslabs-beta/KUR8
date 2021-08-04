@@ -63,6 +63,7 @@ function MetricsPage({ metrics, metricsFetchData, isLoading }) {
     <Grid container spacing={4}>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          {console.log('metrics',metrics)}
           {metrics.defaultcharts.length ? (
             <QueryCpuRangeChart cpuRangeChart={metrics.cpuRangeChart} />
           ) : (

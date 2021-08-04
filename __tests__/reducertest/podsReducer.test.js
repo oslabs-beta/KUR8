@@ -33,7 +33,7 @@ describe('podsReducer', () => {
             items: [
               {
                 metadata: {
-                  creationTimestamp: "2021-08-04T04:10:12.000Z",
+                  creationTimestamp: '2021-08-04T04:10:12.000Z',
                   namespace: 'ns',
                   uid: 0,
                 },
@@ -44,7 +44,7 @@ describe('podsReducer', () => {
                 status: {
                   containerStatuses: [{ name: 'containername' }],
                   phase: 'phase',
-                  startTime: "2021-08-04T04:10:12.000Z",
+                  startTime: '2021-08-04T04:10:12.000Z',
                   hostIP: '172.18.0.4',
                   podIP: '10.244.2.23',
                 },
@@ -67,7 +67,7 @@ describe('podsReducer', () => {
             },
           ],
           metadata: {
-            creationTimestamp: "August 3rd 2021 - 9:10:12 pm",
+            creationTimestamp: 'August 3rd 2021 - 9:10:12 pm',
             namespace: 'ns',
             uid: 0,
           },
@@ -79,7 +79,7 @@ describe('podsReducer', () => {
             hostIP: '172.18.0.4',
             phase: 'phase',
             podIP: '10.244.2.23',
-            startTime: "August 3rd 2021 - 9:10:12 pm",
+            startTime: 'August 3rd 2021 - 9:10:12 pm',
           },
         },
       ]);

@@ -19,6 +19,7 @@ describe('metricsReducer', () => {
       allPromQL: [],
       podPerNamespace: [],
       podNotReady: [],
+      isLoading: false,
     };
   });
 

@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useTheme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -52,7 +52,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
 
   //drag and drop
   const list = [...customDataArray];
-  const onDragEnd = (result) => {
+  const onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -83,7 +83,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
             'font-size': 8,
           },
         },
-        series: dataSet.map((dataPoint) => {
+        series: dataSet.map(dataPoint => {
           return { values: dataPoint.yRange };
         }),
       };
@@ -138,7 +138,7 @@ function CustomCharts({ customDataArray, deleteCustom, moveDnd }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ deleteCustom, moveDnd }, dispatch);
 
 export default connect(null, mapDispatchToProps)(CustomCharts);
