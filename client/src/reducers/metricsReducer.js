@@ -89,7 +89,6 @@ function metricsReducer(state = initialState, action) {
          node.value[1],
        ]);
 
-       console.log(CPUdata);
      });
      return { ...state, cpuGauge: CPUdata };
 
@@ -106,7 +105,6 @@ function metricsReducer(state = initialState, action) {
      return { ...state, memoryNode: memoryNode };
 
   case actionsTypes.CUSTOM_QUERY:
-    console.log('here in custom query reducer')
     let newCustomDataArray = [...state.customDataArray];
     let newCustomData = [];
     let customData = payload.data.data.result;
@@ -130,7 +128,7 @@ function metricsReducer(state = initialState, action) {
 
      let httpRequest = [];
      resultRequest.forEach((thePath, index) => {
-       
+
        httpRequest.push([
          thePath.metric.path,
          thePath.metric.method,
@@ -151,7 +149,7 @@ function metricsReducer(state = initialState, action) {
        ]);
      });
      return { ...state, cpuContainer: cpuContainer };
-     
+
      case actionsTypes.ALL_PROMQL:
        const allPromQL = payload.data.data
       return { ...state, allPromQL: allPromQL };
@@ -166,7 +164,6 @@ function metricsReducer(state = initialState, action) {
       return { ...state, customDataArray: remaining };
 
       case actionsTypes.MOVE_DND:
-        console.log('moving in reducer')
         return { ...state, customDataArray: payload };
 
    case actionsTypes.FETCH_NUM_POD_NAMESPACE:
@@ -186,7 +183,7 @@ function metricsReducer(state = initialState, action) {
 
      let podNotWorking = [];
      resultNotReadyPod.forEach((namespace, index) => {
-       
+
       podNotWorking.push([
          namespace.metric.namespace,
          namespace.values,

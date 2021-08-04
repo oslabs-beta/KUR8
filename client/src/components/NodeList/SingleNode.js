@@ -36,7 +36,6 @@ const useStyles = makeStyles(theme => ({
 function SingleNode({ masterNodeData, pods, ingresses, services }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  console.log(`masterNodeData`, masterNodeData);
   const handleClickOpen = () => {
     setOpen(true);
   };
