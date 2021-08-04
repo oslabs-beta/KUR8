@@ -47,7 +47,7 @@ describe('deploymentsReducer', () => {
       };
     });
 
-    it('should list an array of all deployments', () => {
+    it('should return an array of all deployments', () => {
       const result = deploymentsReducer.default(initialState, action);
       expect(result).toHaveProperty('deployments', [
         {

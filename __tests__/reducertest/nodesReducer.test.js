@@ -171,7 +171,7 @@ describe('nodesReducer', () => {
       };
     });
 
-    it('should list all masternodes and worknodes', () => {
+    it('should return an array of all masternodes and worknodes', () => {
       const result = nodesReducer.default(initialState, action);
       expect(result).toHaveProperty('masterNodes', [
         {

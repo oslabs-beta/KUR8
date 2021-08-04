@@ -79,7 +79,7 @@ describe('alertsreducer', () => {
       };
     });
 
-    it('should list all alerts in alertGroups', () => {
+    it('should return a list all alerts in alertGroups', () => {
       const result = alertsReducer.default(initialState, action);
       expect(result).toHaveProperty('alertGroups', []);
     });

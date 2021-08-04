@@ -66,7 +66,7 @@ describe('ingressesReducer', () => {
       };
     });
 
-    it('should list an array of all ingresses', () => {
+    it('should return an array of all ingresses', () => {
       const result = ingressesReducer.default(initialState, action);
       expect(result).toHaveProperty('ingresses', {
         host: 'host',
