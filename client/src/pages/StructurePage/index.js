@@ -3,15 +3,23 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
+import { useTheme } from '@material-ui/core/styles';
 
 import NodeList from '../../components/NodeList';
 import { fetchStructurePageData } from '../../actions/nodesActionCreators';
 
 function StructurePage({ isLoading, fetchStructurePageData }) {
+  const theme = useTheme();
   useEffect(() => {
-    fetchStructurePageData()
+    fetchStructurePageData();
   }, []);
-  return isLoading ? <LinearProgress color="secondary" /> : <NodeList />;
+  return isLoading ? (
+    <LinearProgress
+      color={theme.palette.type === 'dark' ? 'primary' : 'secondary'}
+    />
+  ) : (
+    <NodeList />
+  );
 }
 
 const mapStateToProps = state => ({
