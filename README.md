@@ -43,7 +43,7 @@ All of your Prometheus alerts including your custom ones are displayed here in t
 
 ## Deploying KUR8
 
-KUR8 requires your Kubernetes cluster to be up and running
+KUR8 requires your Kubernetes cluster to already be set up and running
 
 An image of the application has been pushed to [Docker Hub](https://hub.docker.com/repository/docker/kur8/dashboard) for those who would like to build the image directly from the public repository.
 
