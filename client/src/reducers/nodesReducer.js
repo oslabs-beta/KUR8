@@ -1,6 +1,7 @@
 import * as actionsTypes from '../actions/actionsTypes';
 
 const initialState = {
+  isLoading: false,
   masterNodes: [],
   workerNodes: [],
 };
@@ -8,6 +9,16 @@ const initialState = {
 function nodesReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case actionsTypes.NODE_FETCH_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionsTypes.NODE_FETCH_COMPLETE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     // Only one case used due to both master and worker nodes being located within the same API endpoint
     case actionsTypes.RECEIVE_NODES:
       const { items } = payload.data.response.body;

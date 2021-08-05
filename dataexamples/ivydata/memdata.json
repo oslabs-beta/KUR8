@@ -1,0 +1,5 @@
+100 * (1 - ((avg_over_time(node_memory_MemFree_bytes[10m:15s]) + 
+avg_over_time(node_memory_Cached_bytes[10m:15s])+ avg_over_time(node_memory_Buffers_bytes[10m:15s])) 
+/ avg_over_time(node_memory_MemTotal_bytes[10m:15s]))
+
+

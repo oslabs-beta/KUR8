@@ -1,138 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import React, { useState, useEffect } from 'react';
 import Select from '@material-ui/core/Select';
-import { fetchCustomQuery, hyrateCustom } from '../../actions/metricsActionCreators';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import {
+  fetchCustomQuery,
+  hyrateCustom,
+} from '../../actions/metricsActionCreators';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
+const useStyles = makeStyles(theme => ({
+  customQueryRoot: {
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2),
+    width: '100%',
+    height: '200px',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+  addChartText: {
+    marginLeft: theme.spacing(2),
   },
-  drawerPaper: {
-    width: drawerWidth,
+  icon: {
+    color: theme.palette.grey[700],
   },
-  drawerContainer: {
-    overflow: 'auto',
+  mainSearchInput: {
+    width: '100%',
+    '& > .Mui-focused': {
+      borderColor: 'red',
+    },
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+  timeRange: {
+    marginRight: theme.spacing(2),
+  },
+  input: {
+    height: '50px',
+  },
+  submitButton: {
+    height: '50px',
+    width: '100Px',
+    '&:hover': {
+      color: theme.palette.common.white,
+      background:
+        theme.palette.type === 'dark'
+          ? theme.palette.grey[900]
+          : theme.palette.grey[700],
+    },
   },
 }));
 
-function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCustom }) {
-
+function CustomQuery({
+  fetchCustomQuery,
+  allPromQL,
+  customDataArray,
+  hyrateCustom,
+}) {
+  //on page load this useEffect will check to see if any custom charts have been stored in local storage and dispatch them to hydrate the store via the reducer
   useEffect(() => {
     const retrieveStash = localStorage.getItem('customcharts');
     if (retrieveStash) {
-      hyrateCustom(JSON.parse(retrieveStash))
-    };
-  },[]);
+      hyrateCustom(JSON.parse(retrieveStash));
+    }
+  }, []);
 
+  //This useEffect comes after the hydrate to not overwrite the previous localstorage before hydrating when adding new charts
   useEffect(() => {
     localStorage.setItem('customcharts', JSON.stringify(customDataArray));
   });
 
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const [title, setTitle] = useState('');
-  const [range, setRange] = useState('Range');
-  const [step, setStep] = useState('Step');
+  const [open, setOpen] = useState(false); //state of collapsable Custom Query Form, true = expanded, false = collpased
+  const [query, setQuery] = useState(''); //current query inputted
+  const [range, setRange] = useState('Range'); //current data time range selected
+  const [step, setStep] = useState('Step'); //current step interval selected
 
   const handleNesting = () => {
     setOpen(!open);
   };
 
-  const handleQueryChange = (e, selectedObject) => {
-    if (selectedObject !== null)
-        setQuery(selectedObject)
-  }
-  
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+  //only updates query state on select or enter press for some reason
+  const handleQueryChange = (event, selectedObject) => {
+    setQuery(selectedObject);
   };
 
-  const handleRangeChange = (event) => {
+  const handleRangeChange = event => {
     setRange(event.target.value);
   };
 
-  const handleStepChange = (event) => {
+  const handleStepChange = event => {
     setStep(event.target.value);
   };
 
-  function handleSubmit(event) {
+  //queries Prometheus with query: string, range: number, step: number
+  const handleSubmit = event => {
     event.preventDefault();
-    console.log( 'query:', query, 'range: ', range, 'step', step, 'title', title); 
-    fetchCustomQuery(query, range, step, title);
-  }
+    console.log('query:', query, 'range: ', range, 'step', step);
+    fetchCustomQuery(query, range, step);
+  };
 
-  const ranges = [1,2,3,4,8,12,18,24];
-  const steps = [15,30,60,120];
+  //default values for data time ranges in select drop down menu
+  const ranges = [1, 2, 3, 4, 8, 12, 18, 24];
+  //default values for data step intervals in select drop down menu
+  const steps = [15, 30, 60, 120];
 
   return (
-    <List>
-      <ListItem button onClick={handleNesting}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add New Chart" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <Autocomplete
-              id="autocomplete-query"
-              freeSolo
-              // fullWidth={true}
-              style = {{width: 1000}}
-              value={query}
-              onChange={handleQueryChange}
-              options={allPromQL.map((option) => option)}
-              renderOption={option => option}
-              renderInput={(params) => (
-                <TextField {...params} label="Enter Prometheus Query" margin="normal" variant="outlined" />
-              )}
-            />
-            {/* <TextField
-              id="outlined-title"
-              label="Enter Chart Title"
-              value={title}
-              onChange={handleTitleChange}
-              multiline
+    <Paper className={classes.customQueryRoot}>
+      <Grid
+        className={classes.addChartContainer}
+        container
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="center">
+        <InboxIcon className={classes.icon} />
+        <Typography
+          className={classes.addChartText}
+          variant="h6"
+          component="h1">
+          Add New Chart
+        </Typography>
+      </Grid>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <Autocomplete
+          id="autocomplete-query"
+          freeSolo
+          className={classes.mainSearchInput}
+          value={query}
+          onChange={handleQueryChange}
+          options={allPromQL.map(option => option)}
+          renderOption={option => option}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Enter Prometheus Query"
+              margin="normal"
               variant="outlined"
-            /> */}
+            />
+          )}
+        />
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center">
+          <Grid item>
             <Select
               id="select-range"
               value={range}
               onChange={handleRangeChange}
               label="Choose a time range"
               variant="outlined"
-            >
-            <MenuItem value="Range">
-            <em>Select a time range</em>
-            </MenuItem>
-              {ranges.map((ranges) => (
+              className={classes.timeRange}>
+              <MenuItem value="Range">
+                <em>Select a time range</em>
+              </MenuItem>
+              {ranges.map(ranges => (
                 <MenuItem key={ranges} value={ranges}>
                   {`${ranges} hours`}
                 </MenuItem>
@@ -143,28 +170,30 @@ function CustomQuery({ fetchCustomQuery, allPromQL, customDataArray, hyrateCusto
               value={step}
               onChange={handleStepChange}
               label="Choose a step interval"
-              variant="outlined"
-            >
+              variant="outlined">
               <MenuItem value="Step">
-              <em>Select a step interval</em>
+                <em>Select a step interval</em>
               </MenuItem>
-              {steps.map((steps) => (
+              {steps.map(steps => (
                 <MenuItem key={steps} value={steps}>
                   {`${steps} seconds`}
                 </MenuItem>
               ))}
             </Select>
+          </Grid>
+
+          <Grid item>
             <Button
+              id="submit-custom"
               type="submit"
               variant="outlined"
-              // className={classes.button}
-            >
+              className={classes.submitButton}>
               Submit
             </Button>
-          </form>
-        </ListItem>
-      </Collapse>
-    </List>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
   );
 }
 
@@ -178,4 +207,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ fetchCustomQuery, hyrateCustom }, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomQuery);

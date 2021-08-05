@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
@@ -9,10 +8,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import MasterNodeTable from './MasterNodeTable';
+import ModalTable from './ModalTable';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,7 +32,10 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(25),
     width: theme.spacing(25),
     margin: theme.spacing(3, 0),
-    background: 'rgb(146, 113, 46)',
+    background:
+      theme.palette.type === 'dark'
+        ? theme.palette.primary.accent
+        : theme.palette.primary.accent,
     clipPath:
       'polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)',
   },
@@ -60,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MasterNode({ name, nodeData }) {
+function MasterNode({ id, name, nodeData }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -84,13 +87,14 @@ function MasterNode({ name, nodeData }) {
             />
           </Tooltip>
           <Tooltip disableFocusListener placement="left" title="More Info">
-            <div className={classes.containersShape} onClick={handleClickOpen}>
+            <div id={`Master${id}`} className={classes.containersShape} onClick={handleClickOpen}>
               <Typography className={classes.moreInfo} variant="h4">
                 i
               </Typography>
             </div>
           </Tooltip>
           <Dialog
+            maxWidth="md"
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
             open={open}>
@@ -110,7 +114,7 @@ function MasterNode({ name, nodeData }) {
               </Grid>
             </MuiDialogTitle>
             <MuiDialogContent dividers>
-              <MasterNodeTable nodeData={nodeData} />
+              <ModalTable nodeData={nodeData} />
             </MuiDialogContent>
             <MuiDialogActions>
               <Button autoFocus onClick={handleClose} color="primary">

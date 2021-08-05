@@ -11,14 +11,17 @@ function podsReducer(state = initialState, action) {
     case actionsTypes.RECEIVE_PODS:
       const { items } = payload.data;
       let podArray = [];
-      items.forEach(pod => {
-        const { metadata, spec, status } = pod;
+      items.forEach(({ metadata, spec, status }) => {
+        const containersArr = [];
+
+        // Create a flat object of containerNames with their respective properties
+        status.containerStatuses.forEach(container =>
+          containersArr.push({
+            [container.name]: { ...container },
+          })
+        );
         podArray.push({
-          containers: {
-            list: [...spec.containers],
-            conditions: [...status.containerStatuses],
-            podIPs: [...status.podIPs],
-          },
+          containers: containersArr,
           metadata: {
             namespace: metadata.namespace,
             creationTimestamp: moment(metadata.creationTimestamp).format(

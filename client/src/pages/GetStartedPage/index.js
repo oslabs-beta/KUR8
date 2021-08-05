@@ -1,133 +1,67 @@
-import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import { useParams, useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
+import Instructions from './Instructions';
+
+const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    wordSpacing: '0.4em',
-    fontFamily: 'sans-serif',
+    flexGrow: 1,
+    width: '100%',
   },
+  dialog: {
+    width: '1000px',
+  },
+});
 
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: theme.spacing(1),
-    width: '635px',
-    height: '705px',
-    alignItems: 'center',
-    margin: '30px',
-    fontSize: '20px',
-    padding: '30px',
-  },
-  title: {
-    textAlign: 'center',
-    fontWeight: '500',
-  },
-  button: {
-    color: 'black',
-    backgroundColor: 'white',
-    textAlign: 'center',
-    width: '50px',
-    height: '25px',
-  },
-
-  codeBlock: {
-    backgroundColor: 'black',
-    color: 'white',
-  },
-}));
-
-export default function GetStartedPage() {
+function GetStartedPage({ history }) {
   const classes = useStyles();
+  const [open, setOpen] = useState(true);
+  const cookies = new UniversalCookie();
 
-  const [copySuccess, setCopySuccess] = useState('');
-  const history = useHistory();
+  // On intial load, perform all fetch requests to populate our app with data
+  // Check to see if GetStartedPage has set a cookie
+  useEffect(() => {
+    const beenHere = cookies.get('hasSeenGetStartedPage');
+    if (beenHere) history.push('/structure');
+  }, []);
 
-  const switchPage = () => {
-    history.push('/structure');
+  const closeModal = () => {
+    setOpen(false);
   };
 
   return (
-    <div className={classes.root}>
-      <Paper elevation={3} className={classes.paper}>
-        <Typography variant="h6" component="h1">
-          <center>
-            <strong>Getting Started</strong>
-          </center>
-        </Typography>
-        <Typography variant="body1">Deploying Prometheus</Typography>
-        <ol>
-          <li>
-            If you don't have your instance of Prometheus installed begin by:
-            <br></br>
-            In KUR8 directory run:{' '}
-            <code className={classes.codeBlock}>
-              kubectl create -f infra/manifests/setup
-            </code>
-            <button
-              className={classes.button}
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  'kubectl create -f infra/manifests/setup'
-                )
-              }>
-              <i className="far fa-copy"></i>
-            </button>
-          </li>
-
-          <br></br>
-          <li>
-            Once setup is complete run:{' '}
-            <code className={classes.codeBlock}>
-              kubectl create -f infra/manifests/
-            </code>
-            <button
-              className={classes.button}
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  'kubectl create -f infra/manifests/'
-                )
-              }>
-              <i className="far fa-copy"></i>
-            </button>
-          </li>
-
-          <br></br>
-          <li>
-            If you want to open up Prometheus UI run:{' '}
-            <code className={classes.codeBlock}>
-              kubectl --namespace monitoring port-forward svc/prometheus-k8s
-              9090
-            </code>
-            <button
-              className={classes.button}
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  'kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090'
-                )
-              }>
-              <i className="far fa-copy"></i>
-            </button>
-          </li>
-
-          <br></br>
-          <li>
-            Now open up localhost:9090 in your browser
-            <br></br>
-            You may also view the Prometheus tab in KUR8 localhost:8080 to view
-            and create your custom dashboard.
-          </li>
-        </ol>
-        <button className={classes.button} onClick={switchPage}>
-          Done
-        </button>
-      </Paper>
-    </div>
+    <Dialog
+      fullWidth
+      maxWidth="md"
+      aria-labelledby="customized-dialog-title"
+      open={open}>
+      <MuiDialogTitle disableTypography className={classes.dialogTitle}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="space-between"
+          alignItems="center">
+          <Typography textAlign="center" variant="h6" component="h1">
+            Getting Started
+          </Typography>
+          <Typography textAlign="center" variant="body1">
+            Deploying Prometheus
+          </Typography>
+        </Grid>
+      </MuiDialogTitle>
+      <MuiDialogContent dividers>
+        <Grid container direction="column" alignItems="flex-start">
+          <Instructions closeModal={closeModal} cookies={cookies} />
+        </Grid>
+      </MuiDialogContent>
+    </Dialog>
   );
 }
+
+export default withRouter(GetStartedPage);

@@ -7,8 +7,22 @@
     "start": "cross-env NODE_ENV=PRODUCTION nodemon ./server/index.js",
     "build": "cross-env NODE_ENV=PRODUCTION webpack",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"cross-env NODE_ENV=development nodemon ./server/index.js\"",
-    "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 8080:8080\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
-    "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/"
+    "ports": "concurrently \"kubectl port-forward deployment/kur8-depl 3068:3068\" \"kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090\"",
+    "prominit": "kubectl create -f infra/manifests/setup && kubectl create -f infra/manifests/",
+    "test": "jest --verbose",
+    "testdocker": "docker-compose -f docker-compose-test.yml up --abort-on-container-exit",
+    "cypress:open": "cypress open",
+    "lint": "eslint ."
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "verbose": true,
+    "globals": {
+      "window": {}
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!test-component).+\\.js$"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -35,6 +49,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^16.14.0",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "uuid": "^8.3.2",
@@ -44,17 +59,27 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
+    "cypress": "^8.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.6",
     "mini-css-extract-plugin": "^1.6.0",
+    "redux-mock-store": "^1.5.4",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
+    "supertest": "^6.1.4",
     "webpack-cli": "^4.6.0"
   }
 }

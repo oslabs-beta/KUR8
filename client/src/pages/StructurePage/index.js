@@ -1,20 +1,32 @@
+import { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import NodeList from '../../components/NodeList'
+import { useTheme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  sampleStyle: {
-    color: '#000',
-  },
-}));
+import NodeList from '../../components/NodeList';
+import { fetchStructurePageData } from '../../actions/nodesActionCreators';
 
-export default function StructurePage() {
-  const classes = useStyles();
-
-  return (
-    <div>
-      <NodeList />
-    </div>
+function StructurePage({ isLoading, fetchStructurePageData }) {
+  const theme = useTheme();
+  useEffect(() => {
+    fetchStructurePageData();
+  }, []);
+  return isLoading ? (
+    <LinearProgress
+      color={theme.palette.type === 'dark' ? 'primary' : 'secondary'}
+    />
+  ) : (
+    <NodeList />
   );
 }
+
+const mapStateToProps = state => ({
+  isLoading: state.nodesReducer.isLoading,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchStructurePageData }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(StructurePage);

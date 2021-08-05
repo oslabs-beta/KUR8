@@ -1,33 +1,42 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
 
 import Ingress from './Ingress';
 import MasterNode from './MasterNode';
-import Pod from '../PodList/Pod';
+import SingleNode from './SingleNode';
 import WorkerNode from './WorkerNode';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding: theme.spacing(5, 0),
+    height: '100vh',
+    padding: theme.spacing(2),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey[900]
+        : theme.palette.grey[200],
   },
   masterContainer: {
     height: '100%',
   },
   ingressContainer: {
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: theme.spacing(5, 0),
-    height: '50px',
-    width: '200px',
-    borderRadius: '25px',
-    boxShadow: theme.shadows[3],
+    padding: theme.spacing(3, 0),
+  },
+  masterNodesContainer: {
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0, 0, 3),
+    },
+  },
+  workerNodesContainer: {
+    [theme.breakpoints.down(1300)]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
 }));
 
@@ -52,47 +61,42 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
   // this will render all pods/containers within that node as the primary UI.
   if (!workerNodes.length) {
     return (
-      <Paper className={classes.paper} elevation={1}>
-        <Typography>Node</Typography>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center">
-          <Ingress ingresses={ingresses} />
-        </Grid>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center">
-          {pods.map((pod, index) => {
-            return (
-              <Pod
-                key={`pod-${index}`}
-                clusterIP={services[index].spec.clusterIP}
-                {...pod}
-              />
-            );
-          })}
-        </Grid>
-      </Paper>
+      <SingleNode
+        masterNodeData={masterNodes}
+        ingresses={ingresses}
+        services={services}
+        pods={pods}
+      />
     );
   } else {
     // Otherwise, the primary UI will be composed of masterNodes with multiple workerNodes,
     // with each workerNode producing a list of it's own pods/containers.
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} square>
         <Grid container direction="row">
-          <Grid item xs={3}>
+          <Grid
+            container
+            className={classes.masterNodesContainer}
+            direction="column"
+            justifyContent="space-between"
+            alignItems="center"
+            sm={12}
+            md={3}>
             <Grid
               container
-              direction="column"
-              justifyContent="center"
+              direction="row"
+              justifyContent="flex-start"
               alignItems="center">
-              <Ingress ingresses={ingresses} />
-              {masterNodes.map(masterProps => (
+              <Chip
+                variant="outlined"
+                size="medium"
+                label="Cluster Environment"
+              />
+            </Grid>
+            <Grid item direction="row">
+              {masterNodes.map((masterProps, index) => (
                 <MasterNode
+                  id={index}
                   key={masterProps.metadata.uid}
                   name={masterProps.metadata.name}
                   processes={masterProps.processes}
@@ -101,15 +105,20 @@ function NodeList({ pods, services, ingresses, masterNodes, workerNodes }) {
                 />
               ))}
             </Grid>
+            <Grid item direction="row" className={classes.ingressContainer}>
+              <Ingress ingresses={ingresses} />
+            </Grid>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item sm={12} md={9}>
             <Grid
               container
+              className={classes.workerNodesContainer}
               direction="column"
               justifyContent="flex-start"
               alignItems="flex-start">
-              {workerNodes.map(workerProps => (
+              {workerNodes.map((workerProps, index) => (
                 <WorkerNode
+                  id={index}
                   key={workerProps.metadata.uid}
                   pods={workerNodePods[workerProps.metadata.name]}
                   metadata={workerProps.metadata}

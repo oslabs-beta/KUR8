@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-// import CounterChart from '../../components/Charts/CounterChart';
-// import GaugeChart from '../../components/Charts/GaugeChart';
 import HistogramChart from '../../components/Charts/HistogramChart';
-import MemoryGauge from '../../components/Charts/MemoryGauge';
 import CPUGauge from '../../components/Charts/CPUGauge';
 import QueryRangeChart from '../../components/Charts/QueryRangeChart';
 import QueryCpuRangeChart from '../../components/Charts/QueryCpuRangeChart';
 import TotalHTTPRequest from '../../components/Charts/TotalHTTPRequest';
 import CPUContainer from '../../components/Charts/CPUContainer';
+import PodByNamespace from '../../components/Charts/PodByNamespace';
+import PodsNotReady from '../../components/Charts/PodsNotReady';
+import MemoryNode from '../../components/Charts/MemoryNode';
+import { metricsFetchData } from '../../actions/metricsActionCreators';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: '100%',
+    width: '100%',
+    padding: theme.spacing(2),
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? theme.palette.grey[900]
+        : theme.palette.grey[200],
+  },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'column',
-    height: '512px',
+    height: '560px',
   },
   halfedTop: {
     marginBottom: theme.spacing(2),
@@ -40,76 +53,131 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MetricsPage({ cpuGauge }) {
+const circleSpinner = (
+  <CircularProgress
+    color="secondary"
+    style={{ height: '100px', width: '100px' }}
+    justify="center"
+  />
+);
+
+function MetricsPage({ metrics, metricsFetchData, isLoading }) {
   const classes = useStyles();
+  const theme = useTheme();
+  useEffect(() => {
+    metricsFetchData();
+  }, []);
+
+  if (isLoading)
+    return (
+      <LinearProgress
+        color={theme.palette.type === 'dark' ? 'primary' : 'secondary'}
+      />
+    );
   return (
-    <Grid container spacing={4}>
-      {/* <Grid item xs={12} md={4}>
-        <Grid item>
-          <Paper className={classes.halfedTop}>
-            <CounterChart />
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper className={classes.halfedBottom}>
-            <GaugeChart />
-          </Paper>
-        </Grid>
-      </Grid> */}
-
-      {/* <CustomCharts customDataArray={customDataArray}/> */}
-
+    <Grid className={classes.root} container spacing={2}>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryCpuRangeChart />
+          {console.log('metrics',metrics)}
+          {metrics.defaultcharts.length ? (
+            <QueryCpuRangeChart cpuRangeChart={metrics.cpuRangeChart} />
+          ) : (
+            circleSpinner
+          )}
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <QueryRangeChart />
+          {metrics.defaultcharts.length ? (
+            <QueryRangeChart querycharts={metrics.querycharts} />
+          ) : (
+            circleSpinner
+          )}
         </Paper>
       </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <HistogramChart />
+          {metrics.defaultcharts.length ? (
+            <HistogramChart defaultcharts={metrics.defaultcharts} />
+          ) : (
+            circleSpinner
+          )}
         </Paper>
       </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <CPUGauge cpuGauge={cpuGauge} />
-        </Paper>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <TotalHTTPRequest />
-        </Paper>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <CPUContainer />
+          {metrics.defaultcharts.length ? (
+            <CPUGauge cpuGauge={metrics.cpuGauge} />
+          ) : (
+            circleSpinner
+          )}
         </Paper>
       </Grid>
 
       <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
-          <MemoryGauge />
+          {metrics.defaultcharts.length ? (
+            <PodByNamespace podPerNamespace={metrics.podPerNamespace} />
+          ) : (
+            circleSpinner
+          )}
         </Paper>
-      </Grid> 
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          {metrics.defaultcharts.length ? (
+            <TotalHTTPRequest httpRequestData={metrics.httpRequestData} />
+          ) : (
+            circleSpinner
+          )}
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          {metrics.defaultcharts.length ? (
+            <CPUContainer cpuContainer={metrics.cpuContainer} />
+          ) : (
+            circleSpinner
+          )}
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          {metrics.defaultcharts.length ? (
+            <PodsNotReady podNotReady={metrics.podNotReady} />
+          ) : (
+            circleSpinner
+          )}
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper className={classes.paper}>
+          {metrics.defaultcharts.length ? (
+            <MemoryNode memoryNode={metrics.memoryNode} />
+          ) : (
+            circleSpinner
+          )}
+        </Paper>
+      </Grid>
     </Grid>
   );
 }
 
 const mapStateToProps = state => {
-  console.log(`state`, state);
   return {
-    cpuGauge: state.metricsReducer.cpuGauge,
-    // customDataArray: state.metricsReducer.customDataArray,
+    metrics: state.metricsReducer,
+    isLoading: state.metricsReducer.isLoading,
   };
 };
 
-export default connect(mapStateToProps, null)(MetricsPage);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ metricsFetchData }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MetricsPage);
