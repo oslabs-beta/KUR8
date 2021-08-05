@@ -100,7 +100,6 @@ function CustomQuery({
   //queries Prometheus with query: string, range: number, step: number
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('query:', query, 'range: ', range, 'step', step);
     fetchCustomQuery(query, range, step);
   };
 

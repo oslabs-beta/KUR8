@@ -42,6 +42,7 @@ export class TotalHTTPRequest extends Component {
     return minimumVal * 1000;
   };
 
+    //dynamically render chart based on incoming data
   stateFormat = () => {
     let pathLength = this.props.httpRequestData.length;
 
@@ -98,10 +99,12 @@ export class TotalHTTPRequest extends Component {
   };
 
   render() {
+      //config object for zingchart with its properties
     let myConfig = {
       type: "line",
       "globals": {
         "font-family": "Roboto",
+        //rendering zingchart with config, change in theme depending on the current theme type
         "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
         "color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
       },

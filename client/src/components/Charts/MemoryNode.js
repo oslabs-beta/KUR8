@@ -5,8 +5,6 @@ import { withTheme } from '@material-ui/core/styles';
 export class MemoryNode extends Component {
   constructor(props) {
     super(props);
-
-    console.log('memoryNode', this.props.memoryNode)
   }
 
   findMax = () => {
@@ -95,10 +93,10 @@ export class MemoryNode extends Component {
           outerContainer.push(seriesObj);
           eachData = [];
       } 
-      console.log('outerContainer', outerContainer)
       return outerContainer;     
   }
 
+  //config object for zingchart with the properties
   render() {
     let myConfig = {
       type: "line",
@@ -140,20 +138,18 @@ export class MemoryNode extends Component {
         }
       },
       "scale-x": {
+          //rendering zingchart with config, change in theme depending on the current theme type
         "line-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
         "item": {
           'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
           'font-weight': 'normal',
         },
-        // "min-value" : Date.now() - 86400000,
         "min-value": this.findMin(),
         "max-value": this.findMax(),
         "step": "hour",
-        // 'max-items':10,
         zooming: true,
 
         "shadow": 0,
-        // "step": 83000,
         "transform": {
           "type": "date",
           "all": "%D, %d %M<br />%h:%i %A",
@@ -178,7 +174,6 @@ export class MemoryNode extends Component {
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
-        // "type": "line",
         "plotarea": {
           "adjust-layout": true,
         },

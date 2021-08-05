@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-// import 'zingchart/es6';
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
 import { withTheme } from '@material-ui/core/styles';
 import MyAppBar from '../Layout/MyAppBar';
 
@@ -51,6 +48,7 @@ class CPUContainer extends Component {
   }
 
 
+  //formatting the state of the config object for zingchart
   stateFormat = () => {
       let pathLength = this.props.cpuContainer.length;
 
@@ -58,7 +56,6 @@ class CPUContainer extends Component {
       let eachData = [];
       let seriesObj;
       let value;
-      // let millisecond;
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
@@ -66,11 +63,8 @@ class CPUContainer extends Component {
 
 
           for (let j = 0; j < value.length; j++) {
-            // millisecond = Number(value[j][0]);
-            // millisecond *=  1000;
               eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
           }
-          console.log('eachdata', eachData)
 
           seriesObj = {
             "values": eachData,
@@ -98,10 +92,10 @@ class CPUContainer extends Component {
           outerContainer.push(seriesObj);
           eachData = [];
       } 
-      console.log('outerContainer', outerContainer)
       return outerContainer;     
   }
 
+  //rendering zingchart with config, change in theme depending on the current theme type
   render() {
     let myConfig = {
       type: "line",
@@ -144,7 +138,6 @@ class CPUContainer extends Component {
       },
 
       "scale-x": {
-        // "min-value" : Date.now() - 86400000,
         item: {
           'font-color': this.props.theme.palette.type === 'dark' ? "white" : "#424242",
         },
@@ -154,12 +147,9 @@ class CPUContainer extends Component {
         "step": "hour",
         "line-color": this.props.theme.palette.type === 'dark' ? "white" : "#424242",
         
-
-        // 'max-items':10,
         zooming: true,
 
         "shadow": 0,
-        // "step": 83000,
         "transform": {
           "type": "date",
           "all": "%D, %d %M<br />%h:%i %A",
@@ -180,7 +170,6 @@ class CPUContainer extends Component {
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
-        // "type": "line",
         "plotarea": {
           "adjust-layout": true,
         },

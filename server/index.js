@@ -23,10 +23,6 @@ app.use(express.json());
 const moduleURL = new URL(import.meta.url);
 const __dirname = path.dirname(moduleURL.pathname);
 // WEBPACK
-// app.use('/build', express.static(path.resolve(__dirname, '../client/build')));
-
-// client.register.metrics().then(data => console.log(data))
-// console.log(client.register.metrics());
 
 //Prom API data default endpoint
 app.get('/getMetrics', async (req, res) => {
@@ -52,7 +48,6 @@ app.get('/podList', getPodList, (req, res) => {
   res.status(201).send(res.locals.podList);
 });
 
-console.log('jj');
 const getServiceList = (req, res, next) => {
   k8sApi
     .listNamespacedService('default')
