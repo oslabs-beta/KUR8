@@ -53,14 +53,16 @@ We recommend deploying KUR8 directly to your Kubernetes cluster through kubectl 
 kubectl apply -f kur8-depl.yaml
 ```
 
-```
-kubectl port-forward deployment/kur8-depl 3068:3068
-```
-
 In addition, in order to allow reading resources of the API, you must configure a set of permissions. We have set up a YAML file using RBAC authorization which you can apply directly to your Kubernetes cluster using the command line: [fabric8-rbac.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/fabric8-rbac.yaml)
 
 ```
 kubectl apply -f fabric8-rbac.yaml
+```
+
+Use a port forward command to open up KUR8 on 3068.
+
+```
+kubectl port-forward deployment/kur8-depl 3068:3068
 ```
 
 Then, open your web browser to http://localhost:3068.
