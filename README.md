@@ -94,7 +94,7 @@ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
 
 You may also view the Prometheus tab in KUR8 
 ```
-localhost:8080
+localhost:3068
 ``` 
 to view and create your custom dashboard.
 
