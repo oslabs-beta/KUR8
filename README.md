@@ -43,11 +43,11 @@ All of your Prometheus alerts including your custom ones are displayed here in t
 
 ## Deploying KUR8
 
-Kur8 requires your Kubernetes cluster to be up and running
+KUR8 requires your Kubernetes cluster to be up and running
 
 An image of the application has been pushed to [Docker Hub](https://hub.docker.com/repository/docker/kur8/dashboard) for those who would like to build the image directly from the public repository.
 
-We recommend deploying Kur8 directly to your Kubernetes cluster through kubectl using our config file [kur8-depl.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/kur8-depl.yaml).
+We recommend deploying KUR8 directly to your Kubernetes cluster through kubectl using our config file [kur8-depl.yaml](https://github.com/oslabs-beta/Kur8/blob/dev/infra/k8s/kur8-depl.yaml).
 
 ```
 kubectl apply -f kur8-depl.yaml
