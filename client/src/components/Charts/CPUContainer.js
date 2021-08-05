@@ -65,7 +65,6 @@ class CPUContainer extends Component {
           for (let j = 0; j < value.length; j++) {
               eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
           }
-          console.log('eachdata', eachData)
 
           seriesObj = {
             "values": eachData,
