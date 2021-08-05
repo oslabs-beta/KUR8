@@ -59,7 +59,7 @@ In addition, in order to allow reading resources of the API, you must configure 
 kubectl apply -f fabric8-rbac.yaml
 ```
 
-Use a port forward command to open up KUR8 on 3068.
+Use a port forward command to open up KUR8 on port 3068.
 
 ```
 kubectl port-forward deployment/kur8-depl 3068:3068
