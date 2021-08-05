@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://travis-ci.com/oslabs-beta/Kur8.svg?branch=dev"/>
+  <img src="https://travis-ci.com/oslabs-beta/Kur8.svg?branch=main"/>
   <img src="https://img.shields.io/docker/pulls/kur8/dashboard"/>
   <img src="https://img.shields.io/github/license/oslabs-beta/Kur8" /> 
 </p>
