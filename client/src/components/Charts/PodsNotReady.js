@@ -1,14 +1,11 @@
 //sum by (namespace) (kube_pod_status_ready{condition="false"})
-
-//http://localhost:9090/api/v1/query_range?query=sum%20by%20(namespace)%20(kube_pod_status_ready{condition=%22false%22})&start=2021-07-28T01:53:02.662Z&end=2021-07-29T01:53:26.813Z&step=1m
-
 import React, { Component } from 'react';
-// import 'zingchart/es6';
+
 import ZingChart from 'zingchart-react';
 import { connect } from 'react-redux';
 import { withTheme } from '@material-ui/core/styles';
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
+
+
 
 export class PodsNotReady extends Component {
   constructor(props) {
@@ -54,6 +51,7 @@ export class PodsNotReady extends Component {
   }
 
 
+  //dynamically render the chart based on the incoming data
   stateFormat = () => {
       let pathLength = this.props.podNotReady.length;
 
@@ -61,7 +59,6 @@ export class PodsNotReady extends Component {
       let eachData = [];
       let seriesObj;
       let value;
-      // let millisecond;
 
       let lineColor = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#9ED2F6", "#9DDCE0", "#ADD4FF"];
       for (let i = 0; i < pathLength; i++) {
@@ -69,11 +66,8 @@ export class PodsNotReady extends Component {
 
 
           for (let j = 0; j < value.length; j++) {
-            // millisecond = Number(value[j][0]);
-            // millisecond *=  1000;
               eachData.push([Number(value[j][0]) * 1000, Number(value[j][1])]);
           }
-          console.log('eachdata', eachData)
 
           seriesObj = {
             "values": eachData,
@@ -101,11 +95,11 @@ export class PodsNotReady extends Component {
           outerContainer.push(seriesObj);
           eachData = [];
       } 
-      console.log('outerContainer', outerContainer)
       return outerContainer;     
   }
 
   render() {
+    //config object for zingchart with the following properties
     let myConfig = {
       type: "line",
       "utc": true,
@@ -113,6 +107,7 @@ export class PodsNotReady extends Component {
         "text": "Pods Not Ready Per Namespace",
         "font-size": "24px",
         "adjust-layout": true,
+          //rendering zingchart with config, change in theme depending on the current theme type
         "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
       },
       "globals":{
@@ -148,15 +143,12 @@ export class PodsNotReady extends Component {
           'font-color': this.props.theme.palette.type === 'dark' ? "white": "#424242",
           'font-weight': 'normal',
         },
-        // "min-value" : Date.now() - 86400000,
         "min-value": this.findMin(),
         "max-value": this.findMax(),
         "step": "hour",
-        // 'max-items':10,
         zooming: true,
 
         "shadow": 0,
-        // "step": 83000,
         "transform": {
           "type": "date",
           "all": "%D, %d %M<br />%h:%i %A",
@@ -181,7 +173,6 @@ export class PodsNotReady extends Component {
         "shadow": 0,
         "progression": "log",
         "log-base": Math.E,
-        // "type": "line",
         "plotarea": {
           "adjust-layout": true,
         },

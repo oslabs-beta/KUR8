@@ -9,6 +9,7 @@ export class QueryRangeChart extends Component {
     // this.props.theme.palette.type,
   }
 
+    //dynamically render chart based on incoming data
   dataFormat = () => {
     let outerContainer = [];
     let dataLength = this.props.querycharts.length;
@@ -51,6 +52,7 @@ export class QueryRangeChart extends Component {
     return outerContainer;
   };
 
+    //formatting data for x-axis label
   dateFormat = () => {
     let dateArr = [];
     let timeValue;
@@ -107,6 +109,7 @@ export class QueryRangeChart extends Component {
     return dateArr;
   };
 
+      //formatting the location and name of the labels with the corresponding value;
   labelFormat = () => {
     const labelContainer = [];
     let labelObj = {};
@@ -176,44 +179,13 @@ export class QueryRangeChart extends Component {
     return labelContainer;
   };
 
-  findMax = () => {
-    let data = this.props.querycharts;
-    let maximumVal = -Infinity;
-    let dataVal;
-
-    for (let i = 0; i < data.length; i++) {
-      dataVal = data[i][1];
-
-      for (let j = 0; j < dataVal.length; j++) {
-        if (dataVal[j][0] > maximumVal) {
-          maximumVal = dataVal[j][0];
-        }
-      }
-    }
-    return maximumVal * 1000;
-  };
-
-  findMin = () => {
-    let data = this.props.querycharts;
-    let minimumVal = Infinity;
-    let dataVal;
-
-    for (let i = 0; i < data.length; i++) {
-      dataVal = data[i][1];
-
-      for (let j = 0; j < dataVal.length; j++) {
-        if (dataVal[j][0] < minimumVal) {
-          minimumVal = dataVal[j][0];
-        }
-      }
-    }
-    return minimumVal * 1000;
-  };
 
   render() {
+    //config object for zingchart with its properties
     let myConfig = {
       "globals": {
         "font-family": "Roboto",
+        //rendering zingchart with config, change in theme depending on the current theme type
         "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
         "color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
       },

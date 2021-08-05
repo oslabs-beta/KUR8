@@ -8,11 +8,7 @@ import React, { Component } from 'react';
 import Select from '@material-ui/core/Select';
 import { withTheme } from '@material-ui/core/styles';
 
-// EXPLICITLY IMPORT MODULE from node_modules
-// import 'zingchart/modules-es6/zingchart-maps.min.js';
-// import 'zingchart/modules-es6/zingchart-maps-usa.min.js';
-
-
+//style of the select element
 const styles = theme => ({
   formControl: {
     margin: theme.spacing(1),
@@ -27,8 +23,6 @@ const styles = theme => ({
 export function CPUGauge(props) {
 
   const [node, setNode] = useState(props.cpuGauge[0][2]);
-
-  console.log('frefrfrfrfrfr', props.cpuGauge[0][2])
   const { classes } = props;
 
   const myConfig = {
@@ -90,6 +84,7 @@ export function CPUGauge(props) {
   }
 
 
+  //pass in the nodeID and render different node's cpu gauge depending on the nodeID passed in;
   const updateGauge = (nodeID) => {
     let nodeData;
     props.cpuGauge.forEach(node => {

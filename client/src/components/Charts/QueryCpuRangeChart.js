@@ -8,6 +8,7 @@ class QueryCpuRangeChart extends Component {
     super(props);
   }
 
+  //dynamically render chart based on incoming data
   dataFormat = () => {
     let outerContainer = [];
     let dataLength = this.props.cpuRangeChart.length;
@@ -50,6 +51,7 @@ class QueryCpuRangeChart extends Component {
     return outerContainer;
   };
 
+  //formatting data for x-axis label
   dateFormat = () => {
     let dateArr = [];
     let timeValue;
@@ -125,6 +127,7 @@ class QueryCpuRangeChart extends Component {
     let secondStart = 15;
     let thirdStart = 25;
 
+    //formatting the location and name of the labels with the corresponding value;
     for (let i = 0; i < dataLength; i++) {
       if (i <= 4) {
         labelObj = {
@@ -177,9 +180,11 @@ class QueryCpuRangeChart extends Component {
 
 
   render() {
+    //config object for zingchart with its properties
     let myConfig = {
       "globals": {
         "font-family": "Roboto",
+          //rendering zingchart with config, change in theme depending on the current theme type
         "background-color": this.props.theme.palette.type === 'dark' ? "#424242" : "white",
         "color": this.props.theme.palette.type === 'dark' ? "white": "#424242",
         "padding": "16px"

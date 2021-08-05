@@ -9,8 +9,8 @@ export class PodByNamespace extends Component {
       this.chartDone = this.chartDone.bind(this);
     }
 
+    //formatting the value series
     seriesFormat = () => {
-        //[[kubesystem, 9], ...]
         let valueArr = [];
 
         for (let i = 0; i < this.props.podPerNamespace.length; i++) {
@@ -32,6 +32,7 @@ export class PodByNamespace extends Component {
             type: 'bar',
             "title": {
                 "text": "Number of Pods Per Namespace",
+                  //rendering zingchart with config, change in theme depending on the current theme type
                 "font-color": this.props.theme.palette.type === 'dark' ? 'white': '#424242',
                 "backgroundColor": "none",
                 "font-size": "24px",
@@ -88,9 +89,6 @@ export class PodByNamespace extends Component {
               "crosshair-x": {
                 "line-width": "100%",
                 "alpha": 0.18,
-                // "plot-label": {
-                // //   "header-text": "%kv Pod"
-                // }
               },
             series: [{
                 values: this.seriesFormat(),

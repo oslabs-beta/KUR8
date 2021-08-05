@@ -5,14 +5,15 @@ import { withTheme } from '@material-ui/core/styles';
 class HistogramChart extends Component {
   constructor(props) {
     super(props);
-    console.log("this.props.defaultcharts[0].help", this.props.defaultcharts[0].help)
   }
 
   render() {
+    //config files from zingchart
     let myConfig = {
       type: 'bar',
       "globals": {
         "font-family": "Roboto",
+          //rendering zingchart with config, change in theme depending on the current theme type
         "background-color": this.props.theme.palette.type === 'dark' ? '#424242': 'white',
       },
       title: {
@@ -70,9 +71,6 @@ class HistogramChart extends Component {
       "crosshair-x": {
         "line-width": "100%",
         "alpha": 0.18,
-        // "plot-label": {
-        // //   "header-text": "%kv Pod"
-        // }
       },
       series: [{
         values: this.props.defaultcharts[0].valueArray,
