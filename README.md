@@ -104,8 +104,12 @@ to view and create your custom dashboard.
 
 ## Contributors
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Jimmy Ngo](https://www.linkedin.com/in/jimmycngo/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> jimmycngo](https://github.com/jimmycngo)
+Jimmy Ngo <br />
+[LinkedIn](https://www.linkedin.com/in/jimmycngo/) | [Github](https://github.com/jimmycngo)
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ivy Yu](https://www.linkedin.com/in/ivy-yu-746a5b132/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> ivy118](https://github.com/ivy118)
+Ivy Yu <br />
+[LinkedIn](https://www.linkedin.com/in/ivy-yu-746a5b132/) | [Github](https://github.com/ivy118)
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) Steven Del Rosario](https://www.linkedin.com/in/stevendelro/) • [<img src="https://github.githubassets.com/favicons/favicon-dark.png" width="15" height="15"> stevendelro](https://github.com/stevendelro)
+Steven Del Rosario <br />
+[LinkedIn](https://www.linkedin.com/in/stevendelro/) | [Github](https://github.com/stevendelro)
+
